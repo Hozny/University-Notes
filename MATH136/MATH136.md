@@ -54,7 +54,7 @@ in **linear algebra** we focus our time as follows:
 > $$\vec{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} $$ 
 > where $x_1, x_2, \cdots, x_n$ are in $\mathbb{R}$
 
-Notes: 
+**Note**: 
 - Two **vectors** in $\mathbb{R}$ are equal if their corresponding components are equal, that is, $\vec{x} = \vec{y}$ iff $x_i=y_i$ for $1\leq i \leq n$
 
 ### Arithmetic in $\mathbb{R}$
@@ -70,10 +70,18 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 >**Theorem (p, 4, properties of vector arithmetic)**    
 >if $\vec{x},\vec{y}$ are vectors from $\mathbb{R}$ and $c$ and $d$ are scalars from $\mathbb{R}$, then:  
 >(V1) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
->(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$
+>(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
+>(V3) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
+>(V4) There exists a vector $\vec{0} \in \mathbb{R}$    such that $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} in \mathbb{R}$     
+>(V5) For every $\vec{x} \in \mathbb{R}$ there exists $(-\vec{x}) \in \mathbb{R}$ such that $\vec{x} + (-\vec{y}) = \vec{0}$    
+>(V6) $c\vec{x} \in \mathbb{R}$     
+>(V7) $c(d\vec{x}) = (cd)\vec{x}$   
+>(V8) $(c+d)\vec{x} = c\vec{x} + d\vec{x}$  
+>(V9) $c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}$  
+>(V10) $1\vec{x} = \vec{x}$ 
 >copy the rest down
 
-**Notes:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
+****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
 we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{y}$
 
 
@@ -102,3 +110,9 @@ $
 3 & 4
 \end{bmatrix}
 $
+
+
+
+```
+sdfsdf
+```
