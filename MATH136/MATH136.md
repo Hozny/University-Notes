@@ -27,7 +27,7 @@ Week|Dates|Sections|Topics|
 
 # <p style="text-align: center;">6/1/14 </p>
 ## Functions
-In first year calculus, we study real numbers, $\mathbb{R}$ and functions on the real numers, $f:\mathbb{R} \rightarrow \mathbb{R}$
+In first year calculus, we study real numbers, $\mathbb{R}$, and functions on the real numers, $f:\mathbb{R} \rightarrow \mathbb{R}$
 
 we ask questions about domain, range, injectivity, surjectivity, invertibility, extrema, continuity, differentiability, integrability, etc.
 
@@ -72,7 +72,7 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 >(V1) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
 >(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
 >(V3) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
->(V4) There exists a vector $\vec{0} \in \mathbb{R}$    such that $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} in \mathbb{R}$     
+>(V4) There exists a vector $\vec{0} \in \mathbb{R}$    such that $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} \in \mathbb{R}$     
 >(V5) For every $\vec{x} \in \mathbb{R}$ there exists $(-\vec{x}) \in \mathbb{R}$ such that $\vec{x} + (-\vec{y}) = \vec{0}$    
 >(V6) $c\vec{x} \in \mathbb{R}$     
 >(V7) $c(d\vec{x}) = (cd)\vec{x}$   
