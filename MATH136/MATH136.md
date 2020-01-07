@@ -40,6 +40,7 @@ $$
 
 >**Real Vectors**: $\mathbb{R}^{n} = \vec{x} = (x_1, x_2,\cdots, x_n): x_i \in \mathbb{R}$
 
+
 In multivariate calculus and vector calculus, you will talk about graphing functions like this and discuss things liek continuity and differentiability
 in **linear algebra** we focus our time as follows: 
 - Consider functions $f: \mathbb{R}^{n} \rightarrow \mathbb{R}^m$ that are **linear**
@@ -56,6 +57,10 @@ in **linear algebra** we focus our time as follows:
 
 **Note**: 
 - Two **vectors** in $\mathbb{R}$ are equal if their corresponding components are equal, that is, $\vec{x} = \vec{y}$ iff $x_i=y_i$ for $1\leq i \leq n$
+
+In linear algebra all vectors should be denoted with column vectors. However, sometimes n-tuples are used to match notation commonly used in other areas. 
+
+  - $f(x_1, x_2, \cdots, x_n)$ rather than $f(\begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix})$
 
 ### Arithmetic in $\mathbb{R}$
 there are two basic operations performed on vectors in $\mathbb{R}$
@@ -85,6 +90,7 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{y}$
 
 
+---
 #### latex reference for me to write this
 $$\vec{o}$$
 $$
@@ -111,8 +117,3 @@ $
 \end{bmatrix}
 $
 
-
-
-```
-sdfsdf
-```

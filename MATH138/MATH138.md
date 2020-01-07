@@ -53,9 +53,9 @@ FE|Mar 30-Apr 3|6.8, 6.9, 6.10|Convergence, Binomial Series, Applications|Quiz 1
 >$$\int_a^b f(x)dx $$
 **Note:**
 - The $f(x)$ is the integrand   
-- The $dx$ denots the variable of integration   
-- The $a,b$ denote limits of integeration
-the whole expressiondenots the definite integral    
+- The $dx$ denotes the variable of integration   
+- The $a,b$ denote limits of integration
+the whole expression denotes the definite integral    
 
 So, $\int_a^b f(x)dx = I = lim_{n \rightarrow \infty} S_n$.     
 It represents the exact area under $f$ from $a$ to $b$ (signed - positive/negative)
