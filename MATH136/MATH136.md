@@ -97,6 +97,7 @@ we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{
 >$$Span\{\vec{v_1},\cdots,\vec{v_k}\}=Span\{\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}\}$$
 - Essentially, if some set of vectors' span encompasses a given vector, $\vec{v_i}$, then said vector ($\vec{v_i})$ can be a written as a linear combination of the vectors. The converse is also true. 
 
+
 ---
 #### latex reference for me to write this
 $$\vec{o}$$
