@@ -64,15 +64,15 @@ In linear algebra all vectors should be denoted with column vectors. However, so
 
 ### Arithmetic in $\mathbb{R}$
 there are two basic operations performed on vectors in $\mathbb{R}$
-> **Scalar Multiplication:**
+> **Definition - Multiplication:**
 > Given a scalar $c \in \mathbb{R}$ and a vector $\vec{x}\in \mathbb{R}$ we define $c\vec{x}$ to be 
 > $$c \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} cx_1 \\ cx_2 \\ \vdots \\ cx_n \end{bmatrix} $$  
 
-> **Vector Addition:**
+> **Definition - Vector Addition:**
 > Given two vectors $\vec{x},\vec{y}\in \mathbb{R}$ we define $\vec{x} + \vec{y}$ to be 
 > $$ \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} + \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}= \begin{bmatrix} x_1 + y_1 \\ x_2 + y_2 \\ \vdots \\ x_n + y_n \end{bmatrix} $$  
 
->**Theorem (p, 4, properties of vector arithmetic)**    
+>**Theorem - (p, 4, properties of vector arithmetic)**    
 >if $\vec{x},\vec{y}$ are vectors from $\mathbb{R}$ and $c$ and $d$ are scalars from $\mathbb{R}$, then:  
 >(V1) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
 >(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
@@ -89,6 +89,13 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 ****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
 we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{y}$
 
+>**Definition - Span:** Let $B = \{ c_1 \vec{v_1}, c_2 \vec{v_2}, \cdots, c_k \vec{v_k}\}$ be a set of vectors in $\mathbb{R}^n$. We define the **span** of $B$ by 
+>$$B = \{ c_1 \vec{v_1} + c_2 \vec{v_2} + \cdots + c_k \vec{v_k}\ | c_1, \cdots, c_k \in \mathbb{R}^n \}$$
+>We say that Span$B$ is **spanned** by $B$ and that $B$ is a **spanning set** for Span$B$.  
+
+>**Theorem *unnamed*:** Let $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \in \mathbb{R}^n$. Some vector $\vec{v_i}, 1 \leq i \leq k$ can be written as a linear combination of $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}$ if and only if 
+>$$Span\{\vec{v_1},\cdots,\vec{v_k}\}=Span\{\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}\}$$
+- Essentially, if some set of vectors' span encompasses a given vector, $\vec{v_i}$, then said vector ($\vec{v_i})$ can be a written as a linear combination of the vectors. The converse is also true. 
 
 ---
 #### latex reference for me to write this
