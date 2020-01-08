@@ -104,3 +104,48 @@ Choose from one of three general topics:
 #### Abstract and Keywords (150-250 words)
 - Complete overview of the report or evaluation
 
+### Academic writing is: 
+- based on research/evidence that can be cited (for this class we use MLA). 
+- Written for a professional or academic audience who likely know something about the topic
+- Follows agreed-upon conventions of format, usage, and punctuation
+
+### Establishing authority
+- To become a constructive critic who can analyze and interpret the work of others and create new knowledge based on one's own thinking
+  - Citing sources
+  - Diction (word choice, jargon)
+  - Considering counter-arguments 
+
+**Hope to see personal research for last assignment (survey)**
+
+### Differences in Academic Writing: 
+The differences in writing across different disciplines lies mainly in the: 
+- Kinds of questions asked
+- Kinds of research done to find the answer
+- The ways of communicating the answers 
+
+### Cicero
+- A good speech fulfills 3 main purposes:
+  - To delight 
+  - To teach 
+  - To move 
+- Writing today has similar motivations
+
+### Choosing a topic
+- Choose a topic you are interested in
+- Narrow enough (environmental concerns is too broad)
+  - Specific recycling method of a plastic and its environmental impact is a better topic
+
+### Rhetoric stuffs
+- Ethos
+  - Ethical appeal 
+
+### Questions to consider
+1. What is your overall attitude toward the top? How strong are your opinions? 
+2. What social, political, religious, personal, or other influences have contributed to your attitude? 
+3. How much do you know about the topic? What questions do you have about it? 
+4. What interests you most about the topic? Why? 
+5. What interests you least about it? Why?
+6. What seems important or unimportant about the topic? 
+7. What do you expect to conclude about the topic? 
+8. How will you establish your credibility (ethos)? That is, how will you show that you are knowledgeable and trustworthy?
+    - Expected to have **at least 3 citations**

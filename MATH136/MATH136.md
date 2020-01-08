@@ -29,7 +29,7 @@ Week|Dates|Sections|Topics|
 ## Functions
 In first year calculus, we study real numbers, $\mathbb{R}$, and functions on the real numers, $f:\mathbb{R} \rightarrow \mathbb{R}$
 
-we ask questions about domain, range, injectivity, surjectivity, invertibility, extrema, continuity, differentiability, integrability, etc.
+we ask questions about domain, range, injecti\vec{v_i}ty, surjecti\vec{v_i}ty, invertibility, extrema, continuity, differentiability, integrability, etc.
 
 There are many important functions that do not have domain and codomain $\mathbb{R}$. Let's start by introducing just one new set of objects to consider as inputs and outputs for our functions: 
 
@@ -88,16 +88,36 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 
 ****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
 we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{y}$
+ 
+ # <p style="text-align: center;"> 8/1/14 </p>
+ **Parallelogram Rule:** When adding vectors, the result is the diagonal of the parallelogram formed by the two vectors. The difference of the vectors works similarly.  
+  
+ Pro\vec{v_i}ng the diagonals of a parallelogram are parallel:   
+ Let $\vec{u}$ and $\vec{v}$ be sides of a parallelogram with point $E$ being the intersection of both diagonals of this parallelogram. Note that $\vec{u}$ and $\vec{v}$ cannot lie on the same line and as such are not scalar multiples of each other.   
+ One diagonal can be expressed as $\vec{u} - \vec{v}$ and other other as $\vec{u} + \vec{v}$. 
+
+>**Definition - Linear Combination:** Let $\vec{v_1} , \vec{v_2} , \cdots , \vec{v_k}$ be $k$ vectors from $\mathbb{R}^n$. Any sum in the form:
+>$$c_1 \vec{v_1} + c_2 \vec{v_2} + \cdots + c_k \vec{v_k}\ | c_1, \cdots, c_k \in \mathbb{R}^n$$
+>is called a **linear combination** of the vectors $\vec{v_1} , \vec{v_2} , \cdots , \vec{v_k}$.
 
 >**Definition - Span:** Let $B = \{ c_1 \vec{v_1}, c_2 \vec{v_2}, \cdots, c_k \vec{v_k}\}$ be a set of vectors in $\mathbb{R}^n$. We define the **span** of $B$ by 
->$$B = \{ c_1 \vec{v_1} + c_2 \vec{v_2} + \cdots + c_k \vec{v_k}\ | c_1, \cdots, c_k \in \mathbb{R}^n \}$$
+>$$Span(B) = \{ c_1 \vec{v_1} + c_2 \vec{v_2} + \cdots + c_k \vec{v_k}\ | c_1, \cdots, c_k \in \mathbb{R}^n \}$$
 >We say that Span$B$ is **spanned** by $B$ and that $B$ is a **spanning set** for Span$B$.  
+- The span of some set of vectors $B$ is the set of all scalar multiples of the vectors in $B$.
 
 >**Theorem *unnamed*:** Let $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \in \mathbb{R}^n$. Some vector $\vec{v_i}, 1 \leq i \leq k$ can be written as a linear combination of $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}$ if and only if 
 >$$Span\{\vec{v_1},\cdots,\vec{v_k}\}=Span\{\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}\}$$
+alternatively
+>**Theorem (p. 10):** Let $S = \{ \vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \}$ be a set of vectors in $r^n$. For all $i$ satisfying $1 \leq i \leq k$, the vector $\vec{v_i}$ can be written as a linear combination of the vectors in $S - \{ \vec{v_i} \}$ if and only if 
+> $$ Span(S) = Span(S-\{\vec{v_i}\}) $$
 - Essentially, if some set of vectors' span encompasses a given vector, $\vec{v_i}$, then said vector ($\vec{v_i})$ can be a written as a linear combination of the vectors. The converse is also true. 
+- Essentially, if a set of vectors is a subset of another set of vectors then then the "extra" vectors can be represented by some linear combination of the vectors in the subset.
 
+**Exercise 1.3:**
+Determine whether $\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}$ is in $Span\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} \}.$  
+We determine if there exists $c_1,c_2,c_3 \in \mathbb{R}$ such that $c_1 \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + c_2  \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + c_3 \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
 
+# <p style="text-align: center;"> 8/1/14 </p>
 ---
 #### latex reference for me to write this
 $$\vec{o}$$
