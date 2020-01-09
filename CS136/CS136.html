@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>CS 136</title>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-        
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <style>
 .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
 </style>
@@ -18,7 +18,7 @@
             }
         </style>
         
-        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
     </head>
     <body class="vscode-light">
         <h1 id="cs-136">CS 136</h1>
@@ -34,7 +34,7 @@ Textbook: Course Notes
 Midterm: 
 Final:
 </div></code></pre>
-<h1 id="p-style%22text-align-center%22-7114-p"><p style="text-align: center;"> 7/1/14 </p></h1>
+<h1 id="p-style%22text-align-center%22-7120-p"><p style="text-align: center;"> 7/1/20 </p></h1>
 <p><strong>Main topics &amp; themes:</strong></p>
 <ul>
 <li>Imperative programming style</li>
@@ -103,7 +103,168 @@ customized &quot;Seashell&quot; development environment.</p>
 <li>a <strong>contract</strong>t (including a requires section if necessary)</li>
 <li>unless otherwise stated you don't need templates, data definitions or examples:</li>
 </ul>
-<h1 id="p-style%22text-align-center%22-8114-p"><p style="text-align: center;"> 8/1/14 </p></h1>
+<h1 id="p-style%22text-align-center%22-9120-p"><p style="text-align: center;"> 9/1/20 </p></h1>
+<p><strong>C</strong> was developed by Dennis Ritchie in 1969-1973 to make the Unix operating system more portable.</p>
+<ul>
+<li>Named &quot;C&quot; because it was successor to &quot;B&quot;, which was a smaller version of BCPL.</li>
+<li>C was designed to give programmers low-level access to memory and to be easily translatable into &quot;machine code&quot;.</li>
+<li>Thousands of popular programs and portions of <strong>all</strong> popular operating systems are written in C.</li>
+</ul>
+<p><strong>C versions</strong> There a few different versions of the C standard. In this course, we use C99 (from 1999).</p>
+<ul>
+<li>The C11 standard added some new features to the language.</li>
+<li>The C18 standard only fixes a few bugs from C11</li>
+<li>C2x standard is currently in development.</li>
+</ul>
+<h2 id="c-syntax-intro">C  Syntax Intro</h2>
+<p><strong>Comments</strong> any text on a line <strong>after</strong> <code>// is a comment</code>. Any text between <code>/* and */</code> is also a comment.<br>
+<strong>Note:</strong> C's multi-line comment cannot be &quot;nested&quot;:</p>
+<pre><code class="language-C"><div><span class="hljs-comment">/* this /* nested comment is an */</span> error */
+</div></code></pre>
+<p><strong>Expressions:</strong> C expressions use traditional <em>infix</em> algebraic notation (ex: 3 + 3)<br>
+1 + 3 * 2 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span> 7<br>
+(1 + 3) * 2 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span> 8</p>
+<ul>
+<li>Because C uses infix notation, parenthesis are needed to specify <strong>order of operations</strong>. This is not needed with prefix (or postfix) notation.</li>
+</ul>
+<p><strong>Operators:</strong> In addition to the traditional mathematical <em>operators</em>, c also has <em>non-mathematical</em> operators. With over 40 operators in total (CP:AMA Appendix A).</p>
+<ul>
+<li>C does not have an exponentiation operator (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>x</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">x^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span>)</li>
+<li>
+<pre><code class="language-C"><div><span class="hljs-number">4</span> * <span class="hljs-number">5</span> / <span class="hljs-number">2</span> = (<span class="hljs-number">4</span> * <span class="hljs-number">5</span>) /<span class="hljs-number">2</span>
+</div></code></pre>
+</li>
+</ul>
+<p><strong>The / operator</strong></p>
+<ul>
+<li>When working with integers, the C division operator truncates (rounds toward zero) and intermediate values. Note that rounding toward zero is equivalent to &quot;removing&quot; the decimals.</li>
+<li>
+<pre><code class="language-C"><div><span class="hljs-number">4</span> / <span class="hljs-number">5</span> = <span class="hljs-number">0</span>
+</div></code></pre>
+</li>
+</ul>
+<p><strong>The % operator:</strong> the C <strong>modulo</strong> operator produces the <strong>remainder</strong> after integer division<br>
+The value of <code>(a % b)</code> is equal to <code>a - (a / b) * b</code></p>
+<ul>
+<li><strong>Note:</strong> <code>(i % j)</code> has the same sign as <code>i</code>
+<ul>
+<li>So <code>-10 % 3 = -1</code> instead of the expected <code>2</code>
+<ul>
+<li>a fix would be <code>((i % j) + j) % j</code>, this is especially useful when working with array indices</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>C identifiers:</strong> Ever function, variable, and structure requires an <em>identifier</em> (or &quot;name&quot;).</p>
+<ul>
+<li>C identifiers must start with a letter, and can only contain letters, underscores, and numbers.</li>
+<li>In this course we use <code>underscore_style</code> (or snake case). Words are separated by underscores and all letters are lowercase.
+<ul>
+<li><code>underscore_style</code> is the most popular style for C projects. In other languages (Java) <code>camelCaseStyle</code> is popular.</li>
+<li>C identifiers can start with a leading underscore (<code>_name</code>) but they may interfere with reserved keywords. Avoid using leading underscores in this course.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Anatomy of a function definition</strong></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">return</span> a + b; 
+}
+</div></code></pre>
+<ul>
+<li>braces ({}) indicate the beginning/end of a function <strong>block</strong></li>
+<li><code>return</code> keyword, followed by an expression, followed by a <code>;</code></li>
+<li>parameters <code>(a,b)</code> are separated by a comma</li>
+<li>the function and parameter <strong>types</strong> are specified (in this case, <code>int</code>)</li>
+<li><strong>Note:</strong> the placement of braces and use of whitespace.</li>
+</ul>
+<p><strong>Static typing system:</strong> C uses a <em>static type system:</em> all types <strong>must</strong> be known <strong>before</strong> the program is run and the type of an identifier <strong>cannot change</strong>.</p>
+<ul>
+<li>Racket uses a <strong>dynamic</strong> type system</li>
+</ul>
+<p>If the type in a function definition is missing C assumes it to be an <code>int</code>:</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-comment">//Proper</span>
+    <span class="hljs-keyword">return</span> a + b; 
+}
+
+my_add(a , b){ 
+    <span class="hljs-keyword">return</span> a + b; 
+}
+</div></code></pre>
+<ul>
+<li>&quot;type&quot; runtime errors do not exists in C as the program will <strong>never</strong> compile if there is a type error.</li>
+</ul>
+<p><strong>Function terminology:</strong> We <strong>call</strong> a function by <strong>passing</strong> it <strong>arguments</strong>, a function <strong>returns</strong> a value.</p>
+<ul>
+<li>In &quot;functional&quot; language terminal we <strong>apply</strong></li>
+</ul>
+<p><strong>Functions without parameters:</strong> use the <code>void</code> keyword to indicate a function has no parameters.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_num</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">return</span> my_add(<span class="hljs-number">40</span>,<span class="hljs-number">2</span>);
+}
+</div></code></pre>
+<ul>
+<li>To call a parameterless function, put nothing between the parentheses.</li>
+</ul>
+<p>C allows the omission of <code>void</code> which indicates an &quot;unknown&quot; or &quot;arbitrary&quot; number of parameters (beyond the scope of this course). <strong>Always use</strong> <code>void</code>.</p>
+<ul>
+<li>When writing programs, do not write programs which do what you intend, rather write programs which are not able to do anything except for what is intended.</li>
+</ul>
+<p><strong>No nested function:</strong> In C we are not able to define nested functions. This feature was added to the GNU C compiler but is not found in C Standard.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">nested_func</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+        <span class="hljs-comment">//...</span>
+        <span class="hljs-comment">// This is not possible</span>
+    }
+}
+</div></code></pre>
+<p><strong>Function Documentations</strong>
+<code>C</code></p>
+<p><strong>Whitespaces</strong> C mostly ignores whitespace.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// The following three functions are equivalent</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{  <span class="hljs-comment">//Good</span>
+    <span class="hljs-keyword">return</span> a + b; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a + b; <span class="hljs-comment">//Bad</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> <span class="hljs-comment">//Very bad</span>
+b)</span></span>{<span class="hljs-keyword">return</span> a+
+b ; }
+</div></code></pre>
+<p><strong>CS 136 style:</strong></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{  <span class="hljs-comment">//Good</span>
+    <span class="hljs-keyword">return</span> a + b; 
+}
+</div></code></pre>
+<ul>
+<li>a block start (open brace {) appears at the end of a line</li>
+<li>a block end (close brace }) is aligned with the line that started it, and appears on a line by itself</li>
+<li>indent a block 2 (recommended), 3 or 4 spaces: <strong>be consistent</strong></li>
+<li>add a space after commas and around arithmetic operators</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_super_long_function</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> d, 
+                           <span class="hljs-keyword">int</span> e, <span class="hljs-keyword">int</span> f, <span class="hljs-keyword">int</span> g)</span> </span>{
+    <span class="hljs-keyword">return</span> a * b + b * c + c * d + d * e + d + d * e
+           d + e; 
+}
+</div></code></pre>
+<ul>
+<li>align code when lines are too long</li>
+</ul>
+<p><strong>Entry point:</strong> Typically a program is run by an Operating System (OS) through a shell or another program such as DrRacket. The SO needs to know where to <strong>start</strong> running the code.</p>
+<p><strong>main:</strong> main has no parameters (for now) and <code>int</code> return type.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-comment">//...</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<ul>
+<li>The <code>return</code> value communicates to the OS the &quot;error code&quot; also know as &quot;exit code&quot;, &quot;error number&quot; or <code>errno</code></li>
+<li>A successful program <code>returns</code> <strong>zero</strong> (no error code).</li>
+</ul>
+<h1 id="p-style%22text-align-center%22-7120-p-1"><p style="text-align: center;"> 7/1/20 </p></h1>
 
     </body>
     </html>

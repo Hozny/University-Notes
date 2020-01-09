@@ -9,7 +9,7 @@ Office Hours: Monday & Wednesday 1:30 p.m. - 2:20 p.m.
 Textbook: How to Write Anything: A Guide and Reference with Readings, 4th ed. 
 Things to bring: pen and paper, laptop. 
 ```
-# <p style="text-align: center;">6/1/14 </p>
+# <p style="text-align: center;">6/1/20 </p>
 ## Syllabus Class 
 Interests: Elections/Policy
 

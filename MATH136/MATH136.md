@@ -25,7 +25,7 @@ Week|Dates|Sections|Topics|
 12|Mar 23-27|5.5, 6.1, 6.2|Area and Volume, Similar Matrices, Eigenvalues|
 13|Mar 30-Apr 3|6.2, 6.3, 6.4|Diagonalization, Powers of Matrices
 
-# <p style="text-align: center;">6/1/14 </p>
+# <p style="text-align: center;">6/1/20 </p>
 ## Functions
 In first year calculus, we study real numbers, $\mathbb{R}$, and functions on the real numers, $f:\mathbb{R} \rightarrow \mathbb{R}$
 
@@ -89,7 +89,7 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 ****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
 we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{y}$
  
- # <p style="text-align: center;"> 8/1/14 </p>
+ # <p style="text-align: center;"> 8/1/20 </p>
  **Parallelogram Rule:** When adding vectors, the result is the diagonal of the parallelogram formed by the two vectors. The difference of the vectors works similarly.  
   
  Pro\vec{v_i}ng the diagonals of a parallelogram are parallel:   
@@ -117,7 +117,7 @@ alternatively
 Determine whether $\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}$ is in $Span\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} \}.$  
 We determine if there exists $c_1,c_2,c_3 \in \mathbb{R}$ such that $c_1 \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + c_2  \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + c_3 \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
 
-# <p style="text-align: center;"> 8/1/14 </p>
+# <p style="text-align: center;"> 8/1/20 </p>
 ---
 #### latex reference for me to write this
 $$\vec{o}$$
