@@ -149,12 +149,12 @@ $= \frac{1}{b-a} \int_a^b f(x) dx$
 >$$ f(c) = \frac{1}{b-a} \int_a^bf(x)dx$$
 - The point $c$ is such that if a rectangle was drawn with points $a,b,f(c)$ where $f(c)$ represents the height, the area of this rectangle is equal to the signed area under $f$ on $[a,b]$. Convince yourself as to why this is expected. 
 
-**Proof of AVT:** Assume $f$ is continuous on ab.   
-By Extreme Value Theorem, $\exists m,M \in \mathbb{R}$ such that $m \leq f(x) \leq M$ for all $x\in [a,b]$. Also $\exists c_1,c_2 \int [a,b]$ such that $f(c_1) = m$ and $f(c_2)=M$.    
+**Proof of AVT:** Assume $f$ is continuous on $[a,b]$.   
+By Extreme Value Theorem, $\exists m,M \in \mathbb{R}$ such that $m \leq f(x) \leq M$ for all $x\in [a,b]$. Also $\exists c_1,c_2 \in [a,b]$ such that $f(c_1) = m$ and $f(c_2)=M$.    
 Since $m \leq f(x) \leq M$ by proposition 3 of integrals $m(b-a) \leq \int_a^bf(x)dx \leq M(b-a)$.  
 So $m \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq M$,  
 or $f(c_1) \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq f(c_2)$.    
-Now by Intermediate Value Theoerem there exists $c$ between $c_1$ and $c_2$ such that $f(c) = \frac{1}{b-a} \cdot \int_a^bf(x)dx$.    
+Now by Intermediate Value Theoerem there exists some $c$ between $c_1$ and $c_2$ such that $f(c) = \frac{1}{b-a} \cdot \int_a^bf(x)dx$.    
 QED
 
 
