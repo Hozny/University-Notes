@@ -1,4 +1,4 @@
-# MATH 136
+# MATH 138
 Calculus 2
 ``` 
 Instructor: Jen Nelson
@@ -116,5 +116,46 @@ $$ \Delta t_i = \Delta t = \frac{b-a}{n} = \frac{4-0}{n} = \frac{4}{n}$$
 1. Define $\int_a^af(t)dt=0$
 2. $\int_a^bf(t)dt = -\int_b^af(t)dt$
     - "Moving backwards is negative"
+
+# <p style="text-align: center;">10/1/20 </p>
+**Lecture 3:** Geometric interpretation (1.3), Average value of a function (1.4)
+
+>**Theoerem:** Integrals over subintervals
+>If $f$ is integrable on an interval containing $a,b,c$, then 
+>$$ \int_a^bf(x)dx = \int_a^cf(x)dx + \int_c^b f(x)dx$$
+>Note: C does not need to be between a and b.
+>$$\int_a^b f(x)dx = \int_a^cf(x)dx - \int_b^cf(x)dx = \int_a^cf(x)dx + \int_c^b f(x)dx
+
+**Geometric interpretation of $\int_a^bf(x)dx$:**   
+If $f(x) \geq 0$ on $[a,b]$, then $\int_a^bf(x)dx \geq 0$ and gives the area under $f$ and above the x-axis. If  $f(x) \leq 0$ on $[a,b]$, then $\int_a^bf(x)dx \leq 0$. So $\int_a^bf(x)dx$ gives the **signed**(positive/negative) area between $f$ and the x-axis. 
+
+**Example 3.1:** Calculate $\int_0^4(x-3)dx$:   
+*Solution 1:* Use the definition    
+*Solution 2:* The function is linear so we find the area above the x-axis and subtract the area below the x-axis on the interval $[0,4]$.
+
+### 1.4 Average value of a function
+For $n$ real numbers $a_1,a_2, \cdots, a_n$ the average is $\frac{a_1+a_2+\cdots+a_n}{n}$. How do we extend this to a continuous function $f$ on $[a,b]$?   
+We use a regular n-partition where the average is equal to $lim_{n \rightarrow \infty} \frac{\sum_{i = 1}^nf(t_i)}{n}$. This is the average of each value at a given partition where the number of partitions approaches infinity.    
+Notice:     
+$lim_{n \rightarrow \infty}(\frac{\sum_{i = 1}^nf(t_i)}{n}) = lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i=1}^n f(t_i)$   
+$=lim_{n \rightarrow \infty} \sum_{i=1}^n \frac{f(t_i)}{n} \cdot \frac{b-a}{b-a}$   
+$=lim_{n \rightarrow \infty} \frac{1}{b-a} \sum_{i=1}^n f(t_i) \cdot \frac{b-a}{n}$   
+$=\frac{1}{b-a} lim_{n \rightarrow \infty} \sum_{i=1}^n f(t_i) \cdot \frac{b-a}{n}$   
+$= \frac{1}{b-a} \int_a^b f(x) dx$    
+
+>**Definition:** If $f$ is continuous on $[a,b]$ then the average value of $f$ on $[a,b]$ is $f_{average} = \frac{1}{b-a} \int_a^b f(x)dx$. 
+
+>**Theorem: Average Value Theorem (AVT)** If $f$ is continuous on $[a,b]$, then $\exists c \in [a,b]$ such that 
+>$$ f(c) = \frac{1}{b-a} \int_a^bf(x)dx$$
+- The point $c$ is such that if a rectangle was drawn with points $a,b,f(c)$ where $f(c)$ represents the height, the area of this rectangle is equal to the signed area under $f$ on $[a,b]$. Convince yourself as to why this is expected. 
+
+**Proof of AVT:** Assume $f$ is continuous on ab.   
+By Extreme Value Theorem, $\exists m,M \in \mathbb{R}$ such that $m \leq f(x) \leq M$ for all $x\in [a,b]$. Also $\exists c_1,c_2 \int [a,b]$ such that $f(c_1) = m$ and $f(c_2)=M$.    
+Since $m \leq f(x) \leq M$ by proposition 3 of integrals $m(b-a) \leq \int_a^bf(x)dx \leq M(b-a)$.  
+So $m \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq M$,  
+or $f(c_1) \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq f(c_2)$.    
+Now by Intermediate Value Theoerem there exists $c$ between $c_1$ and $c_2$ such that $f(c) = \frac{1}{b-a} \cdot \int_a^bf(x)dx$.    
+QED
+
 
 # <p style="text-align: center;">6/1/20 </p>
