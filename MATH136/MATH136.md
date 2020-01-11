@@ -74,16 +74,16 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 
 >**Theorem - (p, 4, properties of vector arithmetic)**    
 >if $\vec{x},\vec{y}$ are vectors from $\mathbb{R}$ and $c$ and $d$ are scalars from $\mathbb{R}$, then:  
->(V1) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
->(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
->(V3) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
+>(\vec{v_1}) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
+>(\vec{v_2}) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
+>(\vec{v_3}) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
 >(V4) There exists a vector $\vec{0} \in \mathbb{R}$    such that $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} \in \mathbb{R}$     
 >(V5) For every $\vec{x} \in \mathbb{R}$ there exists $(-\vec{x}) \in \mathbb{R}$ such that $\vec{x} + (-\vec{y}) = \vec{0}$    
 >(V6) $c\vec{x} \in \mathbb{R}$     
 >(V7) $c(d\vec{x}) = (cd)\vec{x}$   
 >(V8) $(c+d)\vec{x} = c\vec{x} + d\vec{x}$  
 >(V9) $c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}$  
->(V10) $1\vec{x} = \vec{x}$ 
+>(\vec{v_1}0) $1\vec{x} = \vec{x}$ 
 >copy the rest down
 
 ****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
@@ -117,7 +117,50 @@ alternatively
 Determine whether $\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}$ is in $Span\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} \}.$  
 We determine if there exists $c_1,c_2,c_3 \in \mathbb{R}$ such that $c_1 \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + c_2  \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + c_3 \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
 
-# <p style="text-align: center;"> 8/1/20 </p>
+# <p style="text-align: center;"> 10/1/20 </p>
+**Example 1.4:**  
+Let $\{\vec{v_1},\vec{v_2},\vec{v_3}\} \subseteq \mathbb{R}^n$.   
+Prove that $\vec{v_3}$ can be written as a linear combination of $\vec{v_1}$ and $\vec{v_2}$ if and only if 
+$$ Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}=Span\{\vec{v_1},\vec{v_2}\}$$
+
+**Proof:**    
+Let $\{\vec{v_1},\vec{v_2},\vec{v_3}\} \subseteq \mathbb{R}^n$.   
+($\Rightarrow$) Assume that $\vec{v_3} = c_1\vec{v_1} + c_2\vec{v_2}$ for some $c_1,c_2 \in \mathbb{R}$.   
+We prove the set equality by showing each set is a subset of the other.     
+Certainly $Span\{\vec{v_1},\vec{v_2}\} \subseteq Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$.    
+If $vx \in Span\{\vec{v_1},\vec{v_2}\}$ then $vx = d_1\vec{v_1} + d_2\vec{v_2}$ for some $d_1,d_2 \in \mathbb{R}$, and so 
+$$ vx = d_1\vec{v_1} + d_2\vec{v_2} + 0 \cdot \vec{v_3}$$
+and hence $vx \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$.    
+Now we show $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} \subseteq Span\{\vec{v_1},\vec{v_2}\}$.    
+If $vx \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$ then    
+$vx = d_1\vec{v_1} + d_2\vec{v_2} + d_3\vec{v_3}$ for some $d_1,d_2,d_3 \in \mathbb{R}$.    
+This means,     
+$vx = d_1\vec{v_1} + d_2\vec{v_2} + d_3(c_1\vec{v_1} + c_2\vec{v_2})$   
+$vx = (d_1 + d_3c_1)\vec{v_1} + (d_2 + d_3c_2)\vec{v_2}$    
+Since $d_1 + d_3c1, d_2+d_3c2 \in \mathbb{R}$ we have shown $vx \in Span\{\vec{v_1},\vec{v_2}\}$ by definition. Therefore $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} = Span\{\vec{v_1},\vec{v_2}\}$    
+$(\Leftarrow)$ Assume $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} = Span\{\vec{v_1},\vec{v_2}\}$    
+Since $\vec{v_3} = 0 \cdot \vec{v_1} + 0 \cdot \vec{v_2} + 1 \cdot \vec{v_3}$ we have $\vec{v_3} \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$. By our assumption, we must have $\vec{v_3} \in Span\{\vec{v_1},\vec{v_2}\}$, and so $\vec{v_3}$ is a linearcombination of $\vec{v_1},\vec{v_2}$.   
+QED
+- The proof for a general number of vectors follows a similar structure
+
+## Linear Dependance & Independence
+>**Definition:** Let $S = \{\vec{v_1},\cdots,\vec{v_k}\}$ be a set of vectors in $r^n$. We say that the set $S$ is **linearly dependent** if there exists scalars $c_1,\cdots,c_k \in \mathbb{R}$ with at least one $c_i$ non-zero, such that $c_1\vec{v_1} + \cdots + c_k\vec{v_k} = 0$    
+Otherwise we call the set **linearly dependent**. 
+- a set consisting of one element is not necessarily independent, consider the $0$ vector. 
+
+>**Theorem (p. 13):** A set is linearly dependent if and only if one vector in the set is in the span of the other vectors in the set. 
+
+**Characterizing dependence:** Tossing in $\vec{0}$ will always result in a dependent set. 
+
+**Theorem (p. 16):** If a set of vectors $\{v1, \cdots , vk\}$ contains the zero vector then the set is linearly dependent. 
+
+**Remarks:**
+- A set of size one, $S=\{\vec{v}\}$ is linearly dependent if and only if $\vec{v}=0$
+- A set of two vectors is linearly dependent if and only if one vector of $S$ is a scalar multiple of the other vector
+- If it is a set of 3 or more then it gets complicated
+  - If its independent then no scalar multiple pairs, however the converse is not guaranteed 
+  - If its independent then there is no zero vector, the converse is not guaranteed
+
 ---
 #### latex reference for me to write this
 $$\vec{o}$$
