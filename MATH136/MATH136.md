@@ -74,16 +74,16 @@ there are two basic operations performed on vectors in $\mathbb{R}$
 
 >**Theorem - (p, 4, properties of vector arithmetic)**    
 >if $\vec{x},\vec{y}$ are vectors from $\mathbb{R}$ and $c$ and $d$ are scalars from $\mathbb{R}$, then:  
->(\vec{v_1}) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
->(\vec{v_2}) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
->(\vec{v_3}) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
+>(V1) $\vec{x} + \vec{y}$ is in $\mathbb{R}$     
+>(V2) $(\vec{x} +\vec{y}) + \vec{w} = \vec{x} + (\vec{y} + \vec{w})$    
+>(V3) $\vec{x} + \vec{y} = \vec{y} + \vec{x}$   
 >(V4) There exists a vector $\vec{0} \in \mathbb{R}$    such that $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} \in \mathbb{R}$     
 >(V5) For every $\vec{x} \in \mathbb{R}$ there exists $(-\vec{x}) \in \mathbb{R}$ such that $\vec{x} + (-\vec{y}) = \vec{0}$    
 >(V6) $c\vec{x} \in \mathbb{R}$     
 >(V7) $c(d\vec{x}) = (cd)\vec{x}$   
 >(V8) $(c+d)\vec{x} = c\vec{x} + d\vec{x}$  
 >(V9) $c(\vec{x} + \vec{y}) = c\vec{x} + c\vec{y}$  
->(\vec{v_1}0) $1\vec{x} = \vec{x}$ 
+>(V10) $1\vec{x} = \vec{x}$ 
 >copy the rest down
 
 ****Note**:** The zero vector is $\vec{0} = (0, \cdots, 0)$ and the inverse $(-\vec{x})$ is $(-1)\vec{x}$  
@@ -116,6 +116,7 @@ alternatively
 **Exercise 1.3:**
 Determine whether $\begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}$ is in $Span\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} \}.$  
 We determine if there exists $c_1,c_2,c_3 \in \mathbb{R}$ such that $c_1 \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + c_2  \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + c_3 \begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
+
 
 # <p style="text-align: center;"> 10/1/20 </p>
 **Example 1.4:**  
