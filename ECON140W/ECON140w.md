@@ -15,10 +15,10 @@ Term Test Two  - GROUP TWO|Friday March 13, 11:59 PM|Saturday March 14, 7PM|
 Final Examination –GROUP THREE|Friday April 3, 11:59 PM|TBA
 
 # <p style="text-align: center;"> 7/1/20 </p>
-## Chapter 19
+
 **Macroeconomics:** is about the organization of markets to ensure that the "right" number of each pie is produced to meet demand.
 
-### Microeconomics Vs. Macroeconomics
+## Microeconomics Vs. Macroeconomics
 Using pies (apple vs. cherry pie)   
 **Micro:**
 - There will be a market price for each type of pie and quantity
@@ -31,6 +31,8 @@ Using pies (apple vs. cherry pie)
 - About foreign trade in pies, how many pies are imported and exported? 
 
 ---
+## Chapter 19, from textbook
+
 A main idea in economics is tha the production of goods and services generates income. 
 
 >**National Income:** the dollar value of production of goods over a period of time (usually one year). Calculated by summing the product of quantity and price of products (price $\cdot$ quantity)
@@ -68,13 +70,78 @@ Economic performance is measured using national income, but long term growth is 
    
 When economy is at potential GDP then there is *full employment*. *Full employment* is said to occur when there is only **frictional** and **structural** unemployment. 
 
----
 # <p style="text-align: center;"> 9/1/20 </p>
+
 **Inflation:** is the percentage change in the value of price - nearly always per year. 
 
 **Consumer Price Index:** The interpretation of inflation
+- Index of how the average prices of goods bought by a typical consumer in a base year have changed between the base year and the current year
+- The number is only meaningful in relation to the base year where the value is 100
+
+Anticipated inflation has a smaller effect on the economy than unanticipated inflation
+
+# <p style="text-align: center;"> 14/1/20 </p>
+Slides: 19/20 - 52  
+## Interest Rates    
+**Interest rates:**
+- There are many interest rates (bonds, treasury bills, saving accounts, mortgages, GIC's ... one day, 7-day, 10-year, etc...). 
+- In macroeconomics, because all these interest rates move together and vary for reasons of risk, collateral, term to maturity. 
+  - We abstract that there is one interest rate **currency of issue**
+
+If I lend **$6.00** and the interest rate is **12%** per year, I get **$6.72** back when my loan is repaid next year. 
+- **$6.00** *principle*, **$0.72** *interest rate*
+
+>**The real interest rate** = nominal interest rate - the rate of inflation
+>- The real interest rate is the nominal interest rate adjusted for changes in the purchasing power of money 
+>- Example: 12% (nominal) - 10% (inflation rate) = 2% (real interest)
+
+Determining interest rates:
+- Central bank usually has a lot of influence on shorter term interest rates
+- Banks play important role in determining interest rates
+
+## Employment and Unemployment 
+There is always some positive number of people unemployed:
+
+**Frictional unemployment:** people randomly between jobs “normal turnover”
+
+**Structural Unemployment:** people whose skills do not match current labour market needs (example pen and ink draftsman)
+Some frictional unemployment can be seasonal 
+- you are a ski instructor and a tree planter
+- but there is a period where neither business hires for weather reasons
+- Each may occur when lots of students hit the job market
+- Statistics Canada produces a seasonally adjusted unemployment rate that deal with that problem
+
+**We might want to Minimize both frictional and structural unemployment with good policies:**
+1. Examples
+2. Retraining 
+3. Education be general enough (if too specific may experience structural unemployment)
+4. Subsidize moving 
+5. Internet job search and its effects       
+
+The economy is at full employment or potential output if the only forms of unemployment are frictional and/or structural
+
+Macroeconomics is most interested in cyclical unemployment
+- When real national income falls, and fewer people are needed to produce it - these people are laid off 
 
 
+Cyclical UE = total unemployment - (structural + frictional)
+- Positive is a bad thing because it signals we are producing less output and therefore need less people to produce that output
+- Zero if at potential output
+- Can be negative as well
 
+Unemployment matters since
+- There are strong social reasons to know that mental health, physical health, children's opportunities are all worse for the unemployed
+- People who are cyclically unemployed
+
+## Productivity 
+**Why would total output increase in Canada?**
+- Technological change 
+- More people
+- More capital 
+- There is no agreement on what causes output to rise in the long run 
+
+**Productivity**
+- If we divide the amount of real income by the number of workers that produced it, we have real output (real GDP) per worker
+- To be even more accurate - we might want to measure real output per hour of work
 
 

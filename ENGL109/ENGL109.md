@@ -202,7 +202,7 @@ The differences in writing across different disciplines lies mainly in the:
 - Bibliography - list of sources indicates how thorough the author has been and points to other potential material 
 
 **Place of publication:**
-- In general, book published by pressess associated with colleges and universities are reputable sources. 
+- In general, book published by presses associated with colleges and universities are reputable sources. 
 - Articles from professional journals described as *refereed* or *peer-reviewed*. 
 - New york times, etc... 
 

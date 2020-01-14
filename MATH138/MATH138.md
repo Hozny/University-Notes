@@ -120,7 +120,7 @@ $$ \Delta t_i = \Delta t = \frac{b-a}{n} = \frac{4-0}{n} = \frac{4}{n}$$
 # <p style="text-align: center;">10/1/20 </p>
 **Lecture 3:** Geometric interpretation (1.3), Average value of a function (1.4)
 
->**Theoerem:** Integrals over subintervals
+>**Theorem:** Integrals over subintervals
 >If $f$ is integrable on an interval containing $a,b,c$, then 
 >$$ \int_a^bf(x)dx = \int_a^cf(x)dx + \int_c^b f(x)dx$$
 >Note: C does not need to be between a and b.
@@ -156,6 +156,51 @@ So $m \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq M$,
 or $f(c_1) \leq \frac{1}{b-a} \cdot \int_a^bf(x)dx \leq f(c_2)$.    
 Now by Intermediate Value Theoerem there exists some $c$ between $c_1$ and $c_2$ such that $f(c) = \frac{1}{b-a} \cdot \int_a^bf(x)dx$.    
 QED
+
+
+# <p style="text-align: center;">13/1/20 </p>
+**Lecture 4:** Fundamental Theorem of Calculus (FTC)
+
+>**Definition:** Suppose $f$ is continuous on $[a,b]$. Define the **integral function:**
+>$$G(x) = \int_a^x f(t) dt$$
+>$G(x)$ is a function that returns the net (*signed*) area under $f$ from $a$ to $x$. 
+
+>**Theorem - The fundamental theorem of calculus part 1 (FTC 1):** If $f$ is continuous on an open interval $I$ containing a point $x=a$, and if $G(x) = \int_a^xf(t)dt$, then $G(x)$ is differentiable at each $x \in I$ and $G'(x)=f(x)$. That is $\frac{d}{dx} \int_a^x f(t)dt = f(x)$.  
+
+**Proof:** Assume $f$ is continuous on $I$ and $G(x) = \int_a^xf(t)dt$.     
+Consider arbitrary $x_0 \in I$.     
+We will show $G(x)$ is differentiable at $x$. and $G'(x_0) = f(x_0)$ by showing, 
+$$lim_{x \rightarrow x_0} \frac{G(x)-G(x_0)}{x-x_0} = f(x_0)$$    
+*First notice:*   
+$$
+\begin{array}{rcl} 
+\frac{G(x)-G(x_0)}{x-x_0}  &=& \frac{\int_a^x f(t)dt - \int_a^{x_0} f(t) dt}{x-x_0}    \\
+&=&\frac{(\int_a^{x_0} f(t)dt + \int_{x_0}^x f(t)dt) - \int_a^{x_0} f(t) dt}{x-x_0} \\ 
+&=& \frac{1}{x-x_0} \int_a^{x_0} f(t) dt \end{array}
+$$
+
+Let $\epsilon > 0$. Since $f$ is continuous at $x_0$ so $\exists \delta > 0$ such that if $0<|x-x_0|<\delta$ then $|f(x)-f(x_0)| < \delta$    
+Suppose $0<|x-x_0|<\delta$    
+By AVT, there xists some $c$ between $x$ and $x_0$ such that $f(c) = \frac{1}{x-x_0} \int_{x_0}^xf(t)dt$    
+Since $c$ is between $x$ and $x_0$, we have $0<|c-x_0|<\delta$ as well.     
+Therefore, $|f(c)-f(x_0)| < \epsilon$.    
+That is, $|\frac{G(x)-G(x_0)}{x-x_0} - f(x_0)| < \epsilon$    
+So, we have shown that for any $\epsilon > 0$, $\exists \delta > 0$ such that if $0 < |x-x_0|<\delta$ then $|\frac{G(x)-G(x_0)}{x-x_0} - f(x_0)| < \epsilon$    
+By the definition of a limit, we've shown $lim_{x \rightarrow x_0} \frac{G(x)-G(x_0)}{x-x_0} = f(x_0)$    
+That is, $G'(x_0) = f(x_0)$ (by the definition of derivative)   
+
+**Example 4.1:** $G(x) = \int_{-2}^x(e^t-1)dt$, determine $G'(x)$:      
+Since $e^{t^3}-1$ is continuous, by FTC 1, 
+$$G'(x)=\frac{d}{dx} \int_{-2}^x(e^{t^3}-1)dt = e^{x^3} -1$$
+
+**Example 4.2:** Determine $\frac{d}{dx} \int_{-2}^{x^2}(e^{t^3} - 1)dt$    
+Since $G(x) = \int_{-2}^{x^2}(e^{t^3} - 1)dt$   
+So 
+$$\begin{array}{rcl} \frac{d}{dx} \int_{-2}^{x^2}(e^{t^3} - 1)dt  &=& \frac{d}{dx} G(x^2) \\
+&=& G'(x^2) \cdot 2x \\ 
+&=& (e^{({x^2})^3}-1)\cdot 2x \\
+&=& 2x \cdot (e^{x^6}-1)\cdot 2x
+\end{array} $$
 
 
 # <p style="text-align: center;">6/1/20 </p>
