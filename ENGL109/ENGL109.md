@@ -104,6 +104,7 @@ Choose from one of three general topics:
 #### Abstract and Keywords (150-250 words)
 - Complete overview of the report or evaluation
 
+# <p style="text-align: center;">8/1/20 </p>
 ### Academic writing is: 
 - based on research/evidence that can be cited (for this class we use MLA). 
 - Written for a professional or academic audience who likely know something about the topic
@@ -149,3 +150,75 @@ The differences in writing across different disciplines lies mainly in the:
 7. What do you expect to conclude about the topic? 
 8. How will you establish your credibility (ethos)? That is, how will you show that you are knowledgeable and trustworthy?
     - Expected to have **at least 3 citations**
+
+# <p style="text-align: center;"> 13/1/20 </p>
+**Critical thinking:**
+- Describes mental habits that reinforce logical reasoning and analysis
+- When we add the *adjective* *critical* to the noun *thinking*, we are talking about searching for 
+  - hidden assumptions
+  - noticing various facts
+  - unravelling different strands
+- The word *critical* comes from a Greek word, *krinein*, meaning "to separate," or "to choose"
+  - It implies conscious, deliberate thinking
+- Critical thinkers are sufficiently open-minded that they adopt a skeptical attitude towards: 
+  - *their own* ideas
+  - *their own* assumptions
+  - the evidence *they themselves* tentatively offer
+  - the assumptions and evidence offered by others
+- When critical thinkers re-read their writing, they approach it with skepticism 
+
+**Basic techniques of academic reading:**
+- Survey the table of contents
+- Pre-read to get a sense of the whole
+- Look up terms and concepts you don't know
+- Summarize what you have read
+
+**Reading advice:**
+- Read to deepen what you already know
+- Read above your level of knowledge
+  - spend time with texts which are tough to get through
+- Read what makes you uncomfortable
+- Read against the grain
+  - raise questions about the texts you read
+- Read slowly - find the thesis
+- Annotate what you read 
+
+**Annotating:**
+- Read slowly and annotate keywords
+- Make a list of words you are unfamiliar with
+- Reflect on the book in the margins. Ask questions
+- List questions you have
+- Link ideas together with arrows
+- Summarize each section at the bottom of the page
+
+**Previewing source materials:**
+- Title - a good title tells what a piece is and isn't about. 
+- A subtitle usually describes the substance of the argument
+- Introduction or abstract - what the source covers, what its methods are. 
+- Table of contents (book) or headings (article) - overall structure 
+- Charts, tables, illustrations - what do they offer, can you use them in your paper? 
+- Index 
+- Final section or chapter - know how does the material conclude
+- Bibliography - list of sources indicates how thorough the author has been and points to other potential material 
+
+**Place of publication:**
+- In general, book published by pressess associated with colleges and universities are reputable sources. 
+- Articles from professional journals described as *refereed* or *peer-reviewed*. 
+- New york times, etc... 
+
+**Sources:**
+- For academic projects, rely primarily on scholarly works - Wikipedia may help to introduce you to your topic, but do not cite it as an authority in an academic paper
+- You should base your work on the most current information - look for date of publication
+- Check the source's documentation, all serious scholarly research is documented. 
+- Journalists establish their credibility by naming their sources
+- Is it C.R.A.A.P?
+  - Current
+  - Relevant 
+  - Authority
+  - Accuracy
+  - Purpose
+
+# <p style="text-align: center;"> 15/1/20 </p>
+# <p style="text-align: center;"> 20/1/20 </p>
+# <p style="text-align: center;"> 22/1/20 </p>
+# <p style="text-align: center;"> 27/1/20 </p>
