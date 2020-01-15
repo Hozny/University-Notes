@@ -198,7 +198,8 @@ my_add(a , b){
 <ul>
 <li>In &quot;functional&quot; language terminal we <strong>apply</strong></li>
 </ul>
-<p><strong>Functions without parameters:</strong> use the <code>void</code> keyword to indicate a function has no parameters.</p>
+<h2 id="functions-without-parameters"><strong>Functions without parameters:</strong></h2>
+<p>use the <code>void</code> keyword to indicate a function has no parameters.</p>
 <pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_num</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
     <span class="hljs-keyword">return</span> my_add(<span class="hljs-number">40</span>,<span class="hljs-number">2</span>);
 }
@@ -218,8 +219,7 @@ my_add(a , b){
     }
 }
 </div></code></pre>
-<p><strong>Function Documentations</strong>
-<code>C</code></p>
+<h2 id="function-documentations"><strong>Function Documentations</strong></h2>
 <p><strong>Whitespaces</strong> C mostly ignores whitespace.</p>
 <pre><code class="language-C"><div><span class="hljs-comment">// The following three functions are equivalent</span>
 
@@ -264,6 +264,291 @@ b ; }
 <li>The <code>return</code> value communicates to the OS the &quot;error code&quot; also know as &quot;exit code&quot;, &quot;error number&quot; or <code>errno</code></li>
 <li>A successful program <code>returns</code> <strong>zero</strong> (no error code).</li>
 </ul>
+<h1 id="p-style%22text-align-center%22-14120-p"><p style="text-align: center;"> 14/1/20 </p></h1>
+<p><strong>Top level expressions:</strong> In C, <em>top-level expressions</em> (code outside of a function) are <strong>not</strong> allowed.</p>
+<ul>
+<li>Code only execute <strong>inside</strong> of a function</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-number">1</span> + <span class="hljs-number">1</span>; <span class="hljs-comment">// INVALID</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>{
+    <span class="hljs-keyword">return</span> a + b; 
+}
+</div></code></pre>
+<p><strong>Tracing expressions:</strong> Seashell provides <em>tracing tools</em> to help you &quot;see&quot; what your code is doing. <code>trace_int</code> is a function that allows you trace integers.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{
+    trace_int(<span class="hljs-number">1</span> + <span class="hljs-number">1</span>); 
+    trace_int(my_add(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)); 
+}
+</div></code></pre>
+<h2 id="running-our-first-program">Running our first program</h2>
+<pre><code class="language-C"><div><span class="hljs-comment">// First C program (documentation omitted)</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"cs136.h"</span>  <span class="hljs-comment">// &lt;-- More on this later</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>{
+    <span class="hljs-keyword">return</span> a + b; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{
+    trace_int(<span class="hljs-number">1</span>+<span class="hljs-number">1</span>);
+    trace_int(my_add(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+}
+</div></code></pre>
+<ul>
+<li>For now, include &quot;cs136.h&quot; for all programs</li>
+</ul>
+<h2 id="function-ordering"><strong>Function ordering:</strong></h2>
+<ul>
+<li>For now, always place function definitions <strong>above</strong> any other functions that reference them (so <code>main</code> is at the bottom).
+<ul>
+<li>There are ways to bypass this, but we will explore that later</li>
+</ul>
+</li>
+</ul>
+<h2 id="program-documentation"><strong>Program documentation:</strong></h2>
+<ul>
+<li>Document a program (state its purpose) at the <strong>top</strong> of the file (not necessarily where <code>main</code> is).</li>
+</ul>
+<h2 id="testing"><strong>Testing:</strong></h2>
+<ul>
+<li><em>tracing tools</em> are an excellent way for you to &quot;see&quot; what is happening
+<ul>
+<li>They are helpful to <em>informally</em> test code</li>
+<li>They are not ways to <em>thoroughly</em> test code</li>
+</ul>
+</li>
+</ul>
+<h2 id="boolean-expressions"><strong>Boolean expressions:</strong></h2>
+<ul>
+<li>In C, boolean expressions do not produces &quot;true&quot; or &quot;false&quot;, they produce either:
+<ul>
+<li>Zero (<code>0</code>) for &quot;false&quot;</li>
+<li>one (<code>1</code>) for &quot;true&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="comparison-operators"><strong>Comparison operators:</strong></h2>
+<p>The <em>equality</em> <strong>operator</strong> in C is <code>==</code> (not the <strong>double</strong> equals)<br>
+(3 == 3) <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">⇒</span></span></span></span> 1 (true)<br>
+(2 == 3) <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">⇒</span></span></span></span> 0 (false)<br>
+The <em>not equal</em> <strong>operator</strong> is <code>!=</code><br>
+(2 != 3) <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">⇒</span></span></span></span> 1 (true)</p>
+<p>The operators &lt;, &lt;=, &gt; and &gt;= behave exactly as expected.</p>
+<ul>
+<li>The accidental use of a single <code>=</code> instead of a double <code>==</code> for equality is one of the most common programming mistakes in C. This can be a serious bug.</li>
+</ul>
+<h2 id="logical-operators"><strong>Logical Operators:</strong></h2>
+<p>The logical operators are ! (not), &amp;&amp; (and), || (or):</p>
+<p>Similarly to Racket, C <em>short-circuits</em> and stops evaluating logical operators as soon as possible.</p>
+<p><strong>All non-zero values are true:</strong></p>
+<ul>
+<li>operators that produce a Boolean value will always produce <code>0</code> or <code>1</code></li>
+<li>Operators that expect a Boolean value will consider <strong>any non-zero value</strong> to be <strong>&quot;true&quot;</strong>
+<ul>
+<li><strong>Only zero (0) is &quot;false&quot;</strong>
+<ul>
+<li>The value <code>NULL</code> is also considered false. but in most implementations is evaluated as <code>0</code> anyway.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Negations</td>
+<td><code>!</code></td>
+</tr>
+<tr>
+<td>multiplicative</td>
+<td><code>* / %</code></td>
+</tr>
+<tr>
+<td>additive</td>
+<td><code>+ -</code></td>
+</tr>
+<tr>
+<td>comparison</td>
+<td><code>&lt; &lt;= &gt;= &gt;</code></td>
+</tr>
+<tr>
+<td>equality</td>
+<td><code>== !=</code></td>
+</tr>
+<tr>
+<td>and</td>
+<td><code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td>or</td>
+<td><code>||</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="bool-type"><strong>Bool type</strong></h2>
+<p>The <code>bool</code> type is an integer that can only have a value <code>0</code> or <code>1</code>.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">is_even</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> (n % <span class="hljs-number">2</span>) == <span class="hljs-number">0</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">my_negate</span><span class="hljs-params">(<span class="hljs-keyword">bool</span> v)</span> </span>{
+    <span class="hljs-keyword">return</span> !v; 
+}
+</div></code></pre>
+<ul>
+<li>You can technically add integers to booleans, but just because you can doesn't mean you should</li>
+</ul>
+<h2 id="assertion"><strong>Assertion</strong></h2>
+<p>use the <code>assert</code> function to test functions:</p>
+<pre><code class="language-C"><div>assert(my_add(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>) == <span class="hljs-number">3</span>); 
+</div></code></pre>
+<p><code>assert(exp)</code> <strong>stops</strong> the program and displays a message if the expression <code>exp</code> is false (zero).</p>
+<p>if exp is true (non-zero), it does &quot;nothing&quot; and continues to the next line of code.</p>
+<ul>
+<li>assert is very similar to Racket's <code>check-expect</code>:</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-comment">// My second C program (now with better testing!)</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"cs136.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">return</span> a + b; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>{
+    assert(my_add(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)==<span class="hljs-number">3</span>);
+    assert(my_add(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)==<span class="hljs-number">4</span>);
+}
+</div></code></pre>
+<h2 id="function-requirements"><strong>Function requirements</strong></h2>
+<p>The <code>assert</code> function is also very useful for <strong>verifying function requirements</strong>.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// my_divide(x, y) ...</span>
+<span class="hljs-comment">// requires: y is not 0 </span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
+    assert(y!=<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> x/y; 
+}
+</div></code></pre>
+<h2 id="infeasible-requirements"><strong>Infeasible requirements</strong></h2>
+<p>Some requirements are <em>infeasible</em> to assert, or they would be <em>inefficient</em> to assert.<br>
+It is good style to communicate that a requirement is not asserted</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// some function ... </span>
+<span class="hljs-comment">// requires: n is a prime number [not asserted]</span>
+</div></code></pre>
+<h2 id="multiple-requirements"><strong>Multiple requirements</strong></h2>
+<p>With multiple requirements, it is better to have several small <code>assert</code>s. It makes it easier to determine which assertion failed.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_function</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z)</span> </span>{
+    assert((x &gt; <span class="hljs-number">0</span>) &amp;&amp; (y &lt; z)); 
+}
+</div></code></pre>
+<h2 id="statements"><strong>Statements</strong></h2>
+<p>Blocks (<code>{}</code>) can contain multiple <em>statements:</em></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x , in y)</span> </span>{
+    assert(y)      <span class="hljs-comment">// statement</span>
+    trace_int(y)   <span class="hljs-comment">// statement</span>
+    <span class="hljs-keyword">return</span> x / y;  <span class="hljs-comment">// statement</span>
+    trace_int(x);  <span class="hljs-comment">// unreachable statement</span>
+}
+</div></code></pre>
+<p>Statements are executed <em>in</em> sequence (on after the other).<br>
+The <code>return</code> statement <strong>ends</strong> the function. In the above code, <code>trace_int(x)</code> will never run.</p>
+<h2 id="brief-introduction-to-control-flow"><strong>Brief introduction to control flow</strong></h2>
+<p>The <code>return</code> statement is a special kind of statement known as a <em>control flow</em> statement.<br>
+<code>return</code> &quot;controls the flow&quot; of the program by ending the function and returning to the caller.</p>
+<h2 id="conditionals"><strong>Conditionals</strong></h2>
+<p>The <code>if</code> control flow statement allows us to have functions with conditional behaviour.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_abs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) { <span class="hljs-comment">// note: the () are required</span>
+        <span class="hljs-keyword">return</span> -n; 
+    } <span class="hljs-keyword">else</span> {     <span class="hljs-comment">// In CS136 they have else on the same line on the closing }</span>
+        <span class="hljs-keyword">return</span> n; 
+    }
+}
+</div></code></pre>
+<ul>
+<li>There can be more than one <code>return</code> in a function, but only one can ever execute.</li>
+</ul>
+<h2 id="else-if"><strong>else if</strong></h2>
+<p>if there are more than wo possible results, use <code>else if</code></p>
+<pre><code class="language-C"><div><span class="hljs-comment">// in_between(x, lo, hi) determines if lo &lt;= x &lt;= hi</span>
+<span class="hljs-comment">// requires: lo &lt;= hi</span>
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">in_between</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span> </span>{ 
+    assert(lo&lt;=hi); 
+    <span class="hljs-keyword">if</span> (x &lt; lo) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; hi) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
+    }
+}
+</div></code></pre>
+<p><strong>The C ternary conditional operator</strong> (<code>?:</code>)</p>
+<pre><code class="language-C"><div>q ? a : b
+</div></code></pre>
+<ul>
+<li><code>a</code> if <code>q</code> is <code>true</code>, <code>b</code> if <code>q</code> is <code>false</code></li>
+</ul>
+<pre><code class="language-C"><div>(v &gt;= <span class="hljs-number">0</span>) ? v : -v;      <span class="hljs-comment">// abs(v)</span>
+(a &gt; b) a : b;          <span class="hljs-comment">// max(a, b)</span>
+</div></code></pre>
+<p>Goals of this section</p>
+<ul>
+<li>Demonstrate the use of C syntax and terminology</li>
+<li>Write a simple function in C</li>
+<li>Use the C operators introduced in this module</li>
+<li>Explain the significance of the <code>main</code> function in C</li>
+<li>Perform basic tracing in C using <code>trace_int</code></li>
+<li>Use assert for testing and to verify requirements</li>
+<li>Provide the required documentation for C functions</li>
+</ul>
+<h2 id="introduction-to-imperative-c"><strong>Introduction to imperative C</strong></h2>
+<p>Readings: CP:AMA</p>
+<h2 id="functional-programming"><strong>Functional programming</strong></h2>
+<ul>
+<li>functions are &quot;pure&quot; (a.k.a &quot;mathematical&quot;)
+<ul>
+<li>functions <strong>only return values</strong></li>
+<li>return values <strong>only depend</strong> on argument values</li>
+</ul>
+</li>
+<li>only <strong>constants</strong> are used</li>
+</ul>
+<p>In the imperative programming paradigm functions may be &quot;impure&quot; and will use variables</p>
+<h2 id="compound-statement"><strong>Compound statement</strong></h2>
+<p>In imperative programming, a <strong>sequence of instructions</strong> (or &quot;statements&quot;) are executed. We have already seen this:</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{ 
+    trace_int(<span class="hljs-number">1</span>+<span class="hljs-number">1</span>); 
+    assert(<span class="hljs-number">3</span> &gt; <span class="hljs-number">2</span>); 
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+}
+</div></code></pre>
+<p>A block <code>{}</code> is formally known as a <em>compound statement</em>, which is simple a <strong>sequence of statements</strong> to be executed in order</p>
+<ul>
+<li>blocks can contain local variable definitions</li>
+</ul>
+<h2 id="io-inputoutput"><strong>I/O</strong> (input/output)</h2>
+<ul>
+<li>in this course we use simple <strong>text-based</strong> I/O.</li>
+</ul>
+<h2 id="text-io"><strong>Text I/O</strong></h2>
+<p>To displace text output in C, we use the <code>printf</code> function.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// My first program with I/O</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"cs136.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello, World"</span>); 
+}
+</div></code></pre>
 <h1 id="p-style%22text-align-center%22-7120-p-1"><p style="text-align: center;"> 7/1/20 </p></h1>
 
     </body>

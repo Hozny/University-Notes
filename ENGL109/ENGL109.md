@@ -63,8 +63,8 @@ Report or Evaluation and Abstract|35%|Post Topic: March 9, In-Class work session
 
 ### Rhetorical Analysis of an Advertisement Assignment (25%)
 - find a recent Canadian advertisement that makes an argument about a particular topic or issue
-- The advertisement you pick should allow you to examin all aspects of rhetoric we have been discussing **(purpose, audience, and rhetorical appeals)**, and it should be clearly making an argument or trying to persuade its audience. TV, online, or in print. 
-- Some godo place to start your search are Oh Canada, Best of Canadian Ads, Ads of the World-Canada, Best Canadian Ads on TV, Political Ad Registry (Federal Election 2019). 
+- The advertisement you pick should allow you to examine all aspects of rhetoric we have been discussing **(purpose, audience, and rhetorical appeals)**, and it should be clearly making an argument or trying to persuade its audience. TV, online, or in print. 
+- Some good place to start your search are Oh Canada, Best of Canadian Ads, Ads of the World-Canada, Best Canadian Ads on TV, Political Ad Registry (Federal Election 2019). 
 - **Final version is due by 10:30 a.m. on February 3 in one PDF document in the "Final Rhetorical Analysis of an Advertisement and Reflection" dropbox**
 
 #### Rhetorical Analysis (1250-1500 words)
