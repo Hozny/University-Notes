@@ -144,4 +144,6 @@ Unemployment matters since
 - If we divide the amount of real income by the number of workers that produced it, we have real output (real GDP) per worker
 - To be even more accurate - we might want to measure real output per hour of work
 
-
+# <p style="text-align: center;"> 16/1/20 </p>
+## Short-run movements in output 
+##

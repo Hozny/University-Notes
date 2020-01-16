@@ -523,7 +523,7 @@ The <code>return</code> statement <strong>ends</strong> the function. In the abo
 </li>
 <li>only <strong>constants</strong> are used</li>
 </ul>
-<p>In the imperative programming paradigm functions may be &quot;impure&quot; and will use variables</p>
+<p>In the imperative programming paradigm functions may be &quot;<strong>impure</strong>&quot; and will <strong>use variables</strong></p>
 <h2 id="compound-statement"><strong>Compound statement</strong></h2>
 <p>In imperative programming, a <strong>sequence of instructions</strong> (or &quot;statements&quot;) are executed. We have already seen this:</p>
 <pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{ 
@@ -549,7 +549,207 @@ The <code>return</code> statement <strong>ends</strong> the function. In the abo
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello, World"</span>); 
 }
 </div></code></pre>
-<h1 id="p-style%22text-align-center%22-7120-p-1"><p style="text-align: center;"> 7/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-16120-p"><p style="text-align: center;"> 16/1/20 </p></h1>
+<h2 id="text-io-1"><strong>Text I/O ...</strong></h2>
+<p>The <strong>newline</strong> character (<code>\n</code>) is necessary to properly format output to appear on multiple lines</p>
+<ul>
+<li>by default <code>printf</code> does not print a new line each time</li>
+</ul>
+<p>To output values, use a <strong>format specifier</strong> (the <strong>f</strong> in print<strong>f</strong>).</p>
+<ul>
+<li>For an integer in &quot;<strong>d</strong>ecimal format the format specifier is <code>%d</code></li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"2 + 2 is %d"</span>,<span class="hljs-number">2</span>+<span class="hljs-number">2</span>);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d + %d is: %d\n"</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>+<span class="hljs-number">2</span>);
+<span class="hljs-comment">// 2 + 2 is: 4</span>
+</div></code></pre>
+<p>If you would like to print a percent sign (%), use two (%%).</p>
+<pre><code class="language-C"><div><span class="hljs-built_in">printf</span>(<span class="hljs-string">"I am %d%% sure you should watch your"</span>,<span class="hljs-number">100</span>);
+<span class="hljs-comment">// I am 100% sure you should watch your</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"spacing!\n"</span>);
+</div></code></pre>
+<p>Similarly,</p>
+<ul>
+<li>to print a backslash (<code>\</code>) use two (<code>\\</code>)</li>
+<li>To print a quote add a backslash (<code>\&quot;</code>)</li>
+</ul>
+<h2 id="side-effects-and-state-introduction">Side effects and state (introduction)</h2>
+<p>In general, a programming side effect is when the <strong>state</strong> of something &quot;changes&quot;.<br>
+State refers to the value of some data (or &quot;information&quot;) <strong>at a moment in time</strong>.</p>
+<ul>
+<li>You have a blank piece of paper, then you write your name on that paper.
+<ul>
+<li>You have changed the state of that paper: at one moment it was blank, and in the next it was &quot;autographed&quot;</li>
+<li>The side effect of writing your name was that you changed the state of the paper</li>
+</ul>
+</li>
+</ul>
+<h2 id="documenting-side-effects">Documenting side effects</h2>
+<p>The <code>printf</code> function has a side effect: it changes the output or &quot;display&quot;</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// noisy_abs(n) computes |n|</span>
+<span class="hljs-comment">// effects: may produce output</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">noise_abs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Yo! I'm changing the sign!\n"</span>);
+        <span class="hljs-keyword">return</span> -n;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> n; 
+    }
+}
+</div></code></pre>
+<p>In this course there is no need to provide any detail in the &quot;effects&quot; section <code>// effects: produces output</code> is sufficient.</p>
+<ul>
+<li>occasionally you want to describe the output in the purpose if the output is important in understanding the core behaviour of the function</li>
+</ul>
+<h2 id="debugging-tools">Debugging tools</h2>
+<p>Statement used for debugging and informal testing (assert, trace_int) are <strong>not</strong> considered side effects.</p>
+<h2 id="io-terminology">I/O terminology</h2>
+<p>In the context I/O, be careful with eerminoloy.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sqr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> n * n; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">noise_sqr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Yo! I'm squaring %d!\n"</span>,n);
+    <span class="hljs-keyword">return</span> n * n; 
+}
+</div></code></pre>
+<ul>
+<li>informally, someone might say: if you <strong>input</strong> <code>7</code> into <code>sqr</code>, it <strong>outputs</strong> <code>49</code>
+<ul>
+<li>We say if <code>7</code> is <strong>passed</strong> into <code>sqr</code> it <strong>returns</strong> <code>49</code></li>
+<li>if <code>7</code> is <strong>passed</strong> into <code>noisy_sqr</code> it <strong>outputs</strong> a message and <strong>returns</strong> <code>49</code>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Our tracing tools print to a different output <strong>stream</strong> than <code>printf</code> (like writing on two different pieces of paper). By default <code>printf</code> outputs to <code>stdout</code> (<strong>st</strong>andard <strong>out</strong>put stream). Our tracing tools print to <code>stderr</code> (<strong>st</strong>andard <strong>err</strong>or stream).</p>
+</blockquote>
+<h2 id="void-functions">Void functions</h2>
+<pre><code class="language-C"><div><span class="hljs-comment">// Display score: produces score</span>
+<span class="hljs-comment">// Effects produces output</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display_score</span><span class="hljs-params">(<span class="hljs-keyword">int</span> score, <span class="hljs-keyword">int</span> max)</span> </span>{ 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"your score is %d out of %d.\n"</span>, score, max)
+}
+</div></code></pre>
+<ul>
+<li>In a void function, the return is optional and has no expression.</li>
+</ul>
+<h2 id="expression-statements">Expression statements</h2>
+<p>An <strong>expression statement</strong> is an expression with a semicolon (<code>;</code>)</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{ 
+    <span class="hljs-number">11</span>;
+    <span class="hljs-number">10</span> + <span class="hljs-number">1</span>; 
+    sqr(<span class="hljs-number">6</span>) - sqr(<span class="hljs-number">5</span>); 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"expression\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"five\n"</span>)+<span class="hljs-number">6</span>;
+}
+</div></code></pre>
+<ul>
+<li>The <strong>value</strong> of an expression statement is <strong>discarded</strong> after it is executed.
+<ul>
+<li>The purpose of an expression statement is to generate <strong>side effects</strong>
+<ul>
+<li>In the example above the <code>printf</code> statements produce an output side effect</li>
+<li>but <code>11;</code> produces no side effect which can result in a warning by some compilers but the program still runs</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="return-value-of-printf">Return value of <code>printf</code></h2>
+<p>Surprisingly <code>printf</code> is not a <code>void</code> function it (<code>return</code>s an <code>int</code>)</p>
+<ul>
+<li><code>printf</code> returns the number of characters that were printed</li>
+</ul>
+<h2 id="statements-1">Statements</h2>
+<ul>
+<li><strong>Compound statements (blocks)</strong>
+<ul>
+<li>a sequence of statements (to be executed in order)</li>
+</ul>
+</li>
+<li><strong>Expression statements</strong>
+<ul>
+<li>for generating side effects (values are discarded)</li>
+</ul>
+</li>
+<li><strong>Control flow statement</strong>
+<ul>
+<li>control the order in which other statements are executed</li>
+</ul>
+</li>
+</ul>
+<h2 id="variables">Variables</h2>
+<p><strong>Variables</strong> store values
+To define a variable in C, we need (in order):</p>
+<ul>
+<li>the <strong>type</strong> (<code>int</code>)</li>
+<li>the <strong>identifier</strong> (&quot;name&quot;)</li>
+<li>the <strong>initial value</strong></li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> my_variable = <span class="hljs-number">7</span>; <span class="hljs-comment">// definition</span>
+</div></code></pre>
+<p>Definitions <strong>are not</strong> statements.</p>
+<h2 id="mutation">Mutation</h2>
+<p>When the value of a variable is changed, it is known as <strong>mutation</strong></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> m = <span class="hljs-number">5</span>; 
+    trace_int(m);   <span class="hljs-comment">// definition (with initialization)</span>
+    m = <span class="hljs-number">6</span>; 
+    trace_int(m);   <span class="hljs-comment">// mutation!</span>
+    m = <span class="hljs-number">-1</span>; 
+    trace_int(m);   <span class="hljs-comment">// more mutation!</span>
+}
+</div></code></pre>
+<p>Mutation is a <strong>side effect</strong></p>
+<h2 id="assignment-operator">Assignment operator</h2>
+<p>In C, mutation is achieved with the <strong>assignment operator</strong> (<code>=</code>)</p>
+<pre><code class="language-C"><div>m = m + <span class="hljs-number">1</span>; 
+</div></code></pre>
+<ul>
+<li>The &quot;right hand side&quot; RHS must be an <em>expression</em> that produces a <strong>value</strong> with the same type as     LHS.</li>
+<li>The LHS <strong>must</strong> be the name of a variable</li>
+<li>The LHS variable is mutated to store the <strong>value</strong> of the RHS</li>
+<li>This is a side effect
+<ul>
+<li><strong>Note</strong> assignment evaluates to the RHS so <code>if(n=1)</code> passes</li>
+</ul>
+</li>
+</ul>
+<p><strong>Pro tip:</strong> some defensive programmers get in the habit of writing equalities as <code>(13 == i)</code> this makes it so that if one equals is missed it produces an error rather than being a bug.</p>
+<h2 id="initialization">Initialization</h2>
+<p>C allows a variable definition without initialization, but is bad style.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> my_variable = <span class="hljs-number">7</span>;    <span class="hljs-comment">// initialized</span>
+<span class="hljs-keyword">int</span> another_variable;   <span class="hljs-comment">// uninitialized</span>
+</div></code></pre>
+<ul>
+<li>Always initialize variables</li>
+</ul>
+<h2 id="initialization-is-not-assignment">Initialization is not assignment</h2>
+<ul>
+<li>The <code>=</code> use in initialization is <strong>not</strong> the assignment operator.</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> n = <span class="hljs-number">5</span>;  <span class="hljs-comment">// initialization syntax</span>
+n = <span class="hljs-number">6</span>;  <span class="hljs-comment">// assignment operator </span>
+</div></code></pre>
+<ul>
+<li>This matters more later on in object oriented programming where assignment is more apparently different than initialization</li>
+</ul>
+<h2 id="more-assignment-operators">More assignment operators</h2>
+<pre><code class="language-C"><div> x += <span class="hljs-number">2</span>;    <span class="hljs-comment">// x = x + 2; </span>
+ ++x;   x++; <span class="hljs-comment">// x += 1;   </span>
+</div></code></pre>
+<ul>
+<li>the prefix (<code>++x</code>) and postfix (<code>x++</code>) both increment by <code>1</code>
+<ul>
+<li><code>x++</code> produces the &quot;old&quot; value of <code>x</code> then increments by <code>1</code></li>
+<li><code>++x</code> increments <code>x</code> then produces the &quot;new&quot; value of <code>x</code></li>
+</ul>
+</li>
+<li>prefix (<code>++x</code>) is usually preferred to improve clarity and efficiency</li>
+</ul>
 
     </body>
     </html>

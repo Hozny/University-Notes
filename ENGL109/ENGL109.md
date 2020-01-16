@@ -219,6 +219,99 @@ The differences in writing across different disciplines lies mainly in the:
   - Purpose
 
 # <p style="text-align: center;"> 15/1/20 </p>
+## Rhetorical analysis of Volkswagen ad: 
+- What rhetorical devices did they use
+  - Humour
+  - Juxtaposed old Volkswagen with new red one
+    - New car was red - a colour for attraction
+    - Music was romantic and French
+  - Actor is falling in love with the car
+  - Author is evoking
+    - Guilt 
+    - Love 
+  - Car is personified 
+    - The car cries
+
+## **What is Rhetoric?**
+Ch. 14 of textboko
+- Identification, getting someone to identify with you over something
+- The study of how writers and speakers use words to influence an audience
+
+**Aristotle**
+>"Of the modes of persuasion furnished by the spoken word there are three kinds.  
+>The first kinds depends on the personal character of the speaker [*ethos*];  
+>The second on putting the audience into a certain frame of mind [*pathos*];   
+>The third on the proof or apparent proof, provided by the words of the speaker. [*logos*];"   
+
+## **Modes of Persuasion**
+- Ethos
+  - Speaker's credibility, audience values
+- Logos
+  - Arrangement, evidence, and logic
+- Pathos
+  - Emotional effect of speaker's words
+
+### Aristotle's Modes of Persuasion
+**Ethos**
+- Ethical appeals raise emotions favourable ot he rhetorician's moral character - that is, credibility, authority, and unselfish or clear motives - essentially ethos depends on trust
+
+**Pathos**
+- Pathetic appeals raise emotions favourable ot the rhetorician's position - influencing what people think and believe based on feelings
+
+**Logos** 
+- logical or rational appeals stress the reasonableness of the rhetorician's argument - that is, claims based on facts, evidence, adn reason 
+
+## **Aristotle's proofs**
+Division of rhetoric into two major categories
+1. "Artistic" proofs, for which the rhetorician constructs the material, eg my client is too good to have committed this crimes
+   1. Encompasses Aristotle's appeals or modes of persuasion (ethos, pathos, logos)
+2. "Inartistic" proofs, for which the rhetorician 
+   1. exists outside the rhetorician (surveys, statistics, etc...)
+3. interprets existing evidence (These three witnesses ...)
+
+Both types of proofs can help make a case
+
+## **Cicero's Persuasion**
+- [*In De Oratore*] Cicero explains that the art of speaking relies wholly on three means of persuasion: 
+  - To be able to prove opinions [*logos*]
+  - To win an audience's favour [*ethos*],
+  - To rouse their feelings according to the motivation which the case requires [*pathos*]
+
+## **Writing a Rhetorical Analysis**
+- Take the words and images seriously
+  - Identify fair and effective techniques of persuasion
+  - Expose the crooked ones as well, such as logical fallacies 
+- Spend time with texts
+  - Carefully study and evaluate the techniques of the write, speaker, or artist until you know them inside out
+- Pay attention to audience
+  - Understand for whom the text is written, which is as important as what it says. 
+  - Audience often determines content, shape, and language of most arguments
+- Mine the text for evidence
+  - Point to subtle language
+  - Over-blown emotional appeals
+  - Intricate logic
+  - Covert bigotry to support your claims in a rhetorical analysis
+
+## Creating a structure for your rhetorical analysis 
+- Once u have a thesis
+  - Introduction leading to a claim
+  - First support reason + textual evidence
+  - Second support reason + textual evidence
+  - Third support reason + textual evidence
+
+Style and design
+- Write in a formal or high style
+- Keep the tone respectful and technical
+
+Make the text accessible to readers
+- Assume your readers have not watched the ad
+- TO achieve this clarity, summarize and quote selectively from the text as you examine it. You may also wish to additionally provide visual images that are captioned or annotated
+- For the advertisement, describe or summarize the content of the work 
+- As you examine it, be sure to identify the authors/creators, title, place/mode of publications, and date in your paper
+
+Stanley fish, the other car : page 294 for third edition
+- What are the rhetorical appeals that fish identifies in the advertisements? What is the dominant rhetorical appeal of the ads? 
+- The online version of this article includes links to the three ads that fish analyzes. Do we need to be able to see the advertisements to understand Fish's analysis?
 # <p style="text-align: center;"> 20/1/20 </p>
 # <p style="text-align: center;"> 22/1/20 </p>
 # <p style="text-align: center;"> 27/1/20 </p>
