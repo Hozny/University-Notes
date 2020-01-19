@@ -203,4 +203,134 @@ $$\begin{array}{rcl} \frac{d}{dx} \int_{-2}^{x^2}(e^{t^3} - 1)dt  &=& \frac{d}{d
 \end{array} $$
 
 
+# <p style="text-align: center;">15/1/20 </p>
+**Lecture 5**: Antiderivatives FTCII(1.6)
+
+>**Definition:** Given a function $f_1$, an antiderivative of $f$ is a function $F$ such that 
+>$$ F'(x) = f(x) $$
+- Example: for $f(x)=x$, $F(x) = \frac{x^2}{2}$
+
+>**Definition:** The collection of all antiderivatives of $f(x)$ is denoted by $\int f(x) dx$. This is called the **indefinite integral** of $f$
+
+By the antiderivative theorem, any two antiderivatives of $f$ differ by a constant. Therefore, $\int f(x) dx = F(x) + c$, where $c \in \mathbb{R}$ and $F$ is any antiderivative of $f$ ($F'(x)=f(x)$)
+
+The indefinite integral, $\int f(x)dx$, is a family of functions, it represents all functions whose derivative is $f(x)$, The definite integral,$\int_a^bf(x)dx$, is a number defined as a limit of Riemann sums. It represents the **signed** area under $f(x)$ from $x=a$ to $x=b$. 
+
+You should know all of the following indefinite integrals: **ADD FROM PAGE 43**
+
+>**Theorem (FTCII):** The Fundemental Theorem of Calculus part II (FTCII) 
+>If  $f$ is continuous on $[a,b]$ and $F$ is any antiderivative of $f$, then 
+>$$ \int_a^bf(x)dx = F(b) - F(a) = F(x)|_a^b  $$
+- Note that $F(x)_a^b$ means $F(b) - F(a)$
+
+**Example 5.1:** Calculate $\int_0^3(x^3+2x)dx$
+$$\begin{array}{rcl} \int_0^3(x^3+2x)dx &=& \frac{x^4}{4} + x^2 + c |_1^3, c = 0 \\
+&=& \frac{81}{4} + 9 \\
+&=& \frac{117}{4}\end{array}$$
+
+**Proof of FTCII:**   
+Suppose $f$ is continuous on $[a,b]$. Consider $G(x) = \int_0^xf(t)dt$    
+By FTCI, $G'(x) = f(x)$. That is, G(x) is an antiderivative of $f(x)$.    
+Consider any antiderivative $F(x)$ of $f(x)$.     
+By the antiderivative theorem, 
+$F(x) = G(x) + c$, where $c\in\mathbb{R}$   
+So, 
+$$\begin{array}{rcl} F(b) - F(a) &=& (G(b) + c) - (G(a) + c) \\ &=&  G(b) - G(a)  \\ &=&  \int_a^bf(t)dt - \int_a^af(t)dt \\ &=& \int_a^bf(t)dt\end{array}$$ 
+As required. 
+
+**Example 5.2:** Calculate $\int_2^4 \frac{2x+2}{x}dx$    
+$$\begin{array}{rcl} \int_2^4 2 + \frac{1}{x}dx 
+&=& (2x + ln|x|)|_2^4 \\
+&=& (8 + ln4) - (4 + ln2) \\
+&=& 4 + ln2 \end{array}$$
+**Note:** We can use any antiderivative 
+$$\begin{array}{rcl} \int_2^4 2 + \frac{1}{x}dx 
+&=& (2x + ln|x| + C)|_2^4 \\
+&=& (8 + ln4 + C) - (4 + ln2 + C) \\
+&=& 4 + ln2 \end{array}$$
+
+**Example 5.4:** $\int_0^{2 \pi}|cosx|dx$   
+$$\begin{array}{rcl} \int_0^{2 \pi}|cosx|dx &=&4\int_0^{2 \pi} cosx dx \\
+&=& 4(sinx)|_0^{\frac{\pi}{2}} \\
+&=& 4 (sin\frac{\pi}{2} - sin0) \\
+&=& 4 \end{array}$$
+- Consider the graph of $|cosx|$, a geometric understanding of $cos$ shows that the first "hill" of area is equal to a quarter of one period's area  
+  
+**OR**    
+$$\int_0^{2 \pi}|cosx|dx = \int_0^{\frac{\pi}{2}}cosxdx + \int_{\frac{\pi}{2}}^{\frac{3\pi}{2}}-cosxdx  + \int_{\frac{3\pi}{2}}^{2 \pi}cosxdx$$
+
+
+>**Corollary:** Extended version of FTCI.    
+>If $f$ is continuous and $g$ and $g$ are differentiable, then, 
+>$$ \frac{d}{dx}[\int_{g(x)}^{h(x)}f(t)dt] - f(h(x))h'(x) - f(g(x)g'(x)$$    
+**Proof 1:** Use FTCII    
+**Proof 2:** Use splitting over subintervals, then, 
+$$ \int_{g(x)}^{h(x)}f(t)dt = \int_{g(x)}^{c}f(t)dt + \int_{c}^{h(x)}f(t)dt$$
+
+**Example 5.5:**
+# <p style="text-align: center;">17/1/20 </p>
+**Lecture 6:** Change of Variable (1.7)
+
+>**Theorem:** If $u=g(x)$ is differentiable and $f$ is continuous on the range of $g$, then 
+>$$\int f(g(x))g'(x)dx = \int f(u)du $$
+- We're reversing the chain rule
+
+**Example 6.1:** $\int \frac{x^3}{(x+5)^2}dx$   
+**Step 1:** Choose a substitution let $u = g(x) = x + 5$ then $g'(x) = 1$       
+
+**Step 2:** Replace original variable w with new variable 
+
+$$\begin{array}{rcl} \int \frac{x^3}{(x+5)^2}dx  &=& \int \frac{(u-5)^3}{u^2}du  \\
+&=& \int \frac{u^3-15u^2+75^u-125}{u^2}du \\
+&=& \int (u - 15 - \frac{75}{u} - \frac{125}{u^2} - \frac{125}{u^2})du \\
+&=& u^2 - 15u + 75ln|u| + \frac{125}{u} + C
+\end{array}$$
+
+**Proof of:** $\int f(g(x))g'(x)dx = \int f(u)du$   
+Since f is continuous on the range of $g$, by FTC1, there is a function $f$ such that $F' = f$ (that is, $f$ has an antiderivative).
+$$\frac{d}{dx} (F(g(x))) = F'(g(x))g'(x) = f(g(x))g'(x)$$   
+So $F(g(x))$ is an antiderivative of $f(g(x))g'(x)$.    
+$$\int f(g(x))g'(x)dx = F(g(x)) + C = F(u) + C = \int f(u)du$$
+
+**Notation trick:** If $u=g(x)$ then $du = g'(x)dx$   
+
+**Example 6.2:** $\int \frac{(lnx)^2}{x}dx$   
+**Tip:** A good choice for $u$ is often $u$ = function in the integrand whose derivative is also in the integrand.      
+Choose $u =lnx \Rightarrow \frac{du}{dx} = \frac{1}{x} \Rightarrow du = \frac{1}{x}dx$
+$$\int \frac{(lnx)^2}{x}dx = \int u^2 du = \frac{u^3}{3} + C = \frac{(lnx)^3}{3} + C$$
+
+**Example 6.3:** $\int \sqrt{1 + \sqrt{x}}dx$   
+**Tip:** Good choice for $u$ is often $u$ = a function whose inside another function    
+Choose $u=\sqrt{x}$   
+$du = \frac{1}{2\sqrt{x}}dx$ so $dx = 2 \sqrt{x} du = 2udu$   
+$\int \sqrt{1 + \sqrt{x}}dx =  \int \sqrt{1 + u}2udu = 2 \int \sqrt{1 + u}udu$
+
+Let $t = 1 + u$, $dt = du$
+$$\begin{array}{rcl} 2 \int (t-1)\sqrt{t}dt &=& 2\int{t^\frac{3}{2}} - t^\frac{1}{2} \\
+&=& 2 \cdot (\frac{2}{5} t^\frac{5}{2} - \frac{2}{3}t^\frac{3}{2}) + C \\
+&=& \frac{4}{5}(1 + \sqrt{x})^\frac{5}{2} - \frac{2}{3}(1 + \sqrt{x})^\frac{3}{2} + C
+\end{array}$$
+
+**Example 6.4:** $\int tanx dx$     
+$u = cosx \Rightarrow du = sinxdx$    
+$\int tanxdx = \int \frac{sinx}{cosx}dx = - \int \frac{1}{u} du = - ln|u| + C$
+
+>Theorem: If $g'(x)$ is continuous on [a,b] and $f$ is continuous on the range of $g$, then 
+>$$ \int f(g(x)dx) = \int_{u = g(a)}^{u = g(b)}f(u)du$$
+- Proven in course notes on pages 52-53
+
+**Example 6.5:** $\int_1^2 \frac{e^\frac{1}{x}}{x^2}dx$     
+Let $u = \frac{1}{x}$ $du=\frac{-1}{x^2}dx$   
+$x = 1 \Rightarrow u = 1$   
+$x = 2 \Rightarrow u = \frac{1}{2}$     
+$\int_1^2 \frac{e^\frac{1}{x}}{x^2}dx = -\int_1^{\frac{1}{2}} e^u du = \int_{\frac{1}{2}}^1 e^u du = e^u|_{\frac{1}{2}}^1 = e - e^{\frac{1}{2}}$
+
+**Example 6.6:** $\int_{\frac{\pi}{2}}^{\pi}sin^2xcos^3xdx$   
+$= \int_{\frac{\pi}{2}}^{\pi} sin^2xcos^2xcosxdx$   
+$= \int_{\frac{\pi}{2}}^{\pi} sin^2x(1-sin^2x)cosxdx$   
+Let $u = sinx$, $du = cosxdx$   
+$= \int_{x= \frac{\pi}{2}}^{z =\pi} u^2(1-u^2)$   
+$= \frac{u^3}{3} - \frac{u^5}{5} |_{x = \frac{\pi}{2}}^{x = \pi}$       
+$= \frac{sin^3x}{3} - \frac{sin^5x}{5} |_{\frac{\pi}{2}}^{\pi}$
+# <p style="text-align: center;">6/1/20 </p>
 # <p style="text-align: center;">6/1/20 </p>

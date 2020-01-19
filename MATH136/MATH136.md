@@ -108,7 +108,7 @@ we define the operation of subtraction by $\vec{x}-\vec{y} = \vec{x} + (-1)\vec{
 >**Theorem *unnamed*:** Let $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \in \mathbb{R}^n$. Some vector $\vec{v_i}, 1 \leq i \leq k$ can be written as a linear combination of $\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}$ if and only if 
 >$$Span\{\vec{v_1},\cdots,\vec{v_k}\}=Span\{\vec{v_1}, \vec{v_2}, \cdots, \vec{v_{i-1}}, \vec{v_{i+1}, \cdots , \vec{v_k}}\}$$
 alternatively
->**Theorem (p. 10):** Let $S = \{ \vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \}$ be a set of vectors in $r^n$. For all $i$ satisfying $1 \leq i \leq k$, the vector $\vec{v_i}$ can be written as a linear combination of the vectors in $S - \{ \vec{v_i} \}$ if and only if 
+>**Theorem (p. 10):** Let $S = \{ \vec{v_1}, \vec{v_2}, \cdots, \vec{v_k} \}$ be a set of vectors in $\mathbb{R}^n$. For all $i$ satisfying $1 \leq i \leq k$, the vector $\vec{v_i}$ can be written as a linear combination of the vectors in $S - \{ \vec{v_i} \}$ if and only if 
 > $$ Span(S) = Span(S-\{\vec{v_i}\}) $$
 - Essentially, if some set of vectors' span encompasses a given vector, $\vec{v_i}$, then said vector ($\vec{v_i})$ can be a written as a linear combination of the vectors. The converse is also true. 
 - Essentially, if a set of vectors is a subset of another set of vectors then then the "extra" vectors can be represented by some linear combination of the vectors in the subset.
@@ -129,23 +129,23 @@ Let $\{\vec{v_1},\vec{v_2},\vec{v_3}\} \subseteq \mathbb{R}^n$.
 ($\Rightarrow$) Assume that $\vec{v_3} = c_1\vec{v_1} + c_2\vec{v_2}$ for some $c_1,c_2 \in \mathbb{R}$.   
 We prove the set equality by showing each set is a subset of the other.     
 Certainly $Span\{\vec{v_1},\vec{v_2}\} \subseteq Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$.    
-If $vx \in Span\{\vec{v_1},\vec{v_2}\}$ then $vx = d_1\vec{v_1} + d_2\vec{v_2}$ for some $d_1,d_2 \in \mathbb{R}$, and so 
-$$ vx = d_1\vec{v_1} + d_2\vec{v_2} + 0 \cdot \vec{v_3}$$
-and hence $vx \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$.    
+If $\vec{x} \in Span\{\vec{v_1},\vec{v_2}\}$ then $\vec{x} = d_1\vec{v_1} + d_2\vec{v_2}$ for some $d_1,d_2 \in \mathbb{R}$, and so 
+$$ \vec{x} = d_1\vec{v_1} + d_2\vec{v_2} + 0 \cdot \vec{v_3}$$
+and hence $\vec{x} \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$.    
 Now we show $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} \subseteq Span\{\vec{v_1},\vec{v_2}\}$.    
-If $vx \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$ then    
-$vx = d_1\vec{v_1} + d_2\vec{v_2} + d_3\vec{v_3}$ for some $d_1,d_2,d_3 \in \mathbb{R}$.    
+If $\vec{x} \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$ then    
+$\vec{x} = d_1\vec{v_1} + d_2\vec{v_2} + d_3\vec{v_3}$ for some $d_1,d_2,d_3 \in \mathbb{R}$.    
 This means,     
-$vx = d_1\vec{v_1} + d_2\vec{v_2} + d_3(c_1\vec{v_1} + c_2\vec{v_2})$   
-$vx = (d_1 + d_3c_1)\vec{v_1} + (d_2 + d_3c_2)\vec{v_2}$    
-Since $d_1 + d_3c1, d_2+d_3c2 \in \mathbb{R}$ we have shown $vx \in Span\{\vec{v_1},\vec{v_2}\}$ by definition. Therefore $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} = Span\{\vec{v_1},\vec{v_2}\}$    
+$\vec{x} = d_1\vec{v_1} + d_2\vec{v_2} + d_3(c_1\vec{v_1} + c_2\vec{v_2})$   
+$\vec{x} = (d_1 + d_3c_1)\vec{v_1} + (d_2 + d_3c_2)\vec{v_2}$    
+Since $d_1 + d_3c1, d_2+d_3c2 \in \mathbb{R}$ we have shown $\vec{x} \in Span\{\vec{v_1},\vec{v_2}\}$ by definition. Therefore $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} = Span\{\vec{v_1},\vec{v_2}\}$    
 $(\Leftarrow)$ Assume $Span\{\vec{v_1},\vec{v_2},\vec{v_3}\} = Span\{\vec{v_1},\vec{v_2}\}$    
 Since $\vec{v_3} = 0 \cdot \vec{v_1} + 0 \cdot \vec{v_2} + 1 \cdot \vec{v_3}$ we have $\vec{v_3} \in Span\{\vec{v_1},\vec{v_2},\vec{v_3}\}$. By our assumption, we must have $\vec{v_3} \in Span\{\vec{v_1},\vec{v_2}\}$, and so $\vec{v_3}$ is a linearcombination of $\vec{v_1},\vec{v_2}$.   
 QED
 - The proof for a general number of vectors follows a similar structure
 
 ## Linear Dependance & Independence
->**Definition:** Let $S = \{\vec{v_1},\cdots,\vec{v_k}\}$ be a set of vectors in $r^n$. We say that the set $S$ is **linearly dependent** if there exists scalars $c_1,\cdots,c_k \in \mathbb{R}$ with at least one $c_i$ non-zero, such that $c_1\vec{v_1} + \cdots + c_k\vec{v_k} = 0$    
+>**Definition:** Let $S = \{\vec{v_1},\cdots,\vec{v_k}\}$ be a set of vectors in $\mathbb{R}^n$. We say that the set $S$ is **linearly dependent** if there exists scalars $c_1,\cdots,c_k \in \mathbb{R}$ with at least one $c_i$ non-zero, such that $c_1\vec{v_1} + \cdots + c_k\vec{v_k} = 0$    
 Otherwise we call the set **linearly dependent**. 
 - a set consisting of one element is not necessarily independent, consider the $0$ vector. 
 
@@ -153,7 +153,7 @@ Otherwise we call the set **linearly dependent**.
 
 **Characterizing dependence:** Tossing in $\vec{0}$ will always result in a dependent set. 
 
-**Theorem (p. 16):** If a set of vectors $\{v1, \cdots , vk\}$ contains the zero vector then the set is linearly dependent. 
+**Theorem (p. 16):** If a set of vectors $\{\vec{v_1}, \cdots , \vec{v_k}\}$ contains the zero vector then the set is linearly dependent. 
 
 **Remarks:**
 - A set of size one, $S=\{\vec{v}\}$ is linearly dependent if and only if $\vec{v}=0$
@@ -162,6 +162,98 @@ Otherwise we call the set **linearly dependent**.
   - If its independent then no scalar multiple pairs, however the converse is not guaranteed 
   - If its independent then there is no zero vector, the converse is not guaranteed
 
+# <p style="text-align: center;"> 13/1/20 </p>
+**Week 1 Terminology Review:**
+- $\begin{bmatrix} 3 \\ -6 \end{bmatrix}$ is a linear combination of $\begin{bmatrix} 2 \\ 1 \end{bmatrix}$ and $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$ since $\begin{bmatrix} 3 \\ -6 \end{bmatrix} = (4)\begin{bmatrix} 2 \\ 1 \end{bmatrix} + (-5)\begin{bmatrix} 1 \\ 2 \end{bmatrix}$
+  - This shoes that $\begin{bmatrix} 3 \\ -6 \end{bmatrix}$ is an element of $Span\{\begin{bmatrix} 2 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix} \}$
+- The set $S = \{ \begin{bmatrix} 2 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix} \}$ spans $\mathbb{R}^2$ since $\forall \vec{x} \in \mathbb{R}^2, \exists c_1,c_2 \in \mathbb{R}, \vec{x} = c_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} 1 \\ 2 \end{bmatrix}$ Given a vector $\vec{x} = \begin{bmatrix} a \\ b \end{bmatrix}$ then $c_1 = \frac{2a-b}{3}$ and $c_2 = \frac{2b-a}{3}$
+- The set $s = \{ \begin{bmatrix} 2 \\ 1 \end{bmatrix} , \begin{bmatrix} 1 \\ 2 \end{bmatrix} \}$ is a linearly independent set since the only scalars
+- $c_1$ and $c_2$ that satisfy are $c_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} 1 \\ 2 \end{bmatrix} = 0$ are $c_1 = c_2 = 0$
+
+## Subspaces of Euclidean Spaces
+>**Definition:** A subset of $\mathbb{R}^n$ is called a **subspace** of $\mathbb{R}^n$ if for all $\vec{x} \vec{y},\vec{w}$ in $S$ and all $c,d$ in $\mathbb{R}$ we have (V1 through V10 hold)  
+
+Note:
+- Commutivity gets inherited from $\mathbb{R}^n$ no matter what so V2,V3,V7,V8,V9,V10 are always true for any subset of $\mathbb{R}^n$
+
+>**Theorem (p.23 Subspace test):**    
+> Let $S$ be a subset of $\mathbb{R}^n$. If $S \neq \emptyset$ and for all $\vec{x},\vec{y} \in S$ and all $c \in \mathbb{R}$ we have $\vec{x} + \vec{y} \in S$ and $c \vec{x} \in S$, then $S$ is a subspace of  $\mathbb{R}^n$
+# <p style="text-align: center;"> 15/1/20 </p>
+## **Bases**
+Since a linearly independent set of vectors is always simpler than a linearly dependent one and a linearly dependent set of vectors can always be reduced to a linearly independent set with the same span; the simplest set of vectors which span some set must be linearly independent. 
+
+>**Definition: Basis**    
+>Let $S = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ be a subset of $\mathbb{r}^n$. If $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is a linearly independent set of vectors in $\mathbb{r}^n$ such that $S = Span\{ \vec{v_1}, \cdots, \vec{v_k} \}$, then the set $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is called a **basis** for $S$.      
+>We define the basis set for $\{\vec{0}\}$ to be the empty set $\emptyset$.
+
+>**Definition: Standard Basis:**     
+>In Rn, let $\vec{e_i}$ represent the vector whose $i^{th}$ component is $1$ and all other components
+are $0$. The set $\{\vec{e_1},...\vec{e_n}\}$ is called the standard basis for $\mathbb{R}^n$.
+
+## Lines and Planes
+>**Definition - Line:**  
+> A **line** in $\mathbb{R}^n$ is a subset of $\mathbb{R}^n$ which can be represented using a vector equation of the form 
+> $$ \vec{x} = \vec{b} + t \vec{m}, t \in \mathbb{R}$$
+> for vectors $\vec{b}$ and $\vec{m}$ in $\mathbb{R}^n$ with $\vec{m} \neq 0$ 
+
+> **Definition - Plane:**  
+> A **plane** in $\mathbb{R}^n$ is a subset of $\mathbb{R}^n$ which can be represented using a vector equation of the form 
+> $$ \vec{x} = \vec{b} + s \vec{u} + t \vec{v}, s,t \in \mathbb{R}$$
+> for vectors $\vec{b},\vec{u},\vec{v}$ in $\mathbb{R}^n$ with $\{\vec{u},\vec{v}\}$ a linearly independent set
+
+
+# <p style="text-align: center;"> 17/1/20 </p>
+ 
+>**Theorem (p. 19):**
+> If $B = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ is a basis for a subset of $S$ of $\mathbb{R}^n$, then every vector in $S$ can be written as a unique linear combination of the vectors in $B$
+
+**Proof:**    
+Let $B = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ be a basis for $S \subseteq \mathbb{R}^n$. Since $B$ is a spanning set for $S$, given $\vec{v_x} \in S$, there exists $c_1, c_2, \cdots, c_k \in \mathbb{R}$ such that 
+$$ \vec{v_x} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_k \vec{v_k}$$
+Now we prove these scalars are **unique**.    
+Suppose we also have 
+$$ \vec{v_x} = \vec{v_x} = d_1\vec{v_1} + d_2\vec{v_2} + \cdots + d_k \vec{v_k}$$   
+for some $d_1, d_2, \cdots d_k \in \mathbb{R}$.    
+Well then,
+$$ c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_k \vec{v_k} =  d_1\vec{v_1} + d_2\vec{v_2} + \cdots + d_k \vec{v_k}$$ 
+This implies 
+$$ (c_1 - d_1)\vec{v_1} + (c_2 - d_2)\vec{v_2} + \cdots + (c_k - d_k)\vec{v_k} = \vec{0}$$    
+By linear independence of $B$, must have $(c_1 - d_1)=0 , \cdots , (c_k - d_k)=0$. This means $c_i=d_i$ and so the scalars are unique.    
+QED
+
+>**Definition: Dot Product**    
+> Given two vectors $\vec{v_x}, \vec{v_y} in \mathbb{R}^n$ the dot product of $\vec{v_x}$ and $\vec{v_y}$ is defined to be 
+> $$ \vec{v_x} \cdot \vec{v_y} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ \vdots \\y_n \end{bmatrix} = x_1y_1 + \cdots x_ny_n = \sum_{i=1}^{n}x_iy_i$$
+
+**Theorem: Properties of dot product**      
+If $\vec{x}, \vec{y}, vvz \in \vec{y}$ and $s,t \in \mathbb{R}$, then we have the following: 
+1. $\vec{x} \cdot \vec{x} \geq 0$ and $\vec{x} \cdot \vec{x} = 0$ if and only if $\vec{x} = 0$
+2. $\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}$
+3. $\vec{x} \cdot (s \vec{y} + t \vec{x}) = s(\vec{x} \cdot \vec{y}) + t(\vec{x} \cdot vvz)$
+
+
+>**Definition: Norm**   
+> Given a vector $\vec{v_x}$ in $\mathbb{R}^n$ the **length** or **norm** of $\vec{v_x}$ is defined to be 
+> $$||\vec{v_x}|| = \sqrt{\vec{v_x} \cdot \vec{v_x}}$$
+
+**Theorem: Properties of the norm**   
+If $\vec{x}, \vec{y} \in \mathbb{R}^n$ and $c \in \mathbb{R}$ then we have the following: 
+1. $||\vec{x}|| \geq 0$ and $||\vec{x}|| = 0$ if and only if $\vec{x} = \vec{0}$
+2. $||c\vec{x}||$ = $|c| \cdot ||\vec{x}||$ (note the absolute value on $c$)
+3. $| \vec{x} \cdot \vec{y}| \leq ||\vec{x}||\cdot||\vec{y}||$
+4. $||\vec{x} +\vec{y}|| \leq ||\vec{x}|| + ||\vec{y}||$
+
+>**Definition: Angle between vectors**    
+> Given $\vec{v_x},\vec{v_y}$ in $\mathbb{R}^n$ the angle between $\vec{v_x}$ and $\vec{v_y}$ is defined to be a real number $\theta$ satisfying the equation 
+> $$ \vec{v_x} \cdot \vec{v_y} = ||\vec{v_x}|| \cdot ||\vec{v_y}|| cos\theta$$
+
+>**Definition: Orthogonal**   
+> Two vectors $\vec{v_x}$ and $\vec{v_y}$ in $\mathbb{R}^n$ are said to be **orthogonal** when they satisfy $\vec{v_x} \cdot \vec{v_y} = 0$
+
+>**Theorem:**     
+> The zero vector is orthogonal to every vector in $\mathbb{R}^n$
+# <p style="text-align: center;"> 17/1/20 </p>
+# <p style="text-align: center;"> 17/1/20 </p>
 ---
 #### latex reference for me to write this
 $$\vec{o}$$
@@ -178,6 +270,7 @@ $$
 12 & 13 & 14 & 15
 \end{bmatrix}
 $$ 
+
 
 --- 
 
