@@ -171,23 +171,26 @@ Otherwise we call the set **linearly dependent**.
 - $c_1$ and $c_2$ that satisfy are $c_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} 1 \\ 2 \end{bmatrix} = 0$ are $c_1 = c_2 = 0$
 
 ## Subspaces of Euclidean Spaces
->**Definition:** A subset of $\mathbb{R}^n$ is called a **subspace** of $\mathbb{R}^n$ if for all $\vec{x} \vec{y},\vec{w}$ in $S$ and all $c,d$ in $\mathbb{R}$ we have (V1 through V10 hold)  
+>**Definition:** A subset of $\mathbb{R}^n$ is called a **subspace** of $\mathbb{R}^n$ if for all $\vec{x}, \vec{y},\vec{w}$ in $S$ and all $c,d$ in $\mathbb{R}$ we have (V1 through V10 hold)  
 
 Note:
 - Commutivity gets inherited from $\mathbb{R}^n$ no matter what so V2,V3,V7,V8,V9,V10 are always true for any subset of $\mathbb{R}^n$
 
 >**Theorem (p.23 Subspace test):**    
 > Let $S$ be a subset of $\mathbb{R}^n$. If $S \neq \emptyset$ and for all $\vec{x},\vec{y} \in S$ and all $c \in \mathbb{R}$ we have $\vec{x} + \vec{y} \in S$ and $c \vec{x} \in S$, then $S$ is a subspace of  $\mathbb{R}^n$
+
+>**Theorem:** If $\vec{v_1},\cdots,\vec{v_k} \in \mathbb{R}^n$, then $\mathbb{S} = Span\{\vec{v_1},\cdots,\vec{v_k}\}$ is a subspace of $\mathbb{R}^n$. 
+>- The span of some vectors in $\mathbb{R}^n$ is a subspace of $\mathbb{R}^n$
 # <p style="text-align: center;"> 15/1/20 </p>
 ## **Bases**
 Since a linearly independent set of vectors is always simpler than a linearly dependent one and a linearly dependent set of vectors can always be reduced to a linearly independent set with the same span; the simplest set of vectors which span some set must be linearly independent. 
 
 >**Definition: Basis**    
->Let $S = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ be a subset of $\mathbb{r}^n$. If $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is a linearly independent set of vectors in $\mathbb{r}^n$ such that $S = Span\{ \vec{v_1}, \cdots, \vec{v_k} \}$, then the set $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is called a **basis** for $S$.      
+>Let $S = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ be a subset of $\mathbb{r}^n$. If $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is a linearly independent set of vectors in $\mathbb{R}^n$ such that $S = Span\{ \vec{v_1}, \cdots, \vec{v_k} \}$, then the set $\{ \vec{v_1}, \cdots, \vec{v_k} \}$ is called a **basis** for $S$.      
 >We define the basis set for $\{\vec{0}\}$ to be the empty set $\emptyset$.
 
 >**Definition: Standard Basis:**     
->In Rn, let $\vec{e_i}$ represent the vector whose $i^{th}$ component is $1$ and all other components
+>In $\mathbb{R}^n$, let $\vec{e_i}$ represent the vector whose $i^{th}$ component is $1$ and all other components
 are $0$. The set $\{\vec{e_1},...\vec{e_n}\}$ is called the standard basis for $\mathbb{R}^n$.
 
 ## Lines and Planes
@@ -212,7 +215,7 @@ Let $B = \{ \vec{v_1}, \cdots, \vec{v_k} \}$ be a basis for $S \subseteq \mathbb
 $$ \vec{v_x} = c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_k \vec{v_k}$$
 Now we prove these scalars are **unique**.    
 Suppose we also have 
-$$ \vec{v_x} = \vec{v_x} = d_1\vec{v_1} + d_2\vec{v_2} + \cdots + d_k \vec{v_k}$$   
+$$ \vec{v_x} = d_1\vec{v_1} + d_2\vec{v_2} + \cdots + d_k \vec{v_k}$$   
 for some $d_1, d_2, \cdots d_k \in \mathbb{R}$.    
 Well then,
 $$ c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_k \vec{v_k} =  d_1\vec{v_1} + d_2\vec{v_2} + \cdots + d_k \vec{v_k}$$ 
