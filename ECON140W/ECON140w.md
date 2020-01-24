@@ -40,6 +40,7 @@ A main idea in economics is tha the production of goods and services generates i
 - If 200 5$ trinkets are sold, *national income* = (5 x 200) = $1000
 
 >**Real National Income:** National income but measured in constant (base-period) dollars. The price is fixed at some set value to allow for the comparison of national income based on quantity only.  
+- To get real income you usually divide the nominal income by the inflation rate
 - **Fixed-dollar national income**
 
 >**National Product** The value of national product is by definition equal to the value of national income. 
@@ -144,6 +145,23 @@ Unemployment matters since
 - If we divide the amount of real income by the number of workers that produced it, we have real output (real GDP) per worker
 - To be even more accurate - we might want to measure real output per hour of work
 
+## **International Sector**
+## Exchange rate
+- In this course the value of other currencies in Canadian dollars is the exchange rate 
+  - If the price increases, the Canadian dollar is weaker
+  - If the price decreases, the Canadian dollar is stronger
+
+Net Exports are called the **trade balance**
+# <p style="text-align: center;"> 21/1/20 </p>
+
+## Chapter 21
+Intro: 
+- We build simplest possible short-run macroeconomic model 
+- Learn techniques and definitions
+- Even this model has 
+- Central idea: 
+  - Desired expenditure (aggregate demand) will equal Actual Expenditure = Actual output
+  - We are trying to understand fluctuations in actual output/income/GDP by understanding spending decisions by households and firms 
 # <p style="text-align: center;"> 16/1/20 </p>
 ## Short-run movements in output 
 ##

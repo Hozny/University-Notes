@@ -672,7 +672,7 @@ State refers to the value of some data (or &quot;information&quot;) <strong>at a
 </li>
 <li><strong>Expression statements</strong>
 <ul>
-<li>for generating side effects (values are discarded)</li>
+<li>for generating side effects (<strong>values are discarded after execution</strong>)</li>
 </ul>
 </li>
 <li><strong>Control flow statement</strong>
@@ -750,6 +750,314 @@ n = <span class="hljs-number">6</span>;  <span class="hljs-comment">// assignmen
 </li>
 <li>prefix (<code>++x</code>) is usually preferred to improve clarity and efficiency</li>
 </ul>
+<h1 id="p-style%22text-align-center%22-21120-p"><p style="text-align: center;"> 21/1/20 </p></h1>
+<h2 id="constants">Constants</h2>
+<p>A <strong>constant</strong> is a variable that is <strong>immutable</strong>. In other words, the value of a constant cannot be changed.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> my_constant = <span class="hljs-number">42</span>
+</div></code></pre>
+<ul>
+<li>In this course <strong>variable</strong> refers to both constants and</li>
+</ul>
+<p>It is <strong>good style</strong> to use <code>const</code> as much as possible (whenever it is appropriate):</p>
+<ul>
+<li>communicates the intended use of the variable</li>
+<li>prevents accidental or unintended mutation</li>
+<li>may help optimize your code</li>
+</ul>
+<h2 id="global-and-local-variables">Global and local variables</h2>
+<p>Variables are either <strong>global</strong> or <strong>local</strong></p>
+<ul>
+<li><strong>Global</strong> variables are defined <em>outside</em> of functions</li>
+<li><strong>Local</strong> variables are defined <em>inside</em> of functions</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> my_global_variable = <span class="hljs-number">7</span>; 
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> my_local_variable = <span class="hljs-number">11</span>; 
+    <span class="hljs-comment">//...</span>
+}
+</div></code></pre>
+<h2 id="variable-scope">Variable Scope</h2>
+<p>The <strong>scope</strong> of a variable is the region of code where it is accessible</p>
+<h2 id="block-local-scope">Block (local scope)</h2>
+<p>Local variables have <strong>block scope</strong>. their scope extended from their definition to the end of the block they are defined in.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> n = <span class="hljs-number">1</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    trace_int(n);           <span class="hljs-comment">// n =&gt; 1</span>
+    <span class="hljs-keyword">int</span> n = <span class="hljs-number">2</span>; 
+    trace_int(n);           <span class="hljs-comment">// n =&gt; 2</span>
+    {
+        <span class="hljs-keyword">int</span> n = <span class="hljs-number">3</span>; 
+        trace_int(n);       <span class="hljs-comment">// n =&gt; 3</span>
+    }
+    trace_int(n);           <span class="hljs-comment">// n =&gt; 2</span>
+}
+</div></code></pre>
+<ul>
+<li>Note how <code>n</code> is equal to the value assigned in the nearest scope</li>
+<li>Also there is probably not much good use for opening and closing curly braces in the middle of another block</li>
+</ul>
+<p>In older versions of C all local variable definitions had to be at the start of a function block (before any statements). In C99 you may define a local variable anywhere in a block.</p>
+<p>Modern programming guides recommend that you define a variable:</p>
+<ul>
+<li>in the narrowest scope possible</li>
+<li>as close to its first use as possible
+<ul>
+<li>This improves readability and ensure</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>; 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> n = <span class="hljs-number">3</span>; 
+    <span class="hljs-comment">// Here</span>
+}
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>; 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> v = <span class="hljs-number">3</span>; 
+    f(); 
+}
+</div></code></pre>
+<ul>
+<li><strong>Note</strong> the function <code>f()</code> does not have access to the variable <code>v</code>, <code>v</code> is not in the scope of <code>f()</code>. But <code>a</code> is. <code>b</code> is <strong>not</strong>.</li>
+</ul>
+<h2 id="%22impure%22-functions">&quot;Impure&quot; functions</h2>
+<p>Recall that the functional paradigm requires &quot;pure&quot; functions:</p>
+<ul>
+<li>functions <strong>only return values</strong> (no side effects)</li>
+<li>Return values <strong>only depend</strong> on argument values</li>
+</ul>
+<p>Impure functions are sometimes called &quot;procedure&quot; or &quot;routines&quot; to distinguish behaviour from &quot;pure&quot; functions</p>
+<h2 id="mutating-global-variables">Mutating global variables</h2>
+<p>A function that mutates a global variable has a <em>mutation</em> side effect (which makes it &quot;impure&quot;).</p>
+<ul>
+<li>Mutating a <strong>local variable</strong> does <strong>not</strong> give a function a side effect</li>
+</ul>
+<h2 id="mutating-parameters">Mutating parameters</h2>
+<p>Parameters are nearly <em>indistinguishable</em> from local variables, and can also be mutated.</p>
+<ul>
+<li>mutating parameters is not a local function</li>
+</ul>
+<h2 id="global-dependency">Global dependency</h2>
+<p>A function that depends on a global <em>mutable</em> variable is &quot;impure&quot; even it has <strong>no</strong> side effects.</p>
+<ul>
+<li>if the global variable is constant it is technically impure, but you could always have the constant value inside the function instead to make it pure so it is pure in a sense?</li>
+</ul>
+<p>A &quot;pure&quot; function only depends on its argument values.</p>
+<h2 id="avoiding-global-mutable-variables">Avoiding global mutable variables</h2>
+<p>Global <em>mutable</em> variables are almost always poor style and should be avoided.<br>
+Unless otherwise specified, you are <strong>note allowed</strong> to use global <em>mutable</em> variable on your assignments.<br>
+On the other hand, global <em>constants</em> are great style and strongly encouraged.</p>
+<h2 id="static-local-variables">Static local variables</h2>
+<p>Have the scope of a local variable, but the duration of a global variable. Their value persists between function calls.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">increment</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> counter = <span class="hljs-number">0</span>; 
+    counter += <span class="hljs-number">1</span>; 
+    <span class="hljs-keyword">return</span> counter; 
+}
+</div></code></pre>
+<ul>
+<li>This counts how many times the function was called</li>
+</ul>
+<p>Like global mutable variables, they are almost always poor style and should be avoided. They are not allowed in this course.</p>
+<h2 id="text-input">Text input</h2>
+<p>The converse of <code>printf</code> is <code>scanf</code>, but we are not going to use it yet.</p>
+<h2 id="read-helper-functions">Read helper functions</h2>
+<p>In this course we have provided some helper functions to make reading in input easier. For example:
+<code>read_int()</code> reads an integer</p>
+<h2 id="input-formatting">Input formatting</h2>
+<p>When C read in <code>int</code> values, it skips over any white spaces</p>
+<h2 id="reading-input">Reading input</h2>
+<ul>
+<li>once you read an input it can no longer be read again, so store your values.</li>
+</ul>
+<h2 id="testing-harness">Testing harness</h2>
+<p>To summarize our function testing strategies:</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test_sqr</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> n = read_int(); 
+    <span class="hljs-keyword">if</span> (n != READ_INT_FAIL) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, sqr(n));
+        test_sqr(); 
+    }
+}
+</div></code></pre>
+<ul>
+<li>This strategy is useful for testing both &quot;pure&quot; and &quot;impure&quot; functions.</li>
+</ul>
+<h2 id="goals-of-this-section">Goals of this section</h2>
+<p>You should be able to answer all of the following:</p>
+<ul>
+<li>explain what a side effect is</li>
+<li>document a side effect with an effects section</li>
+<li>print output with <code>printf</code> and read input using the provided functions (<code>read_int</code>)</li>
+<li>define global and local mutable variables and constants</li>
+<li>use the C assignment operators</li>
+<li>Use the new terminology introduced, including: mutation, expression statements and compound statements ({})</li>
+</ul>
+<h2 id="c-model-memory--control-flow"><strong>C Model: Memory &amp; Control Flow</strong></h2>
+<h2 id="models-of-computation">Models of computation</h2>
+<p>In this course, we model the behaviour of C with two complimentary mechanisms</p>
+<ul>
+<li>control flow</li>
+<li>memory</li>
+</ul>
+<h2 id="control-flow">Control flow</h2>
+<p>We use <strong>control flow</strong> to model how programs are executed.<br>
+During execution, we keep track of the program location, which is &quot;where&quot; in the code the execution is currently occurring.<br>
+When a program is &quot;run&quot;, the program location starts at the beginning of the main function.</p>
+<ul>
+<li>In hardware this is known as the <strong>program counter</strong></li>
+</ul>
+<h2 id="types-of-control-flow">Types of control flow</h2>
+<ul>
+<li>function calls</li>
+<li>conditionals (i.e, if statements)</li>
+<li>iterations (i.e, loops)</li>
+</ul>
+<h2 id="return">Return</h2>
+<p><code>return</code> changes the program location to go back to the most recent calling function. Obviously C needs to keep track of where it is, we discuss this more later on in the course.</p>
+<h2 id="conditionals-1">Conditionals</h2>
+<p>The syntax of <code>if</code> is</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">if</span> (expression) statement
+</div></code></pre>
+<p>where the statement is only executed if the expression is true</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">0</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"n is positive"</span>); 
+</div></code></pre>
+<ul>
+<li>this is bad style</li>
+</ul>
+<p>The <code>if</code> statement only affects whether the <strong>next</strong> statement is executed. This is why if statements work without curly braces if it is only one statement (the curly braces are what allow more than one statement to be ignored).</p>
+<h1 id="p-style%22text-align-center%22-23120-p"><p style="text-align: center;"> 23/1/20 </p></h1>
+<p>Clarifications:</p>
+<ul>
+<li>using global constant variables in a function does not make it impure</li>
+<li><code>x++</code> does not have lower priority than <code>=</code>, rather <code>x++</code> returns the old value of <code>x</code> by design</li>
+</ul>
+<h2 id="flowchart-basics">Flowchart basics</h2>
+<ul>
+<li>beginning in end are in elongated <strong>ellipses</strong></li>
+<li>any statements or return values are in <strong>rectangles</strong></li>
+<li>any choices or conditionals are in <strong>diamonds</strong></li>
+</ul>
+<p>Braces are sometimes necessary to avoid a &quot;dangling&quot; else.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">if</span> (y &gt; <span class="hljs-number">0</span>)
+    <span class="hljs-keyword">if</span> (y != <span class="hljs-number">7</span>)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"you lose"</span>); 
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"you win!"</span>);     <span class="hljs-comment">// when does this print</span>
+</div></code></pre>
+<ul>
+<li>The else is related to the second if</li>
+<li>this is bad style</li>
+</ul>
+<h2 id="switch-statements">Switch statements</h2>
+<ul>
+<li>Control flow statement</li>
+<li>Very error prone for beginner programmers and will <strong>not be used in this course</strong></li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>; 
+<span class="hljs-keyword">switch</span>(a) {
+    <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: 
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Won't print this"</span>); 
+    <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: 
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Will print this"</span>); 
+    <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: 
+        print(<span class="hljs-string">"also this..."</span>); 
+    <span class="hljs-keyword">default</span>: 
+        print(<span class="hljs-string">"and this..."</span>); 
+}
+</div></code></pre>
+<ul>
+<li>This will print more than one case because in a switch case u must have a <code>break</code> statement to end the switch after the desired case.</li>
+</ul>
+<h2 id="c-goto">C goto</h2>
+<ul>
+<li>another control flow statement that will not be used is <code>goto</code></li>
+<li>It was looked down upon by many as i tmakes &quot;spaghetti code&quot; that is hard to read
+<ul>
+<li>Now most agree it is useful and appropriate in <strong>some</strong> circumstances</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">if</span> (k &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">goto</span> mylabel; 
+<span class="hljs-comment">// ...</span>
+mylabel: 
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<h2 id="looping">Looping</h2>
+<p>With mutation, we can control flow with a method known as <strong>looping</strong></p>
+<pre><code class="language-C"><div><span class="hljs-keyword">while</span> (expression) statement
+</div></code></pre>
+<p><code>while</code> is similar to <code>if</code>: the <code>statement</code> is only executed if the <code>expression</code> is true.</p>
+<p>The difference is, <code>while</code> <strong>repeatedly</strong> &quot;loops back&quot; and executes the <code>statement</code> until the <code>expression</code> is false</p>
+<h2 id="iteration-vs-recursion">Iteration vs. recursion</h2>
+<p>Using a loop to solve a program is called <strong>iteration</strong></p>
+<p><em>Iteration</em> is an alternative to <em>recursion</em> and is much more common in imperative programming.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// recursion </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span> </span>{
+    <span class="hljs-keyword">if</span> (k &lt;= <span class="hljs-number">0</span>) { 
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+    }
+    <span class="hljs-keyword">return</span> k + sum(k - <span class="hljs-number">1</span>); 
+}
+
+<span class="hljs-comment">// iteration</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span> </span>{
+    <span class="hljs-keyword">int</span> s = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span>) {
+        s += k; 
+        --k; 
+    }
+    <span class="hljs-keyword">return</span> s; 
+}
+</div></code></pre>
+<ul>
+<li>In general, using recursion can cause ur stack to crash or overflow because every time the function is called the information must be stored somewhere and can eventually exceed the stack
+<ul>
+<li>but iteration uses the same variables and replaces the values making it safer</li>
+</ul>
+</li>
+<li>If something is can be modelled using iteration it can always be modelled using recursion</li>
+</ul>
+<h2 id="tracing-tools">Tracing tools</h2>
+<p><code>trace_int()</code> traces an integer even through loops and will state when a loop has started and the value of the integer for each iteration</p>
+<h2 id="do--while">do ... while</h2>
+<p>the <code>do</code> control flow statement is very similar to <code>while</code></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">do</span> statement <span class="hljs-title">while</span> <span class="hljs-params">(expression)</span></span>; 
+</div></code></pre>
+<p>The difference is that <code>statement</code> is always executed at least once, and the expression is checked at the end of the loop</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">do</span> { 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"try to guess my numebr! \n"</span>); 
+    guess = read_int();
+} <span class="hljs-keyword">while</span> (guess != my_number &amp;&amp; guess != READ_INT_FAIL); 
+</div></code></pre>
+<h2 id="break">break</h2>
+<p>The <code>break</code> control flow statement is useful to exit from the middle of a loop</p>
+<p><code>break</code> is</p>
+<h2 id="continue">continue</h2>
+<p>The <code>continue</code> control flow statement skips over the rest of the statements in the current block and &quot;continues&quot; with the loop.</p>
+<h2 id="for-loops">For loops</h2>
+<p>The final control flow statement we introduce <code>for</code>, which is often referred to as a &quot;<code>for</code> loop&quot;.</p>
+<p><code>for</code> loops are a &quot;condensed&quot; version of a <code>while</code> loop.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; ++i) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,i;)
+}
+</div></code></pre>
+<pre><code class="language-C"><div><span class="hljs-comment">// counting up from 0 to n-1</span>
+<span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; n; ++i) {...}
+
+<span class="hljs-comment">// counting up from 1 to n</span>
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n; ++i) {...}
+
+<span class="hljs-comment">// counting down from n-1 to 0</span>
+<span class="hljs-keyword">for</span> (i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) {...}
+
+<span class="hljs-comment">// counting down from n to 1</span>
+<span class="hljs-keyword">for</span> (i = n; i &gt; <span class="hljs-number">0</span>; --i) {...}
+</div></code></pre>
+<p>any of the three components of a <code>for</code> statement can be omitted. If the expression is omitted, it is always &quot;true&quot;.</p>
+<h1 id="p-style%22text-align-center%22-16120-p-1"><p style="text-align: center;"> 16/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-16120-p-2"><p style="text-align: center;"> 16/1/20 </p></h1>
 
     </body>
     </html>

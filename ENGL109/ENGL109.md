@@ -313,5 +313,66 @@ Stanley fish, the other car : page 294 for third edition
 - What are the rhetorical appeals that fish identifies in the advertisements? What is the dominant rhetorical appeal of the ads? 
 - The online version of this article includes links to the three ads that fish analyzes. Do we need to be able to see the advertisements to understand Fish's analysis?
 # <p style="text-align: center;"> 20/1/20 </p>
+## Context for the argument 
+
+## Synopsis 
+- readers will expect a synopsis of the text you're analyzing
+
+
+For next class read kendall jenner pepsi commercial (link in the slides)
+- and answer the questions 7=-098` 
 # <p style="text-align: center;"> 22/1/20 </p>
+## Nancy Collins Library Session
+- Liaison Librarian for English Language and Literature
+- ncollins@uwaterloo.ca
+
+**Goal**: Provide and introduction to academic research and using the Library as a resource
+- Quick overview of the Library - what services are available to undergraduate students
+- Helpful search tips 
+- How to create your search strategy 
+- How to search and locate resources through the library
+- Evaluating information / sources 
+
+Davis centre Library is the stem library
+
+"Omni" Catalogue - Ontario Council of University Libraries (OCUL)
+- 13 universities in Ontario share their library collections 
+
+Book Borrowing 
+- 120-day loan for most items (Waterloo, Laurier, Guelph)
+- Currently six week loan period from other Omni libraries. By spring, all Omni schools will offer 120=day
+- Watcard is your library card
+
+
+"Peer Reviewed"
+- Refers to the policy of having experts in the field examine a submitted article before accepting it for publication. The peer review (or referee) process insures that the research described in a journal's articles is sound and of high quality. 
+
+Scholarly / peer-reviewed sources
+- Authored by experts in the discipline 
+- Contain little to no advertising 
+- Provide institutional affiliations and/or credentials
+- Published by scholarly presses or associations or are associated with a university 
+- They are often longer articles
+  
+  Ulrichsweb
+  - A directory that aims to capture all serials from around the globe
+  - Use this to check if a journal is peer-reviewed
+
+## Search tips 
+- These tips work with a lot of popular search engines such as google
+
+Truncations 
+  - Expands a term to include all forms of the root word: 
+  - blog* finds .. 
+    - blog**ging**
+    - blog**s**
+    - blog**er**
+
+Boolean operators
+- AND (include all terms)
+- OR (include at least one term) 
+- NOTE (exclude a term )
+  
+Nesting:
+- (vaping **OR** vape **OR** e-cigarettes) **AND** (youth **OR** adolescents **OR** teens)
 # <p style="text-align: center;"> 27/1/20 </p>
