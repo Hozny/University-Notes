@@ -1190,7 +1190,199 @@ p.y = <span class="hljs-number">4</span>;
 <p>Memory is only reserved when a   <strong>variable</strong> is defined:</p>
 <pre><code class="language-C"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">posn</span> <span class="hljs-title">p</span> = {</span><span class="hljs-number">3</span>, <span class="hljs-number">4</span>};
 </div></code></pre>
-<h1 id="p-style%22text-align-center%22-16120-p-1"><p style="text-align: center;"> 16/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-30120-p"><p style="text-align: center;"> 30/1/20 </p></h1>
+<h2 id="sizeof-a-struct">Sizeof a struct</h2>
+<pre><code class="language-C"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mystruct</span> {</span>
+    <span class="hljs-keyword">int</span> x;      <span class="hljs-comment">// 4 bytes</span>
+    <span class="hljs-keyword">char</span> c;     <span class="hljs-comment">// 1 byte</span>
+    <span class="hljs-keyword">int</span> y;      <span class="hljs-comment">// 4 bytes</span>
+};
+</div></code></pre>
+<p>the amount of space reserved for a <code>struct</code> is <strong>at least</strong> the sum of the <code>sizeof</code> each field, but it may be larger.</p>
+<ul>
+<li>this is because the order of each field matters
+<ul>
+<li>so if u have an <code>int</code> following a <code>char</code>, C will space the first <code>char</code> with the same size as an <code>int</code>
+<ul>
+<li>this is because the compiler wants to have each integer at an address that is a multiple of 4 for performance optimization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C"><div>trace_int(<span class="hljs-keyword">sizeof</span>(struct mystruct)); 
+<span class="hljs-comment">// sizeof(struct mystruct) =&gt; 12</span>
+</div></code></pre>
+<ul>
+<li>Because it may be larger than each field, you <strong>must</strong> use sizeof to determine the <code>sizeof</code> a struct</li>
+</ul>
+<h2 id="sections-of-memory">Sections of memory</h2>
+<p>In this course we model five <strong>sections</strong> (&quot;regions&quot;) of memory.</p>
+<table>
+<thead>
+<tr>
+<th>Sections</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+</tr>
+<tr>
+<td>Read-only data</td>
+</tr>
+<tr>
+<td>Global data</td>
+</tr>
+<tr>
+<td>Heap</td>
+</tr>
+<tr>
+<td>Stack</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>each of these is called a <strong>segment</strong>
+<ul>
+<li>if a program tries to access something in a segment it cannot access, you get a <strong>segmentation fault</strong></li>
+</ul>
+</li>
+<li>other courses may use alternative names</li>
+</ul>
+<h2 id="temporary-results">Temporary results</h2>
+<p>When evaluating C expressions, the intermediate results must be temporarily stored.</p>
+<pre><code class="language-C"><div>a = f(<span class="hljs-number">3</span>) + g(<span class="hljs-number">4</span>) - <span class="hljs-number">5</span>; 
+</div></code></pre>
+<ul>
+<li>in this example, C must temporarily store the value returned from <code>f(3)</code> and <code>g(4)</code></li>
+</ul>
+<h2 id="the-code-section">The code section</h2>
+<p>When you program you write <strong>source code</strong> in a text editor using ASCII characters<br>
+To &quot;run&quot; a C program, the <em>source code</em> must be converted into <strong>machine code</strong> that is machine readable<br>
+This machine code is then placed into the <strong>code section</strong> of memory</p>
+<blockquote>
+<p>converting source code into machine code is known as <strong>compiling</strong></p>
+</blockquote>
+<h2 id="the-read-only--global-data-sections">The read-only &amp; global data sections</h2>
+<p>Earlier we described how C reserves space in memory for a variable definition<br>
+All global variables are placed either in the global variables section or the read only section</p>
+<h2 id="the-return-address">The return address</h2>
+<p>When we encounter a <code>return</code>, we need to know: &quot;what was the address we were at right before this function was called?&quot;</p>
+<ul>
+<li>This location is known as the <strong>return address</strong></li>
+<li>This address is stored in the stack</li>
+</ul>
+<p>In this course, we use the name of the calling function and a line number (or an arrow) to represent the return address</p>
+<h2 id="the-call-stack">The call stack</h2>
+<p>The &quot;history&quot; of function calls (say function f,g,h are called in main) are stored in the <strong>call stack</strong></p>
+<ul>
+<li>each time a function is called it is pushed to the stack</li>
+<li>each time a function returns it is popped from the stack</li>
+</ul>
+<h2 id="stack-frames">Stack frames</h2>
+<p>&quot;entries&quot; pushed onto the call stack are known as <strong>stack frames</strong><br>
+Each function call creates a stack fram (&quot;fram of reference&quot;)<br>
+Each stack frame contains:</p>
+<ul>
+<li>the <strong>argument values</strong></li>
+<li>all <strong>local variables</strong> (both mutable variables and constants) that appear within the function block</li>
+<li>the return <strong>address</strong></li>
+</ul>
+<p>C makes a copy of each argument value and places the copy in the stack frame</p>
+<ul>
+<li>this is known as &quot;pass by value&quot; convention</li>
+</ul>
+<p>Although space is reserved for global variables before the program is executed, space for local variables is only reserved <strong>when the function is called</strong></p>
+<ul>
+<li>the space is reserved within the newly created stack frame</li>
+</ul>
+<p>Example stack frame:</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">h</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+    <span class="hljs-keyword">int</span> r = <span class="hljs-number">10</span> * i; 
+    <span class="hljs-keyword">return</span> r; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-keyword">int</span> y)</span> </span>{
+    <span class="hljs-keyword">int</span> c = y * y; 
+    <span class="hljs-keyword">return</span> c; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+  <span class="hljs-keyword">int</span> b = <span class="hljs-number">2</span>*x + <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">int</span> d = g(b + <span class="hljs-number">3</span>) + h(b);
+  <span class="hljs-keyword">return</span> d;
+}   
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{            
+  <span class="hljs-keyword">int</span> a = f(<span class="hljs-number">2</span>);
+  <span class="hljs-comment">//...</span>
+}
+
+<span class="hljs-comment">// Stack frame</span>
+=========================
+g:
+  y: <span class="hljs-number">8</span>
+  c: <span class="hljs-number">64</span>
+  <span class="hljs-keyword">return</span> address: f:<span class="hljs-number">13</span>
+=========================
+f:
+  x: <span class="hljs-number">2</span>
+  b: <span class="hljs-number">5</span>
+  d: ???
+  <span class="hljs-keyword">return</span> address: main:<span class="hljs-number">18</span>
+=========================
+main:
+a: ???
+  <span class="hljs-keyword">return</span> address: OS
+=========================
+</div></code></pre>
+<h2 id="calling-a-function">Calling a function</h2>
+<p>We can now model all of the <strong>control flow</strong> when a function is called:</p>
+<ul>
+<li>a <em>stack frame</em> is created (&quot;pushed&quot; onto the stack)</li>
+<li>a <strong>copy</strong> of each of the arguments is placed in the stack frame</li>
+<li>the current program location is placed in the stack frame as the return address</li>
+<li>program location is changed to the start of the new function</li>
+<li>initial values of local variables are set when their definition is encountered</li>
+</ul>
+<h2 id="return-1">return</h2>
+<p>When a function <code>return</code>s:</p>
+<ul>
+<li>the current program location is changed back to the return address</li>
+<li>the stack frame is removed (&quot;popped&quot; from the Stack memory area)</li>
+</ul>
+<h2 id="recursion-in-c">Recursion in C</h2>
+<p>In C, each recursive call is simply a new <em>stack frame</em> with a separate frame of reference. The only unusual aspect of recursion is that the return address is a location within the same function.</p>
+<h2 id="stack-section">Stack section</h2>
+<p>The <em>call stack</em> is stored in the <strong>stack section</strong>, the fourth section of our memory model. We refer to this section as the &quot;the stack&quot;.<br>
+The &quot;bottom&quot; of the stack (where the <code>main</code> stack frame is placed) is placed at the <strong>highest</strong> available memory address. Each additional stack frame is then placed at increasingly lower address. The stack &quot;grows&quot; toward lower address.</p>
+<ul>
+<li>If the stack grows too large, it can &quot;collide&quot; with other sections of memory. This is called &quot;stack overflow&quot; and can occur with very deep (or infinite) recursion.</li>
+</ul>
+<h2 id="uninitialized-memory">Uninitialized memory</h2>
+<p><strong>Global</strong> variables are initialized with a value of 0 in C, local variables are initialized with a random value.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mystery</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> k;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"the value of k is: %d\n"</span>, k);
+  }
+</div></code></pre>
+<ul>
+<li>the value of k will likely be a leftover value from a previous stack frame</li>
+</ul>
+<h2 id="memory-snapshot">Memory snapshot</h2>
+<p>You may be asked to draw a memory diagram (including the call stack) at a particular moment in the code execution.</p>
+<ul>
+<li>make sure you show any variables in the <strong>global</strong> and <strong>read-only</strong> sections, separate from the stack</li>
+<li>include all local variables in stack frames, including definitions that have not yet been reached (or are incomplete)</li>
+<li>local variables not yet fully initialized have a value of ???</li>
+<li>you do not have to show any temporary storage
+(e.g., intermediate results of an expression)</li>
+</ul>
+<p>When a variable is defined inside of a loop, only one occurrence of the variable is placed in the stack frame. The same variable is re-used for each iteration.<br>
+Each time the definition is reached in the loop, the variable is re-initialized (it does not retain its value from the previous iteration)</p>
+<h2 id="goals-of-this-section-1">Goals of this section</h2>
+<p>At the end of this section</p>
+<h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-30120-p-2"><p style="text-align: center;"> 30/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-30120-p-3"><p style="text-align: center;"> 30/1/20 </p></h1>
 
     </body>
     </html>

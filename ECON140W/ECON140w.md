@@ -163,5 +163,30 @@ Intro:
   - Desired expenditure (aggregate demand) will equal Actual Expenditure = Actual output
   - We are trying to understand fluctuations in actual output/income/GDP by understanding spending decisions by households and firms 
 # <p style="text-align: center;"> 16/1/20 </p>
+# <p style="text-align: center;"> Khan Academy </p>
+## GDP - Expenditure approach
+$GDP = Y = I + C + G + X - IM$ 
+- Investment (spending by firms on things that are used to produce final goods later) and new real estate
+  - new real estate means a house that did not previously exist (not a transfer of ownership)
+- consumption (everything households purchase except new real estate)
+- Government spending
+- Exports
+- Imports
+- ($X - IM$ is commonly grouped as $NX$, net exports)
+
+Example: The sale of a used car is not produced **this year** so it is not included in GDP
+- gdp measures the sales of **final** goods over a **period of time** (usually a year). 
+
+## GDP - Income approach 
+$Y = w + i + r + p$
+- wages earned from labour
+- interest earned on capital
+- rent earned on land
+- profits earned on entrepreneurship  
+  
+## Trade Balance
+The difference in exports and imports is called the **trade balance**, if there are more imports then the country has a **trade deficit** if there are more exports it has a **trade surplus**
+
+
 ## Short-run movements in output 
 ##

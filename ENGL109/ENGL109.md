@@ -375,4 +375,88 @@ Boolean operators
   
 Nesting:
 - (vaping **OR** vape **OR** e-cigarettes) **AND** (youth **OR** adolescents **OR** teens)
+
+# <p style="text-align: center;"> 27/1/20 </p>
+## Peer Review Session
+
+# <p style="text-align: center;"> 29/1/20 </p>
+## Logical Fallacies 
+- honest fair-minded writers have nothing to hide. They name names, cite sources, and generate appropriate emotions
+
+## Fallacies of Emotional (Pathos) Arguments
+- Scare tactics
+  - exaggerating possible dangers well beyond their statistical likelihood
+- Either/Or Choices
+  - Reduce complicated issues to excessively simple terms 
+- Slipper-Slope Arguments
+  - Portray today's tiny mister as tomorrow's slide into disaster
+    - if we ban assault rifles we will inevitably ban all guns
+- Sentimental or emotional appeals
+  - Use tender emotions to distract readers from facts
+- Bandwagon Appeal  
+  - Getting people to think like everyone else
+
+## Fallacies of Ethical (Ethos) Arguments
+- Appeals to false authority
+  - when writers offer themselves or non-authorities as sufficient warrant for believing a claim
+- Dogmatism
+  - Writers who asserts or assumes a particular position is the only one that is acceptable
+    - "no serious person would disagree" 
+- Ad Hominem
+  - attack the character of a person rather than the claim
+- Stacking the deck 
+  - showing only one side of the story - the one in their favour
+
+## Fallacies of Logical (Logos) Arguments
+- Hasty or sweeping generalizations
+  - an inference drawn from insufficient evidence 
+    - my Jetta broke down, so all Jetta must be junk 
+- Faulty causality 
+  - *post hoc*: "after this, because of this"
+    - I put on my lucky shirt causing the blue jays to start winning 
+- Begging the question
+  - the claim is made on grounds that can't be accepted as true because those grounds are in question
+    - "you can't give me a C because I'm an A student" 
+- Equivocation
+  - half-truths or arguments that give lies an an hones appearance 
+- non sequitur
+  - an argument whose claims, reasons, or warrant don't connect logically
+- Straw man attack 
+  - portraying opponents position as more extreme or far less coherent than they actually are
+- Red herring 
+  - changes the subject abruptly or introduces an irrelevant claim or fact to throw readers or listeners off the trail
+- Faulty analogy
+  - inaccurate or inconsequential comparisons between objects or concepts
+
+## Advertisement Reflection
+- comment on your own work - and be candid. I would like to know what you learned from this assignment, and what you intend to work on in subsequent assignments
+- To get you started with your reflection, you may wish to focus on a point or two from this list and discuss: 
+  - your goals in writing the rhetorical analysis and how well you have met them 
+  - how you have defined your audience/readers and how you've adjusted your paper for them 
+  - the strategies behind your organization or style
+  - how you addressed problems pointed out by your peer editors
+  - what you believe succeeds and what you'd like to handle better 
+  - what specifically you learned from composing the paper 
+
+
+## What is Plagiarism? 
+- using someone else's **ideas**, **writing**, or other **intellectual property** as your own 
+
+## Common Types of Plagiarism 
+- Downloading or buying a research paper
+- Copy and pasting
+
+## MLA
+- in-text citation is (author-name page-number)
+  - if there is no page number, just the author's name 
+- No known author
+  - title in quotation marks 
+    - italicize and abbreviate if its longer
+
+## Basic Rules
+- all entries must correspond to the works cited in your main text 
+- Begin your works cited on a separate page at the end 
+- Double space all citations, but do not skip spaces between entries
+- Indent the second and subsequent lines of citations by 0.5 inches to create a hanging indent
+- For online sources, you should include a location to show where you found the source, 
 # <p style="text-align: center;"> 27/1/20 </p>
