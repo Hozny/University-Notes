@@ -459,4 +459,79 @@ Nesting:
 - Double space all citations, but do not skip spaces between entries
 - Indent the second and subsequent lines of citations by 0.5 inches to create a hanging indent
 - For online sources, you should include a location to show where you found the source, 
+# <p style="text-align: center;"> 3/2/20 </p>
+## Argument Assignment 
+- state where your article will be published 
+
+## Reflection
+- explain why you wrote the piece as you did 
+- point out where oyu used the rhetorical appeals (ethos, pathos, logos)
+- explain why you chose to argue your case in the way you did
+
+## Types
+- Forensic
+- Epideictic
+- Deliberative speeches
+  - concerns what should be done in the future, typical of governing bodies
+
+
+# <p style="text-align: center;"> 5/2/2020 </p>
+## Arguments
+- kairos - recognizing the most suitable time
+
+## Audience
+
+## Ethos
+- The identity that writers create for themselves within an argument is their ethos - the voice and attitude they fashion to enhance their appeal 
+- You can shape your ethos by adjusting the style, tone, and vocabulary of your argument. 
+  - Contractions can make you seem friendly
+  - Impressive vocabulary can make you seem smart (or maybe just pompous)
+  - Lots of name dropping can make you seem hop (or insulting)
+
+## Materials 
+- Arguments often deal with current events and topics
+- As you gather materials, select only the best for your argument
+- Come up with reasons to support your claim as soon as you choose your subject 
+- Write them down 
+- Then start reading and continue to list new reasons as they arise 
+- Once your reading and research is complete
+  - Review your notes
+  - Group together all the arguments that support your position
+  - Your initial list of potential arguments should be streamlined into just three or four - which should become the key reasons behind your claim
+  - Study these points and look for logical connections and sequences
+  - Readers will expect your ideas to connect logically
+
+## Evidence
+
+## Counterarguments
+- Find counterarguments and list reasonable objections to your claim
+- Cluster these objections together while making notes to reduce them to a manageable few
+- Decide which counterarguments you must refute in detail, which you might handle briefly
+
+## Pathos
+- Consider emotional appeals and use them within your argument
+- Questions to answer about possible emotional appeals include: 
+  - What emotions might be effectively raised to support my point? 
+  - How might I responsibly introduce such feelings: through words, images, colour, sound? 
+  - How might any feelings my subject arouses work with my argument 
+
+## A writer's play on emotions
+- Look for place where you can generate strong feelings to support your points, win over readers, or influence them in other ways
+
+## Similes and Metaphors
+- Helpful in building understanding are specific types of figurative language, including similes, metaphors, and analogies
+
+## Analogies
+- Compare similar features of two dissimilar things; they explain something unfamiliar based on a familiar context
+
+## Avoid Cliches 
+- a cliche is a frequently used expression such as busy as a bee or children are the future 
+- if you use too many cliches in your writing, however, readers may conclude that what you are saying is not very new or interesting - or true
+
+## Avoid Mixed Metaphors
+- Mixed metaphors are comparisons that are not consistent
+- Instead of creating a clear impression, they confuse the reader by pitting one image against another. 
+  - the lectures were brilliant comets streaking through the night sky, showering listener with a torrential rain of insight   
+    - The images of streaking light and heavy precipitation is inconsistent 
+
 # <p style="text-align: center;"> 27/1/20 </p>

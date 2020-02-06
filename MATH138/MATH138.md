@@ -1,7 +1,7 @@
 # MATH 138
 Calculus 2
 ``` 
-Instructor: Jen Nelson
+Instructor: Jen (Jennifer) Nelson
 Section: idk
 Email: jen.nelson@uwaterloo.ca
 Office: MC 6222
@@ -332,5 +332,70 @@ Let $u = sinx$, $du = cosxdx$
 $= \int_{x= \frac{\pi}{2}}^{z =\pi} u^2(1-u^2)$   
 $= \frac{u^3}{3} - \frac{u^5}{5} |_{x = \frac{\pi}{2}}^{x = \pi}$       
 $= \frac{sin^3x}{3} - \frac{sin^5x}{5} |_{\frac{\pi}{2}}^{\pi}$
-# <p style="text-align: center;">6/1/20 </p>
+
+# <p style="text-align: center;">5/2/20 </p>
+**Lec 14:** Volumes Continued (3.2 & 3.3)   
+**Example 4.1**: Determine the volume of the solid obtained by rotating the region bounded by $x = 5 - y^2$ and $x=0$ about the y-axis
+
+``` 
+sketch 
+"sideways parabola opening to the left rotating about the the y axis"
+```
+- Note that we would need to use horizontal rectangles with this shape (integrating with respect to y)
+  - you could also do with respect to x using the shell method
+
+Use horizontal rectangles of width $\Delta y$   
+From $y = -\sqrt{5}$ to $y = \sqrt{5}$ will get disks and the cross-sectional area of solid is  $\pi (5 - y^2)^2$   
+
+Therefore, 
+$$ \begin{array}{rcl} v &=& \int_{-\sqrt{5}}^{\sqrt{5}} \pi (5 - y^2)^2 dy \\
+&=& \cdots \\
+&=& \frac{80\sqrt{5}}{3}\pi \end{array}$$ 
+
+**Summary**: we get disks/washers when we rotate
+- functions of $x$ about horizontal lines (Ex: 13.2,13.3)
+  - use vertical rectangles (integrate with respect to x)
+- functions of $y$  about vertical lines (Ex: 14.1)
+  - Use horizontal rectangles (integrate with respect to y)
+
+**Exercise**: Rotate region in Ex 14.1 about $x=6$
+
+**Exercise**: Find the volume of the cap heigh with h, of a sphere of radius r. 
+- (cap is the top semi-sphere where h is the height from the top of the sphere to the base of the semi-sphere)
+
+### **Example 14.2**: Determine the volume of the solid obtained by rotating the region bounded by $y = (x-1)(x-3)^2$, the x-axis, $x=1$ and $x=3$, about the y-axis
+
+``` 
+Sketch "from 1 to 3 it looks like a small hill going up from 1 and down to 3"
+```
+- if we use horizontal rectangles we'll get washers, but to find the length of each rectangle would need to be determined using the inverse of the function (x values with respect to y), this is difficult for the given function
+  
+Instead we use vertical rectangles of width $\Delta x$ and length $(x-1)(x-3)^2$.       
+Rotate this rectangle around the y-axis. We will get a **cylindrical shell** (an infinitesimally thin hollow cylinder, its volume is equal to its surface area)
+- What is the volume of one shell? "cut and flatten"
+  - Width: $\Delta x$
+  - Height: $f(x) = (x-1)(x-3)^2$
+  - Length: $2\pi r = 2\pi x$
+
+So volume $=2\pi xf(x)^2 \Delta x= 2\pi x(x-1)(x-3)^2 \Delta x$     
+Therefore total volume is 
+$$ \begin{array}{rcl} V &=& \int_1^3 2 \pi x (x-1)(x-3)^2 dx \\ 
+&=& \cdots \\ 
+&=& \frac{24 \pi}{5} \end{array} $$
+
+### **Example 14.3:** Find the volume of solid obtained by rotating the region bounded by $x=y^2$, $x+y=2$ about $y=-3$
+```
+Sketch "parabola opening outward with the line crossing it diagonally from top left to bottom right
+```
+- Intersection points: $(1,1)$, $(4,-2)$
+
+Let's use horizontal rectangles (since $x=f(y)$) of width $\Delta y$. Rotate one such rectangle about $y=-3$. Cut & flatten: 
+- width: $\Delta y$
+- Length: $(2-y) - y^2 = 2 - y - y^2$
+- Height: $2\pi r = 2 \pi (y - (-3)) = 2 \pi (y +3)$
+
+So, 
+$$\begin{array}{rcl} V &=& \int_{-2}^{1} 2 \pi (y + 3)(2 - y - y^2)dy \\ 
+&=& \cdots \\ 
+&=& \frac{45\pi}{2}\end{array}$$
 # <p style="text-align: center;">6/1/20 </p>

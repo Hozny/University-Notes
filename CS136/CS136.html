@@ -1380,9 +1380,214 @@ The &quot;bottom&quot; of the stack (where the <code>main</code> stack frame is 
 Each time the definition is reached in the loop, the variable is re-initialized (it does not retain its value from the previous iteration)</p>
 <h2 id="goals-of-this-section-1">Goals of this section</h2>
 <p>At the end of this section</p>
+<ul>
+<li>...</li>
+</ul>
+<h1 id="p-style%22text-align-center%22-4220-p"><p style="text-align: center;"> 4/2/20 </p></h1>
+<h2 id="introduction-to-pointers-in-c">Introduction to Pointers in C</h2>
+<h2 id="address-operator">Address operator</h2>
+<p>C was designed to give programmers &quot;low-level&quot; access to memory and <strong>expose</strong> the underlying memory model.</p>
+<p>The <strong>address operator</strong> (<code>&amp;</code>) produces the <strong>location</strong> of an identifier in memory (the <strong>starting address</strong> of where its value is stored)</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> g = <span class="hljs-number">42</span>; 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"the value of g is: %d\n"</span>, g); 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"the address of g is: %p\n"</span>, &amp;g);
+}
+<span class="hljs-comment">// the value of g is: 42</span>
+<span class="hljs-comment">// the address of g is: 0x71a0a0</span>
+</div></code></pre>
+<ul>
+<li>The printf format specifier to display an address (in hex) is &quot;<code>%p</code>&quot;</li>
+</ul>
+<h2 id="pointers">Pointers</h2>
+<p>In C, there is also a <em>type</em> for <strong>storing an address</strong>: a <strong>pointer</strong></p>
+<p>a pointer is defined by placing a (<code>*</code>) before the identifier (name). The <code>*</code> is part of the definition syntax, not the identifier itself.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> g = <span class="hljs-number">32</span>; 
+<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>; 
+<span class="hljs-keyword">int</span> *p = &amp;g;    <span class="hljs-comment">// p "points at" i</span>
+p = &amp;i; 
+<span class="hljs-comment">//  i =&gt; 42</span>
+<span class="hljs-comment">// &amp;i =&gt; 0xf020</span>
+<span class="hljs-comment">//  p =&gt; 0xf020</span>
+<span class="hljs-comment">// &amp;p =&gt; oxf024</span>
+
+</div></code></pre>
+<ul>
+<li>when u call <code>p</code> you do not use the <code>*</code> that is just part of the definition not the identifier name</li>
+</ul>
+<p>The type of <code>p</code> is an &quot;int pointer&quot; which is written as &quot;<code>int *</code>&quot;.</p>
+<p>For each type (e.g, <code>int</code>, <code>char</code>) there is a corresponding pointer type (e.g, <code>int *</code>, <code>char *</code>)</p>
+<p>When drawing a <em>memory</em> diagram, we rarely care about the value of the address, and visualize a pointer with an arrow (that &quot;points&quot;)</p>
+<h2 id="sizeof-a-pointer">sizeof a pointer</h2>
+<p>Int most <em>k</em>-bit systems, memory address are <em>k</em> bits long, so pointers require <em>k</em> bits yo store an address</p>
+<h2 id="indirection-operator">Indirection operator</h2>
+<p>The <strong>indirection operator</strong> (<code>*</code>), also known as the <em>deference operator</em>, is the <strong>inverse</strong> of the address operator (<code>&amp;</code>).</p>
+<ul>
+<li>*p produces the <strong>value</strong> of what pointer p &quot;points at&quot;</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>; 
+<span class="hljs-keyword">int</span> *p = &amp;i; 
+<span class="hljs-comment">//  p =&gt; 0xf020</span>
+<span class="hljs-comment">// *p =&gt; 42</span>
+</div></code></pre>
+<h2 id="pointers-to-pointers">Pointers to pointers</h2>
+<p>&quot;Can a pointer point at itself?&quot;</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> *p = &amp;p;    <span class="hljs-comment">// pointer p points at p ???</span>
+</div></code></pre>
+<ul>
+<li>this is actually a <strong>type error</strong>
+<ul>
+<li>p is defined as (<code>int *</code>), a pointer to an <code>int</code>, but</li>
+<li>the type of &amp;p is (<code>int **</code>), a pointer to a pointer to an <code>int</code></li>
+</ul>
+</li>
+</ul>
+<p>In C, we can define a <strong>pointer to a pointer</strong>:</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>; 
+<span class="hljs-keyword">int</span> *p1 = &amp;i;          <span class="hljs-comment">// pointer p1 points at i</span>
+<span class="hljs-keyword">int</span> **p2 == &amp;p1;       <span class="hljs-comment">// pointer p2 points at p1</span>
+</div></code></pre>
+<ul>
+<li><code>**p * **p</code> is a confusing but valid C expression</li>
+</ul>
+<blockquote>
+<p>A <code>void</code> pointer (<code>void *</code>) can point at anything, including a <code>void</code> pointer (itself)</p>
+</blockquote>
+<h2 id="dereferencing-pointers-to-structures">Dereferencing pointers to structures</h2>
+<p>The structure operator (.) has higher precedence than the indirection operator (<code>*</code>)</p>
+<p>Awkward parenthesis are required to access a field of a pointer to a structure</p>
+<pre><code class="language-C"><div>(*ptr).field
+</div></code></pre>
+<p>Fortunately, the <strong>indirection selection operator</strong>, also known as the &quot;arrow&quot; operator (<code>-&gt;</code>) combines the indirection and the selection operators.</p>
+<p><code>ptr-&gt;field</code> is equivalent to <code>(*ptr).field</code></p>
+<h2 id="the-null-pointer">The NULL pointer</h2>
+<p><code>NULL</code> is a special pointer <strong>value</strong> to represent that the pointer points to &quot;nothing&quot;</p>
+<p>If the value of a pointer is <em>unknown</em> at the time of definition, or what the pointer points at becimes <em>invalid</em>, it's good style to assign the value of NULL to the pointer. A pointer with a value of NULL is often known as a &quot;NULL pointer&quot;</p>
+<ul>
+<li>NULL is considered &quot;false&quot; when used in a Boolean context</li>
+</ul>
+<p>The following two are equivalent:</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">if</span> (p) ... 
+<span class="hljs-keyword">if</span> (p != <span class="hljs-literal">NULL</span>)
+</div></code></pre>
+<ul>
+<li>If you try to dereference a NULL pointer, your program <strong>will crash</strong></li>
+</ul>
+<pre><code class="language-C"><div>p = <span class="hljs-literal">NULL</span>; 
+i = *p;        <span class="hljs-comment">// crash!</span>
+</div></code></pre>
+<h2 id="pointer-assignment">Pointer assignment</h2>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> i = <span class="hljs-number">5</span>; 
+<span class="hljs-keyword">int</span> j = <span class="hljs-number">6</span>; 
+
+<span class="hljs-keyword">int</span> *p = &amp;i; 
+<span class="hljs-keyword">int</span> *q = &amp;j; 
+
+p = q; 
+</div></code></pre>
+<ul>
+<li>this does not change the value of i or j, it just makes p point to j</li>
+</ul>
+<p>This is an example of <strong>aliasing</strong>, which is when the same memory address can be accessed from more than one variable</p>
+<h1 id="p-style%22text-align-center%22-6220-p"><p style="text-align: center;"> 6/2/20 </p></h1>
+<h2 id="mutation-and-parameters">Mutation and parameters</h2>
+<p>Pass by value:<br>
+<strong>copy</strong> of an argument is passed to a function, so the function cannot change the original value. The alternative to this is &quot;pass by reference&quot;</p>
+<p>In C, we can emulate &quot;pass by reference&quot; by passing the address of a variable.</p>
+<ul>
+<li>This is still actually &quot;pass by value&quot; because we pass the <strong>value</strong> of the address. It is not the same as when languages pass by reference.</li>
+</ul>
+<p>It is also common to say pass a pointer</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p)</span> </span>{
+  *p += <span class="hljs-number">1</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+  <span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+  trace_int(x);
+  inc(&amp;x);              <span class="hljs-comment">// note the &amp;</span>
+  trace_int(x);
+}
+</div></code></pre>
+<p>Most pointer parameters should be <strong>required</strong> to be valid (e.g., non-<code>NULL</code>)</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// inc(p) increments the value of *p</span>
+<span class="hljs-comment">// effects:  modifies *p</span>
+<span class="hljs-comment">// requires: p is a valid pointer</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p)</span> </span>{
+    *p += <span class="hljs-number">1</span>;
+}
+</div></code></pre>
+<ul>
+<li>note that instead of <code>*p += 1;</code> we could have written <code>(*p)++;</code> The parenthesis are needed because <code>++</code> has higher priority than <code>*</code></li>
+</ul>
+<h3 id="documenting-the-side-effect">Documenting the side effect</h3>
+<p>We now have a fourth effect that a function may have:</p>
+<ul>
+<li>produce output</li>
+<li>read input</li>
+<li>mutate a global variable</li>
+<li><strong>mutate a variable through a pointer parameter</strong></li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-comment">//  effects: modifies *px and *py</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *px, <span class="hljs-keyword">int</span> *py)</span> </span>{
+      <span class="hljs-keyword">int</span> temp = *px;
+      *px = *py;
+      *py = temp;
+}
+</div></code></pre>
+<h2 id="c-input-scanf">C input: scanf</h2>
+<p><code>scanf</code> requires a <strong>pointer</strong> to a variable to store the value read from input.<br>
+Just like <code>printf</code>, <code>scanf</code> can be used to read in more than one value</p>
+<ul>
+<li><strong>However in this course you may only read one value per <code>scanf</code></strong></li>
+</ul>
+<h2 id="scanf-return-value">scanf return value</h2>
+<p>The <strong>return value</strong> of <code>scanf</code> is an <code>int</code>, and either:</p>
+<ul>
+<li>The quantity of values successfully read
+<ul>
+<li>0 if the input is not formatted properly</li>
+</ul>
+</li>
+<li>The constant <code>EOF</code>: <strong>E</strong>nd <strong>O</strong>f <strong>F</strong>ile has been reached</li>
+</ul>
+<h2 id="invalid-input">Invalid input</h2>
+<ul>
+<li>If you follow the course's advice, scanf will return 1 if the input is valid</li>
+</ul>
+<pre><code class="language-C"><div>retval = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;i); <span class="hljs-comment">// read in an integer, store it in i</span>
+<span class="hljs-keyword">if</span> (retval != <span class="hljs-number">1</span>) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Fail! I could not read in an integer!\n"</span>);
+}
+</div></code></pre>
+<h2 id="whitespace">Whitespace</h2>
+<pre><code class="language-C"><div><span class="hljs-comment">// reads in next character (may be whitespace character)</span>
+count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%c"</span>, &amp;c);
+
+<span class="hljs-comment">// reads in next character, ignoring whitespace</span>
+count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">" %c"</span>, &amp;c);
+
+<span class="hljs-comment">// This is better</span>
+count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"\n%c"</span>, &amp;c);
+</div></code></pre>
+<ul>
+<li>The space in the second example indicated that leading white space is ignored
+<ul>
+<li>It ignores all leading white spaces</li>
+<li>It also ignores any white space characters such as <code>\n</code></li>
+</ul>
+</li>
+<li>You can write a <code>\n</code> instead of the leading white space to have more contrast in your code</li>
+</ul>
+<h2 id="returning-an-address">Returning an address</h2>
+<p>A function must <strong>never</strong> return an address within its stack fram.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">bad_idea</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{ 
+    <span class="hljs-keyword">return</span> &amp;n;    <span class="hljs-comment">// Never do this</span>
+}
+</div></code></pre>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-2"><p style="text-align: center;"> 30/1/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-3"><p style="text-align: center;"> 30/1/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-30120-p-4"><p style="text-align: center;"> 30/1/20 </p></h1>
 
     </body>
     </html>

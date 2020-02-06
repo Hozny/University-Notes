@@ -229,10 +229,10 @@ QED
 > $$ \vec{v_x} \cdot \vec{v_y} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ \vdots \\y_n \end{bmatrix} = x_1y_1 + \cdots x_ny_n = \sum_{i=1}^{n}x_iy_i$$
 
 **Theorem: Properties of dot product**      
-If $\vec{x}, \vec{y}, vvz \in \vec{y}$ and $s,t \in \mathbb{R}$, then we have the following: 
+If $\vec{x}, \vec{y}, \vec{z} \in \vec{y}$ and $s,t \in \mathbb{R}$, then we have the following: 
 1. $\vec{x} \cdot \vec{x} \geq 0$ and $\vec{x} \cdot \vec{x} = 0$ if and only if $\vec{x} = 0$
 2. $\vec{x} \cdot \vec{y} = \vec{y} \cdot \vec{x}$
-3. $\vec{x} \cdot (s \vec{y} + t \vec{x}) = s(\vec{x} \cdot \vec{y}) + t(\vec{x} \cdot vvz)$
+3. $\vec{x} \cdot (s \vec{y} + t \vec{x}) = s(\vec{x} \cdot \vec{y}) + t(\vec{x} \cdot \vec{z})$
 
 
 >**Definition: Norm**   
@@ -255,6 +255,84 @@ If $\vec{x}, \vec{y} \in \mathbb{R}^n$ and $c \in \mathbb{R}$ then we have the f
 
 >**Theorem:**     
 > The zero vector is orthogonal to every vector in $\mathbb{R}^n$
+# <p style="text-align: center;"> 5/2/20 </p>
+## Rotations in $\mathbb{R}^2$
+> **ROtation operator:** If we rotate a vector $\vec{x} \in r^2$ through angle $\theta$ in the counter-clockewise direction then the resulting ve tor is given by 
+> $$ R_{\theta}(\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}) = \begin{bmatrix} x_1cos\theta \end{bmatrix}$$
+
+## Projections in $\mathbb{R}^2$
+>**Projection operator**: If we project a vector $\vec{x}$ onto vector $\vec{v}$, then the resulting vector is given by 
+>$$ projec_{\vec{v}}(\vec{x}) = (\frac{\vec{x} \cdot \vec{v}}{||\vec{v}||^2})\vec{v}
+
+
+$$proj_{v_1,v_2}(x_1,x_2) = \frac{(x_1v_1 + x_2v_2)}{||\vec{v}||^2} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} \frac{(x_1v_1 + x_2v_2)v_1}{||\vec{v}||^2} \\ \frac{(x_1v_1 + x_2v_2)v_2}{||\vec{v}||^2} \end{bmatrix} = \begin{bmatrix} \frac{v_1^2}{||\vec{v}||^2}x_1 + \frac{v_1v_2}{||\vec{v}||^2}x_2  \\ \frac{v_1v_2}{||\vec{v}||^2}x_1 + \frac{v_2^2}{||\vec{v}||^2}x_2 \end{bmatrix}$$
+
+## Reflections in $\mathbb{R}^2$
+>**Reflection operator:** Let L be a line in $\mathbb{R}^2$ that passes through the origin and ahs normal vector $\vec{n}$. If we reflect a vector $\vec{x}$ in the line $L$, then the resulting vector is given by 
+>$$refl_L(\vec{x}) = \vec{x} - 2proj_{\vec{n}}(\vec{x})$$
+
+## Summary
+ALl of these important functions on $\mathbb{R}^2$ (scaling rotation, projection, reflection) have some common properties: 
+- each function $f(\vec{x})$ can be represented using a matrix-vector product, $A\vec{x}$, for some $2$X$2$ matrix A
+
+## What does it mean to be linear
+Here are defining features in terms of algebra: 
+> $f(x + y) = f(x) + f(y)$ and $f(cx) = cf(x)$
+
+## Functions on Euclidean spaces
+$f : \mathbb{R}^n \rightarrow \mathbb{R}^m$
+- $f$ is the function
+- $\mathbb{R}^n$ is the **domain**
+- $\mathbb{R}^m$ is the **codomain** (Euclidean space in which the output vectors lie)
+- **Image**: If $f(\vec{x}) = \vec{y}$ then we call $\vec{y}$ the image of $\vec{x}$ under function $f$
+
+>**Definition:** Two functions $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $g: \mathbb{R}^n \rightarrow \mathbb{R}^m$ are said to be **equal** if $f(\vec{x}) = g(\vec{x})$ for all $\vec{x} \in \mathbb{R}^m$
+
+## Linear mappings
+>Definition: A function $f: \mathbb{R}^n rarow \mathbb{R}^m$ is called a **linear mapping** if for all vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$ and scalars $c,d \int rr$ we have 
+>$$ f(c\vec{x} + d\vec{y}) = cf(\vec{x}) + df(\vec{y})$$
+- Remark: Alternatively, we could define a linear mapping to be a function with the two properties
+  - $f(\vec{x} + \vec{y}) = f(\vec{x}) + f(\vec{y})$
+  - $f(c\vec{x}) = c f(\vec{x})$
+
+**Exercise 3.4**: Determine which of the functions given below are linear mappings and which are not    
+
+$f(x_1, x_2) = (x_1^2, x_2^2)$
+- $f$ is not linear
+  
+Let $\vec{x} = (-1,2)$ and $\vec{y} = (-1,2)$ we show $f(\vec{x} + \vec{y}) \neq f(\vec{x}) + f(\vec{y})$       
+$f(\vec{x}) = f(-1,2) = (1,4) = f(\vec{y})$   
+implies $f(\vec{x}) + f(\vec{y}) = (1,4) + (1,4) = (2,8)$     
+But $f(\vec{x} + \vec{y}) = f(-2,4) = (4,16)$     
+and  so $f(\vec{x} + \vec{y}) \neq f(\vec{x}) + f(\vec{y})$     
+
+$g(x_1,x_2) = (x_2,1,x_1)$
+- $g$ is not linear       
+
+Let $\vec{x} = (1,2)$ and $c=2$   
+We will show $g(2\vec{x}) \neq 2g(\vec{x})$     
+$g(\vec{x}) = g(1,2) = (2,1,1)$   
+implies $2g(\vec{x}) = (4, 2, 2)$   
+But $g(2\vec{x}) = g(2,4) = (4, 1, 2)$    
+and so $2g(\vec{x}) \neq g(2\vec{x})$
+
+$h(x_1, x_2, x_3) = (2x_1, + x_2, x_3)$   
+- $h$ is linear   
+  
+Let $\vec{y}, \vec{z} \in \mathbb{R}^3$ and $c,d \in rr$.    
+Then $\vec{y} = (y_1,y_2,y_3), \vec{z} = (z_1,z_2,z_3)$.      
+So $c\vec{y} + d\vec{z} = (cy_1 + dz_1, cy_2 + dz_2, cy_3 + dz_3)$    
+We have
+$ch(\vec{y}) + dh(\vec{z}) = c(2y_1 + y_2, y_3) + d(2z_1 + z_2, z_3)$     
+$= 2(2cy_1 + cy_2 + 2dz_1 + dz_2, cy_3 + dz_3)$     
+$= (2(cy_1 + dz_1) + (cy_2 + dz_2), cy_3 + dz3)$
+$= h(cy_1 + dz_1, cy_2 + dz_2, cy_3 + dz_3)$      
+$=h(c\vec{y} + d\vec{z})$     
+Therefore $h$ is linear.      
+
+## Projections are linear mappings
+
+# <p style="text-align: center;"> 17/1/20 </p>
 # <p style="text-align: center;"> 17/1/20 </p>
 # <p style="text-align: center;"> 17/1/20 </p>
 ---
