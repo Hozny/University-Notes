@@ -1578,11 +1578,149 @@ count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"\n%c
 </li>
 <li>You can write a <code>\n</code> instead of the leading white space to have more contrast in your code</li>
 </ul>
+<h2 id="using-pointers-to-return-multiple-values">Using pointers to return multiple values</h2>
+<p>Functions in C can only have one return value, we can use pointers to emulate returning more than one value.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num, <span class="hljs-keyword">int</span> denom, <span class="hljs-keyword">int</span> *quot, <span class="hljs-keyword">int</span> *rem)</span> </span>{
+    *quot = num / denom;
+    *rem  = num % denom;
+}
+</div></code></pre>
+<ul>
+<li>This function &quot;returns&quot; both the quotient and remainder</li>
+</ul>
+<p>This multiple return is also useful for when a function could encounter an error.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num, <span class="hljs-keyword">int</span> denom, <span class="hljs-keyword">int</span> *quot, <span class="hljs-keyword">int</span> *rem)</span> </span>{
+    <span class="hljs-keyword">if</span> (denom == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    *quot = num / denom;
+    *rem  = num % denom;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+</div></code></pre>
+<ul>
+<li>returns true if successful</li>
+<li>false if not</li>
+</ul>
 <h2 id="returning-an-address">Returning an address</h2>
 <p>A function must <strong>never</strong> return an address within its stack fram.</p>
 <pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">bad_idea</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{ 
     <span class="hljs-keyword">return</span> &amp;n;    <span class="hljs-comment">// Never do this</span>
 }
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">bad_idea2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+  <span class="hljs-keyword">int</span> a = n*n;
+  <span class="hljs-keyword">return</span> &amp;a;
+}
+</div></code></pre>
+<h2 id="passing-structures">Passing structures</h2>
+<p>When a function is called, a <strong>copy</strong> of each argument value is placed into the stack frame.</p>
+<p>For structures, the <em>entire</em> structure is copied into the stack frame. For large structures, this can be quite inefficient.</p>
+<p>To avoid structure copying, it is common to pass the address of a structure to a function</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// sqr_dist(p1, p2) calculates the square of</span>
+  <span class="hljs-comment">//   the distance between p1 and p2</span>
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sqr_dist</span><span class="hljs-params">(struct posn *p1, struct posn *p2)</span> </span>{
+    <span class="hljs-keyword">int</span> xdist = p1-&gt;x - p2-&gt;x;
+    <span class="hljs-keyword">int</span> ydist = p1-&gt;y - p2-&gt;y;
+    <span class="hljs-keyword">return</span> xdist * xdist + ydist * ydist;
+}
+</div></code></pre>
+<p>passing the address of a structure allows the function to mutate the fields of the structure.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// scale(p, f) scales the posn p by f</span>
+  <span class="hljs-comment">// requires: p is not null</span>
+  <span class="hljs-comment">// effects:  modifies p</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">scale</span><span class="hljs-params">(struct posn *p, <span class="hljs-keyword">int</span> f)</span> </span>{
+    p-&gt;x *= f;
+    p-&gt;y *= f;
+}
+</div></code></pre>
+<h2 id="const-pointers">Const pointers</h2>
+<p>Adding the <code>const</code> keyword to a pointer definition prevents the pointer’s destination from being mutated through the pointer.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cannot_change</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct posn *p)</span> </span>{
+    p-&gt;x = <span class="hljs-number">5</span>;   <span class="hljs-comment">// INVALID</span>
+}
+</div></code></pre>
+<p>Place <code>const</code> <strong>before</strong> the type</p>
+<ul>
+<li>it is <strong>good style</strong> to add <code>const</code> to a pointer parameter to communicate that the destination does not change</li>
+</ul>
+<h2 id="const-parameters">Const parameters</h2>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">can_change</span><span class="hljs-params">(struct posn *p)</span> </span>{
+    p-&gt;x = <span class="hljs-number">5</span>;   <span class="hljs-comment">// VALID</span>
+}
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">cannot_change</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct posn *p)</span> </span>{
+    p-&gt;x = <span class="hljs-number">5</span>;   <span class="hljs-comment">// INVALID</span>
+}
+</div></code></pre>
+<p>Const parameters could be used with simple variables as well</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_function</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x)</span> </span>{
+    <span class="hljs-comment">// mutation of x here is invalid</span>
+    <span class="hljs-comment">// ...</span>
+}
+</div></code></pre>
+<p>It does not matter if the original argument is a constant because</p>
+<ul>
+<li>A <code>const</code> parameter communicates (and enforces) that <strong>the copy</strong> of the argument will not be mutated.</li>
+</ul>
+<h2 id="minimizing-mutative-side-effects">Minimizing mutative side effects</h2>
+<p>Your preference for function design should be:</p>
+<ol>
+<li><strong>“Pure” function</strong></li>
+</ol>
+<ul>
+<li>No side effects or dependencies on global mutable variables.</li>
+</ul>
+<ol>
+<li><strong>Only I/O side effects</strong>
+<ul>
+<li>If possible, avoid any mutative side effects.</li>
+</ul>
+</li>
+<li><strong>Mutate data through pointer parameters</strong>
+<ul>
+<li>If mutation is necessary, use a pointer parameter.</li>
+</ul>
+</li>
+<li><strong>Global dependencies</strong>
+<ul>
+<li>Mutable global variables should be avoided.</li>
+</ul>
+</li>
+<li><strong>Mutate global data</strong>
+<ul>
+<li>Only when absolutely necessary (it rarely is)</li>
+</ul>
+</li>
+</ol>
+<h2 id="function-pointers">Function pointers</h2>
+<p>In Racket, functions are first-class values.</p>
+<p>For example, Racket functions are values that can be stored in variables and data structures, passed as arguments and returned by functions.</p>
+<p>In C, functions are not first-class values, but <strong>function pointers</strong> are.</p>
+<p>A significant difference is that <strong>new</strong> Racket functions can be created during program execution, while in C they cannot.</p>
+<ul>
+<li><strong>a function pointer can only point to a function that already exists</strong></li>
+</ul>
+<p>The function pointer stores the starting address a function in code section of memory.</p>
+<p>The type of a function pointer includes the return type and all of the parameter types, which makes the syntax a little messy.</p>
+<pre><code class="language-C"><div>return_type (*fpname)(param1_type, param2_type, ...)
+</div></code></pre>
+<ul>
+<li>you are not expect to remember the syntax for defining a pointer function for the exam</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
+  <span class="hljs-keyword">return</span> x + y;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">my_sub</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
+  <span class="hljs-keyword">return</span> x - y;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+  <span class="hljs-keyword">int</span> (*fp)(<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>) = <span class="hljs-literal">NULL</span>;
+  fp = my_add;
+  trace_int(fp(<span class="hljs-number">7</span>, <span class="hljs-number">3</span>));
+  fp = my_sub;
+  trace_int(fp(<span class="hljs-number">7</span>, <span class="hljs-number">3</span>));
+}
+<span class="hljs-comment">// fp(7, 3) =&gt; 10</span>
+<span class="hljs-comment">// fp(7, 3) =&gt; 4</span>
 </div></code></pre>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-2"><p style="text-align: center;"> 30/1/20 </p></h1>
