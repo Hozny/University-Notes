@@ -289,7 +289,7 @@ $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$
 >**Definition:** Two functions $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $g: \mathbb{R}^n \rightarrow \mathbb{R}^m$ are said to be **equal** if $f(\vec{x}) = g(\vec{x})$ for all $\vec{x} \in \mathbb{R}^m$
 
 ## Linear mappings
->Definition: A function $f: \mathbb{R}^n rarow \mathbb{R}^m$ is called a **linear mapping** if for all vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$ and scalars $c,d \int rr$ we have 
+>**Definition**: A function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is called a **linear mapping** if for all vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$ and scalars $c,d \int rr$ we have 
 >$$ f(c\vec{x} + d\vec{y}) = cf(\vec{x}) + df(\vec{y})$$
 - Remark: Alternatively, we could define a linear mapping to be a function with the two properties
   - $f(\vec{x} + \vec{y}) = f(\vec{x}) + f(\vec{y})$
@@ -331,8 +331,71 @@ $=h(c\vec{y} + d\vec{z})$
 Therefore $h$ is linear.      
 
 ## Projections are linear mappings
+Fix $vvv \in \mathbb{R}^n$ and consider the associated function $proj_{vvv}: \mathbb{R}^n \rightarrow \mathbb{R}^n$. Prove that this function is a linear mapping. 
 
-# <p style="text-align: center;"> 17/1/20 </p>
+# <p style="text-align: center;"> 7/2/20 </p>
+
+## Matrix representation of linear mappings
+We will prove the follwoing result in this section: 
+>A function $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear mapping if and only if there exists an m x n matrix $A$ such that $f(\vec{x}) = A\vec{x}$ for all $\vec{x} \in \mathbb{R}^n$.
+
+We prove one implication now: If $f(\vec{x}) = A\vec{x}$ for all $\vec{x} \in \mathbb{R}^n$, then for all $\vec{y}, \vec{z} \in \mathbb{R}^n$ and $c,d, \in rr$
+$$ \begin{array}{rcl} f(c\vec{y} + d\vec{z}) = A(c\vec{y} + d\vec{z}) = \begin{bmatrix} \vec{r}_1 \cdot (c\vec{y} + d\vec{z}) \\ \vdots \\ \vec{r}_m \cdot (c\vec{y} + d\vec{z}) \end{bmatrix} \\ 
+= \begin{bmatrix} c(\vec{r}_1 \cdot \vec{y}) + d(\vec{r}_1 \cdot \vec{z}) \\ \vdots \\ c(\vec{r}_m + \vec{y}) + d(\vec{r}_m \cdot \vec{z}) \end{bmatrix} \end{array}$$
+- proof is not complete, rest is in course notes
+  
+
+If $L : \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear mapping, then the vectors $L(\vec{e}_1),\cdots,L(\vec{e}_n)$, (the images of the standard basis vectors under L) completely determine a formula for $L(\vec{x})$. Note that we have
+$$ \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = x_1 \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + x_2 \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix} + \cdots x_n \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}$$
+- or $\vec{x} = x_1\vec{e}_1 + \cdots + x_n\vec{e}_n$
+
+This representation of $\vec{x}$ and the linearity of $L$ gives us the formula 
+$$ L(\vec{x}) = x_1\vec{e}_1 + \cdots + x_n\vec{e}_n = x_1L(\vec{e}_1) \cdots + x_nL(\vec{e}_n)$$
+
+Theorem: If $L: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear mapping then for all $\vec{x} \in \mathbb{R}^n$ we have
+$$L(\vec{x}) = [L(\vec{e}_1)L(\vec{e}_2)\cdots L(\vec{e}_n)]$$
+
+## Standard matrix of a linear mapping 
+>**Definition**: Let $L: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear mapping. The matrix 
+$$ [L] = [L(\vec{e}_1)L(\vec{e}_2)\cdots L(\vec{e}_n)] $$
+is called the **standard matrix** of $L$
+- **Remark**: As the name suggests, this is not the only way to represent $L$ using a matrix-vector product. This matrix is called the standard matrix since it is built from the standard basis for $\mathbb{R}^n$. We will see later that it is sometimes helpful to choose a non-standard basis and build a non-standard matrix representation. 
+
+**Example 3.8**: Determine the standard matrix of $refl_l(x_1,x_2)$ where $l$ is the line $2x_1 - 3x_2 = 0$ in $\mathbb{R}^2$
+
+$refl_l(\vec{x}) = \vec{x} - proj_{\vec{n}}(\vec{x})$ where $n = (2,-3)$
+So, $ref_l(1,0)=(1,0) - 2proj_{(2,-3)}(1,0) = (1,0) - 2(\frac{(2,-3)\cdot(1,0)}{13})(1,-3)$   
+$= (1,0) - \frac{4}{13}(2,-3)$    
+$= (\frac{5}{13},  \frac{12}{13})$   
+$refl_(0,1) = (\frac{12}{13}, \frac{-5}{13})$   
+Therefore, 
+$[refl_l] = \begin{bmatrix} \frac{5}{13} \frac{12}{13} \\ \frac{12}{13} \frac{-5}{13} \end{bmatrix}$
+
+## Matrix equality
+Let $A$ and $B$ be two m x n matrices.    
+We say that $A$ and $B$ are **equal** if their corresponding entries are equal. 
+
+Let $a_{ij}$ denote the entries in the $i^{th}$ row and the $j^{th}$ column of $A$.       
+Let $b_{ij}$ denote the entries in the $i^{th}$ row and the $j^{th}$ column of $A$.   
+
+**Defintion:** $A = B \iff a_{ij} = b_{ij}$ for all $i = 1, \cdots, m$ and $j = 1, \cdots, n$
+
+**Theorem (Matrices equal theorem)** If $A$ and $B$ are m x n matrices, then $A=B$ if and only if $A\vec{x} B\vec{x}$ for all $\vec{x} \in \mathbb{R}^n$
+
+**Proof**: It is clear that if A = B then $A\vec{x} = B\vec{x}$ for all $\vec{x} \in \mathbb{R}^n$.       
+Now suppose that $A = [vva_1 \cdots vva_n]$ and $B = [vvb_1 \cdots vvb_n]$ and $A\vec{x} = B\vec{x}$ for all $x \in \mathbb{R}^n$. It follows that $A\vec{e}_i = B\vec{e}_i$ for all $i = 1, \cdots, n$.      
+Recall that we showed earlier that $A\vec{e}_i = vva_i$ and $B\vec{e}_i = vvb_i$ which means we must have $vva_i = vvb_i$ hence $A=b$
+
+
+We have established that if $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear mapping if and only if there exists an m x n matrix $A$ such that $f(\vec{x}) = A\vec{x}$ for all $\vec{x} \in \mathbb{R}^n$
+- If a function is linear then it can definitely be represented by a matrix (you just have to find it)
+- if a function is not linear then don't bother trying to find a matrix representation!
+  - Caution, if the function is not a linear mapping the finding the matrix representation will not be useful 
+
+## Compositions of linear mappings and matrix representations
+## COmpostions in $\mathbb{R}^2$
+# <p style="text-align: center;"> 7/2/20 </p>
+
 # <p style="text-align: center;"> 17/1/20 </p>
 # <p style="text-align: center;"> 17/1/20 </p>
 ---
