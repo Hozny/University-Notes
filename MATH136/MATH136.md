@@ -393,7 +393,8 @@ We have established that if $f : \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a lin
   - Caution, if the function is not a linear mapping the finding the matrix representation will not be useful 
 
 ## Compositions of linear mappings and matrix representations
-## COmpostions in $\mathbb{R}^2$
+## Compositions in $\mathbb{R}^2$
+
 # <p style="text-align: center;"> 7/2/20 </p>
 
 # <p style="text-align: center;"> 17/1/20 </p>
