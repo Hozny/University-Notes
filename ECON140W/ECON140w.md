@@ -353,3 +353,21 @@ Two important variables reflecting the importance of the global economy to Canad
 The difference between exports and imports (dollar value) is called the **trade balance**
 
 # 19.2 **Growth Versus Fluctuations**
+Most economic variables are characterized by **long-run trends** and **short-run fluctuations**
+
+An important theme in macroeconomics is understanding of both long-run growth and short-run fluctuations. 
+
+## **Long-term economic growth**
+There is lots of debate on the governments role in stimulating economic growth and which techniques are effective
+- should the government focus on maintaining low interest rates? 
+- does economic growth cause too much environmental damage? 
+- should the government promote research and innovation? 
+  - some believe the private sector is enough to provide long term innovation. 
+
+## **Short-term fluctuations**
+- What is the cause of certain recessions?
+- Government budget surpluses and deficits and their effect on the business cycle
+
+# <p style="text-align: center;"> Chapter 20 </p>
+# 20.1 **National Output and Value Added**
+
