@@ -330,3 +330,26 @@ Banks play the important role of "making the credit market"
 - channelling the funds from those who have them to those who need them 
 
 ## **Exchange rates and trade flows**
+Two important variables reflecting the importance of the global economy to Canada are the **exchange rate** and **trade flows**. 
+
+### **The exchange rate**
+**Exchange rate**: the number of units of domestic currency required to purchase one unit of foreign currency
+- we define the exchange rate as the number of Canadian dollars required for one unit of foreign currency (the converse could also be used)
+
+**Foreign exchange** refers to foreign currencies or claims on foreign currencies (bank deposits, cheques, promissory notes, that are payable in foreign money)
+
+**Foreign-exchange-market** is the market in which currencies are trades
+
+### **Depreciation and appreciation**
+
+**depreciation** a rise in the exchange rate - it takes more units of domestic currency to purchase one unit of foreign currency
+- foreign money becomes more expensive for us
+  
+
+**appreciation** a fall in the exchange rate - it takes fewer units of domestic currency to purchase one unit of foreign currency
+- foreign money becomes cheaper for us
+
+### **Trade Flows: Exports and Imports**
+The difference between exports and imports (dollar value) is called the **trade balance**
+
+# 19.2 **Growth Versus Fluctuations**
