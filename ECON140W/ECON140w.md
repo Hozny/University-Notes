@@ -371,3 +371,23 @@ There is lots of debate on the governments role in stimulating economic growth a
 # <p style="text-align: center;"> Chapter 20 </p>
 # 20.1 **National Output and Value Added**
 
+> Production occurs in stages: some firms produce outputs that are used as inputs by other firms, and these other firms, in turn, produce outputs that are used as inputs by yet other firms
+
+When calculating the total output of a nation we cannot simply add up the output of each firm, since some firms' output is anothers' input. This means the final product was double counted. 
+
+**Intermediate goods:** all outputs that are used as inputs by other producers in a further stage of production 
+
+**Final goods**: goods that are not used as inputs by other firms but are produced to be sold for consumption, investment, government, or export during the period under consideration
+
+It is hard to figure out what was sold as a final good or intermediate good, so economists use the concept of **value added**
+
+>**Value added:** the value of a firm's output minus the value of the inputs that it purchases from other firms
+$$ value added \; = \; sales \; revenue \; -
+\; cost \; of \; intermediate \; good$$
+
+$$Value \;  added \; = \; payments \; owed \; to\;  the \; firm's \; factors \;  of \; production$$
+- this is because the revenue must be exhausted by the factors of production (wages, etc...)
+
+> The sum of all values added in an economy is a measure of the economy's total output
+
+# 20.2 **National Income Accounting: The Basics**
