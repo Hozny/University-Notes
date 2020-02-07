@@ -1,5 +1,4 @@
 # ECON 140W
-# TES TESTES TES HELLLOO
 ``` 
 Instructor: David Johnson 
 Section: Tuesday/Thursday 11:30 a.m - 12:50 a.m 
