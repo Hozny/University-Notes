@@ -507,7 +507,55 @@ GDP deflator measures all final goods **produced in Canada** in the economy whil
 
 ### **Do the Omission Matter?**
 
-## **GDP nad Living Standards**
+## **GDP and Living Standards**
 The average level of real income in the economy is best measured by real GDP per capita, but this does not necessarily rise whenever real GDP rises. 
 
 > Changes in real per capita income are a good measure of average material living standards. But material living standards are only part of what most people consider their overall well-being 
+
+
+# <p style="text-align: center;"> Chapter 21 </p>
+# 21.1 **Desired Aggregate Expenditure**
+Desired or planned expenditure or planned expenditure refers to what people would like to do under imaginary circumstances. 
+**Desired aggregate expenditure (AE)** 
+$$AE = C + I + G+ (X - IM)$$
+- The sum of desired or planned spending on domestic output by households, firms, governments, and foreigners
+
+For the rest of this section we only explore $C$ and $I$ in the aggregate expenditure
+
+>National income accounts measure actual expenditures in each of the four expenditure categories. Our model fo the macro economy deals with both actual and desired expenditure
+
+### **Autonomous versus induced spending**
+
+**autonomous expenditure** elements of expenditure that do not change systematically with national income. 
+- the amount of money that people will spend in the economy regardless
+
+**induced expenditure** any component of expenditure that is systematically related to national income
+
+for this section we assume we are in a **Closed economy**
+- this economy has no foreign trade in goods, services, or assets
+
+## **Desired consumption expenditure**
+> By definition there are onyl two uses of disposable income, consumption or saving
+
+Saving: all disposable income that is not spent on consumption
+
+## **The consumption function**
+consumption function: The relationship between desired consumption expenditure and all the variables that determine it. In the simplest case, it is the relationship between desired consumption expenditure and disposable income. 
+
+> Holding constant other determinants of desired consumption, an increase in disposable income is assumed to lead to an increase in desired consumption
+
+To discuss the consumption function concisely, economists use two technical expressions. 
+
+The **average propensity to consume (APC)** is the proportion of disposable income that households want to consume. 
+- It is equal to desired consumption expenditure divided by disposable income: 
+$$APC = \frac{C}{Y_D}$$
+
+The **marginal propensity to consume (MPC)** the change in desired consumption divided by the change in disposable income that bought it about. 
+$$ MPC = \frac{\Delta C}{\Delta Y_D}$$
+
+### **The break even level of income**
+- the 45 degree line shows when the desired consumption equals disposable income
+
+### **The saving function**
+
+> Expectations about the future state of the economy often influence desired consumption. Optimism leads to an upward shift in the consumption function; pessimism leads to a downward shift in the consumption function

@@ -1722,10 +1722,149 @@ count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"\n%c
 <span class="hljs-comment">// fp(7, 3) =&gt; 10</span>
 <span class="hljs-comment">// fp(7, 3) =&gt; 4</span>
 </div></code></pre>
+<h1 id="p-style%22text-align-center%22-11220-p"><p style="text-align: center;"> 11/2/20 </p></h1>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">constant</span> <span class="hljs-params">(<span class="hljs-keyword">double</span> x)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">linear</span> <span class="hljs-params">(<span class="hljs-keyword">double</span> x)</span> </span>{
+    <span class="hljs-keyword">return</span> x; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">square</span> <span class="hljs-params">(<span class="hljs-keyword">double</span> x)</span> </span>{
+    <span class="hljs-keyword">return</span> x*x;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">cube</span> <span class="hljs-params">(<span class="hljs-keyword">double</span> x)</span> </span>{
+    <span class="hljs-keyword">return</span> x*x*;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">R_sum</span> <span class="hljs-params">(<span class="hljs-keyword">double</span> (*fp) (<span class="hljs-keyword">double</span>), <span class="hljs-keyword">double</span> a, <span class="hljs-keyword">double</span> b, <span class="hljs-keyword">double</span> delta)</span> </span>{
+    <span class="hljs-keyword">double</span> sum = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">double</span> i = a; i &lt; b; i += delta) {
+        sum += delta * fp(i);
+    }
+    <span class="hljs-keyword">return</span> sum; 
+}
+</div></code></pre>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
+<h2 id="modularization--adts"><strong>Modularization &amp; ADTs</strong></h2>
+<h2 id="modularization"><strong>Modularization</strong></h2>
+<p>A <strong>module</strong> provides a collection of functions that share a common aspect or purpose</p>
+<ul>
+<li>Modules are also commonly known as <strong>libraries</strong>
+<ul>
+<li>Libraries are usually sufficiently large and used by many users</li>
+</ul>
+</li>
+</ul>
+<h2 id="modules-vs-files">Modules vs. files</h2>
+<p>In this course, and in most cases, it is considered <strong>good style</strong> to store <strong>modules</strong> in <strong>separate files</strong>.</p>
+<h2 id="terminology">Terminology</h2>
+<p>The <strong>client</strong> <strong>requires</strong> the <strong>functions</strong> that a module <strong>provides</strong></p>
+<ul>
+<li>imagine the client is a stranger
+<ul>
+<li>don't assume there is any context</li>
+</ul>
+</li>
+</ul>
+<h2 id="building-a-program">Building a program</h2>
+<p>When building a program we can combine (&quot;link&quot;) <strong>multiple machine code files</strong> together to form a single program. that means we can &quot;build&quot; a program from multiple source code files and/or machine code files</p>
+<pre><code><div>main.c module.c module2.c module3.ll
+</div></code></pre>
+<ul>
+<li>modules do not contain a main function
+<ul>
+<li>only <strong>one</strong> main function an be defined in a program</li>
+</ul>
+</li>
+</ul>
+<h2 id="motivation-benefits-of-modularization">Motivation (benefits of modularization)</h2>
+<p><strong>Re-usability</strong>: A good module can be re-used by many clients. Once we have a &quot;repository&quot; of re-usable modules, we can construct large programs more easily.</p>
+<p><strong>Maintainability</strong>: It is much easier to test and debug a single module instead of a large program. If a bug is fond only the module that contains the bug needs to be fixed.</p>
+<p><strong>Abstraction</strong>: To use a module, the client needs to understand <strong>functionality</strong> it provides, but it does not need to understand <strong>how</strong> it is implemented.</p>
+<h2 id="declarations">Declarations</h2>
+<p>In C, a function or variable mus tbe <strong>declared</strong> before it can b accessed (or referenced)</p>
+<ul>
+<li>
+<p>a <strong>declaration</strong> introduces an identifier into a program and specifies its type</p>
+</li>
+<li>
+<p>A declaration only specifies the type of an identifier</p>
+</li>
+<li>
+<p>A definition instructs C to &quot;create&quot; the identifier</p>
+<ul>
+<li>a definition includes a declaration</li>
+</ul>
+</li>
+</ul>
+<p>A variable declarations starts with extern keywords, followed by the type then the variable name. There is no initialization</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> g; 
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printg</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    print(<span class="hljs-string">"%d"</span>,g);
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> g = <span class="hljs-number">9</span>; 
+    printg(); 
+}
+</div></code></pre>
+<h2 id="module-scope"><strong>Module scope</strong></h2>
+<p>To &quot;<strong>hide</strong>&quot; a global identifier from other files, prefix the definition with the <code>static</code> keyword</p>
+<p>In other words, the <code>static</code> keyword restricts the scope of a global identifier to the file (module) it is defined in.</p>
+<p>We will refer to this as</p>
+<h2 id="types-of-scope-revisted">Types of scope (revisted)</h2>
+<ul>
+<li>Local (block) identifiers
+<ul>
+<li>only available inside of the function (or bloc)</li>
+</ul>
+</li>
+<li>global identifiers
+<ul>
+<li>program scope identifiers, available to any file in the program</li>
+<li>file scope</li>
+</ul>
+</li>
+</ul>
+<h2 id="module-interface"><strong>Module interface</strong></h2>
+<p>The module <strong>interface</strong> is the list of functions that the module provides (including the documentation)</p>
+<p>The interface is separate from the module <strong>implementation</strong>, which is the code fo the module (i.e., function definitions)</p>
+<ul>
+<li>the interface is everything that a client would need to use the module</li>
+</ul>
+<h2 id="interface-contents">Interface contents</h2>
+<ul>
+<li>an <strong>overall description</strong> of the module</li>
+<li>a <strong>function declaration</strong> for each provided function</li>
+<li><strong>documentation</strong> (purpose) for each provided function</li>
+</ul>
+<h2 id="interface-h-files">Interface (.h) files</h2>
+<p>For C modules, the interface is placed in a separate file with a <code>.h</code> file extentsion</p>
+<p>clients can read the documentation in the interface to understand how to use the provided functions</p>
+<p>The client can also copy and pase the function definitions from the header file</p>
+<h2 id="include">#include</h2>
+<p>A preprocessor directive temporarily modifies a source file just before it is run (but does not save the modifications)</p>
+<p>The directive #include cut and pastes the contents of another file directly into your code</p>
+<h2 id="implementation-notes">Implementation notes</h2>
+<p>It is good style to have header files for each module</p>
+<p>Referring the reader to interface file is sufficient</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// see fun.h for details</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">is_fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-comment">//...</span>
+}
+</div></code></pre>
+<h2 id="c-standard-modules">C standard modules</h2>
+<p>Unlike Racket, there are no &quot;built-in&quot; functions in C</p>
+<p>Fortunately, C provides several standard modules also known as libraries with many useful functions</p>
+<p>For example, the stdio module provides printf and scanf</p>
+<p>when using #include we use angle brackets <code>&lt;&gt;</code> to specify that the module is one of the standard modules and quotes <code>&quot;&quot;</code> for regular modules (i.e, ones we have written)</p>
+<pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"mymodule.h"</span>`</span>
+</div></code></pre>
 <h1 id="p-style%22text-align-center%22-30120-p-2"><p style="text-align: center;"> 30/1/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-3"><p style="text-align: center;"> 30/1/20 </p></h1>
-<h1 id="p-style%22text-align-center%22-30120-p-4"><p style="text-align: center;"> 30/1/20 </p></h1>
 
     </body>
     </html>

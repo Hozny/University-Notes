@@ -534,4 +534,11 @@ Nesting:
   - the lectures were brilliant comets streaking through the night sky, showering listener with a torrential rain of insight   
     - The images of streaking light and heavy precipitation is inconsistent 
 
+# <p style="text-align: center;"> 10/2/20 </p>
+## Freewriting to brainstorm ideas 
+- let your thoughts flow, putting pen to paper and writing down whatever comes into your mind
+- Don't worry about the quality of what you write, style or any surface-level, like spelling, grammar or punctuation
+- If you can't think of anything to say write that down 
+- The advantage of this technique is that you free internal critic
 # <p style="text-align: center;"> 27/1/20 </p>
+# <p style="text-align: center;"> 27/1/20 </p> 
