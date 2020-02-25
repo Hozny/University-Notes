@@ -540,5 +540,59 @@ Nesting:
 - Don't worry about the quality of what you write, style or any surface-level, like spelling, grammar or punctuation
 - If you can't think of anything to say write that down 
 - The advantage of this technique is that you free internal critic
-# <p style="text-align: center;"> 27/1/20 </p>
+# <p style="text-align: center;"> 24/2/20 </p>
+## Style
+There are three kinds of style, called types: 
+1. The Grand (High style)
+2. The Middle
+3. The Simple (Low style)
+
+High style
+- formal, scientific, and scholarly writing: 
+  - Professional journals
+  - Scholarly books
+  - Legal briefs
+  - Formal addresses (e.g. ceremonial speeches)
+  - Some newspaper editorials
+  - Some technical writing
+  - Traditional wedding invitations
+- features
+  - serious or professional subjects
+  - knowledgeable or professional audiences
+  - impersonal point of view
+  - complex sentences with technical terms 
+
+Middle style
+- This style is between formal and everyday language
+- It is the language of: 
+  - journalism
+  - popular books
+  - professional memos
+  - commercial websites
+- some characteristics of middle style writing: 
+  - a full range of topics, from serious to humourous 
+  - range of perspectives
+  - a personal rather than institutional voice
+  - general audiences
+
+## Introduction
+When writing a story for a newspaper, you may begin by providing essential facts, identifying who, what where, and when. 
+
+Thinking ahead to your report or evaluation assignment, your argument may open more slowly, using an introductory section.
+
+Don't write the introduction until you are ready. 
+
+## Thesis
+A working thesis should have two parts
+- a topic 
+- and a point made about the point
+
+Justin bieber
+- music streaming services (spotify)
+- clothing brands (celebrities have influence on fashion)
+  
+Non benefit
+- products for older generations
+- formal / high-end products
+- very scientific/technical products
 # <p style="text-align: center;"> 27/1/20 </p> 

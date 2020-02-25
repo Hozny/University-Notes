@@ -1862,8 +1862,201 @@ count = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"\n%c
 <pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"mymodule.h"</span>`</span>
 </div></code></pre>
+<h1 id="p-style%22text-align-center%22-13220-p"><p style="text-align: center;"> 13/2/20 </p></h1>
+<h2 id="cs136h">cs136.h</h2>
+<pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"cs136.h"</span></span>
+</div></code></pre>
+<p>The <code>cs136.h</code> interface file contains:</p>
+<pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;limits.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+</div></code></pre>
+<h2 id="test-client">Test client</h2>
+<p>for each module you design, it is good practice to create a <strong>test client</strong> that ensures the provided functions are correct.</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// test-fun.c: testing client for the fun module</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"fun.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    assert(is_fun(<span class="hljs-number">42</span>)); 
+    assert(!is_fun(<span class="hljs-number">13</span>)); 
+    <span class="hljs-comment">// ...</span>
+}
+</div></code></pre>
+<ul>
+<li>Do not add a main function to your implementation (e.g, <code>fun.c</code>). Create a new test <em><strong>client</strong></em> with a <code>main</code> function</li>
+</ul>
+<h2 id="designing-modules">Designing modules</h2>
+<h2 id="cohesion-and-coupling">Cohesion and coupling</h2>
+<p>When designing module interfaces, we want to achieve <strong>high cohesion</strong> and <strong>low coupling</strong></p>
+<p><strong>High cohesion</strong> means that all the interface functions are related and working toward a &quot;common goal&quot;. A module with many unrelated interface functions is poorly designed.</p>
+<p><strong>Low coupling</strong> means that there is little interaction between modules. It is impossible to completely eliminate module interaction, but it should be minimized.</p>
+<ul>
+<li>modules should be close to self sufficient (shouldn't have a lot of dependencies)</li>
+</ul>
+<h2 id="interface-vs-implementation">Interface vs. implementation</h2>
+<p>Another important aspect of interface design is information hiding, where the interface is designed to hide any implementation details from the client.</p>
+<h2 id="information-hiding">Information hiding</h2>
+<p>The two key advantages of information hiding are</p>
+<ul>
+<li><strong>security</strong></li>
+<li><strong>flexibility</strong></li>
+</ul>
+<p><strong>Security</strong></p>
+<ul>
+<li>we may want to prevent the client from tampering with data used by the module. Even if the tampering is not malicious, we may need to &quot;protect the client from themselves&quot;</li>
+</ul>
+<p>By hiding the implementation details from the client, we gain the <strong>flexibility</strong> to change the implementation in the future.</p>
+<h2 id="information-hiding-in-c">Information hiding in C</h2>
+<p>instead of providing the client with the implementation source code (<code>.c</code> file) you can provide a machine code (e.g., a <code>.ll</code> file).</p>
+<p>While C is good at hiding the implementation code, it is not very good at hiding <strong>data</strong>.</p>
+<p>If a <strong>malicious</strong> client obtains or &quot;guesses&quot; the memory address of some data they can access it directly.</p>
+<ul>
+<li>this is quite dangerous</li>
+</ul>
+<p>There are <strong>disassemblers</strong> which are able to &quot;guess&quot; and reverse engineer binary files to potential source code.</p>
+<ul>
+<li>however it is usually very hard to comprehend the code these disassemblers produce</li>
+</ul>
+<h2 id="opaque-structures-in-c">Opaque structures in C</h2>
+<p>Fortunately, C supports <strong>opaque structures</strong>, which are &quot;good enough&quot; to hide data from a <strong>friendly</strong> client.</p>
+<p>An opaque structure is like a &quot;black box&quot; that the client cannot &quot;see&quot; inside of.</p>
+<p>They are implemented in C using <strong>incomplete declaration</strong>, where a structure is declared without any field.</p>
+<pre><code class="language-C"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">box</span>;</span>     <span class="hljs-comment">// Incomplete Declaration</span>
+</div></code></pre>
+<p>With an incomplete declaration <strong>only pointers to the structure can be defined</strong></p>
+<pre><code class="language-C"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">box</span> <span class="hljs-title">my_box</span>;</span> st   <span class="hljs-comment">// Invalid</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">box</span> *<span class="hljs-title">box_ptr</span>;</span>      <span class="hljs-comment">// Valid</span>
+</div></code></pre>
+<p>The reason this works is because the fields for the structure are not defined for the client so a non-malicious user cannot change any of the fields.</p>
+<ul>
+<li>there are ways for malicious attackers to use the pointer to change values though</li>
+</ul>
+<p>If a module only provides an incomplete declaration in the interface the the client cannot create an instance of that structure.</p>
+<ul>
+<li>Modules with opaque structures must provide a function for creating and destroying structures of that type.</li>
+</ul>
+<h2 id="opaque-structure-example">Opaque structure example</h2>
+<p>We will create a small <code>stopwatch</code>   module which tracks race times and we do not want clients to be able to tamper with the times</p>
+<p><strong>Interface</strong></p>
+<ul>
+<li>The client cannot define a <code>struct</code> stopwatch, so we need to provide <strong>create</strong> and <strong>destroy</strong> functions.</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-comment">// stopwatch.h [INTERFACE]</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stopwatch</span>;</span>
+
+<span class="hljs-comment">// stopwatch_create() creates a new stopwatch at time 0:00</span>
+<span class="hljs-comment">// effects: allocates memory (client must call</span>
+stopwatch_destroy) <span class="hljs-function">struct stopwatch *<span class="hljs-title">stopwatch_create</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
+
+<span class="hljs-comment">// stopwatch_destroy(sw) removes memory for sw</span>
+<span class="hljs-comment">// effects: sw is no longer valid</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopwatch_destroy</span><span class="hljs-params">(struct stopwatch *sw)</span></span>;
+
+<span class="hljs-comment">// stopwatch_get_seconds(sw) returns the number of seconds in sw</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">stopwatch_get_seconds</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct stopwatch *sw)</span></span>;
+
+<span class="hljs-comment">// stopwatch_get_minutes(sw) returns the number of minutes in sw</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">stopwatch_get_minutes</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct stopwatch *sw)</span></span>;
+
+<span class="hljs-comment">// stopwatch_add_time(sw, min, sec) adds min[utes] and // sec[onds] to sw</span>
+<span class="hljs-comment">// requires: 0 &lt;= minutes, seconds</span>
+<span class="hljs-comment">// effects: modifies sw</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopwatch_add_time</span><span class="hljs-params">(struct stopwatch *sw, <span class="hljs-keyword">int</span> min, <span class="hljs-keyword">int</span> sec)</span></span>;
+</div></code></pre>
+<p><strong>Implementation</strong></p>
+<pre><code class="language-C"><div><span class="hljs-comment">// stopwatch.c [IMPLEMENTATION]</span>
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stopwatch</span> {</span>
+    <span class="hljs-keyword">int</span> min;
+    <span class="hljs-keyword">int</span> sec;
+};
+  <span class="hljs-comment">// requires: 0 &lt;= min</span>
+  <span class="hljs-comment">//           0 &lt;= sec &lt;= 59</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">stopwatch_get_seconds</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct stopwatch *sw)</span> </span>{ assert(sw);
+<span class="hljs-keyword">return</span> sw-&gt;sec;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">stopwatch_get_minutes</span><span class="hljs-params">(<span class="hljs-keyword">const</span> struct stopwatch *sw)</span> </span>{ assert(sw);
+<span class="hljs-keyword">return</span> sw-&gt;min;
+}
+
+<span class="hljs-comment">// stopwatch.c [IMPLEMENTATION]</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopwatch_add_time</span><span class="hljs-params">(struct stopwatch *sw, <span class="hljs-keyword">int</span> min, <span class="hljs-keyword">int</span> sec)</span> </span>{ 
+    assert(sw);
+    assert(sec &gt;= <span class="hljs-number">0</span>);
+    assert(min &gt;= <span class="hljs-number">0</span>);
+    sw-&gt;min += min;
+    sw-&gt;sec += sec;
+    <span class="hljs-keyword">while</span> (sw-&gt;sec &gt;= <span class="hljs-number">60</span>) {
+        sw-&gt;min += <span class="hljs-number">1</span>;
+        sw-&gt;sec -= <span class="hljs-number">60</span>;
+  }
+}
+</div></code></pre>
+<p><strong>Example client</strong></p>
+<pre><code class="language-C"><div><span class="hljs-comment">// client.c</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"cs136.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"stopwatch.h"</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stopwatch</span> *<span class="hljs-title">sw</span> = <span class="hljs-title">stopwatch_create</span>();</span>
+
+    stopwatch_add_time(sw, <span class="hljs-number">1</span>, <span class="hljs-number">59</span>);
+    stopwatch_add_time(sw, <span class="hljs-number">3</span>, <span class="hljs-number">30</span>);
+
+    trace_int(stopwatch_get_minutes(sw));
+    trace_int(stopwatch_get_seconds(sw));
+
+    stopwatch_destroy(sw);
+}
+</div></code></pre>
+<h2 id="maintainability">Maintainability</h2>
+<p>We can improve our stopwatch module without changing the client. This is an example of <strong>maintainability</strong></p>
+<pre><code class="language-C"><div><span class="hljs-comment">// stopwatch.c [IMPLEMENTATION]</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> seconds_per_minute = <span class="hljs-number">60</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopwatch_add_time</span><span class="hljs-params">(struct stopwatch *sw, <span class="hljs-keyword">int</span> min, <span class="hljs-keyword">int</span> sec)</span> </span>{ assert(sw);
+    assert(sec &gt;= <span class="hljs-number">0</span>);
+    assert(min &gt;= <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> total_time = (min + sw-&gt;min) * seconds_per_minute + sec + sw-&gt;sec;
+    sw-&gt;min = total_time / seconds_per_minute;
+    sw-&gt;sec = total_time % seconds_per_minute;
+}
+</div></code></pre>
+<h2 id="flexibility">Flexibility</h2>
+<p>Because we have used <strong>information hiding</strong> to design our <strong>interface</strong>, our implementation is not only maintainable but also <strong>flexible</strong></p>
+<p>We can change the design of our <code>struct</code> <strong>stopwatch</strong> and the client will be completely unaware</p>
+<h2 id="data-structures--abstract-data-types">Data structures &amp; abstract data types</h2>
+<p>In the previous <code>stopwatch</code> example, we demonstrated two <strong>implementation</strong> with different <strong>data structures</strong>:</p>
+<ul>
+<li>a <code>struct</code> with two fields (sec and min)</li>
+<li>a <code>struct</code> with one field (<code>seconds</code>)</li>
+</ul>
+<p>For each data structure we knew how the data was &quot;structured&quot;</p>
+<p>However, the client doesn't need to know how the data is structured. The client only requires an <strong>abstract</strong> understanding that a <code>stopwatch</code> stores time information.</p>
+<p>The <code>stopwatch</code> module is an implementation of a stopwatch <strong>Abstract Data Type (ADT)</strong></p>
+<p>Formally, an ADT is mathematical model for storing and accessing data through <strong>operations</strong>. As mathematical models they transcend any specific computer language or implementation.</p>
+<p>In practice ADTs are <strong>implemented</strong> as data storage <strong>modules</strong> that only allow access to the data through interface functions (ADT operations). THe underlying data structure and implementation of an ADT are <strong>hidden</strong> from the client (which provides flexibility and security).</p>
+<h1 id="p-style%22text-align-center%22-25220-p"><p style="text-align: center;"> 25/2/20 </p></h1>
+<h2 id="arrays">Arrays</h2>
+<p>C only has two built-in types of &quot;compound&quot; data storage:</p>
+<ul>
+<li><code>structure</code></li>
+<li><strong>arrays</strong></li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> my_array[<span class="hljs-number">6</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}; 
+</div></code></pre>
+<ul>
+<li>an array is a data structure that contains a <strong>fixed number</strong> of elements that all have the <strong>same type</strong></li>
+</ul>
+<p>To define an array we must know the <strong>length</strong> of the array <strong>in advance</strong> (we address this limitation in Section 10).</p>
+<p>Each individual value in the array is known as an <strong>element</strong>. To access an element, its <strong>index</strong> is required</p>
+<ul>
+<li>The first element in the array is at index <code>0</code></li>
+<li>In computer science we often start counting at <code>0</code></li>
+</ul>
+<h1 id="p-style%22text-align-center%22-13220-p-1"><p style="text-align: center;"> 13/2/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
-<h1 id="p-style%22text-align-center%22-30120-p-2"><p style="text-align: center;"> 30/1/20 </p></h1>
 
     </body>
     </html>

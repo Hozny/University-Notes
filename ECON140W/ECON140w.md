@@ -559,3 +559,61 @@ $$ MPC = \frac{\Delta C}{\Delta Y_D}$$
 ### **The saving function**
 
 > Expectations about the future state of the economy often influence desired consumption. Optimism leads to an upward shift in the consumption function; pessimism leads to a downward shift in the consumption function
+
+# <p style="text-align: center;"> Chapter 23 </p>
+## **Exogenous changes in the price level**
+Change in the price level affects desired consumption expenditures and desired net exports. 
+
+### Changes in Consumption
+Demand does not increase with a fall in price level in a macroeconomic model (unlike microeconomic models). This is because our macroeconomic model measures aggregate price level. This affects the price of ALL goods. 
+
+> A rise in the price level lowers the real value of money held by the private sector. A fall in the price level raises the real value of money held by the private sector. 
+
+> Changes in the price level change the wealth of bondholders and bond issuers, but because the changes offset each other, there is no change in aggregate wealth. 
+- if price level increases the repayment to the bondholder is now worth less (wealth decrease). But the issuer of the bond must also pay less (wealth increase), these two are exactly equal and offset each other. 
+
+Overall, a rise in the price level leads to a reduction in the real value of the private sector's wealth. And as in Chapter 21, a reduction in wealth leads to a decrease in autonomous desired consumption. 
+- A fall in domestic price levels leads to a rise in wealth and desired consumption. 
+  
+### Changes in Net Exports
+
+> A rise in domestic price level (with a constant exchange rate) reduces net exports and causes a downward shift in the AE curve. A fall in the domestic price level increases net exports and causes an upward shift in the AE curve. 
+
+## **Changes in Equilibrium GDP**
+
+Exogenous rise in the price level causes a downward shift in the AE curve
+- fall in the price level causes an upward shift in the AE curve
+
+### A Change of Labels
+- the horizontal axis was previously labelled "actual national income", it is now labeled "Real GDP"
+
+## The Aggregate Demand Curve
+
+The negative relationship between price and equilibrium GDP can be shown in a new concept, the **aggregate demand curve**
+- the new curve has Real GDP on the horizontal axis and Price Level on the vertical axis, so it can be placed on the AE curve to determine changes in equilibrium GDP based on changes in price. 
+
+> For any given price level, the AD curve shows the level of real GDP for which desired aggregate expenditure equals actual GDP. 
+- because the AD curve relates equilibrium GDP to price level a shift ALONG the AD curve causes an upward/downward shift in the AE curve
+
+### The AD Curve Is Not a Micro Demand Curve
+
+The AD curve is not negatively sloped for the same reasons as the micro demand curve. 
+
+The AD curve is negatively sloped for two reasons: 
+1. A fall in the price level leads to a rise in private sector wealth, which increases desired consumption and thus leads to an increase in equilibrium GDP. 
+2. A fall in the price level (for a given exchange rate) leads to a rise in net exports and thus leads to an increase in equilibrium GDP. 
+
+### Shifts in the AD Curve
+
+Any change to the variables (government spending, autonomous expenditure, etc...) of the AE curve will cause a shift in the AD curve.
+
+> For a given price level, an increase in autonomous aggregate expenditure shifts the AE curve upward and the AD curve to the right. A fall in autonomous aggregate expenditure shifts the AE curve to downward and the AD curve to the left. 
+- Note: In order to shift the AD curve, the change in autonomous expenditure must be caused by something **other than** price level. 
+
+### The Simple Multiplier and the AD Curve
+
+> The simple multiplier measures the horizontal shift in the AD curve in response to a change in autonomous desired expenditure
+
+# 23.2 **The Supply Side of the Economy**
+## Aggregate Supply Curve
+**Aggregate supply (AS) curve**: A curve showing the relation between the price level and the quantity of aggregate output supplied, for given technology and factor prices. 
