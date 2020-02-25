@@ -2055,6 +2055,118 @@ stopwatch_destroy) <span class="hljs-function">struct stopwatch *<span class="hl
 <li>The first element in the array is at index <code>0</code></li>
 <li>In computer science we often start counting at <code>0</code></li>
 </ul>
+<h2 id="array-initialization">Array initialization</h2>
+<p>Arrays can only be <strong>initialized</strong> with braces ({})</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> a[<span class="hljs-number">6</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>};
+a = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>}  <span class="hljs-comment">// INVALID</span>
+a = ??? ;               <span class="hljs-comment">// INVALID</span>
+</div></code></pre>
+<p>Once defined the entire array cannot be mutated at once. Only individual elements can be mutated.</p>
+<p>If there are not enough elements in the initialization braces, the remaining values are initialized to zero.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> b[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};  <span class="hljs-comment">// b[3] &amp; b[4] = 0</span>
+</div></code></pre>
+<p>character arrays can be initialized with double quotes (<code>&quot;</code>) for convenience.</p>
+<p>The following two definitions are equivalent:</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">char</span> a[<span class="hljs-number">3</span>] = {<span class="hljs-string">'c'</span>,<span class="hljs-string">'a'</span>,<span class="hljs-string">'t'</span>};
+<span class="hljs-keyword">char</span> b[<span class="hljs-number">3</span>] = <span class="hljs-string">"cat"</span>;
+</div></code></pre>
+<ul>
+<li>In this example. a and b are character arrays and are not valid strings.</li>
+</ul>
+<p>Like variables, the value of an uninitialized array depends on the scope of the array:</p>
+<ul>
+<li>uninitialized global arrays are zero filled</li>
+<li>uninitialized local arrays are filled with arbitrary (&quot;garbage&quot;) values from the stack</li>
+</ul>
+<h2 id="array-length">Array length</h2>
+<p>C does not explicitly keep track of the array <strong>length</strong> as part of thiearray data structure</p>
+<ul>
+<li>you must keep track of the array lenght sperately</li>
+</ul>
+<p>To improve readability, the array length is often stored in a separate variable. `</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> a[<span class="hljs-number">6</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}; 
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a_len = <span class="hljs-number">6</span>; 
+</div></code></pre>
+<p>It might seem better to use a constant to specify the length of an array.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a_len = <span class="hljs-number">6</span>; 
+<span class="hljs-keyword">int</span> a[a_len] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>};  <span class="hljs-comment">// NOT IN CS136</span>
+</div></code></pre>
+<p>This would appeare to be a &quot;better style&quot;</p>
+<p>However the syntax to do this properly is outside the scope of this course.</p>
+<p>A preferred syntax to specify the length of an array is to define a macro.</p>
+<pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> A_LEN 6</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{ 
+    <span class="hljs-keyword">int</span> a[A_LEN] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}; 
+    <span class="hljs-comment">//...</span>
+}
+</div></code></pre>
+<p>Theoretically, in some circumstances <code>sizeof</code> can be used to determine the length of an array.</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> len = <span class="hljs-keyword">sizeof</span>(a) / <span class="hljs-keyword">sizeof</span>(a[<span class="hljs-number">0</span>]);
+</div></code></pre>
+<ul>
+<li>However in practice this should be avoided, as the sizeof operator only properly reports the size in specific circumstances</li>
+</ul>
+<h2 id="array-size">Array size</h2>
+<p>The <strong>length</strong> of an array is the number of elements in the array</p>
+<p>The <strong>size</strong> of an array is the number of bytes it occupies in memory</p>
+<p>An array of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> elements, each of size <em>s</em>, requires exactly <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>⋅</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">k \cdot s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> bytes.</p>
+<p>In the C memory mode, array elements are adjacent to each other. Each element of an array is placed in memory immediately after the previous element.</p>
+<ul>
+<li>Not everyone uses the same terminology for length and size</li>
+</ul>
+<h2 id="the-array-identifier">The array identifier</h2>
+<p>The <strong>value</strong> of an array (a) is the same as the <strong>address</strong> of the array (&amp;a), which is also the address of the first element (&amp;a[0]).</p>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> a[<span class="hljs-number">6</span>] == {<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>};
+trace_ptr(a);      <span class="hljs-comment">//     a =&gt; 0x5000</span>
+trace_ptr(&amp;a);     <span class="hljs-comment">//    &amp;a =&gt; 0x5000</span>
+trace_ptr(&amp;a[<span class="hljs-number">0</span>]);  <span class="hljs-comment">// &amp;a[0] =&gt; 0x500</span>
+</div></code></pre>
+<h2 id="passing-arrays-to-functions">Passing arrays to functions</h2>
+<p>When an array is passed to a function, only the <strong>address</strong> of the array is copied into the stack frame.</p>
+<p>This is more efficient than copying the entire array to the stack.</p>
+<blockquote>
+<p>Typically, the length of an array is unknown to the function, and is a separate parameter</p>
+</blockquote>
+<p>There is no method for &quot;enforcing&quot; that the length passed to a function is valid</p>
+<p>Functions should <strong>require</strong> that the length is valid, but there is no way for a function to <code>assert</code> that requirement.</p>
+<p>As we have seen before, passing an address to a function allows the function to mutate the contents tat hat address.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum_array</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{
+   <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) {
+       sum += a[i]; 
+    }
+    <span class="hljs-keyword">return</span> sum; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> my_array[<span class="hljs-number">6</span>] = {<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>};
+    trace_int(sum_array(my_array, <span class="hljs-number">6</span>));
+}
+</div></code></pre>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">array_negate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) { 
+        a[i] = -a[i];
+    }
+}
+</div></code></pre>
+<p>It's good style to use the const keyword to both prevent mutation and communicate that no mutations occurs. `</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum_array</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{ 
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) {
+        sum += a[i]; 
+    }
+    <span class="hljs-keyword">return</span> sum; 
+}
+</div></code></pre>
+<h2 id="pointer-arithmetic">Pointer arithmetic</h2>
+<p>We have not yet discussed any <strong>pointer arithmetic</strong></p>
+<p>C allows an integer to be added to a pointer, but the result may not be what you expect.</p>
+<p>If <code>p</code> is a pointer, the value of <code>(p+1)</code> <strong>depends on the type</strong> of the pointer <code>p</code>.</p>
+<p><code>(p+1)</code> adds the <code>sizeof</code> whatever <code>p</code> points at.</p>
+<blockquote>
+<ul>
+<li>according to the official C standard, pointer arithmetic is only valid <strong>within an array</strong> (or a structure) context. This becomes clearer later.</li>
+</ul>
+</blockquote>
 <h1 id="p-style%22text-align-center%22-13220-p-1"><p style="text-align: center;"> 13/2/20 </p></h1>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
 
