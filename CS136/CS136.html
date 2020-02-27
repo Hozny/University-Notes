@@ -2167,7 +2167,156 @@ trace_ptr(&amp;a[<span class="hljs-number">0</span>]);  <span class="hljs-commen
 <li>according to the official C standard, pointer arithmetic is only valid <strong>within an array</strong> (or a structure) context. This becomes clearer later.</li>
 </ul>
 </blockquote>
-<h1 id="p-style%22text-align-center%22-13220-p-1"><p style="text-align: center;"> 13/2/20 </p></h1>
+<h1 id="p-style%22text-align-center%22-27220-p"><p style="text-align: center;"> 27/2/20 </p></h1>
+<p>When adding an integer <code>i</code> to a pointer <code>p</code>, the address computed by <code>(p + i)</code> in C is given in normal arithmetic by :</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>+</mo><mi>i</mi><mo>⋅</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mi>o</mi><mi>f</mi><mo stretchy="false">(</mo><mo>∗</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p + i \cdot sizeof(*p)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">∗</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span></span></p>
+<p>Subtracting an integer from a pointer <code>(p- i)</code> works in the same way.</p>
+<p>Mutable pointers can be incremented (or decremented). <code>++p</code> is equivalent to <code>p = p + 1</code>;</p>
+<p>you cannot add two pointers</p>
+<p>A pointer q can be subtracted from another pointer <code>p</code> if the pointers are the same type (point to the same type). The value of <code>(p-q)</code> in C is given in normal arithmetic by:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>p</mi><mo>−</mo><mi>q</mi></mrow><mrow><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mi>o</mi><mi>f</mi><mo stretchy="false">(</mo><mo>∗</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{p-q}{sizeof(*p)} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.19633em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603300000000002em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">∗</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>In other words, if <code>p = q + i</code> then <code>i = p - q</code></p>
+<p>Pointers (of the same type) can be compared with the comparison operators: <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>=&gt;</code>, <code>&gt;</code></p>
+<h2 id="pointer-arithmetic-and-arrays">Pointer arithmetic and arrays</h2>
+<p>Pointer arithmetic is useful when working with <strong>arrays</strong></p>
+<blockquote>
+<p>The array indexing syntax (<code>[]</code>) is an <strong>operator</strong> that performs pointer arithmetic.
+<code>a[i]</code> is equivalent to <code>*(a+i)</code></p>
+</blockquote>
+<h2 id="pointer-arithmetic-and-arrays-1">Pointer arithmetic and arrays</h2>
+<p>Pointer arithmetic is useful when working with <strong>arrays</strong></p>
+<blockquote>
+<p>The array indexing syntax (<code>[]</code>) is an <strong>operator</strong> that performs pointer arithmetic.
+<code>a[i]</code> is equivalent to <code>*(a+i)</code></p>
+</blockquote>
+<blockquote>
+<p>C does not perform any array &quot;bounds checking&quot;.
+For a given array a of length <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span>, C does not verify that <code>a[j]</code> is valid (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>≤</mo><mi>j</mi><mo>&lt;</mo><mi>l</mi></mrow><annotation encoding="application/x-tex">0 \leq j &lt; l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span>),
+C simply translates <code>a[j]</code> to <code>*(a+j)</code>, which may be outside the bounds of the array (e.g, <code>a[100000000]</code> or <code>a[-1]</code>)
+This is a common source of errors and bugs and a common criticism of C. Many modern languages have fixed this shortcoming and have &quot;bounds checking&quot; on arrays</p>
+</blockquote>
+<pre><code class="language-C"><div><span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">5</span>] = {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>};
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, i[<span class="hljs-built_in">array</span>]);
+}
+<span class="hljs-comment">// output: 0 1 2 3 4</span>
+</div></code></pre>
+<ul>
+<li>this works because it performs <code>*(i + a)</code> which is the same as <code>*(a + i)</code> since <code>a</code> is an address (some number) and i is an integer.</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum_array</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *a, <span class="hljs-keyword">int</span> len)</span> </span>{ 
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p = a; p &lt; a + len; ++p) {
+        sum += *p; 
+    }
+    <span class="hljs-keyword">return</span> sum; 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum_array</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{ 
+    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) { 
+        sum += a[i]; 
+    }
+    <span class="hljs-keyword">return</span> sum; 
+}
+</div></code></pre>
+<ul>
+<li>both do the same thing</li>
+<li>the second is slightly preferred as it's more optimized</li>
+</ul>
+<pre><code class="language-C"><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *p;
+<span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>* p; 
+<span class="hljs-keyword">int</span> * <span class="hljs-keyword">const</span> p; 
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span> *p; 
+</div></code></pre>
+<ul>
+<li>consider these and understand the differences</li>
+</ul>
+<h2 id="array-map">Array map</h2>
+<p>Aside from the awkward function pointer parameter syntax, the implementation of array_map is straightforward</p>
+<pre><code class="language-C"><div><span class="hljs-comment">// array_map(f, a, len) replaces each element a[i]</span>
+<span class="hljs-comment">//   with f(a[i])</span>
+<span class="hljs-comment">// effects: modifies a</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">array_map</span><span class="hljs-params">(<span class="hljs-keyword">int</span> (*f)(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) {
+      a[i] = f(a[i]);
+    }
+}
+</div></code></pre>
+<pre><code class="language-C"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"array_map.h"</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+  <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sqr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+  <span class="hljs-keyword">return</span> i * i;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+  <span class="hljs-keyword">int</span> a[<span class="hljs-number">6</span>] = {<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>};
+  print_array(a, <span class="hljs-number">6</span>);
+  array_map(add1, a, <span class="hljs-number">6</span>);
+  print_array(a, <span class="hljs-number">6</span>);
+  array_map(sqr, a, <span class="hljs-number">6</span>);
+  print_array(a, <span class="hljs-number">6</span>);
+}
+<span class="hljs-comment">// 4, 8, 15, 16, 23, 42.</span>
+<span class="hljs-comment">// 5, 9, 16, 17, 24, 43.</span>
+<span class="hljs-comment">// 25, 81, 256, 289, 576, 1849.</span>
+</div></code></pre>
+<h2 id="selection-sort">Selection sort</h2>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">selection_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{ 
+    <span class="hljs-keyword">int</span> pos = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; ++i) {
+        pos = i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; len; ++j) {
+            <span class="hljs-keyword">if</span> (a[j] &lt; a[pos]) {
+                pos = j;
+            }
+        }
+    swap(&amp;a[i], &amp;a[pos]);  <span class="hljs-comment">// see Section 05</span>
+  }
+}
+<span class="hljs-comment">// Notes:</span>
+<span class="hljs-comment">//   i: loops from 0 ... len-2 and represents the</span>
+<span class="hljs-comment">//      "next" element to be replaced</span>
+<span class="hljs-comment">//   j: loops from i+1 ... len-1 and is "searching"</span>
+<span class="hljs-comment">//      for the next smallest element</span>
+<span class="hljs-comment">//   pos: position of the "next smallest"</span>
+</div></code></pre>
+<h2 id="insertion-sort">Insertion sort</h2>
+<p>In <strong>insertion sort</strong>, we consider the first element to be a sorted sequence (of length one)</p>
+<p>We then &quot;insert&quot; the second element into the existing sequence into the correct position. and then the third element, and so on.</p>
+<p>For each iteration of Insertion sort, the first <code>i</code> elements are sorted. We then “insert” the element <code>a[i]</code>into the correct position, moving all of the elements greater than <code>a[i]</code> one to the right to “make room” for <code>a[i]</code>.</p>
+<pre><code class="language-C"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertion_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> len)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; len; ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; a[j - <span class="hljs-number">1</span>] &gt; a[j]; --j) { 
+            swap(&amp;a[j], &amp;a[j - <span class="hljs-number">1</span>]);
+        }
+    }
+}
+</div></code></pre>
+<h2 id="quicksort">Quicksort</h2>
+<p>Quick ort is an example of a &quot;divide &amp; conquer&quot; algorithm.</p>
+<p>First, an element is selected as a &quot;pivot&quot; element.</p>
+<p>The list is then <strong>partitioned</strong> (divided) into two sub-groups: Less than (or equal to) the pivot and those greater than the pivot.</p>
+<p>Finally, each subgroup is then sorted</p>
+<ul>
+<li>Quicksort is also known as partition-exchange sort or Hoare’s quicksort (named after the author)</li>
+</ul>
+<p>Quick sort in racket:</p>
+<pre><code class="language-Scheme"><div>(<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> (<span class="hljs-name">quick-sort</span> lon)
+  (<span class="hljs-name"><span class="hljs-builtin-name">cond</span></span> [(<span class="hljs-name">empty?</span> lon) empty]
+    [<span class="hljs-name"><span class="hljs-builtin-name">else</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> pivot (<span class="hljs-name">first</span> lon))
+          (<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> less (<span class="hljs-name">filter</span> (<span class="hljs-name"><span class="hljs-builtin-name">lambda</span></span> (x)
+                         (<span class="hljs-name"><span class="hljs-builtin-name">&lt;=</span></span> x pivot)) (<span class="hljs-name">rest</span> lon)))
+          (<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> greater (<span class="hljs-name">filter</span> (<span class="hljs-name"><span class="hljs-builtin-name">lambda</span></span> (x)
+                            (<span class="hljs-name"><span class="hljs-builtin-name">&gt;</span></span> x pivot)) (<span class="hljs-name">rest</span> lon)))
+          (<span class="hljs-name"><span class="hljs-builtin-name">append</span></span> (<span class="hljs-name">quick-sort</span> less)
+                  (<span class="hljs-name"><span class="hljs-builtin-name">list</span></span> pivot)
+                  (<span class="hljs-name">quick-sort</span> greater))]))
+</div></code></pre>
 <h1 id="p-style%22text-align-center%22-30120-p-1"><p style="text-align: center;"> 30/1/20 </p></h1>
 
     </body>

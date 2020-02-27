@@ -595,4 +595,21 @@ Non benefit
 - products for older generations
 - formal / high-end products
 - very scientific/technical products
-# <p style="text-align: center;"> 27/1/20 </p> 
+# <p style="text-align: center;"> 26/2/20 </p> 
+## Editorial marking
+- discussion board post
+  - yes/no
+- brought in 200 words? 
+  - yes/no
+- peer-review
+  - yes/yes-didnt post/etc
+- facts-context-synposys 10/10
+- structure content 20/20
+- evidence 20/20
+- analysis 20/20 (ethos pathos logs)
+- reflection 20/20
+- mechanics 10/10
+- penalties 
+  - any penalties incurred throughout the process
+
+A rhetoric of motives 
