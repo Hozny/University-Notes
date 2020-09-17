@@ -90,7 +90,84 @@ $$|f(x,y) - L| \leq B(x,y)$$
 in some neighbourhood of $(a,b)$ and $lim_{(x,y)\rightarrow (a,b)} B(x, y) = 0$ then 
 $$lim_{(x,y)\rightarrow (a,b)} f(x, y) = L$$
 
+# Chapter 3
+## 3.1 - Definition of a continuous function 
+
+A single variable function is continuous iff: 
+1. $f$ is defined at $x = a$
+2. $lim_{x \rightarrow a} f(x)$ exists, which means the left and right limits exist and are equal 
+3. $lim_{x \rightarrow a} f(x) = f(a)$
+
+For a function $f(x,y)$ to be continuous we can intuively see that this means there are no "breaks" or "holes" in the surface
+
+**Definition - Continuous:** A function $f(x,y)$ is continuous at $(a,b)$ if and only if
+$$lim_{(x,y) \rightarrow (a,b)} f(x, y) = f(a,b)$$
+Additionally, if $f$ is continuous at every point in a set $D_1 \subset \mathbb{R}^2$
+
+*Remark* just like single variable calculus there are three requirements in this definition: 
+1. the limit exists
+2. f is defined at (a, b)
+3. the limit as (x,y) -> (a, b) f(x, y) = f(a, b)
+
+## 3.2 - The continuity theorems
+
+We will defined basic functions which can be understood as continuous on their domain without further explanation.      
+Using these functions we will view other functions as compositions of simpler functions to make proving continuity easier. 
+
+List of continuous functions: 
+- the constant function $f(x, y) = k$
+- the power functions $f(x, y) = x^n, $f(x, y) = y^n$
+- the logarithm function $ln(\cdot)$
+- the exponential fucntion $e^{(\cdot)}$
+- the trigonometric functions, $sin(\cdot), cos(\cdot)$, etc. 
+- the inverse trigonometric functions, $arcsin(\cdot)$, etc. 
+- the absolute value function $|\cdot|$
+
+**Definition - Operations on functions:** if $f(x, y)$ and $g(x, y)$ are scalar functions and (x, y) is in the domain of both functions then: 
+1. the **sum** is $f+g$ is defined by $(f+g)(x, y) = f(x, y) + g(x, y)$
+2. the ** product $fg$ is defined by $(fg)(x, y) = f(x,y)g(x, y)$
+3. the **quotient** $\frac{f}{g}$ is defined by $(\frac{f}{g})(x, y) = \frac{f(x, y)}{g(x, y}$ if $g(x, y) \neq 0$
+
+## 3.2 - The continuity theorems
+
+**Theorem: Continuity theorem 1:** if $f$ and $g$ are continuous at $(a, b)$ then $f + g$ and $fg$ are continuous at $(a, b)$
+
+**Theorem: Continuity theorem 2:** if $f$ and $g$ are continuous at $(a, b)$ and $g(a, b) \neq 0$ then $\frac{f}{g}$ is continuous at $(a, b)$ 
+
+**Theorem: Continuity theorem 3:** if $f$ and $g$ are continous at $(a, b)$ then their composition is continuous
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
