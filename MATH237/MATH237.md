@@ -116,7 +116,7 @@ Using these functions we will view other functions as compositions of simpler fu
 
 List of continuous functions: 
 - the constant function $f(x, y) = k$
-- the power functions $f(x, y) = x^n, $f(x, y) = y^n$
+- the power functions $f(x, y) = x^n$, $f(x, y) = y^n$
 - the logarithm function $ln(\cdot)$
 - the exponential fucntion $e^{(\cdot)}$
 - the trigonometric functions, $sin(\cdot), cos(\cdot)$, etc. 
@@ -125,7 +125,7 @@ List of continuous functions:
 
 **Definition - Operations on functions:** if $f(x, y)$ and $g(x, y)$ are scalar functions and (x, y) is in the domain of both functions then: 
 1. the **sum** is $f+g$ is defined by $(f+g)(x, y) = f(x, y) + g(x, y)$
-2. the ** product $fg$ is defined by $(fg)(x, y) = f(x,y)g(x, y)$
+2. the **product $fg$ is defined by $(fg)(x, y) = f(x,y)g(x, y)$
 3. the **quotient** $\frac{f}{g}$ is defined by $(\frac{f}{g})(x, y) = \frac{f(x, y)}{g(x, y}$ if $g(x, y) \neq 0$
 
 ## 3.2 - The continuity theorems
@@ -136,13 +136,51 @@ List of continuous functions:
 
 **Theorem: Continuity theorem 3:** if $f$ and $g$ are continous at $(a, b)$ then their composition is continuous
 
+# Chapter 4
+## Chapter 4.1 - Partial Derivatives
+
+**Definition - Partial Derivatives:** The **partial derivatives** of $f(x,y)$ are defined by 
+$$ \frac{\delta f}{\delta x}(x, y) = f_x(x, y) = lim_{h \rightarrow 0} \frac{f(x + h, y) - f(x, y)}{h}$$
+$$ \frac{\delta f}{\delta y}(x, y) = f_y(x, y) = lim_{h \rightarrow 0} \frac{f(x, y + h) - f(x, y)}{h}$$
+- provided that these limits exist
+
+**Remark:** sometimes it's convenient to use **operator notation**, if $f$ has variables $x$ and $y$
+$$D_1f=\frac{\delta f}{\delta x} = f_x$$
+$$D_2f=\frac{\delta f}{\delta y} = f_y$$
+- sometimes we abbreviate and only write $\frac{\delta f}{\delta y}$
+
+note that the conept of partial derivatives does not match our definition of derivative for single variable functions, where differentiability imples continuity (this is not the case for partial derivatives). 
 
 
+We can generalize this concept to a scalar function of $n$ variables $f(\vec{x}), \vec{x} \in \mathbb{R}^n$, where we find the partial derivative of $f$ with respect to its $i$-th variable, we hold **all the other variables constant**. 
 
 
+## Chapter 4.2 - Higher-Order Partial Derivatives
+
+Since we have two first order partial derivatives (1 for each variables) then we have 4 total combinations for second order partial derivitaves. 
+- it is often convenient to use subscript or operator notation
 
 
+**Theorem 1 - Clairaut's Theorem:** If $f_{xy}$ and $f_{yx}$ are defined in some neighbourhood of $(a,b)$ and are both continuous at $(a,b)$, then 
+$$f_{xy}(a,b) = f_{yx}(a,b)$$
+- the proof of this theorem is beyond the scope of this course
 
+### Higher-order partial derivatives
+observe that $f(x,y)$ has eight third partial derivatives
+- Clairaut's theorem holds ofr higher-order partial derivatives (the partial derivative is equal to another when they contain the same partial derivatives in a different arrangements)
+
+**Terminology:** if the $k$-th partial derivatives of $f(x_1, \cdots, x_n)$ are continuous then we write, 
+$$ f \in C^k $$
+- and say "$f$ is in class $C^k$."
+
+## Chapter 4.3 - Tangent Plane
+**Definition - Tangent Plane:** The **tangent plane** to $z = f(x,y)$ at the point $(a, b, f(a, b))$ is 
+$$ z = f(a, b) + \frac{\delta f}{\delta x}(a,b)(x - a) + \frac{\delta f}{\delta y}(a, b)(y - b)$$
+
+## Chapter 4.4 - Linear Approximation for $z = f(x, y)$
+
+### Review of the 1D case
+$L_a(X) = f(a) + f'(a)(x-a)$ and is called the **linearization** of $f$ at $a$ since it approximates $f(x)$ for $x$ sufficiently close to $a$
 
 
 
