@@ -46,11 +46,11 @@ Range
 - $nullity(L) = dim(Ker(L))$
 
 **Theorem - 8.2.3:** if $L : \mathbb{V} \rightarrow \mathbb{W}$ and $\mathbb{V}$ is n-dimensional then
-$$ rank(L) + nullity(L) = n$
+$$ rank(L) + nullity(L) = n$$
 
 ## 8.3 Matrix of a Linear Mapping
 
-**Definition - Matrix of a Linear Mapping:** Suppose $B = {\vec{v}_1, \cdots, \vec{v}_n} is a basis for $\matbb{V}$ and $C$ is a basis for a finite dimensional vector space $\vec{W}$. For $L : \mathbb{V} \rightarrow \mathbb{W}$, the **matrix of L with respect to bases $B$ and $C$** is defined by
+**Definition - Matrix of a Linear Mapping:** Suppose $B = {\vec{v}_1, \cdots, \vec{v}_n}$ is a basis for $\mathbb{V}$ and $C$ is a basis for a finite dimensional vector space $\vec{W}$. For $L : \mathbb{V} \rightarrow \mathbb{W}$, the **matrix of L with respect to bases $B$ and $C$** is defined by
 $$ _C[L]_B = [[L(\vec{v}_1)]_C \cdots [L(\vec{v}_n]_c]$$
 and satisfies
 $$ [L(\vec{x})]_C = _C[L]_B[\vec{x}]_B $$
@@ -72,3 +72,75 @@ $$ [L(\vec{x})]_C = _C[L]_B[\vec{x}]_B $$
 
 **Theorem 4:** Let $\mathbb{V}$ and $\mathbb{W}$ be isomorphic vector spaces and let $\{\vec{v}_1, \cdots, \vec{v}_n\}$ be basis for $\mathbb{V}$. A linear mapping $L : \mathbb{V} \rightarrow \mathbb{W}$ is an isomorphism if and only if $\{ L(\vec{v}_1, \cdots, L(\vec{v}_n)\}$ is a basis for $\mathbb{W}$. 
 
+
+# Chapter 9 
+
+## 9.1 Inner Products
+
+What makes standard basis easy to use? 
+1. All the vectors in the basis are orthogonal
+2. All vectors in the basis have unit length
+
+We have only defined the concept of orthogonality and length in $\mathbb{R}^n$, our goal now is to generalize this to general vector spaces
+
+**Definition - Inner Product:** Let $\mathbb{V}$ be a vector space. An inner product on $\mathbb{V}$ is a function $\langle , \rangle : \mathbb{V} \times \mathbb{V} \rightarrow \mathbb{R}$ such that for all $\vec{v}, \vec{w}, \vec{z} \in \mathbb{V}$ and $a, b \in \mathbb{R}$ we have
+1. $\langle \vec{v}, \vec{v} \rangle \geq 0$. Also $\lang \vec{v}, \vec{v} \rangle = 0$ if and only if $\vec{v} = \vec{0}$
+2. $\langle \vec{v}, \vec{w} \rangle = \langle \vec{w}, \vec{v} \rangle$
+3. $\langle a \vec{v} + b \vec{w}, \vec{z} \rangle = a \langle \vec{v}, \vec{z} \rangle + b \langle \vec{w}, \vec{z} \rangle$
+
+a function with property 1 is said to be **positive definite**          
+a function with property 2 is said to be **symmetric**          
+a function with property 3 is said to be **left linear**
+
+if it is has both property 1 and 2 then it is also right linear and is said to be**bilinear**
+
+## 9.2 - Length and orthagonality 
+**Thereom:** If V is an inner product space then the inner product of any vector in V with 0 is 0. 
+
+**Theorem:** Let $\mathbb{V}$ be an innerproduct space with inner product $\langle , \rangle$. The length of $\vec{v}$ is dfeined by, 
+$$ ||\vec{v}|| = \sqrt{\langle \vec{v}, \vec{v} \rangle}$$
+- notice that the length of a vector can change if we change the inner product
+
+**Definition:** Let $\mathbb{V}$ be an inner product space with inner product $\langle , \rangle$. If $\vec{v}\in\mathbb{V}$ with $||\vec{v}|| = 1$ then $\vec{v}$ is called a **unit vector**
+
+**Theorem 9.2.1:** Let $\vec{v}, \vec{w}$ be in inner product space $\mathbb{V}$ and $t \in \mathbb{R}$. Then 
+1. $||\vec{v}|| \geq 0$ , and $||\vec{v}|| = 0$ if and only if $\vec{v}  = \vec{0}$ 
+2. $||t \vec{v}|| =  |t|\cdot||\vec{v}||$
+3. $\langle \vec{v}, \vec{w} \rangle \leq ||\vec{v}|| \cdot ||\vec{w}||$
+4. $|| \vec{v} + \vec{w} || \leq ||\vec{v}|| + || \vec{w} ||$
+
+**Definition:** Let $\mathbb{V}$ be an inner product space. If $\vec{v}, \vec{w} \in \mathbb{V}$ such that $\langle \vec{v}, \vec{w} \rangle = 0$ then we say $\vec{v}$ and $\vec{w}$ are **orthogonal**.           
+if $\{ \vec{v}_1, \cdots, \vec{v}_k \} \in \mathbb{V}$ such that $\langle \vec{v}_i , \vec{v}_j \rangle = 0$ for all $i \neq j$ then $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is called an **orthogonal set**.
+- like length, orthogonality is dependent on the definition of the inner product
+
+**Theorem 9.2.2:** Let $\mathbb{V}$ be an inner product space. $\vec{v}_1, \cdots, \vec{v}_k \}$ is an orthogonal set in $\mathbb{V}$, then 
+$$ ||\vec{v}_1 + \cdots + \vec{v}_k ||^2 = ||\vec{v}_1||^2 + \cdots + ||\vec{v}_k||^2$$
+- notice this is a generalization of pythagorean theorem
+
+**Theorem 9.2.3:** Let $\mathbb{V}$ be an inner product space. If $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is an orthogonal set of non-zero vectors in $\mathbb{V}$ then the set $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is linearly independent. 
+
+**Definition:** Let $\mathbb{V}$ be an inner product space. If $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is an orthogonal set in $\mathbb{V}$ that is a basis for $\mathbb{V}$ then we call $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ an **orthogonal basis** for $\mathbb{V}$.
+
+**Definition:** Let $\mathbb{V}$ be an inner product space. If $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is an orthogonal set of **unit vectors** in $\mathbb{V}$ that is a basis for $\mathbb{V}$ then we call $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ an **orthonormal basis** for $\mathbb{V}$.
+
+### Orthonormal Bases and Orthogonal Matrices
+
+**Theorem 9.2.4:** If $B = \{ \vec{v}_1, \cdots, \vec{v}_n \}$ is an orthogonal basis for an inner product space $\mathbb{V}$ and $\vec{v} \in \mathbb{V}$ then the coefficient of $\vec{v}_i$ when $\vec{v}$ is written as a linear combination of the vectors in $B$ is 
+$$\frac{ \langle \vec{v}, \vec{v}_i \rangle }{ || \vec{v}_i||^2}$$
+- so $\vec{v}$ is written as the sum of all the possible $\vec{v}_i$
+
+**Theorem 9.2.6:** If $P \in M_{n \times n}(\mathbb{R})$ then teh following are equivalent:
+1. The columns of $P$ form an orthonormal basis for $\mathbb{R}^n$
+2. $P^T = P^{-1}$
+3. The rows of $P$ form an orthonormal basis for $\mathbb{R}^n$
+    - recall equivalence means that if one is true then all are true, and if one is false then all are false
+
+**Definition:** Let $P \in M_{n \times n}(\mathbb{R})$ whose columns form an orthonormal basis for $\mathbb{R}^n$. Then, $P$ is called an **orthogonal matrix**
+- **notice** *orthogonal* matrices have *orthonormal* column vectors
+
+**Theorem 9.2.7** if $P$ and $Q$ are $n \times n$ **orthogonal** matrices and $\vec{x}, \vec{y} \in \mathbb{R}^n$, then:
+1. $(P\vec{x}) \cdot (P\vec{y}) = \vec{x} \cdot \vec{y}$
+2. $||P\vec{x}|| = ||\vec{x}||$
+3. $det P = \pm 1$
+4. All real eigenvalues of $P$ are $1$ or $-1$
+5. $PQ$ is also an orthogonal matrix

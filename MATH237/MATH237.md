@@ -182,6 +182,99 @@ $$ z = f(a, b) + \frac{\delta f}{\delta x}(a,b)(x - a) + \frac{\delta f}{\delta 
 ### Review of the 1D case
 $L_a(X) = f(a) + f'(a)(x-a)$ and is called the **linearization** of $f$ at $a$ since it approximates $f(x)$ for $x$ sufficiently close to $a$
 
+# Chapter 5 - Differentiable Functions
+
+## Chapter 5.1 - Definition of Differentiability
+
+**Theorem 1 - differentiability of single variable**: if $g'(a)$ exists then $lim_{x \rightarrow a} \frac{ | R_{1,a}(x) | }{|x-a|} = 0$ where 
+$$ R_{1,a}(x) = g(x) - L_a(x) = g(x) - g(a) - g'(a)(x-a) $$
+
+
+**Definition - Dirrefentiable:** a function $f(x, y)$ is **differentiable** at $(a,b)$ if 
+$$ lim_{(x,y) \rightarrow (a, b)} \frac{|R_{1,(a,b)}(x, y)|}{||(x, y) - (a, b)||} = 0$$
+where
+$$R_{1, (a, b)}(x, y) = f(x, y) - L_{(a, b)}(x, y)$$
+- as with the one dimensional case there is only one plane which satisfies this result
+
+**Theorem 2:** if a function $f(x, y)$ satisfies
+$$ lim_{(x, y) \rightarrow (a, b)} \frac{ |f(x, y) - f(a, b) - c(x - a) - d(y - b)|}{|| (x, y) - (a, b)||} = 0$$
+for some constants $c$ and $d$ then $c = f_x(a, b)$ and $d = f_y(a, b)$
+
+A function which is not differentiable at a point $a_1$ has the property that the linear approximation doesn't get any better at approximating the function as we get closer to the point
+- this is equivalent to saying there is no good plane to represent the tangent plane at that point
+
+**Definition - Tangent Plane:** if $f$ is differentiable at $(a, b)$ then the tangent plane of the surfance is, 
+$$ z = f(a, b) + \frac{\delta f}{\delta x} (a, b) (x - a) + \frac{\delta f}{\delta y}(a, b)(y - b) $$
+## Chapter 5.2 - Differentiability and Continuity
+
+**Theorem 1:** if $f(x, y)$ is differentiable at $(a, b)$ then $f$ is continuous at $(a, b)$
+
+## Chapter 5.3 - Continuous Partial Derivatives and Differentiability 
+
+**Theorem 1 - The mean value theorem:** If $f(x)$ is continuous on the closed interval $[x_1, x_2]$ and $f$ is differentiable on the open interval $(x_1, x_2)$, then there exists $x_0 \in (x_1, x_2)$ such that
+$$f(x_2) - f(x_1) = f'(x_0)(x_2 - x_1)$$
+
+**Theorem 2:$$ if the partial derivatives $f_x$ and $f_y$ are both continuous at $(a, b)$ then $f(x, y)$ is differentiable at $(a, b)$
+
+**Generalization**
+**Definition - Differentiability for $f : \mathbb{R}^n \rightarrow \mathbb{R}$**            
+A function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is differentiable at point $\vec{a}$ if 
+$$ lim_{\vec{x} \rightarrow \vec{a}} \frac{ | f(\vec{x}) - f(\vec{a}) - L_{\vec{a}}(\vec{x} - \vec{a})|}{||\vec{x} - \vec{a}||} = 0$$
+where $L : \mathbb{R}^n \rightarrow \mathbb{R}$ is a linear transformation
+
+**Theorem 1 for functions of $n$ variables** if $f(x_1, \cdots, x_n)$ is differentiable at $\vec{a}$ then $f$ is continuous at $a$
+
+**Theorem 2 for functions of $n$ variables** if $f_1, \cdots f_n$ are continuous at $\vec{a}$ then $f$ is differentiable at $\vec{a}$
+
+## Chapter 5.4 - Linear Approximation Revisited
+$$f(x, y) \approx f(a, b) + \Delta f(a, b) \cdot (x - a, y - b) $$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

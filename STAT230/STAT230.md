@@ -82,7 +82,7 @@ De Morgan's Laws:
 
 ## Independent events
 **Definition - n independent events):** $A_1,\cdots, A_n$ are independent if and only if
-P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}) = P(A_{i_1})\cdots P(A_{i_k)$ for all sets $(i_1, \cdots, i_k)$ of distinc subscripts chosen from $(1, \cdots, n)$
+$P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}) = P(A_{i_1})\cdots P(A_{i_k)$ for all sets $(i_1, \cdots, i_k)$ of distinc subscripts chosen from $(1, \cdots, n)$
 - it is not sufficient to only have pairwise independence  
 
 # Week 3
@@ -113,3 +113,46 @@ Problem: If A and B are positive probability events and are independent is it po
 **Theorem: (Law of Total Probability):** Let the sample space $S$, be partitioned into $k$ mutually exclusive sets $B_1, \cdots, B_k$ such that $P(B_i) > 0$ for $i = 1, \cdots, k$ and $S = B_1 \cup B_2 \cup \cdots \cup B_k$
 - then for any even $A$, $P(A) = \Sigma_{i=1}^kP(A \cap B_i)$.
 
+# Week 4
+## Random vairables and distributions 2
+**Definition (c.d.f):$$ A cummulative distribution function (c.d.f.) is defined as the funciton $F(x) = P(X \leq x)$, for all real $x$
+1. $F(x) is non decreasing
+2. $0 \leq F(x) \leq 1$ for all $x$
+3. $lim_{x \rightarrow - \infty} F(x) = 0$ and $lim_{x \rightarrow \infty} F(x) = 1$
+
+$f(x) = F(x) - F(x-1)$
+
+## Discrete uniform and hypergeometric distributions
+
+**Theorem:** Suppose $X$ takes values $a, a+1, a+2, \cdots, b$ with all values being equally likely. Then $X$ has a discrete uniform distribution on its domain. The probability function of the discrete uniform is 
+$$ f(x) = \frac{1}{b-a+1} $$
+- for $x = a, a+1, a+2, \cdots, b$, and $0$ otherwise
+
+**Theorem:** We have a collection of $N$ obejects which can be classified into two distinct types, $r$ of type 1, and $N-r$ of type 2.          
+Pick a sample of $n < N$ at random **without replacement**          
+Let $X$ be the number of type 1 in the sample.          
+Then $X$ has a hypergeometric distributionm with probability function
+$$ f(x) = \frac{ways-to-choose-x-type-1) \cdot (ways-to-choose-n-x-type-2)}{(ways-to-choose-sample-of-n)}$$
+$$ = \frac{ {r \choose x} l{N-r \choose n-x} }{ {N \choose n} }$$
+- the range for $X$ is $max(0, n-N+r) \leq x \leq min(r, n)$
+
+**Theorem:**
+$$\Sigma_{all-x} {a \choose x} {b \choose n-x} = {a+b \choose n} $$
+
+**Definition - acceptance sampling** is a statistical method which is used for deciding whether a batch of items produced by a company is acceptable or not for distribution (sale) 
+
+## Binomial distribution
+
+**Definition** Suppose we have an experiment with 2 possible outcomes which, for convenience, we call Success ($S$) and Failure ($F$). Suppose that $P(S) = p$. Repeat the experiment (called a **trial**). Such a sequence of independent trials are called **Bernoulli trials**.          
+Key assumptions: 
+1. the probability of success, $p$, must be **constant** over $n$ trials
+2. the $n$ trials must be **independent**
+
+**Theorem:** the probability function of x for binomial distribution is 
+$$ f(x) = {n \choose x} p^x(1 - p)^{n-x}$$
+- for $x = 0, 1, 2, \cdots , n$
+
+**Theorem - (binomial theorem):** 
+$$ \Sigma_{x = 0}^n {n \choose x} a^xb^{n-x} = (a + b)^n $$
+
+The main difference between Binomial distribution and Hypergeometric is that binomial requires **independent** trials and the hypergeometric requires the draws be made from a collection **without replacement**
