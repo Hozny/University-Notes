@@ -92,7 +92,7 @@ a function with property 1 is said to be **positive definite**
 a function with property 2 is said to be **symmetric**          
 a function with property 3 is said to be **left linear**
 
-if it is has both property 1 and 2 then it is also right linear and is said to be**bilinear**
+if it is has both property 1 and 2 then it is also right linear and is said to be **bilinear**
 
 ## 9.2 - Length and orthagonality 
 **Thereom:** If V is an inner product space then the inner product of any vector in V with 0 is 0. 
@@ -144,3 +144,49 @@ $$\frac{ \langle \vec{v}, \vec{v}_i \rangle }{ || \vec{v}_i||^2}$$
 3. $det P = \pm 1$
 4. All real eigenvalues of $P$ are $1$ or $-1$
 5. $PQ$ is also an orthogonal matrix
+
+## 9.3 The Gram-Schmidt Procedure
+
+**Theorem 9.3.1 - Gram-Schmidt Orthogonalization Theorem):** Let $\{ \vec{w}_1 , \cdots , \vec{w}_n \}$ be a basis for an inner product space $\mathbb{W}$. If we define $\vec{v}_1, \cdots, \vec{v}_n$ successively as follows: 
+$$ \vec{v}_1 = \vec{w}_1 $$
+$$ \vec{v}_2 = \vec{w}_2 - \frac{ \langle \vec{w}_2, \vec{v}_1 \rangle}{||\vec{v}_1||^2} \vec{v}_1 $$
+$$ \vec{v}_i = \vec{w}_i - \frac{ \langle \vec{w}_i, \vec{v}_1 \rangle}{||\vec{v}_1||^2} - \frac{ \langle \vec{w}_i, \vec{v}_2 \rangle}{||\vec{v}_2||^2} \vec{v}_2 - \cdots - \frac{ \langle \vec{w}_i, \vec{v}_{i-1} \rangle}{||\vec{v}_{i-1}||^2} \vec{v}_{i-1}$$
+- for $3 \leq k \leq n$ then $\vec{v}_1, \cdots, \vec{v}_n$ is an orthogonal basis for $Span \{ \vec{w}_1, \cdots, \vec{w}_n \}$ for $1 \leq k \leq n$
+
+**Theorem 9.3.2 - QR-Decomposition:**
+Let $A = [ \vec{a}_1 \cdots \vec{a}_n ] \in M_{m \times n}(\mathbb{R})$ where $dimCol(A) = n$. Let $\vec{q}_1, \cdots, \vec{q}_n$ denote the vectors that result from applying the Gram-Schmidt procedure to the columns of $A$ (in order) and the normalizing. If we define 
+$$ Q = [ \vec{q}_1, \cdots, \vec{q}_n ]$$
+and 
+$$ R = \begin{bmatrix} \vec{a}_1 \cdot \vec{q}_1 & \vec{a}_2 \cdot \vec{q}_1 & \cdots & \vec{a}_n \cdot \vec{q}_1 \\ 
+0 & \vec{a}_2 \cdot \vec{q}_2 & \cdots & \vec{a}_n \cdot \vec{q}_2 \\ 
+0 & 0 & \ddots & \vec{a}_n \cdot \vec{q}_{n-1} \\ 
+0 & \cdots & 0 & \vec{a}_n \cdot \vec{q}_{n}\end{bmatrix}$$
+then $Q$ is orthogonal, R is invertible, and 
+$$ A = QR $$
+
+## 9.4 General Projections
+
+**Definition - Orthogonal Complement:** Let $\mathbb{W}$ be a subspace of an inner product space $\mathbb{V}$. The **orthogonal complement** $\mathbb{W}^\bot$ of $\mathbb{W}$ in $\mathbb{V}$ is defined by 
+$$ \mathbb{W}^\bot = \{ \vec{v} \in \mathbb{V} | \langle \vec{w}, \vec{v} \rangle = 0 , \forall \vec{w} \in \mathbb{W} \}$$
+
+**Theorem 9.4.1:** Let $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ be a spanning set for a subspace $\mathbb{W}$ of an inner product space $\mathbb{V}$, and let $\vec{x} \in \mathbb{V}$. We have $\vec{x} \in \mathbb{W}^\bot$ if and only if$\langle \vec{x} , \vec{v}_i \rangle = 0$ for $1 \leq i \leq k$
+
+**Theorem 9.4.2:** If $\mathbb{W}$ is a subspace of an inner product space $\mathbb{V}$ , then 
+1. $\mathbb{W}^\bot$ is a subspace of $\mathbb{V}$
+2. If $dim \mathbb{V} = n$, then $dim\mathbb{W}^\bot = n - dim \mathbb{W}$
+3. If $dim \mathbb{V} = n$, then $(\mathbb{W}^\bot)^\bot = W$
+4. $\mathbb{W} \cap \mathbb{W}^\bot = \{ \vec{0} \}$
+5. If $dim \mathbb{V} = n$, $\{ \vec{v}_1, \cdots, \vec{v}_k \}$ is an orthogonal basis for $\mathbb{W}$ , and $\{ \vec{v}_{k+1} , \cdots , \vec{v}_n \}$ is an orthogonal basis for $\mathbb{W}^\bot$, then $\{ \vec{v}_1, \cdots, \vec{v}_k, \vec{v}_{k+1}, \cdots, \vec{v}_n \}$ is an orthogonal basis for $\mathbb{V}$
+
+**Definition - Projection Perpendicular:** Suppose $\mathbb{W}$_ is a k-dimensional subspace of an inner produce space $\mathbb{V}$ and $\{\vec{v}_1 , \cdots , \vec{v}_k \}$ is an orthogonal basis for $\mathbb{W}$. For an $\vec{v} \in \mathbb{V}$ we define the **projection** of $\vec{v}$ onto $\mathbb{W}$ by 
+$$ proj_{\mathbb{W}}(\vec{v}) = \frac{ \langle \vec{v}, \vec{v}_1 \rangle }{||\vec{v}_1||^2}\vec{v}_1 + \cdots + \frac{\langle \vec{v}, \vec{v}_k \rangle }{ || \vec{v}_k || } \vec{v}_k$$
+and the **perpendicular** of the projection is defined by, 
+$$ perp_\mathbb{W}(\vec{v}) = \vec{v} - proj_\mathbb{W}(\vec{v}) $$
+
+**Theorem 3:** If $\mathbb{W}$ is a k-dimensional subspace of an inner product space $\mathbb{V}$, then for any $\vec{v} \in \mathbb{V}$ we have 
+$$ perp_\mathbb{W}(\vec{v}) = \vec{v} - proj_\mathbb{W}(\vec{v})  \in \mathbb{W}^\bot$$
+
+**Theorem 4:** If $\mathbb{W}$ is a k-dimensional subspace of an inner product space $\mathbb{V}$, then $proj_{\mathbb{W}}$ is al inear operator on $\mathbb{V}$ with kernal $\mathbb{W}^\bot$
+
+**Theorem 5:** If $\mathbb{W}$ is a subspace of a finite dimensional inner product spave $\mathbb{V}$, then for any $\vec{v} \in \mathbb{V}$ we have 
+$$ proj_{\mathbb{W}^\bot}(\vec{v}) = perp_{\mathbb{W}}(\vec{v})$$
