@@ -229,12 +229,37 @@ where $L : \mathbb{R}^n \rightarrow \mathbb{R}$ is a linear transformation
 ## Chapter 5.4 - Linear Approximation Revisited
 $$f(x, y) \approx f(a, b) + \Delta f(a, b) \cdot (x - a, y - b) $$
 
+# Chapter 6 - Chain Rule
+## Chapter 6.1 - Basic Chain Rule in two dimensions
+First, 
+$$\frac{ dT }{ dt } = \frac{\delta T}{\delta x} \frac{dx}{dt} + \frac{\delta T}{\delta y} \frac{dy}{dt} $$
+Recall that $T(x) = f(x(t), y(t))$ $$T'(x) = \frac{d}{dt}f(x(t), y(t)) = f_x(x(t), y(t))x'(t) + f_y(x(t), y(t)) y'(t)$$
+
+**Theorem - Chain Rule:** Let $G(t) = f(x(t), y(t))$, and let $a = x(t_0)$ and $b = y(t_0)$. If $f$ is differentiable at $(a, b)$ and $x'(t_0)$ and $y'(t_0)$ exist, then $G'(t_0)$ exists and is given by
+$$ G'(t_0) = f_x(a, b) x' (t_0) + f_y(a, b)y'(t_0) $$
+
+Vector form: 
+$$\frac{d}{dt} f(\vec{x}(t)) = \Delta f(\vec{x}(t)) \cdot \frac{d\vec{x}}{dt}(t)$$
+
+## 6.2 - Extension of basic chain rule
+Use a tree to apply the following algorithm: 
+1. Identify all of the variables
+2. Take all possible paths from the differentiated variable to the differentiating variable
+3. For each lik in a given path, differentiate the upper variable with respect to the lower variable being carefule to consider if thsi is a derivative or a partial derivative. Multiply all such derivatives in that path. 
+4. Add the products from step 3 together to complete the Chain Rule
+
+# Chapter 7 - Directional Derivatives and the Gradient Vector
+
+## Chapter 7.1 - Directional Derivative
+The **directional derivative** of $f(x, y)$ at a point $(a, b)$ in the direction vector of a **unit vector** $\vec{u} = (u_1, u_2)$ where $||\vec{u}|| = 1$ is defined by
+$$D_{\vec{u}}f(a, b) = \frac{d}{ds}f(a + su_1, b + su_2) \rvert_{s=0}$$
+
+**Theorem 1 - Directional Derivative (DD) Theorem:** If $f(x, y)$ si differentiable at $(a, b)$ and $\vec{u} = (u_1, u_2)$ where $||\vec{u}|| = 1$ is a **unit vector**, then 
+$$D_{\vec{u}}f(a, b) = \Delta f(a, b) \cdot \vec{u}$$
+where $\cdot$ reperesents the dot product
 
 
-
-
-
-
+  
 
 
 
