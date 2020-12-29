@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CS 246 - Object Oriented Software Development &vert; Fall 2020</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="cs-246---object-oriented-software-development--fall-2020">CS 246 - Object Oriented Software Development | Fall 2020</h1>
+<h1 id="linux-file-permissions">Linux File Permissions</h1>
+<p>Permission information: d rwx r-x ---</p>
+<ul>
+<li>first character: <code>d</code> if directory, <code>-</code> if file</li>
+<li>next three are read (<code>r</code>), write (<code>w</code>), executable (<code>x</code>)</li>
+<li>first three are user, next three are group, next three are other (everyone)</li>
+</ul>
+<h2 id="chgrp---change-group">chgrp - change group</h2>
+<p>Changes group-name associated with a file</p>
+<p>Usage: <code>chgrp [-R] group-name file/directory-list</code></p>
+<h2 id="chmod---change-permissions">chmod - change permissions</h2>
+<p>Changes permissions of a file</p>
+<p>Usage: <code>chmod [-R] mode-list file/directory-list</code></p>
+<ul>
+<li><code>mode-list</code> has the form : <code>security-level operator permission</code></li>
+<li>securty-level is: user (<code>u</code>), group (<code>g</code>), other (<code>o</code>), all (<code>a</code>)</li>
+<li>Operator <code>+</code> adds permission, <code>-</code> removes permission, <code>=</code> sets permission</li>
+</ul>
+<p>Example: <code>chmod go-rw foo</code>, <code>chmod a+r schedule.html</code>, <code>chmod g=rw test.txt</code></p>
+<p><strong>Note:</strong> if you <code>chmod</code> using binary numbers you can switch the permissions based on the binary representation of each of those bits</p>
+<ul>
+<li>chmod <code>712</code> -&gt; <code>111 001 010</code> -&gt; <code>rwz --x -w-</code></li>
+</ul>
+<h1 id="the-file-system">The File System</h1>
+<p><strong>path:</strong> is the general name of a file or directory in textual format</p>
+<p>Note: directories in linux are just a specialized form of file</p>
+<ul>
+<li>they can be edited but it is dangerous to do so</li>
+</ul>
+<h2 id="absolute-and-relative-paths">Absolute and relative paths</h2>
+<p><code>/</code> is the <strong>root</strong> directory</p>
+<p><code>.</code> is the current directory, <code>..</code> is the previous directory</p>
+<h2 id="changing-the-current-directory">Changing the current directory</h2>
+<p><code>cd</code> to change directory<br>
+<code>pwd</code> to display path of working directory</p>
+<h2 id="the-home-directory">The home directory</h2>
+<p>Each new user is given their own <strong>home directory</strong></p>
+<ul>
+<li>this is a directory owned by the user where they can place their personal files without disturbing other users</li>
+</ul>
+<p>when writing a pathname, the shell replaces the special character <code>~</code> with the absolute path of your home directory.</p>
+<h2 id="the-path-variable">The $PATH variable</h2>
+<p>When the name of a file is given without a path then the shell looks in locations defined global system variable named <code>$PATH</code><br>
+The contents of the <code>$PATH</code> variable are a list of pathnames separated by the colon character (:)</p>
+<pre><code><code><div>$ echo $PATH
+/home/bob/bin:/user/local/bin:/usr/bin
+</div></code></code></pre>
+<p>you can run a program by giving its path to the shell</p>
+<p>you can add to the $PATH variable by (this doesn't affect existing PATH values):</p>
+<pre><code><code><div>export PATH=$PATH:/location/program
+</div></code></code></pre>
+<h1 id="the-shell">The shell</h1>
+<p>A <strong>shell</strong> is a program that runs and gives an interface to communicate with the opreating system</p>
+<p>In most linux distributions, a program called bash acts as the shell</p>
+<p>SSH (Secure SHell) connection allows us to user the shell on another computer through the internet.</p>
+<p><strong>Standard input:</strong> <code>stdin</code> is a device where from the shell is reading text input<br>
+<strong>Standard output:</strong> <code>stdout</code> is a device where the shell is writing text output<br>
+<strong>Standard error:</strong> <code>stderr</code> is a device where the shell writes error messages to</p>
+<h2 id="the-command-ls">The command <code>ls</code></h2>
+<p>The command <code>ls -l</code> displays a long form of the list with the following information:</p>
+<ul>
+<li><strong>type:</strong> <code>-</code> for a file, <code>d</code> for directory</li>
+<li><strong>permissions:</strong> three groups of three bits
+<ul>
+<li>3 for user, 3 for group, 3 for other</li>
+</ul>
+</li>
+<li><strong>owner:</strong> the ID of the user that owns the file</li>
+<li><strong>group:</strong> a user can belong to one or more group</li>
+<li><strong>size:</strong> size of the file in bytes</li>
+<li><strong>modified:</strong> the date and time it was last modified</li>
+<li><strong>name:</strong> the file name</li>
+</ul>
+<h2 id="executing-commands">Executing commands</h2>
+<p><code>bash</code> can run in an interactive (user provides commands) or non-interactive mode (a script file)</p>
+<h2 id="the-command-prompt">The command prompt</h2>
+<p>command prompt is what the shell displays in interactive mode when it is waiting for user input</p>
+<h3 id="types-of-commands">Types of commands</h3>
+<p><strong>Scripts:</strong> are text files that contain commands in a specific programming language.</p>
+<ul>
+<li>interpreters interpret and execute the commands</li>
+</ul>
+<p><strong>Programs:</strong> are files that contain commands in binary format. They can be understood the operating system not by a human<br>
+and can be run without an interpreter</p>
+<h2 id="inputoutput-redirection">Input/Output redirection</h2>
+<h3 id="the-command-cat">The command <code>cat</code></h3>
+<p><code>cat</code> simple reads the contents of standard input and writes it back to standard output</p>
+<h3 id="redirecting-input-and-output">Redirecting input and output</h3>
+<p>you can use the shell's <strong>redirect</strong> <code>cat</code>'s standard input and output devices to read from or write to fiels.</p>
+<p><code>cat &lt; file1.txt</code></p>
+<ul>
+<li>cat is doing the same thing but instead of <code>stdin</code> being the keyboard it will be <code>file1.txt</code></li>
+</ul>
+<p>you can also redirect the standard output using <code>&gt;</code><br>
+<code>cat &gt; file2.txt</code></p>
+<ul>
+<li>this will make cat reading from the keyboard and output to <code>file2.txt</code></li>
+</ul>
+<p>you can combined both redirections.</p>
+<pre><code><code><div>cat &lt; file1.txt &gt; file2.txt
+</div></code></code></pre>
+<ul>
+<li>this will read from file1 and write to file2</li>
+</ul>
+<p>you can redirect the standard error device with <code>2&gt;</code>. For example:</p>
+<pre><code><code><div>cat &lt; file1.txt &gt; file2.txt 2&gt; log.txt
+</div></code></code></pre>
+<ul>
+<li>this will write error messages to <code>log.txt</code></li>
+</ul>
+<h2 id="commans-line-arguments">Commans-line arguments</h2>
+<h3 id="passing-command-line-arguments">Passing command-line arguments</h3>
+<p>you can pass arguments to a program or script by writing each argument separated by a space after the command name:</p>
+<pre><code><code><div>cat -n file1.txt
+</div></code></code></pre>
+<ul>
+<li>here the <code>-n</code> argument makes cat prefix each line with a line number</li>
+</ul>
+<h3 id="difference-between-arguments-and-input-redirection">Difference between arguments and input redirection</h3>
+<p><code>cat -n &lt; file1.txt</code> essentially dose the same thing as <code>cat -n file1.txt</code> but they are different</p>
+<ul>
+<li>the first has the <strong>shell</strong> redirect <code>stdin</code> so that it's <code>file1.txt</code></li>
+<li>the second passes &quot;file1.txt&quot; to cat which then has to look for the file to read from it</li>
+</ul>
+<p>the program <code>echo</code> reads each command-line argument to <code>stdout</code></p>
+<pre><code><code><div>$ echo a file1.txt
+a file1.txt
+$ echo a &lt; file1.txt
+a 
+$
+</div></code></code></pre>
+<ul>
+<li>the second time echo is called <code>file1.txt</code> is not printed because its not an argument (its an instruction for the shell to redirect <code>stdin</code>)
+<ul>
+<li>this demonstrates the difference between arguments and input redirection</li>
+</ul>
+</li>
+</ul>
+<h3 id="quoting-arguments">Quoting arguments</h3>
+<p>Spaces are treated as separators between arguments. If you want to pass an argument that contains spaces you need to quote it.<br>
+<code>'</code> single quotes will not interpolate anything. <code>&quot;</code> duoble quotes will interpolate.</p>
+<pre><code><code><div>$ echo &quot;My shell is $0&quot;
+My shell is -bash
+$ echo 'My shell is $0'
+My shell is $0
+</div></code></code></pre>
+<h3 id="pipes">Pipes</h3>
+<p><strong>pipes</strong> allow us to use the output of one program as the input of another by connecting the second program's <code>stdin</code> to the first's <code>stdout</code></p>
+<ul>
+<li>The command <code>head -n</code> gives the first n lines of a file</li>
+<li>the command <code>wc -w</code> counts the words in the input</li>
+</ul>
+<p>We can combine these two programs by piping them. A pipe is made using the the character <code>|</code></p>
+<pre><code><code><div>head -20 file.txt | wc - w
+</div></code></code></pre>
+<ul>
+<li>this counts the words in the first 20 lines of <code>file.txt</code></li>
+</ul>
+<pre><code><code><div>cat file.txt | head -20 | wc -w &gt; words.txt
+</div></code></code></pre>
+<ul>
+<li>cat outputs <code>file.txt</code> to head</li>
+<li>file is passed to <code>head</code> which is passed to <code>wc</code> and finally the number of words is redirected to <code>words.txt</code></li>
+</ul>
+<p><strong>Note:</strong> echo changes whitespace of a file, do not combine <code>echo</code> with <code>cat</code> if u need to preserve the original file format</p>
+<h2 id="globbing-patterns">Globbing patterns</h2>
+<p>The shell can automaticall expand a few wildcard patterns to match all the files that satisfy the pattern.</p>
+<ul>
+<li>this is known as <strong>globbing</strong></li>
+</ul>
+<pre><code><code><div>cat *.txt
+</div></code></code></pre>
+<ul>
+<li><code>*.txt</code> is known as a <strong>globbing pattern</strong>, the wildcard <code>*</code> means &quot;match any sequence of characters&gt;&quot;</li>
+</ul>
+<p>The following operators can be used in globbing patterns</p>
+<ul>
+<li><code>*</code> : matches zero or more characters</li>
+<li><code>?</code> : matches zero or one character</li>
+<li><code>+</code> : matches at least one character</li>
+<li><code>[abc]</code> : matches exactly one of the characters in the brackets</li>
+<li><code>[!abc]</code> : matches any character <em>except</em> the ones in the brackets</li>
+<li><code>[a-z]</code> : matches any character in the given range</li>
+<li><code>{pat1, pat2}</code> matches either <code>pat1</code> or <code>pat2</code> (note no spaces)</li>
+</ul>
+<h1 id="regular-expressions">Regular Expressions</h1>
+<h2 id="introduction-to-pattern-matching">Introduction to pattern matching</h2>
+<p>We will use the tool <code>egrep</code> which looks for lines that match a pattern.</p>
+<ul>
+<li><code>grep</code> is the less powerful predecessor of <code>egrep</code></li>
+</ul>
+<pre><code><code><div>$ egrep &quot;CS246&quot; &lt; tasks.txt
+CS246: Assignment 2
+anth221: Discuss conflict with CS246
+</div></code></code></pre>
+<ul>
+<li>looks for lines with exactly &quot;CS246&quot;</li>
+</ul>
+<pre><code><code><div>$ egrep &quot;(CS246|cs246)&quot; &lt; tasks.txt
+CS246: Assignment 2
+cs246 : Exam 1
+anth221: Discuss conflict with CS246
+</div></code></code></pre>
+<ul>
+<li>looks for lines with either &quot;CS246|cs246&quot;</li>
+</ul>
+<p>The syntax <code>(x|y)</code> matches to either the pattern <code>x</code> or <code>y</code></p>
+<pre><code><code><div>$ egrep &quot;(CS|cs)246&quot; &lt; tasks.txt
+CS246: Assignment 2
+cs246 : Exam 1
+anth221: Discuss conflict with CS246
+</div></code></code></pre>
+<p><code>egrep</code> also has argument <code>-i</code> which ignores case</p>
+<ul>
+<li>this is blunt because it will accept &quot;Cs246&quot; and &quot;cS246&quot;</li>
+</ul>
+<p><code>^</code> means &quot;beginning of line&quot; in regular expressions</p>
+<pre><code><code><div>$ egrep &quot;^(CS|cs)246:&quot; &lt; tasks.txt
+CS246: Assignment 2
+</div></code></code></pre>
+<h2 id="advanced-patterns">Advanced patterns</h2>
+<p>It is common to want to match to a pattern or nothing, the sorthand is <code>?</code></p>
+<pre><code><code><div>$ egrep &quot;^(CS|cs)246 ?:&quot; &lt; tasks.txt
+CS246: Assignment 2
+cs246 : Exam 1
+</div></code></code></pre>
+<ul>
+<li>this makes the space before the colon optional</li>
+</ul>
+<pre><code><code><div>$ egrep &quot;^(CS|cs)246 *:&quot; &lt; tasks.txt
+CS246: Assignment 2
+cs246 : Exam 1
+</div></code></code></pre>
+<ul>
+<li>this makes the space before the <code>*</code> repeatable, it will match to either 0 or any number of repetitions of the space</li>
+<li>if we wanted it to match to at least one ore more of the space we can change the <code>*</code> to <code>+</code> which means at least one of the repetition must exist</li>
+</ul>
+<pre><code><code><div>$ egrep &quot;^(CS|cs)246 +:&quot; &lt; tasks.txt
+cs246 : Exam 1
+</div></code></code></pre>
+<h2 id="pattern-reference">Pattern reference</h2>
+<ul>
+<li>The basic battern is all normal characters. <code>e</code> matches to &quot;e&quot;</li>
+<li><code>(XYZ)</code> groups patterns, usually in order to use <code>|</code>,<code>*</code>,or <code>+</code> on a whole group
+<ul>
+<li>for example <code>(CS246)*</code> matches to &quot;&quot; or &quot;CS246&quot; or &quot;CS246CS246&quot;</li>
+</ul>
+</li>
+<li><code>(X|Y)</code> matches either <code>X</code> or <code>Y</code></li>
+<li><code>[...]</code> matches any of the <em>characters</em> between the square brackets
+<ul>
+<li><code>[cC][sS]</code> is equivalent to <code>(c|C)(s|S)</code></li>
+</ul>
+</li>
+<li><code>[...]</code> can also match <em>ranges</em> of characters, specified with <code>a-z</code>.
+<ul>
+<li><code>[a-z0-9]</code> matches all lower case letters and numbers</li>
+<li><code>[a-df-z]</code> matches all lower case letters except for &quot;e&quot;</li>
+</ul>
+</li>
+<li><code>[^...]</code> is an inversion of <code>[...]</code> (matches anything except what's specified)
+<ul>
+<li><code>[^a-z]</code> matches anything other than a lower-case character</li>
+<li>it must match to something tho, <code>CS[^3]46</code> will not match to &quot;CS46&quot; but will match &quot;CS246&quot;</li>
+</ul>
+</li>
+<li><code>*</code> matches repetition of a pattern 0 or more times
+<ul>
+<li>repeats the pattern not the matched string so <code>(c|C)*</code> matches &quot;cCCCcccCCcCCC&quot;</li>
+</ul>
+</li>
+<li><code>+</code> matches repetition of pattern 1 or more times</li>
+<li><code>?</code> matches repetition of a pattern 0 or 1 time.
+<ul>
+<li><code>a?</code> matches either &quot;&quot; or &quot;a&quot;</li>
+</ul>
+</li>
+<li><code>.</code> matches any single character. Often used to combined patterns that are separated by random tings
+<ul>
+<li><code>(CS246.*ANTH221|ANTH221.*CS246)</code> matches to ant and cs with anything between</li>
+</ul>
+</li>
+<li><code>^</code> matches beginning of line
+<ul>
+<li><code>^CS246</code> matches to the line that starts with &quot;CS246&quot;</li>
+</ul>
+</li>
+<li><code>$</code> matches end of line
+<ul>
+<li><code>CS246$</code> matches to the line that ends with &quot;CS246&quot;</li>
+<li><code>^CS246$</code> matches to the line that is exactly &quot;CS246&quot;</li>
+</ul>
+</li>
+<li><code>\</code> escapes special characters
+<ul>
+<li>be carefule the shell interprets <code>\</code> on its own so you should use it in single quotes (which will not interploate)</li>
+</ul>
+</li>
+</ul>
+<p>Here's an example</p>
+<pre><code><code><div>$ egrep &quot;^(CS|cs)2[0-9][0-9] *:.*[Aa]ssignment&quot; &lt; tasks.txt
+CS241: Finish assignment 1
+CS246: Assignment 2
+</div></code></code></pre>
+<ul>
+<li>matches to cs with 2 numbers after and with a colon and followed by assignment</li>
+</ul>
+<h2 id="bash-egrep-and-quotation-marks">bash, egrep, and quotation marks</h2>
+<p>Since we just started with <code>bash</code> it is recommended to using <code>'</code> single quotes around <code>egrep</code> patterns to avoid bash substitutions</p>
+<pre><code><code><div>$ echo &quot;\hi&quot;
+\hi
+$ echo &quot;\\&quot;
+\
+$ echo &quot;\\hi&quot;
+\hi
+$ echo &quot;$PATH&quot;
+/usr/bin:/bin
+$ echo &quot;\$PATH&quot;
+$PATH
+</div></code></code></pre>
+<p>In comparison to:</p>
+<pre><code><code><div>$ echo '\hi'
+\hi
+$ echo '\\'
+\\
+$ echo '\\hi'
+\\hi
+$ echo '$PATH'
+$PATH
+$ echo '\$PATH'
+\$PATH
+</div></code></code></pre>
+<h1 id="bash-scripts">Bash Scripts</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="creating-a-script-file">Creating a script file</h3>
+<p>It is convention, but not necessary, to use <code>.sh</code> for bash script files</p>
+<pre><code><code><div>#!/bin/bash 
+date 
+whoami 
+pwd
+</div></code></code></pre>
+<ul>
+<li>the first line is called a <strong>shebang</strong> line</li>
+<li>it tells the shell which language the script is written in</li>
+<li>the argument <code>-x</code> can be added to show verbose output
+<ul>
+<li>this will be helpful for assignment 1</li>
+</ul>
+</li>
+</ul>
+<p>we can run the program by telling bash to execute it <code>basic basic.sh</code></p>
+<h3 id="running-a-script-file">Running a script file</h3>
+<p>The general rules for setting up a script file are:</p>
+<ol>
+<li>insert a <strong>shebang</strong> line as your first line</li>
+<li>always add user-level execute permission</li>
+</ol>
+<h1 id="bash-as-a-programming-language">Bash as a programming language</h1>
+<p>adding <code>-x</code> will make the script show every command and its arguments as it executes</p>
+<h2 id="variables">Variables</h2>
+<p>Good list of potential problems <a href="https://www.linuxtopia.org/online_books/advanced_bash_scripting_guide/gotchas.html">here</a></p>
+<p>Variable naming should follow similar naming conventions to C variable names.</p>
+<p>When assigning veriables there should never be a <code>$</code>, a <code>$</code> is only used to retrives values from a variable.</p>
+<pre><code><code><div>x=1
+echo $x
+</div></code></code></pre>
+<ul>
+<li>the 1 is a string</li>
+<li>there must be no whitespace around the <code>=</code> operator, otherwise its an error</li>
+</ul>
+<p>it is good idea to user curly braces <code>{}</code> around variable names when retrieving their value <code>${x}</code></p>
+<p>there are a lot of global variables available to you.
+- use the env command to see many of them</p>
+<h3 id="special-shell-variables">Special shell variables</h3>
+<ul>
+<li><code>$0</code> the first parameter of the command-line and its arguments; the shell-script name</li>
+<li><code>$1, $2, etc</code> each command-line argument, based upon its position</li>
+<li><code>$#</code> the total number of command-line arguments</li>
+<li><code>$?</code> the exit/return value of the most recently executed command; used to tell us whether it succeeded or failed
+<ul>
+<li>0 means success, not-0 (any other value) means failure</li>
+</ul>
+</li>
+</ul>
+<pre><code><code><div>#!/bin/bash
+
+egrep &quot;^$1$&quot; /usr/share/dict/words
+</div></code></code></pre>
+<ul>
+<li>this returns the word if its in the dictionary</li>
+</ul>
+<h2 id="selection-statements">Selection statements</h2>
+<p>if statement general structure must follow one of the two following forms:</p>
+<pre><code><code><div>if condition1 ; then
+    statement1
+    statement2
+elif condition2 ; then
+    statement3
+...
+else
+    statement4
+    statement5
+fi
+</div></code></code></pre>
+<p>or</p>
+<pre><code><code><div>if condition1
+then
+  statement1
+  statement2
+elif condition2
+then
+    statement3
+...
+else
+    statement4
+    statement5
+fi
+</div></code></code></pre>
+<ul>
+<li>note that if you want the keyword then to be on the same line as <code>if/elif</code> you must separate it with a semicolon from the condition</li>
+</ul>
+<h3 id="specifying-conditions">specifying conditions</h3>
+<p>a conditions is generally specified with <code>[ ]</code> a pair of open square brackets. There must be a black space between the opening square bracked and the closing square bracket</p>
+<pre><code><code><div>if [ -e foo.txt ]; then
+    cat foo.txt
+fi
+</div></code></code></pre>
+<pre><code><code><div>if [ $foo -eq 2 ]; then
+    echo equals 2
+else
+    echo not equal 2
+fi
+</div></code></code></pre>
+<p>if you want to combine conditions using &quot;and&quot; or &quot;or&quot; use the keywords <code>-a</code> or <code>-o</code>.</p>
+<h2 id="functions">Functions</h2>
+<p>functions can only return a positive integer value, 0 to 255, so we don't need to specify a return-type</p>
+<pre><code><code><div>foo() {
+    echo &quot;name is: &quot; ${0}
+    echo &quot;foo argument 1 is: &quot; ${1}
+    echo &quot;foo argument 2 is: &quot; ${2}
+    echo &quot;foo argument 3 is: &quot; ${3}
+    if [ ${1} = &quot;cat&quot; ]; then
+        return 0
+    fi
+    return 1
+}
+</div></code></code></pre>
+<p>and <code>foo</code> is called by saying:</p>
+<pre><code><code><div>foo ${3} ${2} ${1}
+echo 'foo returned ${?}' ${?}
+</div></code></code></pre>
+<h2 id="loops">Loops</h2>
+<p>bash provied two main types of loops, a counted loop and a loop that iterates over a list of items</p>
+<p>here the general forms of a counted loop:</p>
+<pre><code><code><div>while [ cond ]; do
+    ...
+done
+
+until [ cond ]; do
+   ...
+done
+
+for (( expr1; expr2; expr3 )) ; do
+   ...
+done
+</div></code></code></pre>
+<p>and here are examples of the forms:</p>
+<pre><code><code><div>x=1
+while [ ${x} -le 5 ]; do
+   echo ${x}
+   x=$((x + 1))
+done
+
+x=1
+until [ ${x} -gt 5 ]; do
+   echo ${x}
+   x=$((x + 1))
+done
+
+for (( x=1; x &lt;= 5; x++ )) ; do
+    echo ${x}
+done
+</div></code></code></pre>
+<ul>
+<li>the special syntax <code>$(( ... ))</code> is used to tell the shell that the information within the doubled parentheses are to be treated as integers.</li>
+</ul>
+<p>here is a list iteration loop:</p>
+<pre><code><code><div>for variable in list; do
+   command1
+   command2
+   ...
+done
+</div></code></code></pre>
+<h1 id="software-testing">Software testing</h1>
+<p>software can be tested manually by a human or automatically by a machine</p>
+<p>In <strong>automated testing</strong> test suites are implemented that automatically test the software and compare results with expected ones.</p>
+<ul>
+<li>in general <strong>test suites</strong> should contain a list of input sets and matching expected outputs</li>
+</ul>
+<h2 id="types-of-software-tests">Types of software tests</h2>
+<p><strong>Unit tests</strong></p>
+<ul>
+<li>conducted at the lowest level, testing one specific module/unit of the software</li>
+</ul>
+<p><strong>Integration tests</strong></p>
+<ul>
+<li>verify if the different modules/units of the software work correctly together</li>
+</ul>
+<p><strong>Functional tests (system tests)</strong></p>
+<ul>
+<li>verifies if application produces the correct outputs, here we are not conerned with how results are produced</li>
+</ul>
+<p><strong>Acceptance tests</strong></p>
+<ul>
+<li>part of a formal process where client must verify that produced software meets all the requirements
+<ul>
+<li>can be split into phases such as <strong>alpha testing</strong> (end of development, subset of users, in developer environment) and **beta testing (end of development after alpha tests, subset of users, in user's environment)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Regressions tests</strong></p>
+<ul>
+<li>conducted after any modification in the software to ensure no errors were introduced</li>
+</ul>
+<p><strong>Performance tests</strong></p>
+<ul>
+<li>verify if the run-time performance of teh system will be adequate</li>
+</ul>
+<h2 id="whiteblack-box-tests">White/Black box tests</h2>
+<p>White box tests:</p>
+<ul>
+<li>created with knowledge of internal structure of a program</li>
+<li>generalyl used to verify internal structures of a program instead of expected functional requirements</li>
+<li>most common for unit tests</li>
+</ul>
+<p>Black-box tests:</p>
+<ul>
+<li>tests created based only on the requirement specifications, without any knowledge of internal structure of program</li>
+<li>verify if software works according to specification</li>
+</ul>
+<p>Grey-box tests:</p>
+<ul>
+<li>a mix of the two approaches above</li>
+</ul>
+<p>Creating black-box test:</p>
+<ul>
+<li>identify the different classes of input (numeric ranges, positive vs. negative, etc.)</li>
+<li>test the boundaries of valid ranges (edge cases), e.g., min and max values</li>
+<li>test multiple simultaneous boundaries (corner case)</li>
+<li>test extreme cases</li>
+<li>intuition - with experience you can begin to guess likely errors</li>
+</ul>
+<p>creating white-box tests</p>
+<ul>
+<li>the tests execute all logical paths through the program
+the tests make sure that every function runs</li>
+</ul>
+<h1 id="introduction-to-c">Introduction to C++</h1>
+<p>C++ allows for high-level abstraction as well as machine level work (backwards compatability with C)</p>
+<p>C++ Standard refers to a particular standard, e.g. C++11 refers to the C++ 2011 standard.</p>
+<h2 id="basics">Basics</h2>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Hello world!&quot;</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<ul>
+<li>notice iostream does not end in a <code>.h</code>, because <code>.h</code> represents that it's a C library and this is a C++ library</li>
+<li><code>std::</code> specifies that something is defined in the <strong>standard (std) namespace</strong>
+<ul>
+<li>declarations are specific to their namespace</li>
+<li><code>std::cout</code> is the name for the standard output stream</li>
+</ul>
+</li>
+</ul>
+<p><code>main</code> must have a return value in C++ (0 for success, anthing else for error just like bash), if you don't add <code>return 0</code> the compiler will add it for you.</p>
+<p>There are ways around not writing <code>std::</code> each time,</p>
+<pre><code class="language-c++"><div><span class="hljs-comment">// solution 1</span>
+ <span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::count; 
+ <span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+
+<span class="hljs-comment">// solution 2</span>
+ <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+</div></code></pre>
+<p>C++ file end in one of <code>.cc</code>, <code>.cpp</code> or <code>.C</code></p>
+<ul>
+<li>we will use <code>.cc</code> in this course</li>
+</ul>
+<h2 id="compilation">Compilation</h2>
+<p>You cannot just run C++ files, you must first compile them.<br>
+Compilers take high-level languages and produce machine-readable code by first preprocessing, then compiling, assembling, and linking.</p>
+<p>We will use the GCC compiler, <code>g++</code> is a &quot;front-end&quot; to <code>gcc</code> that specifies we're programming in C++.</p>
+<ul>
+<li>programs compiled on one system will not run on a system with different OS, libraries, etc... So you must compile for the system you intend to run the program on</li>
+</ul>
+<p><strong>Compiling:</strong>
+<code>g++ hello.cc</code> creates <code>a.out</code> by default<br>
+<code>g++ -std=c++14 hello.cc</code> specifies we want to use the C++14 standard (at a minimum)<br>
+<code>g++14 hello.cc -o hello</code> specifies the compiled name to have name <code>hello</code> (g++14 is an alias we created to shorten <code>g++ std=c++14</code>)</p>
+<p>There are more options for the compiler which are useful</p>
+<ul>
+<li><code>-g</code> roduce debugging information in the operating system's native format. The GNU debugger, gdb, can work with this debugging information. Makes your code larger, but useful while trying to get everything working.</li>
+<li><code>-c</code> Produce an object file (ends in .o) that consists of assembler output. Will be useful once we discuss separate compilation.</li>
+<li><code>-Wall</code> This enables all the warnings about constructions that some users consider questionable, and that are easy to avoid (or modify to prevent the warning). Not necessary, but a good idea.</li>
+<li><code>Wextra</code> This enables some extra warnings that aren't enabled by -Wall. Not necessary, but a good idea.</li>
+<li><code>Wpedantic</code> This ensures that your code follows the strict ISO C++ standard, with no forbidden extensions. Not necessary, but a good idea.</li>
+<li><code>-D</code> Lets us define a macro name as a command-line argument to the compiler. Useful for selectively adding/removing code during the compilation process.</li>
+</ul>
+<p>It is strongly recommended to learn a tool such as <code>gdb</code> for debugging</p>
+<h2 id="input-and-output">Input and output</h2>
+<p>There are three golbal variables in the standard (std) <strong>namespace</strong> whcih define stream objects used for basic input and output</p>
+<ul>
+<li><code>cin</code> = <code>stdin</code> (in C) : reads from standard input</li>
+<li><code>cout</code> = <code>stdout</code> (in C) : writes to standard output</li>
+<li><code>cerr</code> = <code>stderr</code> (in C) : writes to standard error
+<ul>
+<li><code>&gt;&gt;</code> is the operator to read input from the stream</li>
+<li><code>&lt;&lt;</code> is the operator to write to the output stream</li>
+<li>easy way to remember is they point in the direction of data flow</li>
+</ul>
+</li>
+<li>to use these streams you must include the <code>iostream</code> library</li>
+</ul>
+<p>The standard input stream object <code>cin</code> has several bits to track if an error has occured, we can only access these bits through methods <code>fail()</code> or <code>eof()</code></p>
+<pre><code class="language-c++"><div><span class="hljs-keyword">if</span> (<span class="hljs-built_in">cin</span>.fail()) { ... }
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">cin</span>.eof()) { ... }
+</div></code></pre>
+<ul>
+<li>you must attempt to read before you test for end-of-file</li>
+</ul>
+<h2 id="error-handling">Error Handling</h2>
+<p>We see that the program will just silently fail if a user enters an invalid input for an integer.</p>
+<p><strong>Version 2:</strong></p>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">int</span> i; 
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) { 
+        <span class="hljs-built_in">cin</span> &gt;&gt; i; 
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">cin</span>) <span class="hljs-keyword">break</span>;
+        <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+}
+</div></code></pre>
+<ul>
+<li>in C++ <code>(!cin)</code> is equivalent to <code>cin.operator!()</code> where <code>cin</code>'s operator <code>!</code> has been defined to return the contents of the fail bit by calling <code>fail()</code>
+<ul>
+<li>this ability to specialize operators is called <strong>operator overloading</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>Version 3:</strong></p>
+<ul>
+<li>(<code>cin &gt;&gt; i</code> is equivalent to <code>operator&gt;&gt;(cin, i)</code>
+<ul>
+<li><code>operator&gt;&gt;</code> has return type <code>cin</code> since it must be able to read from input multiple times</li>
+<li><code>cin &gt;&gt; x &gt;&gt; y &gt;&gt; z</code> is equivalent to `operator&gt;&gt;( operator&gt;&gt;( operator&gt;&gt;( cin, x), y), z);</li>
+</ul>
+</li>
+<li>the parameter to <code>operator&gt;&gt;</code> is a <strong>refnerence variable</strong> since <code>cin</code> needs to be able to modify it</li>
+</ul>
+<p>the <strong>signature</strong> of the function <code>operator&gt;&gt;</code> that reads in an integer is:</p>
+<pre><code class="language-c++"><div><span class="hljs-built_in">std</span>::istream * <span class="hljs-keyword">operator</span>&gt;&gt;( <span class="hljs-built_in">std</span>::istream &amp; in, <span class="hljs-keyword">int</span> &amp; value );
+
+```C++
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">int</span> i; 
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) { 
+        <span class="hljs-keyword">if</span> (!(<span class="hljs-built_in">cin</span> &gt;&gt; i)) <span class="hljs-keyword">break</span>;
+        <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+}
+</div></code></pre>
+<ul>
+<li>parenthesis are there to clarify order of operations</li>
+</ul>
+<p><strong>Version 4:</strong>
+This will take advantage of C++11 where <code>std::istream</code> can be implicitly converted (we say it is <strong>coerced</strong>) to a Boolean type.</p>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">int</span> i; 
+    <span class="hljs-keyword">while</span> ( <span class="hljs-built_in">cin</span> &gt;&gt; i ) { 
+        <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+}
+</div></code></pre>
+<p><strong>Version 5:</strong><br>
+we will now modify the program so that it skips reading any non-integer value</p>
+<ul>
+<li>since <code>cin</code> keeps reading till a non-integer then sets the fail bit we need to</li>
+</ul>
+<ol>
+<li>clear the fail bit after an error with <code>cin.clear()</code></li>
+<li>we have to &quot;throw away&quot; the offending input with <code>cin.ignore()</code></li>
+</ol>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">int</span> i; 
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) { 
+        <span class="hljs-keyword">if</span> ( !(<span class="hljs-built_in">cin</span> &gt;&gt; i) ) {  <span class="hljs-comment">// remember, operator! === fail()</span>
+            <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">cin</span>.eof() ) <span class="hljs-keyword">break</span>;
+            <span class="hljs-built_in">cin</span>.clear();
+            <span class="hljs-built_in">cin</span>.ignore(); 
+        } <span class="hljs-keyword">else</span> { 
+            <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+        }
+    }
+}
+</div></code></pre>
+<h2 id="file-io">File I/O</h2>
+<p>Reading from a file is almost indentical to reading from standard input. Instead of including the <code>iostream</code> library we include the <code>fstream</code> library and use the <code>ifstream</code> type.<br>
+writing to a file is similar except that we use the <code>ofstream type</code></p>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt; </span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-built_in">std</span>::ifstream infile{ <span class="hljs-string">&quot;input.txt&quot;</span> };
+    <span class="hljs-built_in">std</span>::ofstream outfile{ <span class="hljs-string">&quot;output.txt&quot;</span> };
+    <span class="hljs-keyword">int</span> i; 
+    <span class="hljs-keyword">while</span> ( <span class="hljs-literal">true</span> ) { 
+        infile &gt;&gt; i; 
+        <span class="hljs-keyword">if</span> (infile.fail() ) <span class="hljs-keyword">break</span>;
+        outfile &lt;&lt; i &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    }
+}
+</div></code></pre>
+<ul>
+<li>the <em>name</em> of a file must be of type <code>(const char *)</code> or the type <code>(const string &amp;)</code>.*</li>
+</ul>
+<p>if input file cannot be opened for input</p>
+<ul>
+<li>the <code>fail</code> bti is set and u can chek it with <code>fail()</code></li>
+</ul>
+<p>if output file doesn't exist</p>
+<ul>
+<li>the system automatically creates the file output file with new contents</li>
+</ul>
+<p>if output file doesn't have write permissions</p>
+<ul>
+<li><code>fail</code> bit is set</li>
+</ul>
+<p>The files will automatically close for us when the objects go &quot;out of scope&quot; and are destroyed on the final closing brace <code>}</code> of the program.</p>
+<ul>
+<li>if you used <code>open()</code> to open the file you must remember to <code>close()</code> it when you are done</li>
+</ul>
+<h2 id="formatting-output">Formatting output</h2>
+<p>We will rarely require formatting beyond white space in this course, but it's good to know.</p>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iomanip&gt; </span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20</span>; ++i) { 
+        <span class="hljs-built_in">cout</span> &lt;&lt; dec &lt;&lt; setw(<span class="hljs-number">3</span>) &lt;&lt; i &lt;&lt; oct &lt;&lt; setw(<span class="hljs-number">3</span>) &lt;&lt; i &lt;&lt; hex &lt;&lt; setw(<span class="hljs-number">3</span>) &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+    } 
+} 
+</div></code></pre>
+<ul>
+<li><code>setw</code> is to set width of the information to 3 characters, the fill-character is used to fill out information to meet width</li>
+<li><code>dec</code>, <code>oct</code>, <code>hex</code> are used to print different &quot;base&quot; systems</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">int</span> i = <span class="hljs-number">95</span>;
+  <span class="hljs-built_in">cout</span> &lt;&lt; hex &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+  <span class="hljs-built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-built_in">endl</span>;
+  <span class="hljs-keyword">float</span> price = <span class="hljs-number">2.00</span>;
+  <span class="hljs-built_in">cout</span> &lt;&lt; fixed &lt;&lt; showpoint &lt;&lt; setprecision(<span class="hljs-number">2</span>) &lt;&lt; price &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+$ g++<span class="hljs-number">14</span> manip.cc 
+$ ./a.out
+<span class="hljs-number">5f</span>
+<span class="hljs-number">5f</span>
+<span class="hljs-number">2.00</span>
+</div></code></pre>
+<ul>
+<li><code>dec/oct/hex</code> feature is &quot;sticky&quot; as in once it's set it continues to print in that base until we change it again</li>
+<li><code>showpoint</code> is used to force printing of decimal point in our floating point number</li>
+<li><code>setprecisions</code> specifies number of digits after the decimal point to print, uses <code>0</code> as the fill character</li>
+</ul>
+<h2 id="strings">Strings</h2>
+<table>
+<thead>
+<tr>
+<th>C</th>
+<th>C++</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>array of character: <code>char *</code> or <code>char []</code></td>
+<td>*type is <code>std::string</code> and requires inclusiong of <code>&lt;string&gt;</code> library</td>
+</tr>
+<tr>
+<td>memory needs to be explicitly managed. Need to shrink and grow array explicitly</td>
+<td>manages memory for you</td>
+</tr>
+<tr>
+<td>Easy to accidently overwrite <code>'\0'</code> and corrupt memory</td>
+<td>safer to manipulate</td>
+</tr>
+<tr>
+<td><code>char  * s = &quot;hello&quot;; char name [10] = &quot;Jane\0&quot;;</code></td>
+<td><code>std:: string s = &quot;hello&quot;; string name{ &quot;Jane&quot; };</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>note the literal &quot;hello&quot; that is on the right side of s in the c++ assignment is actually a C constant character pointer which is passed to initialize in <code>s</code></li>
+</ul>
+<h3 id="operations">Operations</h3>
+<p>these are a few of the common string oeprations/operators</p>
+<ul>
+<li>equality: <code>s1 == s2</code></li>
+<li>inequality: <code>s1 != s2</code></li>
+<li>comparison: <code>s1 &lt;= s2, s &lt; s2, s1 &gt;= s2, s1 &gt; s2</code>
+<ul>
+<li>comparison are <em>lexicographic</em></li>
+</ul>
+</li>
+<li>length: <code>s1.size()</code> or <code>s1.length()</code></li>
+<li>fetch individual characters: <code>s1[0], s1[1], ...</code>
+<ul>
+<li>starts at <code>0</code> and goes to <code>s1.size() - 1</code></li>
+</ul>
+</li>
+<li>concatenation <code>s1 = s2 + s3; s3 += s4;</code></li>
+</ul>
+<h3 id="inputoutput">Input/Output</h3>
+<ul>
+<li><code>&gt;&gt;</code> skips initial whitespace when reading <code>std::string</code></li>
+<li><code>getline</code> takes an input stream as a parameter</li>
+<li><code>getline</code> does <strong>not</strong> skip initial white space</li>
+<li><code>getline</code> can be coerced to return a boolean value</li>
+</ul>
+<h2 id="string-streams">String streams</h2>
+<p>There is <code>stringstream</code> type which is a hybrid of a string class and I/O stream class. It lets you read/write to/from strings using stream operators.</p>
+<ul>
+<li>you can use <code>stringstream</code> for input or output its recommended to use <code>istringsream</code> or <code>ostringstream</code> as appropriate.</li>
+</ul>
+<h3 id="input-string-streams">Input string streams</h3>
+<p>The primary purpose of an input string stream is to take an existing string and split it into separate words.</p>
+<ul>
+<li><code>isstringstream</code> separates the words by whitespace</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">string</span> s;
+    <span class="hljs-built_in">string</span> s1{ <span class="hljs-string">&quot;The quick brown fox\njumped over the lazy\t dog.&quot;</span> };
+    <span class="hljs-built_in">istringstream</span> ss1{ s1 };
+    <span class="hljs-keyword">while</span> ( ss1 &gt;&gt; s ) {
+         <span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-built_in">string</span> s2{ <span class="hljs-string">&quot;Smith,Jane,99999999,Yu,Yaoliang,99999998&quot;</span> };
+    <span class="hljs-built_in">istringstream</span> ss2{ s2 };
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;***&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">while</span> ( getline( ss2, s, <span class="hljs-string">&#x27;,&#x27;</span> ) ) {
+         <span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+}
+</div></code></pre>
+<ul>
+<li>*we use <code>getline</code> to specify a delimiter to separate our string based on commas for <code>s2</code></li>
+</ul>
+<h3 id="output-string-streams">Output string streams</h3>
+<p>There is almost no reason to use an output string stream object in this course (CS246)</p>
+<ul>
+<li>with the exception of converting integer values to strings for a library such as X11</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sstream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-built_in">ostringstream</span> ss;
+  <span class="hljs-keyword">int</span> lo {<span class="hljs-number">1</span>}, hi {<span class="hljs-number">100</span>};
+  ss &lt;&lt; <span class="hljs-string">&quot;Enter a # between &quot;</span> &lt;&lt; lo &lt;&lt; <span class="hljs-string">&quot; and &quot;</span> &lt;&lt; hi;
+  <span class="hljs-built_in">string</span> s {ss.str()};
+  <span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+</div></code></pre>
+<ul>
+<li>s contains &quot;Enter a # between 1 and 100&quot;</li>
+</ul>
+<h2 id="command-line-arguments">Command-line arguments</h2>
+<p>Command-line arguments in C++ are the same as in C: The <code>main</code> function may take two arguments, <code>argc</code> and <code>argv</code></p>
+<ul>
+<li><code>argc</code> is the number of of arguments the program received</li>
+<li><code>argv</code> is the array of arguments</li>
+<li>unfortunately they are no difference than in C! so it's of type <code>char **</code> not an array of strings</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span> </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> argi = <span class="hljs-number">0</span>; argi &lt; argc; argi++) {
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; argv[argi] &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+  }
+}
+</div></code></pre>
+<ul>
+<li>just like in c <code>argv[0]</code> is the name of the program itself</li>
+</ul>
+<h2 id="functions-1">Functions</h2>
+<p>functions in C++ are very similar to C. Basic format:</p>
+<pre><code class="language-c++"><div><span class="hljs-keyword">return</span>-type function-name( type1 arg1, type2 arg2, ... ) {
+    ...
+    <span class="hljs-keyword">return</span> value of appropriate type;
+}
+</div></code></pre>
+<h3 id="forward-declarations">Forward declarations</h3>
+<p>You should already know to separate a function into its <strong>declaration</strong> (signature) and its <strong>definition</strong> (implementation)</p>
+<p>You must call functions only after they have been <strong>declared</strong> but you can <strong>define</strong> them wherever.</p>
+<h2 id="overloading">Overloading</h2>
+<p>C++ allows for functions to be **overloaded&amp;&amp; which means more than one function can have the exact same name so long as the number of arguments and/or their types is different.</p>
+<p>Note: the decision as to which function must be called must be made at compile-time</p>
+<p>The compiler does <strong>not</strong> distinguish between overloaded functions based on return types</p>
+<ul>
+<li>this makes sense, because if they're exactly the same other than return which do you use?</li>
+</ul>
+<h3 id="default-parameters">Default parameters</h3>
+<p>Sometimes you want a function to behave the a way most of the time unless specified otherwise through a parameter.<br>
+We can do this with overloading, but then we'd have to maintain two functions, instead we use default parameters.</p>
+<p>function declaration:</p>
+<pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">processInput</span><span class="hljs-params">( <span class="hljs-keyword">bool</span> <span class="hljs-built_in">log</span> = <span class="hljs-literal">false</span> )</span></span>; 
+</div></code></pre>
+<ul>
+<li>this means that the parameter will be set to false when it is called without the parameter explicitly specified</li>
+</ul>
+<p><strong>Note:</strong> All parameters with default values must come <strong>after</strong> those without.</p>
+<h2 id="structures">Structures</h2>
+<p><em>C</em>:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node_t</span> {</span>
+    <span class="hljs-keyword">int</span> value;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node_t</span> * <span class="hljs-title">next</span>;</span>
+} Node;
+
+Node * head = <span class="hljs-literal">NULL</span>;
+Node n;
+n.value = <span class="hljs-number">5</span>;
+n.next = <span class="hljs-literal">NULL</span>;
+</div></code></pre>
+<p><em>C++</em>:</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> value;
+    Node * next;
+};
+
+Node * head = <span class="hljs-literal">nullptr</span>;
+Node n{ <span class="hljs-number">5</span>, <span class="hljs-literal">nullptr</span> }, n1 = { <span class="hljs-number">6</span>, head };
+</div></code></pre>
+<ul>
+<li>C++ doesn't require that the type definition start with keyword <code>typedef</code></li>
+<li><code>struct</code> doesn't need to repeated in all variable declarations. Just needs to be done once in the initial type definition</li>
+<li>C++ no longer uses <code>NULL</code> instead you should use <code>nullptr</code></li>
+<li>there is no &quot;short version&quot; of teh type name before closing the semicolon</li>
+<li>there must always be a closing semicolon, after the closing <code>}</code></li>
+</ul>
+<p>Here is an <strong>incorrect</strong> example:</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> value;
+    Node next;
+};
+</div></code></pre>
+<ul>
+<li>this is because <code>Node</code> is not defined until the end of the closing bracket. You can use a pointer since they all have the same size</li>
+</ul>
+<h2 id="constants">Constants</h2>
+<p>We can define <strong>immutable</strong> values with teh <code>const</code> keyword. A common convention is to name cosntant values using all capital letters:</p>
+<pre><code class="language-c++"><div><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX_GRADE = <span class="hljs-number">100</span>; 
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> MATH_PI = <span class="hljs-number">3.14159</span>;
+</div></code></pre>
+<p>you can also declare more complext types as constant such as a <code>struct</code></p>
+<h2 id="parameter-passing">Parameter passing</h2>
+<p>If we want to write a function that increments a value without having to assign its return value we need to pass the variables adress and directly modify it.<br>
+Normally we are only passing the value of a variable and any modification within the function does not affect it, this is called <strong>call-by-value</strong></p>
+<pre><code class="language-c++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inc</span><span class="hljs-params">( <span class="hljs-keyword">int</span> * n )</span> </span>{ ++*n; } <span class="hljs-comment">// same as *n = *n + 1;</span>
+...
+inc( &amp;value );
+</div></code></pre>
+<ul>
+<li>this allows for <code>inc(x)</code> to work</li>
+</ul>
+<h2 id="references">References</h2>
+<p>References are a very important topic you should understand them well.</p>
+<ul>
+<li>in this course, you should generally pass by reference rather than by pointer as much ass possible
+<ul>
+<li>that way you don't have to remember to dereference your pointers all of the time.</li>
+</ul>
+</li>
+</ul>
+<p>Let's introduce the concept of <strong>rvalues</strong> and <strong>lvalues</strong> (left and right)</p>
+<ul>
+<li>if you can take the address of an expression it's an <strong>lvalue</strong>, otherwise it's an <strong>rvalue</strong></li>
+<li><strong>lvalue</strong> can appear on the left hand side of an assignment</li>
+</ul>
+<p>for example :</p>
+<pre><code class="language-c++"><div><span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> * ptr = <span class="hljs-literal">nullptr</span>;
+</div></code></pre>
+<ul>
+<li>x and ptr are both <strong>lvalues</strong></li>
+</ul>
+<p>A <strong>reference</strong> is an <em>lvalue</em> that acts like a constant pointer but the compiler automatically dereferences it. Since it's constant it <strong>must</strong> be initialized when it is defined.</p>
+<pre><code class="language-c++"><div><span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> &amp;y = x;
+<span class="hljs-keyword">int</span> * ptr = &amp;y;
+y += <span class="hljs-number">2</span>;
+*ptr += <span class="hljs-number">3</span>;
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<ul>
+<li><code>*ptr</code> contains the address of <code>x</code></li>
+</ul>
+<p>There are a number of things that <strong>cannot</strong> be done with an <strong>lvalue reference</strong></p>
+<ol>
+<li>cannot leave them uninitialized <code>int &amp;x;</code> is illegal, must be initialized with an <strong>lvalue</strong></li>
+<li>cannot create a pointer to a reference <code>int &amp;*x;</code> is illegal
+<ul>
+<li>but a reference to a pointer is legal</li>
+</ul>
+</li>
+<li>cannot create a reference to a reference <code>int &amp;&amp;x;</code> does not mean &quot;reference to reference&quot; we will see what it actually means later</li>
+<li>cannot create an array of reference <code>int $refAarray[3] = {x, y, z}</code></li>
+</ol>
+<p>let us revise the increment program:</p>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;n)</span> </span>{
+  n = n + <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">int</span> x {<span class="hljs-number">5</span>};
+  inc(x);
+  <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+}
+</div></code></pre>
+<p>passing by value requires &quot;copying&quot; the value into the function which can be expensive for large data, so to incerase efficiency we can pass a <strong>constant reference</strong> which will allow us to read the data but not mutate it.</p>
+<p><strong>Advice:</strong> pass by const ref over pass by value for anything larger than an integer unless the function needs to make a copy anyways.</p>
+<p><strong>Warning:</strong> if you want to pass a literal integer it must be defined as a constant reference.</p>
+<p><code>f(5)</code> would not work with <code>int f( int &amp; n ) { ... }</code></p>
+<p><code>f(5)</code> works with <code>int f( const int &amp; n ) { ... }</code></p>
+<h2 id="dynamic-memory-allocation">Dynamic memory allocation</h2>
+<table>
+<thead>
+<tr>
+<th>C</th>
+<th>C++</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uses a library <code>cstdlib</code> now known as <code>stdio.h</code> that provides <code>malloc</code>,<code>calloc</code>,<code>realloc</code> and <code>free</code>. Only works with type <code>(void*)</code> so <strong>not</strong> type safe</td>
+<td>uses keywords <code>new</code> and <code>delete</code>. Type safe, i.e. allocates space appropriate of size and return a  pointer of the appropriate type</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+   <span class="hljs-keyword">int</span> data;
+   Node * next;
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   Node n{ <span class="hljs-number">5</span>, <span class="hljs-literal">nullptr</span> };
+   Node * np = <span class="hljs-keyword">new</span> Node{ <span class="hljs-number">3</span>, &amp;n };
+   <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; n.data &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; np-&gt;data &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+   <span class="hljs-keyword">delete</span> np;
+}
+</div></code></pre>
+<p><strong>Warning:</strong> if you fail to delete dynamically allocated memory you have a <strong>memory leak</strong>. It is considered incorrect in this course since it will eventually fail.</p>
+<h3 id="dynamic-array-allocation">Dynamic array allocation</h3>
+<pre><code class="language-c++"><div>Node * nodeArray = <span class="hljs-keyword">new</span> Node[<span class="hljs-number">10</span>];
+...
+nodeArray[<span class="hljs-number">0</span>].data = <span class="hljs-number">5</span>;
+nodeArray[<span class="hljs-number">0</span>].next = <span class="hljs-literal">nullptr</span>;
+...
+<span class="hljs-keyword">delete</span> []  nodeArray;
+</div></code></pre>
+<ul>
+<li>must specify <code>[]</code> after <code>delete</code> otherwise it will only delete the first element and cause a <strong>memory leak</strong>
+<ul>
+<li>match your <code>new</code> and <code>delete</code> statements, if one used <code>[]</code> the other should too</li>
+</ul>
+</li>
+</ul>
+<h3 id="pointers-and-optional-files">Pointers and optional files</h3>
+<p><code>./test [ input-file-name [output-file-name] ]</code> it is unix convention to specify (in documentation) optional arguments by enclosing them in <code>[]</code></p>
+<p>it is common to have programs default to <code>stdin</code> or use files if supplied in arguments.</p>
+<p>Here is a good example of how to handle this:</p>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">usage</span><span class="hljs-params">( <span class="hljs-keyword">char</span> * pgmname )</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; pgmname &lt;&lt; <span class="hljs-string">&quot; [ input-file-name [output-file-name] ]&quot;</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+} <span class="hljs-comment">// usage</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">( <span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> * argv[] )</span> </span>{
+    <span class="hljs-built_in">std</span>::istream * infile = &amp;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span>;
+    <span class="hljs-built_in">std</span>::ostream * outfile = &amp;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span>;
+
+    <span class="hljs-keyword">if</span> ( argc &gt; <span class="hljs-number">3</span> || argc &lt; <span class="hljs-number">1</span> ) {
+        usage( argv[<span class="hljs-number">0</span>] );
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;           
+    } <span class="hljs-comment">// if</span>
+
+    <span class="hljs-keyword">switch</span>( argc ) {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+            outfile = <span class="hljs-keyword">new</span> <span class="hljs-built_in">std</span>::ofstream{ argv[<span class="hljs-number">2</span>] };
+            <span class="hljs-keyword">if</span> ( outfile == <span class="hljs-literal">nullptr</span> || outfile-&gt;fail() ) {
+                <span class="hljs-keyword">delete</span> outfile;
+                <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">&quot;ERROR: unable to open output file \&quot;&quot;</span>
+                    &lt;&lt; argv[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">&#x27;&quot;&#x27;</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            } <span class="hljs-comment">// if</span>
+            <span class="hljs-comment">// fall through to open up the input file next</span>
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            infile = <span class="hljs-keyword">new</span> <span class="hljs-built_in">std</span>::ifstream{ argv[<span class="hljs-number">1</span>] };
+            <span class="hljs-keyword">if</span> ( infile == <span class="hljs-literal">nullptr</span> || infile-&gt;fail() ) {
+                <span class="hljs-keyword">if</span> ( outfile != &amp;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> ) <span class="hljs-keyword">delete</span> outfile;
+                <span class="hljs-keyword">delete</span> infile;
+                <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">&quot;ERROR: unable to open input file \&quot;&quot;</span>
+                    &lt;&lt; argv[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">&#x27;&quot;&#x27;</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            } <span class="hljs-comment">// if</span>
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-comment">// do nothing</span>
+            <span class="hljs-keyword">break</span>;
+    } <span class="hljs-comment">// switch</span>
+
+    <span class="hljs-comment">// Echoes the input to output.</span>
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> line;
+    <span class="hljs-keyword">while</span> ( <span class="hljs-built_in">std</span>::getline( *infile, line ) ) {
+        *outfile &lt;&lt; line &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    } <span class="hljs-comment">// while</span>
+
+    <span class="hljs-comment">// Closes the I/O files. Don&#x27;t delete if standard input or output, though.</span>
+    <span class="hljs-keyword">if</span> ( infile != &amp;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span> ) <span class="hljs-keyword">delete</span> infile;
+    <span class="hljs-keyword">if</span> ( outfile != &amp;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> ) <span class="hljs-keyword">delete</span> outfile;
+} <span class="hljs-comment">// main</span>
+</div></code></pre>
+<h2 id="returning-information">Returning information</h2>
+<p>There are three ways a function can return values;</p>
+<ol>
+<li>return by <em>value</em></li>
+<li>return by <em>pointer</em></li>
+<li>return by <em>reference</em></li>
+</ol>
+<p>let's see examples of the three using the structure:</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+  <span class="hljs-keyword">int</span> data;
+  Node * next;
+};
+</div></code></pre>
+<p><strong>Return by value</strong></p>
+<pre><code class="language-c++"><div><span class="hljs-function">Node <span class="hljs-title">getMeANode</span><span class="hljs-params">( <span class="hljs-keyword">int</span> value )</span> </span>{
+   Node n{ value, <span class="hljs-literal">nullptr</span> };
+   <span class="hljs-keyword">return</span> n;
+}
+</div></code></pre>
+<p><strong>Return by pointer</strong></p>
+<pre><code><code><div>// THIS CODE IS INCORRECT
+Node * getMeANode( int value ) {
+   Node n{ value, nullptr };
+   return &amp;n;
+}
+</div></code></code></pre>
+<ul>
+<li>this is return an adress of a local variable which is popped from the stack when the function ends
+The correct way:</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-function">Node * <span class="hljs-title">getMeANode</span><span class="hljs-params">( <span class="hljs-keyword">int</span> value )</span> </span>{
+   Node *nptr = <span class="hljs-keyword">new</span> Node{ value, <span class="hljs-literal">nullptr</span> };
+   <span class="hljs-keyword">return</span> nptr;
+}
+</div></code></pre>
+<p><strong>Return by reference</strong></p>
+<pre><code class="language-c++"><div><span class="hljs-function">Node &amp; <span class="hljs-title">getMeANode</span><span class="hljs-params">( <span class="hljs-keyword">int</span> value )</span> </span>{
+   Node *nptr = <span class="hljs-keyword">new</span> Node{ value, <span class="hljs-literal">nullptr</span> };
+   <span class="hljs-keyword">return</span> *nptr;
+}
+</div></code></pre>
+<ul>
+<li>the problem is that the user won't know that it allocates in the heap and that they must <code>delete</code> what's allocated</li>
+</ul>
+<pre><code class="language-c++"><div>Node &amp; newNode = getMeANode( <span class="hljs-number">5</span> );
+...
+<span class="hljs-comment">// do something with newNode</span>
+...
+<span class="hljs-keyword">delete</span> &amp;newNode;
+</div></code></pre>
+<ul>
+<li>when deleteing a reference value we must get it's address since <code>delete</code> only works on pointers</li>
+</ul>
+<p><strong>Which technique should we use</strong></p>
+<ul>
+<li>in some cases returning a pointer is fine, however in most situations it turns out that return by value is the right thing to do since as of C++11 (and up) it's not as expensive as it looks</li>
+</ul>
+<h2 id="operator-overloading">Operator overloading</h2>
+<p>we can also overload operators such as <code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>, etc. in C++.</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Vec</span> {</span>
+   <span class="hljs-keyword">int</span> x, y;
+};
+
+Vec <span class="hljs-keyword">operator</span>+( <span class="hljs-keyword">const</span> Vec &amp; v1, <span class="hljs-keyword">const</span> Vec &amp; v2 ) {
+   Vec v{ v1.x + v2.x, v1.y + v2.y };
+   <span class="hljs-keyword">return</span> v;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+   Vec v1{<span class="hljs-number">3</span>, <span class="hljs-number">4</span>}, v2{<span class="hljs-number">6</span>, <span class="hljs-number">7</span>};
+   Vec v3 = v1 + v2;
+}
+</div></code></pre>
+<p>We can multiply a vector by an integer</p>
+<pre><code class="language-c++"><div>Vec <span class="hljs-keyword">operator</span>*( <span class="hljs-keyword">const</span> Vec &amp; v, <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> k  ) {
+   <span class="hljs-keyword">return</span> { k*v.x, k*v.y };
+}
+Vec <span class="hljs-keyword">operator</span>*( <span class="hljs-keyword">const</span> Vec &amp; v, <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> k  ) {
+   <span class="hljs-keyword">return</span> k * v;
+}
+</div></code></pre>
+<ul>
+<li>without the second operator overload we would only be able to write <code>(v * k)</code> so we have to define it both ways</li>
+</ul>
+<h3 id="overloading--and-">Overloading &lt;&lt; and &gt;&gt;</h3>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Grade</span> {</span> 
+    <span class="hljs-keyword">int</span> theGrade; 
+};
+</div></code></pre>
+<p>We want the output operator the print the value then a '%' sign</p>
+<pre><code class="language-c++"><div><span class="hljs-built_in">std</span>::ostream &amp; <span class="hljs-keyword">operator</span>&lt;&lt;( <span class="hljs-built_in">std</span>::ostream &amp; out, <span class="hljs-keyword">const</span> Grade &amp; g ) {
+   out &lt;&lt; g.theGrade &lt;&lt; <span class="hljs-string">&#x27;%&#x27;</span>;
+   <span class="hljs-keyword">return</span> out;
+}
+</div></code></pre>
+<p>Rules for output operator:</p>
+<ol>
+<li>the return type is always <code>std::osteram &amp;</code></li>
+<li>the function name is always <code>operator&lt;&lt;</code></li>
+<li>the first parameter is always the output stream <code>std::ostream &amp;</code></li>
+<li>the second parameter is always the information being output</li>
+<li>write the <code>return</code> statement to return whatever the name of the output stream is</li>
+</ol>
+<pre><code class="language-c++"><div><span class="hljs-built_in">std</span>::istream &amp; <span class="hljs-keyword">operator</span>&gt;&gt;( <span class="hljs-built_in">std</span>::istream &amp; in, Grade &amp; g ) {
+   in &gt;&gt; g.theGrade;
+   <span class="hljs-keyword">if</span> ( g.theGrade &lt; <span class="hljs-number">0</span> ) g.theGrade = <span class="hljs-number">0</span>;
+   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( g.theGrade &gt; <span class="hljs-number">100</span> ) g.theGrade = <span class="hljs-number">100</span>;
+   <span class="hljs-keyword">return</span> in;
+}
+</div></code></pre>
+<p>Rules for input operator:</p>
+<ol>
+<li>the return operator is always <code>std::istream &amp;</code></li>
+<li>the function operator is always <code>operator&gt;&gt;</code></li>
+<li>the firs parameter is always the input stream <code>std::istream &amp;</code></li>
+<li>the second parameter is always the information being read in.</li>
+<li>write the <code>return</code> statement to return whatever the name of the input stream</li>
+</ol>
+<p>templates:</p>
+<pre><code class="language-c++"><div><span class="hljs-built_in">std</span>::ostream &amp; <span class="hljs-keyword">operator</span>&lt;&lt;( <span class="hljs-built_in">std</span>::ostream &amp; out, <span class="hljs-keyword">const</span> typeToPrint &amp; value ) {
+   out &lt;&lt; v ; <span class="hljs-comment">// whatever is appropriate for the type you are outputting</span>
+   <span class="hljs-keyword">return</span> out;
+}
+<span class="hljs-built_in">std</span>::istream &amp; <span class="hljs-keyword">operator</span>&gt;&gt;( <span class="hljs-built_in">std</span>::istream &amp; in, typeToRead &amp; value ) {
+   in &gt;&gt; v ; <span class="hljs-comment">// whatever is appropriate for the type you are reading in</span>
+   <span class="hljs-keyword">return</span> in;
+}
+</div></code></pre>
+<h1 id="preprocessing-and-compilation">Preprocessing and Compilation</h1>
+<h2 id="the-preprocessor">The preprocessor</h2>
+<p>The <strong>C preprocessor</strong> is tasked with handling <strong>preprocessor directives</strong>, it's primary purpose is to control what code is included in your program.</p>
+<p>the <code>-E</code> flag with g++ will make the preprocessor output to standard out</p>
+<p>the preprocessor can also define constants <code>#define GEESE 15</code> however in modern C++ and C this is unneeded and you should use <code>const</code> definitions since they are more type-safe.</p>
+<p>the <code>#if</code> (ends with <code>#endif</code>) controls whether code is included (controlled by preprocessor).<br>
+Here is an example of debugging using <code>#if</code></p>
+<pre><code class="language-c++"><div>$ cat debug.cc 
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DEBUG_LEVEL 1</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> DEBUG_LEVEL &gt;= 1</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;main has started&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Hello, world!&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> DEBUG_LEVEL &gt;= 2</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;About to end main&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p><code>#ifdef</code> and <code>#ifndef</code> check if a preprocessor variable is set:</p>
+<pre><code class="language-c++"><div> [...]
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> DEBUG</span>
+  <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Debugging activated (I don&#x27;t care what level)&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+</div></code></pre>
+<p><code>#if 0</code> can be used to comment out large amounts of code since it nests properly unlike comments</p>
+<p>preprocessor variables can be given in the command line to <code>g++</code>, e.g. <code>$ g++ -std=c++14 debug.cc -DDEBUG_LEVEL=2 -o debug</code></p>
+<h2 id="separate-compilation">Separate compilation</h2>
+<ul>
+<li><strong>declaration</strong>: asserts that a function or variable exists, but does't define its content</li>
+<li><strong>definition</strong>: full details on a function or variable. Defines a function's content and allocates space for both functions and variables</li>
+</ul>
+<p>We split our code into two components:</p>
+<ul>
+<li><strong>interface</strong>: declarations including function prototypes, with no actual code, as well as type definitions. Put in a separate file from the actual code, typically named wih <code>.h</code> (for &quot;header&quot;)</li>
+<li><strong>implementation</strong>: the full definition for every function, as well as space for any global variables. In this course, typicall named <code>.cc</code>. C files are always named <code>.c</code></li>
+</ul>
+<p>The real power in separating our implementations is by having <strong>separate compilation</strong> this is useful for very large projects where compiling the entire project for one change would take a very long time.</p>
+<pre><code><code><div>$ g++ -c main.cc
+$ g++ -c vec.cc
+$ g++ main.o vec.o -o vecs
+$
+</div></code></code></pre>
+<ul>
+<li>the <code>-c</code> compiles to an <strong>object file</strong> which is compiled code but not enough for a full program.</li>
+<li>combining multiple <code>.o</code> files is called <strong>linking</strong></li>
+</ul>
+<p>if we only change something in main we don't have to recompile the entire project:</p>
+<pre><code class="language-c++"><div>  [... change main.cc ...]
+$ g++ -c main.cc
+$ g++ main.o vec.o -o vecs
+$
+</div></code></pre>
+<p>header files can only have declarations so we need to declare a variable in the header file with <code>extern type name</code> then define the varaible in an implementation file.</p>
+<h2 id="make-and-makefiles">Make and makefiles</h2>
+<p>there is a tool to automate linking, <code>make</code><br>
+a simple makefile for our previous example program is</p>
+<pre><code class="language-make"><code><div>vecs: main.o vec.o
+	g++ main.o vec.o -o vecs
+
+main.o: main.cc vec.h
+	g++ -std=c++14 -c main.cc
+
+vec.o: vec.cc vec.h
+	g++ -std=c++14 -c vec.cc
+</div></code></code></pre>
+<ul>
+<li>this must be placed in a file named &quot;Makefile&quot;</li>
+<li>the lines not indented are <em>dependencies</em>
+<ul>
+<li>the show that the file before the colon depends on the file after the colon</li>
+<li>each file is a <strong>target</strong> (something Makefile describes how to create)</li>
+</ul>
+</li>
+</ul>
+<p><strong>note:</strong> the commands to create a target must be indented with tabs, even if you normally use spaces</p>
+<p>the command to create any given target is called a <strong>recipe</strong></p>
+<p>to use the make file we only need to use the command <code>make</code></p>
+<pre><code><code><div>$ make
+g++ -std=c++14 -c main.cc
+g++ -std=c++14 -c vec.cc
+g++ main.o vec.o -o vecs
+$
+</div></code></code></pre>
+<ul>
+<li><code>make</code> automatically only rebuilds what is needed based on what we changed</li>
+</ul>
+<p>we can clean up unwanted side effects of building through a <strong>phony target</strong> (a target that only exists for its recipe and doesn't actually build anything)</p>
+<pre><code><code><div>$ cat Makefile 
+vecs: main.o vec.o
+	g++ main.o vec.o -o vecs
+
+main.o: main.cc vec.h
+	g++ -std=c++14 -c main.cc
+
+vec.o: vec.cc vec.h
+	g++ -std=c++14 -c vec.cc
+
+.PHONY: clean
+
+clean:
+	rm *.o vecs
+
+$ make clean
+rm *.o vecs
+$
+</div></code></code></pre>
+<p>we can reduce clutter in our <code>Makefile</code> by using <strong>make variables</strong></p>
+<pre><code><code><div>$ cat Makefile 
+CXX=g++
+CXXFLAGS=-std=c++14
+OBJECTS=main.o vec.o
+EXEC=vecs
+
+${EXEC}: ${OBJECTS}
+	${CXX} ${OBJECTS} -o ${EXEC}
+
+main.o: main.cc vec.h
+vec.o: vec.cc vec.h
+.PHONY: clean
+
+clean:
+	rm ${OBJECTS} ${EXEC}
+
+$ make 
+g++ -std=c++14   -c -o main.o main.cc
+g++ -std=c++14   -c -o vec.o vec.cc
+g++ main.o vec.o -o vecs
+$
+</div></code></code></pre>
+<p>the <code>-MMD</code> flag for g++ makes it create <code>.d</code> files which are <code>make</code> dependencies so that we can keep track of what our dependencies are.</p>
+<pre><code><code><div>$ cat Makefile 
+CXX=g++
+CXXFLAGS=-std=c++14 -MMD
+OBJECTS=main.o vec.o
+DEPENDS=${OBJECTS:.o=.d}
+EXEC=vecs
+
+${EXEC}: ${OBJECTS}
+	${CXX} ${OBJECTS} -o ${EXEC}
+
+-include ${DEPENDS}
+
+.PHONY: clean
+
+clean:
+	rm ${OBJECTS} ${DEPENDS} ${EXEC}
+$ 
+</div></code></code></pre>
+<p><code>make</code> is capable of a lot more, but this is sufficient to build most normal C++ projects*</p>
+<h1 id="object-oriented-programming">Object Oriented Programming</h1>
+<h2 id="introduction-1">Introduction</h2>
+<h3 id="classes">Classes</h3>
+<h4 id="coupling-and-cohesion">Coupling and cohesion</h4>
+<p>There are two important measurements of software design quality, <strong>cohesion</strong> and <strong>coupling</strong></p>
+<p><strong>Cohesion</strong> measures the amount of &quot;relatedness&quot; that a module or unit of code contains. we want there to be a &quot;high degree&quot; of cohesion.</p>
+<ul>
+<li>for example the <code>stdio</code> library contains input and output functions so it's highly cohesive</li>
+</ul>
+<p><strong>Coupling</strong> measures the amont of dependency <em>between</em> units/modules. We want the amount of coupling between modules to be low, this is because the more dependency each module has the more likely a change in one will cause a change in the other.</p>
+<ul>
+<li>so we want our code modules to be as &quot;independent&quot; as possible so that a potential change in one module does not impact many others</li>
+</ul>
+<h4 id="applying-these-principles">Applying these principles</h4>
+<p>In C we can combine related data together in a structure. In C++ we can also combine <em>functions</em> and <em>data</em> together using the <code>struct</code> keyword. This improves cohesion.</p>
+<ul>
+<li>functions inside a structure are now called, <strong>operations</strong>, <strong>methods</strong> or <strong>member functions</strong> which are in the data structure called a <strong>class</strong></li>
+<li>a <strong>class</strong> is a <em>type</em> and an <em>instance</em> of a class is called an <strong>object</strong></li>
+<li>in C++ we can also add functions to a <code>struct</code></li>
+</ul>
+<p>Here is an example using <code>struct</code>:<br>
+<code>student.h</code></p>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> _STUDENT_H_</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _STUDENT_H_</span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span> {</span> 
+    <span class="hljs-keyword">int</span> assns, mt, <span class="hljs-keyword">final</span>; 
+
+    <span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">grade</span><span class="hljs-params">()</span></span>; 
+};
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+</div></code></pre>
+<ul>
+<li>we see there is a single method <code>grade</code> which takes no parameters and returns the final grade
+<code>studnet.cc</code></li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;student.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">Student::grade</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">return</span> assns * <span class="hljs-number">0.4</span> + mt * <span class="hljs-number">0.2</span> + <span class="hljs-keyword">final</span> * o<span class="hljs-number">.4</span>; 
+}
+</div></code></pre>
+<ul>
+<li>we use the <strong>scope resolution operator</strong> <code>::</code> prefixed by the class name to specify that the <code>grade</code> function is a <strong>method</strong> of the <code>student</code> class</li>
+<li><code>C::f</code>
+<ul>
+<li>for some class <code>C</code>, <code>f</code> is in the context of <code>C</code>
+<code>main.cc</code> the <em>client code</em></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;student.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{ 
+    Student s{ <span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">80</span> }; 
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span>&lt;&lt; s.grade() &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+} 
+</div></code></pre>
+<ul>
+<li>we use an <strong>initialization list</strong> where the compiler automatically maps the values to the order they were declared</li>
+</ul>
+<p>All class methods have a hidden first parameter called <strong>this</strong> which is a pointer of class type and points to the object which the method is being invoked upon.<br>
+We can rewrite our previous code as</p>
+<pre><code class="language-C++"><div><span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">Student::grade</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;assns * <span class="hljs-number">0.4</span> + <span class="hljs-keyword">this</span>-&gt;mt * <span class="hljs-number">0.2</span> + <span class="hljs-keyword">this</span>-&gt;<span class="hljs-keyword">final</span> * <span class="hljs-number">0.4</span>; 
+} 
+</div></code></pre>
+<p><strong>Warning</strong> some people hate the use of <code>this</code> unnecessarily and feel it should only ever be used when needed to disambiguate parameter or method calls since it clutters up the ocode.</p>
+<ul>
+<li>in this course we will only use it when absolutely necessary</li>
+</ul>
+<h4 id="initializing-objects">Initializing objects</h4>
+<p>C++ classes have a special type of method called a <strong>constructor</strong></p>
+<ul>
+<li>which guarantees that an object is always initialized upon creation</li>
+</ul>
+<pre><code class="language-C++"><div>Name-of-Class-Type( parameter-<span class="hljs-built_in">list</span> ) { 
+    <span class="hljs-comment">// necessary code </span>
+} 
+</div></code></pre>
+<ul>
+<li>there is no return type</li>
+<li>the method is the type name</li>
+<li>the parameter list may be empty</li>
+<li>constructors can be overloaded</li>
+<li>method body may be empty, but must be present</li>
+</ul>
+<p>So using constructors our new implementation file becomes</p>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;student.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">capGrade</span><span class="hljs-params">( <span class="hljs-keyword">int</span> grade )</span> </span>{
+   <span class="hljs-keyword">if</span> ( grade &lt; <span class="hljs-number">0</span> ) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+   <span class="hljs-keyword">if</span> ( grade &gt; <span class="hljs-number">100</span> ) <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;
+   <span class="hljs-keyword">return</span> grade;
+}
+
+Student::Student( <span class="hljs-keyword">int</span> assns, <span class="hljs-keyword">int</span> mt, <span class="hljs-keyword">int</span> <span class="hljs-keyword">final</span> ) {
+   <span class="hljs-keyword">this</span>-&gt;assns = capGrade( assns );
+   <span class="hljs-keyword">this</span>-&gt;mt = capGrade( mt );
+   <span class="hljs-keyword">this</span>-&gt;<span class="hljs-keyword">final</span> = capGrade( <span class="hljs-keyword">final</span> );
+}
+
+<span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">Student::grade</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">return</span> assns * <span class="hljs-number">0.4</span> + mt * <span class="hljs-number">0.2</span> + <span class="hljs-keyword">final</span> * <span class="hljs-number">0.4</span>;
+}
+</div></code></pre>
+<ul>
+<li>our header file will need to account for the constructor as well</li>
+<li>notice we need to use <code>this</code> to differentiate between the parameters and the actual data field names</li>
+</ul>
+<p>The preffered syntax in modern C++ is <strong>uniform intialization syntax</strong> and is of form:</p>
+<pre><code class="language-C++"><div>Student s{ <span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">80</span> };
+<span class="hljs-keyword">int</span> x{ <span class="hljs-number">5</span> };
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> word{ <span class="hljs-string">&quot;hello&quot;</span> };
+Node * ptr = <span class="hljs-keyword">new</span> Node{ <span class="hljs-number">10</span>, <span class="hljs-literal">nullptr</span> };
+</div></code></pre>
+<p>we can overload our constructors</p>
+<ul>
+<li>have different constructors with different parameters</li>
+</ul>
+<p>we can use default parameters on our constructors, these go in the interface and <strong>not</strong> the implementation file.</p>
+<h2 id="special-class-members">Special Class Members</h2>
+<h3 id="default-constructors">Default constructors</h3>
+<p>By definition a <strong>default constructor</strong> is a constructor that has 0 parameters.</p>
+<p>If you do not define any constructor to your class the compiler will give you a defualt constructor.</p>
+<ul>
+<li>all it will do is call the default constructor on any data fields in your object that are themselves objects</li>
+</ul>
+<h3 id="initializing-constants-and-references">Initializing constants and references</h3>
+<p>what if we want to intialize constants in an object (for example student id in a student object)</p>
+<ul>
+<li>we can't just provide the value in the constructor since they const is already created and can't be modified</li>
+</ul>
+<p>so we use</p>
+<h4 id="member-initialization-lists-mil">Member initialization lists (MIL)</h4>
+<p>after the parenthesis of a constructor we add a <code>:</code> followed by a list of data field names to be initialized</p>
+<pre><code class="language-C++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;student.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">capGrade</span><span class="hljs-params">( <span class="hljs-keyword">int</span> grade )</span> </span>{
+   <span class="hljs-keyword">if</span> ( grade &lt; <span class="hljs-number">0</span> ) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+   <span class="hljs-keyword">if</span> ( grade &gt; <span class="hljs-number">100</span> ) <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;
+   <span class="hljs-keyword">return</span> grade;
+}
+
+Student::Student( <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> id, <span class="hljs-keyword">int</span> assns, <span class="hljs-keyword">int</span> mt, <span class="hljs-keyword">int</span> <span class="hljs-keyword">final</span> ) 
+   : id{ id },
+     assns{ capGrade(assns) }, 
+     mt{ capGrade(mt) }, 
+     <span class="hljs-keyword">final</span>{ capGrade(<span class="hljs-keyword">final</span>) }
+{}
+
+<span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">Student::grade</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">return</span> assns * <span class="hljs-number">0.4</span> + mt * <span class="hljs-number">0.2</span> + <span class="hljs-keyword">final</span> * <span class="hljs-number">0.4</span>;
+}
+</div></code></pre>
+<ul>
+<li>the name outside of <code>{}</code> in the MIL is the data field, the name inside is the parameter name</li>
+<li>the MIL can be used to initialize other data fields not just constants or references</li>
+<li>fields in the MIL are intialized in the order in which they are declared in the class, <strong>not</strong> in the order that they are listed in the MIL</li>
+<li>using MIL is more efficient for data fields which have a default constructor since it takes precedance over intialization in the class so it avoids initializing a data feild twice</li>
+<li>MIL can only be used on constructors</li>
+</ul>
+<p>It is normally considered poor practice to use the body for anything the MIL could have done</p>
+<h4 id="copy-constructors">Copy constructors</h4>
+<p>There are other methods the compiler provides if you don't provide your own</p>
+<ol>
+<li>default constructor: calls the default constructor on all fields that are objects</li>
+<li>copy constructor: copies all fields from the object passed in</li>
+<li>copy assignment operator: copies all fields from the object passed in</li>
+<li>destructor: does nothing by default</li>
+<li>move constructor: takes data from the object passed in</li>
+<li>move assignment operator: takes data from the object passed in</li>
+</ol>
+<p>a copy constructor has a parameter which is a constant reference to an object of the same type</p>
+<pre><code class="language-C++"><div>Student( <span class="hljs-keyword">const</span> Student &amp; other ) 
+      : assns{other.assns}, mt{other.mt}, <span class="hljs-keyword">final</span>{other.<span class="hljs-keyword">final</span>} {}
+</div></code></pre>
+<ul>
+<li>example of a copy constructor</li>
+</ul>
+<p>The default copy constructor does not work when we want to copy a dynamically allocated data structure.</p>
+<ul>
+<li>for example if we copied a linked list it would create a <strong>shallow copy</strong> since it would copy the first node which is linked to the same other nodes
+<ul>
+<li>the end result is that we did not create a new linked list that is independent so we need to define our own copy constructor if we want to create a <strong>deep copy</strong></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C++"><div>Node(<span class="hljs-keyword">const</span> Node &amp;n) {
+   data = n.data;
+   <span class="hljs-keyword">if</span> ( n.next != <span class="hljs-literal">nullptr</span> ) {
+      next = <span class="hljs-keyword">new</span> Node{ *n.next };
+   } <span class="hljs-keyword">else</span> {
+      next = <span class="hljs-literal">nullptr</span>;
+   }
+}
+</div></code></pre>
+<ul>
+<li>here is a possible copy constructor for our linked list</li>
+</ul>
+<p>For now, we are going to say that a copy constructor is called when an object:</p>
+<ol>
+<li>is initialized by another object</li>
+<li>is passed by value</li>
+<li>returned by value
+<ul>
+<li>we will see exceptions to these cases later</li>
+</ul>
+</li>
+</ol>
+<h3 id="the-peril-of-single-argument-constructors">The Peril of single-argument constructors</h3>
+<p>By definition a single argument constructor <strong>implicitly convert</strong> an argument of the specified type into an object of the construcor type.</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+   ...
+   Node( <span class="hljs-keyword">int</span> data ) : data{data}, next{<span class="hljs-literal">nullptr</span>} {}
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(Node n)</span> </span>{...}
+
+Node n1{<span class="hljs-number">4</span>}; <span class="hljs-comment">// single-argument ctor call</span>
+Node n2 = <span class="hljs-number">4</span>; <span class="hljs-comment">// implicit conversion from int to Node via single-arg ctor</span>
+f( <span class="hljs-number">4</span> ); <span class="hljs-comment">// 4 implicitly converted to a Node</span>
+</div></code></pre>
+<ul>
+<li>beware of the conversionn happening here as it can cause errors</li>
+</ul>
+<p>if we want to disable implict converstion we can lable all single-argument constructors with the <code>explicit</code> keyword</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+  <span class="hljs-keyword">int</span> data;
+  Node *next = <span class="hljs-literal">nullptr</span>;
+  <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">Node</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> : data</span>{data} {}
+  Node(<span class="hljs-keyword">int</span> data, Node *next): data{data}, next{next} {}
+
+  Node(<span class="hljs-keyword">const</span> Node &amp;n): data{n.data},
+                       next{n.next ? <span class="hljs-keyword">new</span> Node{*n.next} : <span class="hljs-literal">nullptr</span>} {}
+};
+
+Node myNode = <span class="hljs-number">4</span>; <span class="hljs-comment">// Causes an ERROR</span>
+</div></code></pre>
+<ul>
+<li>we would have to expicitly create a node with <code>Node myNode = Node{4};</code></li>
+</ul>
+<h2 id="destructors">Destructors</h2>
+<p>The destructor provided by the compiler does nothing but call destructor of data fields which are objects</p>
+<p>the steps that occur when a destructor is run are:</p>
+<ol>
+<li>run the body of the destructor</li>
+<li>invoke destructors for the object's data fields that are themeslves objects. This occurs in reverse declaration order.</li>
+<li>Deallocate the space associated with the object</li>
+</ol>
+<p>the signature for a class destructor follows the format:</p>
+<pre><code class="language-c++"><div>~<span class="hljs-class"><span class="hljs-keyword">class</span>-<span class="hljs-title">name</span>();</span> 
+</div></code></pre>
+<p>Header file</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+  <span class="hljs-keyword">int</span> data;
+  Node *next;
+  Node(<span class="hljs-keyword">int</span> data, Node *next);
+  Node(<span class="hljs-keyword">const</span> Node &amp;n);
+  <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">Node</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>;
+  ~Node();
+};
+</div></code></pre>
+<p>Here is the destructor as it would appear in the implementation file</p>
+<pre><code class="language-C++"><div>Node::~Node() {
+    <span class="hljs-keyword">delete</span> next;
+}
+</div></code></pre>
+<h2 id="copy-assignment-operator">Copy assignment operator</h2>
+<p>We can copy an object by assigning it to another object. This uses the <strong>copy assignment operator</strong> which performs a <em>shallow copy</em> of the data fields just like the implicit copy constructor.</p>
+<ul>
+<li>we need to define our own if we wanty to perform a <em>deep copy</em></li>
+</ul>
+<p>the name of the operator is <code>operator=</code> and by definition it takes a constant reference of the class type as its single parameter.</p>
+<ul>
+<li>it returns a reference of the class type since it needs to work if its part of a cascade/sequence of assignment operations</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">class</span>-<span class="hljs-title">type</span> &amp; <span class="hljs-title">operator</span>=( <span class="hljs-title">const</span> <span class="hljs-title">class</span>-<span class="hljs-title">type</span> &amp; <span class="hljs-title">parameter</span>-<span class="hljs-title">name</span> );</span>
+</div></code></pre>
+<p>Here is an example of a copy assignment operator implementation</p>
+<pre><code class="language-C++"><div>Node &amp; <span class="hljs-keyword">operator</span>=( <span class="hljs-keyword">const</span> Node &amp; other) {
+   <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span> == &amp;other ) <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+   data = other.data;
+   Node * tmp = other.next? <span class="hljs-keyword">new</span> Node{ *other.next } : <span class="hljs-literal">nullptr</span>;
+   <span class="hljs-keyword">delete</span> next;
+   next = tmp;
+   <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+}
+</div></code></pre>
+<h3 id="copy-swap-idiom">Copy-swap idiom</h3>
+<p>There is another approach by using the <strong>copy-and-swap</strong> idiom where we create a local copy which is automatically destroyed. and if it is succesfully created we swap using <code>std::swap</code></p>
+<pre><code class="language-c++"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;utility&gt;</span></span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+   ...
+   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">( Node &amp; other )</span> </span>{
+      <span class="hljs-built_in">std</span>::swap( data, other.data );
+      <span class="hljs-built_in">std</span>::swap( next, other.next );
+   }
+   
+   Node &amp; <span class="hljs-keyword">operator</span>=( <span class="hljs-keyword">const</span> Node &amp; other) {
+      Node tmp{ other };
+      swap( tmp );
+      <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+   }
+   ...
+};
+</div></code></pre>
+<h2 id="move-semantics">Move semantics</h2>
+<p>There are situations (such as passing an argument as a parameter) where the compiler will need to create a temporary object and then later copy this object to create the final result.</p>
+<ul>
+<li>the compiler realizes its wasteful to copy information so the compiler optimizes by just &quot;stealing&quot; the information instead this is called <strong>move/copy elision</strong>
+<ul>
+<li>in order to do this we need to pass the object as an <strong>rvalue reference</strong> (<code>type&amp;&amp;</code>) which tells the compiler to not perform the whole move/copy</li>
+</ul>
+</li>
+</ul>
+<h3 id="move-constructor">Move constructor</h3>
+<p>The introduction of an rvalue reference now lets us declar a constructor which takes in an rvalue reference.</p>
+<p>Ad <strong>move constructor</strong> is designed to steal the information from the rvalue passed into the constructor</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">class</span>-<span class="hljs-title">type</span>( <span class="hljs-title">class</span>-<span class="hljs-title">type</span> &amp;&amp; <span class="hljs-title">parameter</span>-<span class="hljs-title">name</span> ) {</span>...}
+</div></code></pre>
+<ul>
+<li>this constructor saves us that temporary object we copied earlier</li>
+</ul>
+<p>The rvalue passed through is eventually destroyed by the call for its destructor so we have to ensure that we save the information we need.<br>
+In the example of the node structure we have:</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    ...
+    Node( Node &amp;&amp; other );
+    ...
+};
+
+...
+
+Node::Node( Node &amp;&amp;other ) : data{other.data}, next{other.next} {
+    other.next = <span class="hljs-literal">nullptr</span>;
+}
+</div></code></pre>
+<h3 id="move-assignment">Move assignment</h3>
+<p><strong>Move assignment</strong> is similar to copy assignment. We need to make sure we don't leak memory.</p>
+<ul>
+<li>we can exchange our old information with new information from the rvalue, guaranteeing that it'll be cleauned up when the rvalue's destructor is run</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    ...
+    Node &amp; <span class="hljs-keyword">operator</span>=( Node &amp;&amp;other );
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">( Node &amp;other )</span></span>;
+    ...
+};
+ 
+...
+
+Node &amp; Node::<span class="hljs-keyword">operator</span>=( Node &amp;&amp;other ) {
+    swap(other);
+    <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Node::swap</span><span class="hljs-params">(Node &amp;other)</span> </span>{
+    <span class="hljs-built_in">std</span>::swap( data, other.data );
+    <span class="hljs-built_in">std</span>::swap( next, other.next );
+}
+</div></code></pre>
+<h2 id="rules-for-replacing-default-compiler-operations">Rules for replacing default compiler operations</h2>
+<p>|---|---|--|
+|Default constructor|	if no other constructors|	does nothing|
+|Destructor|	if no destructor|	does nothing|
+|Copy constructor|	if no move constructor and no move assignment|	copies all members|
+|Copy assignment|	if no move constructor and no move assignment|	copies all members|
+|Move constructor|	if no destructor, no copy constructor and no copy nor move assignment|	moves all members|
+|Move assignment|	if no destructor, no copy constructor and no copy nor move assignment|	moves all members|</p>
+<p>This leads us to the rule of 5, generally if u define one of the following u will need to define the rest</p>
+<ol>
+<li>copy constructor</li>
+<li>copy assignment operator</li>
+<li>destructor</li>
+<li>move constructor</li>
+<li>move assignment operator</li>
+</ol>
+<h2 id="member-operators">Member operators</h2>
+<p>if we are invoking an operation, the object <strong>must</strong> be on the left hand side</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Vec</span> {</span>
+   <span class="hljs-keyword">int</span> x, y;
+   
+   Vec <span class="hljs-keyword">operator</span>+( <span class="hljs-keyword">const</span> Vec &amp; other ) {
+      <span class="hljs-keyword">return</span> {x + other.x, y + other.y};
+   }
+   
+   Vec <span class="hljs-keyword">operator</span>*( <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> k ) {
+      <span class="hljs-keyword">return</span> { x * k, y * k };
+   }
+};
+</div></code></pre>
+<ul>
+<li>this definition of the operator requires us to have the vector on the left hand side</li>
+<li>the only way we can have a version which allows us to have the vector on the right hand side as well is to define it outside of the class</li>
+</ul>
+<p><strong>Must be class members:</strong></p>
+<ul>
+<li>constructors</li>
+<li>destructors</li>
+<li>operator=</li>
+<li>operator[]</li>
+<li>operator-&gt;</li>
+<li>operator()</li>
+<li>operator T()</li>
+</ul>
+<p><strong>Must not be class members</strong></p>
+<ul>
+<li>operators whose first parameter isn't an object of the class type. In particular, I/O operators</li>
+</ul>
+<h2 id="static-members">Static Members</h2>
+<p>If we want to have values which are the same across all objects of a certain type (value belongs to the class rather than the individual objects), for example the number of students, then we need to use a static member.</p>
+<p><strong>Static members</strong> are associated with the class itself and not any particular instance of the class:</p>
+<pre><code class="language-c++"><div><span class="hljs-comment">// In student.h</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span> {</span>
+    . . .
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> numInstances;
+    Student(<span class="hljs-keyword">int</span> assns, <span class="hljs-keyword">int</span> mt, <span class="hljs-keyword">int</span> <span class="hljs-keyword">final</span>): assns{assns}, mt{mt}, <span class="hljs-keyword">final</span>{<span class="hljs-keyword">final</span>} {
+        ++numInstances;
+    }
+};
+
+<span class="hljs-comment">// In student.cc:</span>
+<span class="hljs-keyword">int</span> Student::numInstances = <span class="hljs-number">0</span>;
+</div></code></pre>
+<p><strong>Static member functions:</strong> don't depend on a specific instance for their computation (they don't have an implicit <code>this</code> parameter).</p>
+<ul>
+<li>they can only access static fields and call other static member functions</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-comment">// In student.h:</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span> {</span>
+    <span class="hljs-keyword">int</span> assns, mt, <span class="hljs-keyword">final</span>;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> numInstances;
+    . . .
+    <span class="hljs-comment">// The static method howMany() can access the static field numInstances.</span>
+    <span class="hljs-comment">// However, it cannot access the instance fields assns, mt, final.</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">howMany</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">cout</span> &lt;&lt; numInstances &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+};
+
+<span class="hljs-comment">// In main.cc:</span>
+Student billy {<span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">80</span>}, jane {<span class="hljs-number">70</span>, <span class="hljs-number">80</span>, <span class="hljs-number">90</span>};
+Student::howMany(); <span class="hljs-comment">// 2</span>
+</div></code></pre>
+<ul>
+<li>notice how the method is called on the <code>Student</code> class, and not on any object</li>
+</ul>
+<h1 id="advanced-object-use">Advanced object use</h1>
+<h2 id="object-arrays">Object arrays</h2>
+<p>To create an array of objects the class must provide a default constructor, otherwise it's a syntax error</p>
+<p>This cannot be used in an array:</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Vec</span> {</span>
+   <span class="hljs-keyword">int</span> x, y;
+   Vec( <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y );
+};
+</div></code></pre>
+<p>However this <strong>can</strong> be used in an array:</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Vec</span> {</span>
+   <span class="hljs-keyword">int</span> x, y;
+   Vec( <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y );
+};
+</div></code></pre>
+<p>If the class we're working cannot/should not introduce a default constructor, then the only alternative is to create an array of pointers to the class type</p>
+<h2 id="constant-objects">Constant Objects</h2>
+<p><strong>Constant object</strong> (const object) is an object whos fields cannot be modified.</p>
+<ul>
+<li>we can define a constant object <code>const className obj</code> or pass the object as a constant <code>f(const className &amp;obj)</code></li>
+<li>we can only call methods which have <code>const;</code> added to their signature on constant objects because that promises that the fields won't be modified
+for example:</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-comment">// const is part of a function&#x27;s signature, so it must be written in both .h and .cc</span>
+<span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">Student::grade</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{
+    <span class="hljs-keyword">return</span> assns * <span class="hljs-number">0.4</span> + mt * <span class="hljs-number">0.2</span> + <span class="hljs-keyword">final</span> * <span class="hljs-number">0.4</span>;
+}
+</div></code></pre>
+<ul>
+<li>if we call a method which modified a field on a constant object then it will cause an error</li>
+</ul>
+<h3 id="mutable-fields">Mutable fields</h3>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span> {</span>
+    . . .
+    <span class="hljs-keyword">mutable</span> <span class="hljs-keyword">int</span> numMethodCalls = <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">grade</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{  <span class="hljs-comment">// can be const now</span>
+        ++numMethodCalls;  <span class="hljs-comment">// OK now</span>
+        <span class="hljs-keyword">return</span> . . . ;
+    }
+};
+</div></code></pre>
+<p>Say we want to track how many times a method is called to track performance. The variables which counts the number of times the method is called only affects the <strong>phyiscal constness</strong> of the object rather than the <strong>logical constness</strong> (its value changing does not affect any of the logic an outside user would observe).</p>
+<p>We can define <code>mutable</code> fields which means the can be changed even in constant objects</p>
+<ul>
+<li>we cannot implement the above without this because the methodCalls counter would not work on a const object</li>
+</ul>
+<h3 id="best-practices">Best practices</h3>
+<ul>
+<li>if you know a method will not affect any internal fields then always declare the method as <code>const</code></li>
+<li>whenever declaring a method which recieves objects as parameters and it will not change the contents of the object then declare parameters as <code>const</code> so that constant objects can be passed to it</li>
+<li>if you have fields that must be modified even for constant objects define them as mutable</li>
+<li>whenever you create (instantiate) an object whose values should not change later then declare it as constant</li>
+</ul>
+<h1 id="invariants-and-encapsulation">Invariants and Encapsulation</h1>
+<p>Sometimes we need to enforce certain proper use of classes or other things in our code so that errors cannot be introduced. For example:</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    Node *next;
+    Node (<span class="hljs-keyword">int</span> data, Node *next): data{data}, next{next} {}
+    . . .
+    ~Node() { <span class="hljs-keyword">delete</span> next; }
+};
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Node n1 {<span class="hljs-number">1</span>, <span class="hljs-keyword">new</span> Node{<span class="hljs-number">2</span>, <span class="hljs-literal">nullptr</span>}};
+    Node n2 {<span class="hljs-number">3</span>, <span class="hljs-literal">nullptr</span>};
+    Node n3 {<span class="hljs-number">4</span>, &amp;n2};
+}
+</div></code></pre>
+<ul>
+<li>when the destructor for <code>n3</code> is called it can cause the program to crash since it is trying to delete an object in the stack not the heap.</li>
+<li>so we need to enforce that a node is declared either to a valid location in the heap or a <code>nullptr</code></li>
+</ul>
+<h2 id="encapsulation">Encapsulation</h2>
+<p>We can regain control of our classes through <strong>encapsulation</strong>, by setting the <strong>access modifier</strong> or <strong>visibility</strong> for each one of the members of a class.</p>
+<ul>
+<li><strong>private</strong> class members can only be accessed from within the object (i.e, using the implicit <code>this</code> pointer of the object's methods)</li>
+<li><strong>public</strong> class members can be accessed from anywhere</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Vec</span> {</span>
+    Vec (<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y); <span class="hljs-comment">// By default, members are public</span>
+  <span class="hljs-keyword">private</span>: <span class="hljs-comment">// What follows is private; cannot be accessed outside struct Vec</span>
+    <span class="hljs-keyword">int</span> x, y;
+
+  <span class="hljs-keyword">public</span>: <span class="hljs-comment">// What follows is public; accessible to all</span>
+    Vec <span class="hljs-keyword">operator</span>+(<span class="hljs-keyword">const</span> Vec &amp;other);
+    . . .
+};
+</div></code></pre>
+<ul>
+<li>once we use an access modifier all members after it are assigned to that modifier until the other one is declared
+<ul>
+<li>so we can write private once at the top to have all members as private</li>
+</ul>
+</li>
+<li>by default in a struct members are <em>public</em></li>
+</ul>
+<h2 id="the-class-keyword">The <code>class</code> Keyword</h2>
+<p>By default all members of structs are public, but in general we want fields to be private and only methods should be public. So it would be better if the default visibility way private.</p>
+<p>We achieve this with the <code>struct</code> keyword</p>
+<ul>
+<li>the only difference between <code>struct</code> and <code>class</code> is the defualt visibility</li>
+</ul>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vec</span> {</span>
+    <span class="hljs-keyword">int</span> x, y; <span class="hljs-comment">// These are private.</span>
+  <span class="hljs-keyword">public</span>:
+    Vec (<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y);
+    Vec <span class="hljs-keyword">operator</span>+(<span class="hljs-keyword">const</span> Vec &amp;other);
+    . . .
+};
+</div></code></pre>
+<ul>
+<li>since in most cases we want default visibility to be private it is best practice to use class and only change necessary things to public</li>
+</ul>
+<h2 id="accessor-and-mutator-methods">Accessor and Mutator Methods</h2>
+<p>Since fields of objects are private, we use <strong>acessor</strong> and <strong>mutator</strong> methods to read and change the values.</p>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vec</span> {</span>
+    <span class="hljs-keyword">int</span> x, y;
+  <span class="hljs-keyword">public</span>:
+    . . .
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getX</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-keyword">return</span> x; } <span class="hljs-comment">// accessor</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setX</span><span class="hljs-params">(<span class="hljs-keyword">int</span> z)</span> </span>{ x = z; }    <span class="hljs-comment">// mutator</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getY</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-keyword">return</span> y; } <span class="hljs-comment">// accessor</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setY</span><span class="hljs-params">(<span class="hljs-keyword">int</span> z)</span> </span>{ y = z; }    <span class="hljs-comment">// mutator</span>
+ };
+</div></code></pre>
+<ul>
+<li>since the fields get and set the value it is convention to name them <code>getField</code> and <code>setField</code>
+<ul>
+<li>they are sometimes called getters and setters</li>
+</ul>
+</li>
+<li>since accessor methods should not modify any state they should be decalred as <code>const</code></li>
+</ul>
+<h3 id="enforcing-encapsulation-with-accessors-and-mutators">Enforcing encapsulation with accessors and mutators</h3>
+<p>We should only create accessors and mutators when necessary. If certain invariants are needed for mutators they are implemented in the mutator methods (for example grade must be between 0 and 100)</p>
+<p>here is a fixed implementation of our linked list class
+<strong>list.h:</strong></p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">List</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>;</span>             <span class="hljs-comment">// Private nested class; only accessible inside List</span>
+    Node *theList = <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">// Must be nullptr or pointer to heap-allocated object</span>
+  <span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addToFront</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>;  <span class="hljs-comment">// Adds an element to the front of the list</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ith</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>;          <span class="hljs-comment">// Retrieves the element in the ith position of the list</span>
+    ~List();
+};
+</div></code></pre>
+<p><strong><a href="http://list.cc">list.cc</a></strong></p>
+<pre><code class="language-c++"><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">List</span>:</span>:Node { <span class="hljs-comment">// Nested class</span>
+    <span class="hljs-keyword">int</span> data;
+    Node *next;
+    Node (<span class="hljs-keyword">int</span> data, Node *next): data{data}, next{next} {}
+    ~Node() { <span class="hljs-keyword">delete</span> next; }
+};
+
+List::~List() { <span class="hljs-keyword">delete</span> theList; }
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">List::addToFront</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{ theList = <span class="hljs-keyword">new</span> Node(n, theList); }
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">List::ith</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>{
+    Node *cur = theList;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; ++j, cur = cur-&gt;next);
+    <span class="hljs-keyword">return</span> cur-&gt;data;
+}
+</div></code></pre>
+<ul>
+<li>note that Node is now a nested class (the client cannot directly create a node) this allows us to prevent errors we discussed earlier</li>
+<li>invariants should be documented in the source file or another standard document used by the organization</li>
+</ul>
+<h2 id="friend-classes">Friend Classes</h2>
+<p>In our implementation of node the client cannot access nodes directly and must call <code>ith</code> function many times to find it which costs O(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>) time.<br>
+We can fix this by making node a public class but with the construct being private (so the client cannot create a node).</p>
+<ul>
+<li>but this would make our list class unable to make a node too
+So we use <strong>friend</strong> classes to allow List to have special privilages with Node</li>
+</ul>
+<pre><code><code><div>class List {
+  public:
+    class Node {   // Public nested class
+        int data;
+        Node *next;
+        Node (int data, Node *next); // Constructor is now private!
+       public:
+        ~Node();
+        int getData() const;
+        Node *getNext() const;
+        friend class List;    // List has access to all members of Node
+    }
+  private:
+    Node *theList = nullptr;  // Private internal state
+  public:
+    void addToFront(int n);        // Adds an element to the front of the list
+    int ith(int i) const;          // Retrieves the element in the ith position of the list
+    Node *getNodeAt(int i) const;  // Retrieves the Node in the ith position of the list
+    ~List();
+};
+</div></code></code></pre>
+<ul>
+<li>note that List is declared as a friend of Node.</li>
+</ul>
+<p>You should use friends as little as possible since it weakens encapsulation</p>
+<h2 id="friend-functions">Friend Functions</h2>
+<pre><code class="language-C++"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vec</span> {</span> 
+    <span class="hljs-keyword">int</span> x, y; 
+} 
+</div></code></pre>
+<ul>
+<li>x and y are private but <code>operator&lt;&lt;</code> needs to see them so it must be a <strong>friend function</strong>
+We implement it as</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-comment">// vec.h</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vec</span> {</span>
+    <span class="hljs-keyword">int</span> x, y;
+    <span class="hljs-keyword">friend</span> <span class="hljs-built_in">std</span>::ostream &amp;<span class="hljs-keyword">operator</span>&lt;&lt;(<span class="hljs-built_in">std</span>::ostream &amp;out, <span class="hljs-keyword">const</span> Vec &amp;v);
+};
+
+<span class="hljs-comment">//vec.cc</span>
+<span class="hljs-built_in">std</span>::ostream &amp;<span class="hljs-keyword">operator</span>&lt;&lt;(<span class="hljs-built_in">std</span>::ostream &amp;out, <span class="hljs-keyword">const</span> Vec &amp;v) {
+    <span class="hljs-keyword">return</span> out &lt;&lt; v.x &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; v.y;
+}
+</div></code></pre>
+<p>Once again this weakens encapsulation</p>
+<h1 id="unified-modelling-language">Unified Modelling Language</h1>
+<p>The <strong>Unified Modelling Language</strong> (UML) is a visual modelling language that lets people design and document a software system.</p>
+<p>We will be looking onlt at the subset of notation for class models</p>
+<h3 id="class-models">Class models</h3>
+<p>Martin Fowler's &quot;UML Distilled: Third Edition&quot; is a very good reference (focus on chapter 3 and 5)</p>
+<h2 id="class-model-notation">Class model notation</h2>
+<h3 id="classes-1">Classes</h3>
+<p>Class models contain 3 boxes</p>
+<ol>
+<li>containes the <strong>class name</strong>
+<ul>
+<li>must be unique among all classes in that scope, otherwise a scope operator is added (<code>Banking::CheckingAccount</code>)</li>
+<li>The calss name must be Capitalized, centered, or left-justified, and in bold. Generally they are plural only if they are containers for multiple objects of the type</li>
+<li>The class name may be qualifed with an optional stereotype keyword using guillements
+<ul>
+<li>these are not made up of &lt;&lt; and &gt;&gt; but rather their own thing <code>≪controller≫</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>the second box is optional, and contains <strong>atributes</strong></li>
+<li>the third box is optional, and contains <strong>operations</strong></li>
+</ol>
+<h3 id="comments">Comments</h3>
+<p>A <strong>comment</strong> can be added to the class diagram by joining a rectangle with a bet uppr right corner (&quot;dog ear&quot;) to the item being annoted with a dashed-line.</p>
+<h3 id="attributes">Attributes</h3>
+<p><strong>Attributes</strong> are left-justified and written in the regular typeface. Describe the information held by an instance of the class and may be replaced by <strong>association needs</strong></p>
+<p>The general syntax for an attribute is:</p>
+<pre><code><code><div>≪stereotype≫ visibility / name : type multiplicity initial-value {property}
+</div></code></code></pre>
+<ul>
+<li>visibility: describes the visibility of the attribute as a punctuation mark
+<ul>
+<li>
+<ul>
+<li>public</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>private</li>
+</ul>
+</li>
+<li>
+<h1 id="protected">protected</h1>
+</li>
+<li>~ package</li>
+</ul>
+</li>
+<li>type: a string that describes the attribute's type. Usually written to be as language-independent as possible (Boolean instead of Bool)</li>
+<li>/ : indicates that this attribute is derived from a parent class</li>
+<li>mutliplicity: How many of these values will be held. It is enclosed in square brackets (1 if nothing is there), can describe a range ([3..10])
+<ul>
+<li>[0..1] implicitly represents a pointer in C/C++</li>
+</ul>
+</li>
+<li>initial-value: Specifies the defaul intitial value as an equal sign followed by the value</li>
+<li>property: list of comma-separated strings surrounded by {} which describe properties</li>
+</ul>
+<h3 id="operations-1">Operations</h3>
+<p><strong>operations</strong> are left-justified and written in regular type face. They are shown when needed though a full description must be provided at least once.</p>
+<ul>
+<li>visibility: same as for attribute</li>
+<li>return-type: string containing comma-separated return types. If it is empty its equivalen to C++ <code>void</code></li>
+<li>Parameter-list:</li>
+<li>property</li>
+</ul>
+<p><strong>abstraction operation</strong> is italicized.</p>
+<p>If the operatio is static the name and type strings are underlined</p>
+<p>examples:</p>
+<pre><code><code><div>- display () : Location
++ hide ()
+≪constructor≫ + create ()
+- attachXWindow( xwin : XWindow* )
+# Matrix::transform (in distance: Vector, in angle: Real = 0) : Matrix
+</div></code></code></pre>
+<h1 id="class-relationships">Class relationships</h1>
+<ol>
+<li>aggregation</li>
+<li>composition</li>
+<li>generalization</li>
+</ol>
+<h2 id="association">Association</h2>
+<p>Tells us very little other than that a relationship exists</p>
+<h2 id="aggregation">Aggregation</h2>
+<p>Describes a &quot;whole-part&quot; relation where the <strong>aggregate</strong> (or whole) is made up of the constituent parts
+if A has a B then typically:</p>
+<ul>
+<li>B exists independently outside of A</li>
+<li>if A is destroyed, B lives on</li>
+<li>if A is copied, B is not deep copied</li>
+</ul>
+<h2 id="composition">Composition</h2>
+<p><strong>Composition</strong> is a stricter form of aggregation. Once a part is joined to a &quot;whole&quot; it may not be shared with any other object.</p>
+<p>The whole is responsible for destroying all of its component parts when it is destroyed</p>
+<p>An example of the relation is a Point to a Polygon or a Circle (a point may belong to an object of either type but not part of borth simultaneously).</p>
+<h2 id="generalizationspecialization">Generalization/specialization</h2>
+<p>The <strong>generalization</strong> (or <strong>specialization</strong>) association between the parent/super class and the child/sub class is indicated by putting a triangular arrowhead on the association end that joins the parent. By definition, there is no multiplicity or navigation arrow head, though constraints may be added. There may be separate lines from the parent class to each child, or the lines may be drawn as a tree structure.</p>
+
+    </body>
+    </html>
