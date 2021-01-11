@@ -190,3 +190,55 @@ $$ perp_\mathbb{W}(\vec{v}) = \vec{v} - proj_\mathbb{W}(\vec{v})  \in \mathbb{W}
 
 **Theorem 5:** If $\mathbb{W}$ is a subspace of a finite dimensional inner product spave $\mathbb{V}$, then for any $\vec{v} \in \mathbb{V}$ we have 
 $$ proj_{\mathbb{W}^\bot}(\vec{v}) = perp_{\mathbb{W}}(\vec{v})$$
+
+## 9.5 - Fundemental Theorem of Lineary Algebra
+**Definition:** Let $mathbb{U}$ and $\mathbb{W}$ be subspaces of a vector space $\mathbb{V}$ such that $\mathbb{U} \cup \mathbb{W} = \{ \vec{0} \}$. We define the **direct sum** of $mathbb{U}$ and $\mathbb{W}$ by
+$$ mathbb{U} \oplus \mathbb{W} = \{ \vec{u} + \vec{w} | \vec{u} \in \mathbb{U}, \vec{w} \in \mathbb{W}$$
+
+Notice the direct sum is a subspace and the union of their basis is a basis for the direct sum. The proof should be straight forward. 
+
+**Theorem 9.5.2:** If V is a finite dimensional inner product space with W is a subspace of V. Then $\mathbb{W} \oplus \mathbb{W}^\bot = \mathbb{V}$
+
+**Theorem - The fundemental theorem of linear algebra**: $Col(A)^\bot = Null(A^T)$ and $Row(A)^\bot = Null(A)$
+$$\mathbb{R}^n = Row(A) \oplus Null(A)$$
+$$\mathbb{R}^m = Col(A) \oplus Null(A^T)$$
+
+## 9.6 - The method of real squares
+
+**Theorem 9.6.1 - The approximation theorem:** Let $\mathbb{W}$ be a finite dimensional subspace of an inner product space $\mathbb{V}$. if $\vec{v} \in \mathbb{V}$, then 
+$$||\vec{v} - \vec{w}|| > ||\vec{v} - proj_{\mathbb{W}}(\vec{v})||$$
+- for all $\vec{w} \in \mathbb{W}, \vec{w} \neq proj_\mathbb{W}(\vec{v)$
+
+This essentially tells us that the projection of the vector v onto W is the shortest vector from v to W. 
+
+Say we have a bunch of equations and we want to determined a vector $\vec{a}$ for the values all these systems. In the real world this system will be overdetermined and due to measurement error will likely be an incosistent system. So we are looking for $X\vec{a} = \vec{y}$ but there is no such $\vec{y}$, so we want to minimize the different between $X\vec{a}$ and $\vec{y}$ and from the theorem above this will be the projection of y onto the column space of X. 
+
+Since the vector y is in the column space we can show that this results in 
+$$ X^TX\vec{a} = X^T\vec{y} $$
+- this is called the **normal system**
+
+**Theorem 9.6.2:** if we have points (xi, yi) up to $(x_n, y_n)$ then the vector y and the matrix X (which is composed of rows in the form [1 xi xi^2 ... xn^m]) then if the vector a is any solution to the normal system, the polynomial p(x) with coefficients equal to value in vector a is the best fitting polynomial of degree m for the given data. 
+
+# Chapter 10 - Applications of Orthogonal Matrices
+## 10.1 - Orthogonal similarity
+
+**Definition - orthogonally similar::** two matrices are A, B are orthogonally similar if there exists some **orthogonal** P such that
+$$ P^T A P  = B $$
+
+**Theorem 1 - Triangularization theorem:** If A is an n by n matrix with real eigen values then A is similar to some upper triangular matrix T
+
+## 10.2  - Orthogonal Diagonalization
+**Definition - orthogonally diagonalizable:** An n by n matrix A is orthogonally diagonalizable if there exists orthogonal P and diagonal D such that
+$$ P^T A P = D $$
+
+**Theorem 1:** If A is orthogonally diagonlizable then $A^T = A$
+
+**Definition - symmetrix matrix:** A matrix A with $A^T = A$ is said to be symmetric
+- *lemma 2*: If A is symmetric with real entries, then all of its eigenvalues are real
+
+**Theorem 3 - Principal Axis Theorem:** Every symmetric matrix A is orthogonally diagonalizable 
+
+**Theorem 4:** A matrix A is symmetric if and only if $\vec{x} \cdot (A\vec{y}) = (A\vec{x})\cdot \vec{y})$ for all $\vec{x}, \vec{y} \in \mathbb{R}^n$
+
+**Theorem 5:** If $\vec{v}_1, \vec{v}_2$ are eigenvectors of symmetric matrix A corresponding to distinct eigenvalues $\lambda_1, \lambda_2$, then the vectors are orthogonal
+

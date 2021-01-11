@@ -258,15 +258,80 @@ $$D_{\vec{u}}f(a, b) = \frac{d}{ds}f(a + su_1, b + su_2) \rvert_{s=0}$$
 $$D_{\vec{u}}f(a, b) = \Delta f(a, b) \cdot \vec{u}$$
 where $\cdot$ reperesents the dot product
 
+# Chapter 8 
+## Chapter 8.1 - The Taylor Polynomial of Degree 2
+**Definition - 2nd degree Taylor polynomial:** Let $f$ be a function of two variables. The **second degree Taylor polynomial** $P_{2, (a, b)}$ of $f(x, y)$ and $(a, b)$ is given by 
+$$ P_{2, (a, b)}(x, y) = f(a, b) + f_x(a, b)(x - a) + f_y(a, b)(y - b) + \frac{1}{2} [f_{xx}(a, b)(x-a)^2 + 2f_{xy}(a, b)(x-a)(y-b) + f_{yy}(a, b)(y - b)^2]$$
+- the second degree Taylor polynomial approximates the functiona round (a, b) with better accuracy than the linear approximation (a plane in comparison to a paraboloid)
 
-  
+## Chapter 8.2 - Taylor's Formula with Second Degree Remainder
+
+**Theorem 2 - Taylor's Theorem for Functions of Two Variables**
+## Chapter 8.3 Generalizations of the Taylor Polynomial
+
+**Definition - The **k-th degree Taylor polynomial** of a function $f(x, y)$ is
+$$ P_{k, (a, b)}(x, y) = \Sum_{|a| \leq k} \delta^\alpha f(a, b) = \frac{ [(x, y) - (a, b)]^\alpha}{\alpha !}$$
+- summing over $|a| \leq k$ means we consider all of the mixed partial derivatives whose orders sum to k or less
+- $\alpha$ is a set of numbers where the number in the ith position represents the order of the partial derivative of the ith variable of the function
+    - raising to the exponent of alpha means the terms with the ith variable are raised to the ith value in alpha
+
+**Theorem: Taylor's Theorem of order $k$**
+
+**Definition: Taylor polynomial of degree k for functions of n variables:**
+
+# Chapter 10 : Optimization Problems
+## 10.1 The extreme value theorem 
+Definition: Bounded Set: A set $S \subset \mathbb{R}^2$ is said to be bounded if and only if it is contained in some neighbourhood of the origin
+- this implies that any point in $S$ has finite distance to $(0,0)$
 
 
+**Definition - Boundary Point:** Given a set $S \subset \mathbb{R}^2$ a point $(a, b) \in \mathbb{R}^2$ is said to be a boundary point of S if and only if every neighbourhood of $(a, b)$ contains at least one point in S and one point not in S
 
+**Definition - Boundary of $S$:** is the set $B(S)$ which contains all boundary points of S is called the boundary set of S 
 
+**Definition - Closed set:** A set $S \subseteq \mathbb{R}^2$ is said to be closed if S contains all of its boundary points
 
+### The extreme value theorem for functions of two variables
+Theorem - EVT for functions of two variables: If $f(x, y)$ is continuous on a  closed and bounded set $S \subset \mathbb{R}^2$ then there exist points $(a, b), (c, d) \in S$ such that 
+$$ f(a, b) \leq f(x, y) \leq f(c, d)$$
+- for all $(x, y) \in S$
 
+So a function of two variables which is continuous on a bounded and closed set will always have absolute maxima and minima
 
+## 10.2 - Algorithm for Extreme Valuestttttt
+
+**Algorithm:**      
+First, check to see if the given set $S \subset \mathbb{R}^2$ is closed and bounded     
+Next check if $f(x, y)$ is continuous on $S$
+1. find all critical points in $S$
+2. evaluate $f$ at each critical point
+3. find the maximum and minimum values of $f$ on the boundary $B(S)$
+4. Compare the maximum value from step 3 and 2. Compare the minimum value from step 3 and 2. 
+
+## 10.3 - optimzation with constraints
+
+**Lagrange Multiplier Algorithm:** Assume that $f(x, y)$ is a differentiable function and $g \in C^1$. To find the maxmimum and minimum value of f with contraint $g(x, y) = k$, evalute $f(x, y)$ at all points $(a, b)$ which satisfy one of the following conditions. 
+1. $\nabla f(a, b) = \lambda \nabla g(a, b)$ and $g(a, b) = k$
+2. $\nabla g(a, b) = (0, 0)$ and $g(a, b) = k$
+3. $(a, b)$ is an end point of the curve $g(x, y) = k$
+
+The maximum/minimum value of $f(x, y)$ is the largest/smallest value of $f$ obtained at the points found in conditions 1-3
+
+The variable $\lambda$ is called the **Lagrange multiplier** an can be very useful in some real world applications
+
+Remarks. 
+1. observe that condition 2 must be included since we assumed the gradient vector of g does not equal 0 in the derivation
+2. if the curve $g(x, y) = k$ is unbounded then we need to consider the limit ad (x, y) go to infinity of f(x, y) which satisfy g(x, y) = k
+    - we will not see such cases in this course
+
+### Generalization
+The method of lagrange multipliers can be generalized to function of $n$ varaibles $f(\vec{x}), \vec{x} \in mathbb{R}^n$ and with $r$ constraints of the form.          
+$$g_1(\vec{x}) = 0, \cdots, g_r(\vec{x}) = 0$$
+In order to find the possible maximum and minimum points of $f$ subject to the contraint, we find all points $\vec{x}$ such that
+$$\nabla f(\vec{a}) = \lambda_1 \nabla g_1(\vec{a}) + \cdots + \lambda_r \nabla g_r(\vec{a})$$
+- $g_i(\vec{a}) = 0$ for $1 \leq i leq r$
+
+Notice the scalars $\lambda$ are the Lagrange multipliers
 
 
 

@@ -156,3 +156,46 @@ $$ f(x) = {n \choose x} p^x(1 - p)^{n-x}$$
 $$ \Sigma_{x = 0}^n {n \choose x} a^xb^{n-x} = (a + b)^n $$
 
 The main difference between Binomial distribution and Hypergeometric is that binomial requires **independent** trials and the hypergeometric requires the draws be made from a collection **without replacement**
+
+# Week 5
+Binomial, Negative Binomial, Poission Distribution
+
+# Week 6
+## Average and Expected Value
+
+Definition - Expected Value: If a discrete random variable $X$ has p.f. $f(x)$ then the number $E(X) = \Sum_{all-x}x \cdot f(x)$ is the **expected value** of X, denoted $E(X)$ (also referred to as mean or expectation)
+
+Significance of expected value
+- E(X) = the 'fair' price to pay to play a game whos payoff is X
+- E(X) = the 'center of gravity' of the distribution of X
+
+## Average and Expected Value 2
+- Possion: $E(X) = \mu$
+- Binomial : $f(x) = {n}\choose{x} p^x (1-p)^{n-x}$, $E(X) = np\Sum_{j = 0}{n - 1} {n-1}\choose{j} p^j (1-p)^{n-1-j}$
+- Geometric: $E(X) = \frac{1-p}{p}$ 
+
+
+$$E(g(X)) = \Sum_{all-x}g(x)f(x)$$
+- f(x) is the probability of x
+
+Law of expectation:
+$$E(aX + b) = aE(X) + B$$
+and thus (theorem for linearity)
+$$ E[g(X) + h(X)] = E[g(X)] + E[h(X)] $$
+
+## Variance and Standard Deviation
+Definition - Variance: If $E(X) = \mu$, then the average squared distance between $X$ and $\mu$ is $E[(X-\mu)^2]$ ans is called the **variance** of $X$ or $Var(X)$, often denoted as $\sigma^2$
+- notice that the variance is squared so if the units are km then the variance is in km squared
+
+Defininition - **standard deviation**: The standard deviation is $\sigma$
+
+$$Var(X) = E(X^2) - \mu^2$$
+- this formula can be derived from the definition
+
+Theorem: 
+1. $Var(aX + b) = a^2Var(X)$
+2. SD(aX+b) = a \times SD(X)$, where SD stands for standard deviation (just square root of the above)
+
+**Theorem:** For many standard distributions with $E(X) = \mu$ we can use $Var(X) = E[X(X-1)] + \mu - \mu^2$
+
+
