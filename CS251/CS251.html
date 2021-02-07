@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Computer Organization and Design</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="computer-organization-and-design">Computer Organization and Design</h1>
+<h2 id="motivations">Motivations:</h2>
+<p>Course goals:
+Understanding of computer architecture, structure and evolution</p>
+<ul>
+<li>Computer architecture = instruction set architecture &amp; computer organization</li>
+<li>Instruction set architecture:
+<ul>
+<li>conceptual structure and functional behaviour of computing system as seen by programmer</li>
+</ul>
+</li>
+<li>Computer organization:
+<ul>
+<li>physical implementation, described in terms of function units, their interconnection, how information flow among them is controlled</li>
+</ul>
+</li>
+</ul>
+<p>Why this course is taught:</p>
+<ul>
+<li>Understanding what's inside the computer</li>
+<li>Material is used in future courses</li>
+<li>Architecture issues influence programming
+<ul>
+<li>for example initializing a 2D array row-by-row is much faster than going by column</li>
+</ul>
+</li>
+</ul>
+<p><strong>A brief look at electricity:</strong></p>
+<ul>
+<li>Comuter work with current/voltage <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">V = IR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> (voltage = current * resistance)</li>
+<li>These are continuous values (can graph them)</li>
+<li>Can be manipulated by accuracy is difficuly</li>
+</ul>
+<p><strong>Digitizing</strong></p>
+<ul>
+<li>Discrete signal (high voltage or low voltage, [5V or 0] most modern computers are ~1V and 0V).</li>
+<li>Signal is either high (1) or low (0)</li>
+<li>Transformation could lead to intermediate values
+<ul>
+<li>we're going to assume they're taken care of and are &quot;designed&quot; out by engineers</li>
+</ul>
+</li>
+</ul>
+<p><strong>Why binary?</strong></p>
+<ul>
+<li>Two level are simpler and equally expressive</li>
+<li>Nearly all computers today use binary</li>
+<li>Nearly all computer have similar underlying structure</li>
+</ul>
+<p><strong>Course outline:</strong></p>
+<ul>
+<li>ARM overview, brief discussion of performance</li>
+<li>digital logic design</li>
+<li>data representation and manipulation</li>
+<li>
+<ul>
+<li>designing a datapath</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>single-cycle control units</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>multiple-cycle controler units</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>pipelining and hazards</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>memory hierarchies (<strong>caches</strong> and virtual memory)</li>
+</ul>
+</li>
+<li>input/output</li>
+<li>multiprocessor systems</li>
+<li>case studies: VAX, SPARC, Pentium</li>
+</ul>
+<p><strong>CS 251 topics continued in other courses:</strong></p>
+<ul>
+<li>CS 240: memory management</li>
+<li>CS 350: operating systems</li>
+<li>CS 343: concurrency</li>
+<li>CS 370: scientific computation</li>
+<li>CS 454: distributed systems</li>
+<li>CS 456: networks</li>
+</ul>
+<h2 id="adminstrative-overview">Adminstrative overview</h2>
+<p>Weekly: quiz and/or assignment each week</p>
+<p>Videos (broken up into the following):</p>
+<ul>
+<li>Content, Examples, Review, Details</li>
+</ul>
+<p>Quizes:</p>
+<ul>
+<li>simple set of questions to ensure students are going through content
+<ul>
+<li>only covers the current week of material</li>
+</ul>
+</li>
+</ul>
+<p>Assignments:</p>
+<ul>
+<li>will cover more material and more challenging</li>
+<li>occur every two weeks</li>
+</ul>
+<p>Term test:</p>
+<ul>
+<li>bulk of grade (timed 2 hours) prepare for them like midterm</li>
+</ul>
+<h1 id="arm-overview">Arm Overview</h1>
+<p>ARM:</p>
+<ul>
+<li>Advanced RISC Machines</li>
+<li>RISC: Reduced Instruction Set Computer
+<ul>
+<li>CISC: Complex Instruction Set Computer</li>
+</ul>
+</li>
+</ul>
+<h2 id="registers">Registers</h2>
+<p>Registers:</p>
+<ul>
+<li>temporary storage units which maintain binary information (e.g, 64 bit register)</li>
+<li>you can only manipulate values in a register
+<ul>
+<li>so you take values from memory manipulate in registers then write to memory</li>
+</ul>
+</li>
+</ul>
+<p>There are 32 registers</p>
+<ul>
+<li>can use like a variable in a program, but via ARM instruction
+<ul>
+<li>each register has 64 bits, eight bytes</li>
+<li>X0, X1, ..., X31</li>
+<li>X31 always contains 0</li>
+<li>Example: ADD X1, X2, X3 (add X2, X3 and store in X1) comes in R-Format (two source registers and one destination)</li>
+</ul>
+</li>
+</ul>
+<p>Example: <code>f = (g + h) - (i + j)</code><br>
+Lets assume X1:f X2:g X3: h X4:i X5:j</p>
+<pre><code><code><div>ARM: 
+
+ADD X6, X2, X3
+ADD X7, X4, X5
+SUB X1, X6, X7
+</div></code></code></pre>
+<ul>
+<li>it will actually be more than 3 instructions since we need to load the values in a full example and we would also have to populate f in memory</li>
+</ul>
+<h2 id="instruction">Instruction</h2>
+<p>Five general types of ARM instructions<br>
+Format refers to how many and what type of operands</p>
+<ul>
+<li>R-format: <code>ADD X1,X2,X3</code>
+<ul>
+<li>adds content of X2 to contents of X3; store result in X1</li>
+</ul>
+</li>
+<li>D-format: <code>LDUR X1, [X2, #20]</code>
+<ul>
+<li>load data from memory address X2+20 into register X1</li>
+<li><code>STUR X1, X2, #100</code> store data from X1 into memory at address X2+30</li>
+</ul>
+</li>
+<li>I-format: <code>ADDI X1, X2, #100</code>
+<ul>
+<li>adds immediate value 100 to contents of X2; store result in X1</li>
+</ul>
+</li>
+<li>B-format: <code>B #28</code>
+<ul>
+<li>set program counter to PC+4*28</li>
+</ul>
+</li>
+<li>CB-format: <code>CBZ X1,#8</code>
+<ul>
+<li>if X1==0 then set program counter to PC+(4x8)</li>
+</ul>
+</li>
+</ul>
+<p>Program counter:</p>
+<ul>
+<li>keeps track of the address of whic instruction is executing and which instruction will come next
+<ul>
+<li>adress go up by 4</li>
+</ul>
+</li>
+</ul>
+<h2 id="memory">Memory</h2>
+<ul>
+<li>Arm can access <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span> bytes of random access memory (RAM)</li>
+<li>Memory accesd with number from 0 to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{64} - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>Usually grouped in 4-byte blocks called <em>words</em> or 8-byte blocks called <em>double-words</em>
+<ul>
+<li>most memory accesses are to addresses that are multiple 4 or 8</li>
+</ul>
+</li>
+<li>Both ARM program and data are stored in memory</li>
+<li>Instructions are 32-bits (4 bytes)</li>
+<li>Each instruction adress is a multiple of 4</li>
+</ul>
+<h2 id="control-flow">Control flow</h2>
+<ul>
+<li>In ARM, no conditionals like <code>if</code> nor loop constructions like <code>for</code> or <code>while</code></li>
+<li>Control flow handled by goto-like commands
+<ul>
+<li>branch (unconditional goto)</li>
+<li>CBZ (conditional goto)</li>
+</ul>
+</li>
+<li>Special register, <em>program counter</em> (PC), stores address of executing instruction</li>
+<li>When non-goto instruction executed, PC incremented by 4. This auto-increment advances the program to the next instruction</li>
+</ul>
+<h3 id="branch-instruction">Branch instruction</h3>
+<p>Branch: <code>B</code></p>
+<pre><code><code><div>100: B #3
+104: ...
+108: ...
+112: ... // this line
+</div></code></code></pre>
+<ul>
+<li>when branch is executed PC is set to PC + 4 times the immediate argument</li>
+<li>BTA : Branch target address</li>
+</ul>
+<h3 id="conditional-branch">Conditional branch</h3>
+<p>Example: <code>CBZ X1, #100</code> (or -100)</p>
+<ul>
+<li>Compare contents of register X1 to zero. If equal add 4 times constant and add to PC.
+<ul>
+<li>if register is not zero the instruction following branch is executed (PC+4)</li>
+</ul>
+</li>
+<li>constant can be negative</li>
+<li><code>CBNZ</code> is similar but looks for if the register is <strong>not</strong> zero</li>
+</ul>
+<p>Example:</p>
+<pre><code><code><div>100: ADD X1, XZR, XZR
+104: ADD X2, XZR, #6
+108: ADDI X1, X1, 5
+112: SUBI X2, X2, 1
+116: CBNZ X2, #-2
+120: ADD X4, X6, X8
+</div></code></code></pre>
+<h3 id="memory-access">Memory access</h3>
+<p>Three general categories of instructions in every Instruction Set Architecture</p>
+<ol>
+<li>computation (arithmetic format)</li>
+<li>control flow</li>
+<li>data manipulation (memory access) (loading and storing)</li>
+</ol>
+<p>Load Unscaled Register (LDUR): Reads a double word from memory and stores this to register<br>
+<code>100: LDUR X1, [x2,#100]</code></p>
+<ul>
+<li>loads from the address at to 100 + x2
+Read value stored at memory address 100+X2 (M[100+X2]). Store result in register X1.</li>
+</ul>
+<p>Store Unscaled Register (STUR): takes the value contained in a register 64-bit) value and writes it to memory</p>
+<ul>
+<li><code>100: STUR X1, [X2,#100]</code></li>
+</ul>
+<h1 id="simulator">Simulator</h1>
+
+    </body>
+    </html>

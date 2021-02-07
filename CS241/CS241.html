@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Foundations of Sequential Programming</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="foundations-of-sequential-programming">Foundations of Sequential Programming</h1>
+<p>Professors: Nomair Naeem, Gregor Richards<br>
+Winter 2021 - notes by Yousof Hosny</p>
+<h1 id="module-1---data-representations">Module 1 - Data Representations</h1>
+<p>Data in computers is stored in bits. We need to know what data representation is used to
+know what the bits mean. <code>1000011</code> could be decimal, binary (unsigned vs. two's complement), etc..</p>
+<h2 id="binary-representation">Binary Representation</h2>
+<p><strong>Definition 1:</strong> A <strong>bit</strong> is a <strong>bi</strong>nary digi<strong>t</strong>, that is a 0 or 1 (on or off)</p>
+<p><strong>Definition 2:</strong> A <strong>nibble</strong> is <strong>4</strong> bits.</p>
+<p><strong>Definition 3:</strong> A <strong>byte</strong> is <strong>8</strong> bits.</p>
+<p><strong>Definition 4:</strong> A <strong>word</strong> is a machine-specific grouping of bytes. For us, a word will be 4 bytes (32-bit architecture) though 8 byte (or 64-bit architectures) words are more common now.</p>
+<p><strong>Definition 5:</strong> The <strong>Most Significant Bit (MSB)</strong> is the left-most bit (highest value/sign bit).</p>
+<p><strong>Definition 6:</strong> The <strong>Least Significant Bit (LSB)</strong> is the right-most bit (lowes value)</p>
+<p>We will discuss two types of binary representations:</p>
+<ul>
+<li>Unsigned (non-negative integers)</li>
+<li>Signed integers</li>
+</ul>
+<h3 id="unsigned-integers-in-binary">Unsigned Integers In Binary</h3>
+<p>This works the same as non-negative decimal numbers but each position is a power of 2 instead of 10.</p>
+<ul>
+<li>multiply each value at the position by the position's index (0-based from the right) and add them
+<ul>
+<li>in the case of binary you will only ever multiply by 0 or 1</li>
+</ul>
+</li>
+</ul>
+<p>Arithmetic works the same way with binary numbers (you can just add and carry the 1s)</p>
+<h4 id="converting-from-decimal-to-binary">Converting From Decimal to Binary</h4>
+<p><strong>Approach 1:</strong></p>
+<ul>
+<li>Break the number into factors (summation factors) that are powers of 2</li>
+<li>The process is find the largest power of 2 less than the number then subtract and repeat</li>
+</ul>
+<p><strong>Approach 2:</strong> Constantly dvide the number by 2</p>
+<ul>
+<li>keep dividing the number by 2 and track the remainder, the binary number is the remainder from bottom to top (last remainder to first)</li>
+</ul>
+<h3 id="signed-integers-in-binary">Signed Integers in Binary</h3>
+<p>A computer must store both positive and nevative integers. <strong>Sign-Magnitude</strong> is one way to do it where the first bit is 0 to indicate positive and 1 to indicate negative. This approach has a multiple problems and is not used in practice.</p>
+<ul>
+<li>Two representations for 0 (00000000 and 10000000) which is wastefule and awkward.</li>
+<li>Arithmetic is tricky; the sign of a sum of two numbers depends on the numbers and this requires additional circuitry to do arithmetic.</li>
+</ul>
+<p>The more common approach is to represent signed integers using <strong>Two's complement form:</strong></p>
+<ul>
+<li>It is similar to sign-magnitude in spirit; first bit is 0 if non-negative, 1 if negative.</li>
+<li>To negate a value: Take the complement of all bits and add 1
+<ul>
+<li>a faster way is to lcoate the rightmost 1 bit and flipp all the bits to the left of it</li>
+</ul>
+</li>
+</ul>
+<h4 id="converting-to-and-from-twos-complement">Converting to and from Two's Complement</h4>
+<p>Decimal to two's complement:<br>
+First write the number in binary next take the complement of all bits and add 1.</p>
+<p>Two's complement to decimal:<br>
+Flip all the bits and add 1 then convert (remember the sign).<br>
+Another way is to treat the number as an unsigned number and convert to decimal then subtract <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>The idea behind Two's Complement notaiton is based on the following:</p>
+<ul>
+<li>The range of unsigned integers is 0 to 255. The number after 255 = 11111111 is in some sense 0 if we ignore overflow</li>
+<li>So let's make <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">2^8 = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> i.e, we work with modulo <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup><mo>=</mo><mn>256</mn></mrow><annotation encoding="application/x-tex">2^8 = 256</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">6</span></span></span></span>. In this vein we setup a correspondence to the positive integer k with the unsigned integer <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup><mo>−</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">2^8 - k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> since we are working modulo <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span>, subtracting a positive integer k from 0 is the same as subtracting it from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">2^n - 1 = \sum_{i=0}^{n-1}2^i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.253718em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="arithmetic-of-signed-integers">Arithmetic of Signed Integers</h4>
+<p>Arithmetic works by ignoring overflow because arithmetic works in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="double-struck">Z</mi><mn>256</mn></msub></mrow><annotation encoding="application/x-tex">\mathbb{Z}_{256}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83889em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">Z</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">5</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="hexadecimal-numbers">Hexadecimal numbers</h2>
+<p>Base 16 system using 0 to 9 and A,B,C,D,E,F</p>
+<p>Converting to hexadecimal is the same as binary, either dvide and read remainders bottom up, or find largest powers and subtract.</p>
+<p>Binary can be converted to hexadecimal as well by converting each nibble to its its hexadecimal value so,<br>
+<code>1001 1101 = 9D = 0x9D</code></p>
+<p><strong>Example:</strong><br>
+What is -11 + 6 corresponging to words in Two's complement notation.<br>
+Answer: recall a word is 8 bytes, and -11 + 6 = -5 so 5 in binary is <code>0000 0000 0000 0000 0000 0000 0000 0101</code> and thus -5 is <code>0000 0000 0000 0000 0000 0000 0000 1011</code> in two's complement and so
+it is <code>0xFFFFFFFB</code> in hexadecimal</p>
+<h2 id="ascii-representation">ASCII Representation</h2>
+<p>A common convention used to represent the English alphabet and printable characters (it uses 7 bits). 95 of the codes are printable and the rest are obsolute control codes that came from Teletype machines.</p>
+<p>Highlights:</p>
+<ul>
+<li>Characters 0-31 are control characters</li>
+<li>Characters 48-57 are the numbers 0 to 9</li>
+<li>Characters 65-90 are the letters A to Z</li>
+<li>Characters 97-122 are the letters a to z</li>
+<li>Note that 'A' and 'a' are 32 letters away</li>
+</ul>
+<p>ASCII is outdated and most things use Unicode now which contains multiple encodings such as UTF-8, UTF-16, UTF-32.</p>
+<h2 id="bit-wise-operations">Bit-Wise operations</h2>
+<p><strong>Bitwise AND (&amp;):</strong> Computes the value given by applying logical AND to each corresponding bits in the operands</p>
+<ul>
+<li><code>1001 &amp; 1111 = 1001, 0000 &amp; 1111 = 0000</code></li>
+</ul>
+<p><strong>Bitwise OR (|):</strong> Computes the value given by applying logical OR to each pair of bits in the operands</p>
+<p><strong>Left Bit Shift (&lt;&lt;):</strong> Used as <code>x &lt;&lt; n</code> and shifts the bits to the left n times and padds with additional n zeroes on the right (overflow is ignored). It is equivalent to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>×</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">x \times 2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span></p>
+<p><strong>Right Bit Shift (&gt;&gt;&gt;):</strong> Our intended use of the Right Bit Shift operator is to perform arithmetic right shift. We expect <code>x &gt;&gt; n</code> to be equivalent to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>x</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">\frac{x}{2^n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5935428571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<ul>
+<li>If the most significant bit is 0 this is achieved by padding 0s on the left.</li>
+<li>If the right most bit is 1
+<ul>
+<li>if the number is unsigned we must pad with 0s on th eleft</li>
+<li>if the number is signed we must pad with 1s to maintain negativity</li>
+</ul>
+</li>
+<li><strong>note:</strong> it is best to test your programming language to check that it implements arithmetic right shift</li>
+</ul>
+<h1 id="module-2---machine-language">Module 2 - Machine Language</h1>
+<p>Different processors understand different <strong>machine language</strong>s. A machine language is made up of multiple patterns (<strong>machine instruction</strong>)</p>
+<p>In this course we use MIPS (Microprocessor Without Interlocked Pipeline Stages).</p>
+<ul>
+<li>MIPS used to be a lot more popular (Nintendo 64, Playstation 1 &amp; 2, PSP)</li>
+<li>Not so popular today in favour of ARM and x86
+<ul>
+<li>no real benefit gained from the added complexity of switching this course to ARM</li>
+</ul>
+</li>
+</ul>
+<h2 id="mips-hardware">MIPS Hardware</h2>
+<p><strong>Control Unit:</strong> The Control Unit is the brain of the processor.</p>
+<ul>
+<li>Controls the sequence of instructions to execute</li>
+<li>Interprets the instructions and flow of data</li>
+<li>Contains processor's timing unit</li>
+<li>Controls signals to and from peripheral devices (not discussed in this course)</li>
+</ul>
+<p><strong>Arithmetic Logic Unit:</strong> The ALU performs mathematical operations such as addition, multiplication, logical comparison and decisions requested by the control unit.</p>
+<p><strong>Geral Purpose Registers:</strong> Our MIPS processor has 32 general purpose registers (labelled $0 through $31).</p>
+<ul>
+<li>$0 will always hold the value zero</li>
+<li>$29 is a frame pointer</li>
+<li>$30 is a stack pointer</li>
+<li>$31 is the return address</li>
+</ul>
+<p><strong>Program Counter (PC) and Instruction Register (IR):</strong> PC and IR are two special 32-bit registers used by the Control Unit in fetching and decoding instructions.</p>
+<p><strong>Memory Data Register (MDR) and Memory Address Register (MAR):</strong> Data travels from registers and memory (RAM) through the data bus.</p>
+<ul>
+<li>When Control Unit wants to read from memory address it stores the address in MAR. Data is then fetched from that address and stored in MDR where it is loaded into a register.</li>
+</ul>
+<p><strong>hi and lo Registers:</strong> These are two special registers used by the multiplication and division machine instructions.</p>
+<p>Everything above is physically part of our simplified MIPS processor.<br>
+<strong>Off-chip memory (RAM):</strong></p>
+<ul>
+<li>Programs need more than the 32 registers a processor has so we have external memory
+<ul>
+<li>includes: L1/L2 cache, RAM, hard drives, etc.</li>
+</ul>
+</li>
+<li>Our simplified processor only communicates with RAM
+<ul>
+<li>We view RAM as an array of 8-bit (1 byte) slots with addresses starting from 0</li>
+</ul>
+</li>
+</ul>
+<h3 id="how-mips-executes-programs">How Mips Executes Programs</h3>
+<p>Programs operate on data by can also themselves be viewed as data. This is the classic <strong>von Neumann architecture</strong>.</p>
+<ul>
+<li>it is important that the processor knows where the line of code is (to differentiate between data and code)</li>
+</ul>
+<p>To run a program the Operating System uses a special program called the <code>Loader</code> to load the program (on the hard drive) into memory.</p>
+<ul>
+<li>The program occupies some space in RAM, then additional RAM is allocated for the program to use.
+<ul>
+<li>the rest of the memory is not available for the program to use</li>
+</ul>
+</li>
+<li>Once the <code>Loader</code> must to do other steps to setup the memory for the program- The load communicates to the processor where it has loaded the program
+<ul>
+<li>does so by setting the PC to the starting address of the program</li>
+</ul>
+</li>
+</ul>
+<p>Once the loader is done a hardware-based algorithm known as the <strong>Fetch-Execute Cycle</strong> begins:</p>
+<pre><code><code><div>PC = 0x00 // whatever the starting adress is for the program
+while true do 
+    IR = MEM[PC]
+    PC += 4
+    Decode and execute instructions in IR
+end while 
+</div></code></code></pre>
+<ul>
+<li>this is a cycle which would go on forever unless and instruction is executed that break it</li>
+<li>we are using 32-bit architecture and machine instructions are 32 bits, each memory address is 8 bits, so we increase PC by 4 (32/8 = 4)</li>
+</ul>
+<h2 id="mips-machine-language">MIPS Machine Language</h2>
+<p>We will use the following simplified set of 18 instructions in our MIPS</p>
+<ul>
+<li>Word - <code>.word i</code></li>
+<li>Add - <code>add $d, $s, $t</code></li>
+<li>Subtract - <code>sub $d, $s, $t</code></li>
+<li>Multiply - <code>mult $s, $t</code></li>
+<li>Multiply Unsigned - <code>multu $s, $t</code></li>
+<li>Divide - <code>div $s, $t</code></li>
+<li>Divide Unsigned - <code>divu $s, $t</code></li>
+<li>Move From High/Remainder - <code>mfhi $d</code></li>
+<li>Move From Low/Quotient - <code>mflo $d</code></li>
+<li>Load immediate and Skip - <code>lis $d</code></li>
+<li>Load Word - <code>lw $t, i($s)</code></li>
+<li>Set Less Than - <code>slt $d, $s, $t</code></li>
+<li>Set Less Than Unsigned - <code>sltu $d, $s, $t</code></li>
+<li>Branch on Equal - <code>beq $s, $s, i</code></li>
+<li>Branch on Not Equal - <code>bne $s, $s, i</code></li>
+<li>Jump Register - <code>jr $s</code></li>
+<li>Jump And Link Register - <code>jalr $s</code></li>
+</ul>
+<h3 id="add-and-subtract-instructions">Add and Subtract Instructions</h3>
+<p>The behavior is <code>$d = $s + $t</code></p>
+<p>The 32-bit instruction patter for add is:</p>
+<pre><code><code><div>add $d, $s, $t: 000000 sssss ttttt ddddd 00000 100000
+</div></code></code></pre>
+<ul>
+<li>we need 5 bits to represent a register since there are 32 general purpose registers</li>
+</ul>
+<p>An alternate format we see is seperating each nibble:</p>
+<pre><code><code><div>add $d, $s, $t: 0000 00ss ssst tttt dddd d000 0010 0000
+</div></code></code></pre>
+<p><strong>Note:</strong> the difference in order in our syntax and the machine instruction</p>
+<p>Subtract is similar to add</p>
+<pre><code><code><div>sub $d, $s, $t: 000000 sssss ttttt ddddd 00000 100010
+</div></code></code></pre>
+<ul>
+<li>the only difference is the second last bit</li>
+</ul>
+<h3 id="jump-instruction">Jump Instruction</h3>
+<p>The jump instruction sets PC to the value in $S.</p>
+<p>Unlike most high-level programming languages, MIPS programs <strong>are expected to have an explicity jump to the return addrress stored by the loader to exit the program (stored in $31)</strong></p>
+<p><code>jr $s:</code> 000000 sssss 00000 00000 00000 001000<br>
+<code>jr $s:</code> 0000 0011 1110 0000 0000 0000 0000 1000. In hexadecimal: 0x03e00008</p>
+<h2 id="load-immediate-and-skip-instruction">Load Immediate and Skip Instruction</h2>
+<pre><code><code><div>Shorthand:
+lis $8
+.word 11
+lis $9
+.word 0xD
+add $3, $8, $9
+jr $31
+</div></code></code></pre>
+<ul>
+<li>add 11 and 13 and store result in $3</li>
+</ul>
+<h2 id="mips-assembly-language">MIPS Assembly Language</h2>
+<p>MIPS assembly language abstracts MIPS machin language so that we do not have to program in binary.</p>
+<p><strong>Definition 1 - Assembly language:</strong> a textual representation of a machine language</p>
+<ul>
+<li>unlike higher level languages, assembly code is still very close to machine code and has a one to one correspondence</li>
+</ul>
+<p>Our shorthand for MIPS machine code is what the syntax for MIPS assembly code is.</p>
+<h2 id="multiply-and-divide">Multiply and divide</h2>
+<p>For our course, unless specified, we assume that multiplication (<code>mult</code>) fits in the lo register (it is a 32-bit value).</p>
+<ul>
+<li><code>multu</code> assumes unsigned integers, <code>mult</code> assumes signed in two's compliment</li>
+</ul>
+<p>Division stores the quotient in the lo register and the remainder in the hi register</p>
+<ul>
+<li>the sign of the remainder matches the sign of the dividend stored in $s ($s / $t)</li>
+</ul>
+<h3 id="move-from-hi-and-lo">move from hi and lo</h3>
+<p>since these are special registers we have special instructions to move values from them</p>
+<pre><code><code><div>mfhi $d // Move from register hi into register $d
+mflo $d // Move from register lo into register $d
+</div></code></code></pre>
+<pre><code><code><div>lis $8
+.word 2 ; $8 contains 2
+lis $9
+.word 3 ; $9 contains 3
+lis $2
+.word 11 ; $2 contains 11
+div $1, $8 ; $mfhi &lt;-- $1 % $8
+mfhi $3 ; $3 &lt;-- mfhi
+beq $3, $0, 1 ; if $3 == $0 skip 1 instruction
+add $2, $9, $0 ; store 3 in $2
+jr $31 ; exit the program
+</div></code></code></pre>
+<ul>
+<li>updates register $2 with value 3 if the signed number in register $1 is odd and the value 11 if the number is even</li>
+</ul>
+<p>You can branch uncoditionally if you compare the zero register to itself</p>
+<h2 id="set-less-than">Set less than</h2>
+<pre><code><code><div>slt $d $s $t 
+</div></code></code></pre>
+<ul>
+<li>sets the value of $d to 1 if the value in $s is less than value in $t</li>
+</ul>
+<pre><code><code><div>// Version 1:
+slt $2, $1, $0 ; $2 is 1 if $1 &lt; 0
+beq $2, $0, 1 ; skip 1 instruction if $2 is 0
+; jump if $1 is NOT less than 0
+sub $1, $0, $1 ; $1 = $0 - $1 (negate)
+jr $31 ; exit
+
+// Version 2:
+slt $2, $1, $0
+bne $2, $0, 1 ; skip 1 if $2 is 1
+; i.e. $1 was negative
+jr $31 ; exit as $1 is positive
+sub $1, $0, $1 ; $1 = $0 - $1 (negate)
+jr $31 ; exit
+</div></code></code></pre>
+<ul>
+<li>compute absolute value of $1 and store result in $1</li>
+<li>both variations are equally efficient</li>
+</ul>
+<p><code>sltu</code> does the same thing but uses unsigned binary</p>
+<h2 id="conditional-loops">Conditional loops</h2>
+<pre><code><code><div>lis $2
+.word 13 ; $2 = 13
+lis $1
+.word -1 ; $1 = -1
+add $3, $0, $0 ; initialize $3 to 0
+add $3, $3, $2 ; $3 += $2
+add $2, $2, $1 ; --$2
+bne $2, $0, -3 ; if $2 != 0, go up 3 instructions
+; (remember PC is already at the next instruction)
+jr $31 ; exit
+</div></code></code></pre>
+<ul>
+<li>computes 1 + 4 + 7 + ... + 13</li>
+</ul>
+<p>In assembly language we have the convenience of labels</p>
+<pre><code><code><div>0x00 lis $2
+0x04 .word 13
+0x08 lis $1
+0x0c .word -1
+0x10 add $3, $0, $0
+loop:
+0x14 add $3, $3, $2
+0x18 add $2, $2, $1
+0x1c bne $2, $0, loop
+0x20 jr $31
+</div></code></code></pre>
+
+    </body>
+    </html>
