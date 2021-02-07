@@ -64,3 +64,132 @@ The big picture is
 
 **Limits prserve order:** if $a_n, b_n$ are real and converge to $a$ and $b$ and $\exists M \in \mathbb{N}$ such that $a_n \leq b_n, \forall n \geq M$ then $a \leq b$
 
+# Week 2 
+
+## Module 1 - MCT 
+Definition: (a series is)
+1. increasing 
+    - if $a_n \geq a_{n+1}$ for all $n \in \mathbb{N}$
+2. decreasing
+    - if $a_n \leq a_{n+1}$ for all $n \in \mathbb{N}$
+3. monotone
+    - if it is increasing or decreasing 
+
+Note: We allow a constant sequence to be increasing & decreasing 
+
+**Theorem - Monotone Convergence Theorem:** 
+If $(a_n) \subseteq \mathbb{R}$ is increasing and $\{ a_{ni} \n \in \mathbb{N}\}$ is bounded above then 
+$$a_n \rightarrow sup\{a_n : n \in \mathbb{n}\}$$
+
+**Corollary**           
+If $(a_n) \in \mathbb{R}$ is decreasing and is bounded then 
+$$a_n \rightarrow inf\{a_n : n \in \mathbb{N}\}$$
+
+Monotone (either increasing or decreasing). 
+
+## Module 2 Nested Interval Lemma
+
+**Theorem - Nested Intervals Theorem:**
+Let $I_1 \supseteq I_2 \supseteq I_3 \supseteq \cdots$ where each $I_i = [ a_i, b_j]$ (each is bounded), $a_i \leq b_i$. Then 
+$$\bigcap^\infty_{n=1} I_n \neq \emptyset$$
+- their intersection is not empty
+
+
+## Module 3 - Bolzana Weierstrass Theorem
+
+**Definition:** $(a_n) \subseteq \mathbb{R}$ a subsequence of $(a_n)$ is a sequence 
+$$(a_nk)^{\infty}_{k=1}$$
+where $n_1 < n_2 < n_3 < \cdots$
+
+**Theorem:** [ Bolzano-Weierstrass Theorem ]
+- Every bounded sequence of real numbers has a convergent subsequence. 
+
+## Module 4 - Completeness of $\mathbb{R}$
+
+**Definition:** Cauchy Sequence         
+- We say $(a_n)$ is cauchy if $\forall \epsilon > 0, \exists N \in \mathbb{N}$ such that $|a_n - a_m| < \epsilon$ for all $n,m \geq N$
+
+**Proposition:** $(a_n) \subseteq \mathbb{R}$
+- if $(a_n)$ is convergent then the sequence is cauchy 
+
+**Proposition:** $(a_n) \subseteq \mathbb{R}$
+- if $(a_n)$ is cauchy then the sequence is bounded 
+
+**Theorem - Completeness in $\mathbb{R}$:** 
+- A sequence $(a_n) \subseteq \mathbb{R}$ is convergent **iff** it is cauchy 
+
+Remark: Recap of the week 
+- LUB 
+- $\Rightarrow$ MCT 
+- $\Rightarrow$ NIL
+- $\Rightarrow$ BW Theorem
+- $\Rightarrow$ Cauch $\iff$ Convergent
+- $\Rightarrow$ LUB
+    - this one is an axiom in this course
+    
+# Week 3
+## Module 1 - Normed Vector Spaces
+
+Main math object we work with. 
+
+Idea [ Normed Vector Space ]
+- a vector space where we can measure distance between vectors
+
+
+**Definition - Norm:**
+- let V be a real vector space over $\mathbb{R}$
+
+A **norm** on V is a function $||\cdot ||: V \rightarrow \mathbb{R}$ such that 
+1. $||v|| \geq 0$ for all v
+2. $||v|| = 0$ iff $v=0$
+3. For all $\alpha \in \mathbb{R}, v \in V$
+    - $||\alpha v|| = |\alpha | \cdot ||v|||$
+4. Triangle inequality 
+    - $|| u + v || \leq ||u|| + ||v||$
+
+## Module 2
+A NVS is a vector space equipped with a norm 
+
+Example: reals with absolute value 
+
+Example: $\mathbb{R}^n, ||\cdot||_2$ 
+- $||(x_1, \cdots, x_n)||_2 = \sqrt{x_1^2 + \cdots + x_n^2}$
+
+Example: $\mathbb{R}^n, ||\cdot||_p$ 
+- $||(x_1, \cdots, x_n)||_p = (x_1^p + \cdots + x_n^p)^\frac{1}{p}$
+
+Example: Rn equipped with $||\cdot||_\infty$ 
+- we choose the maximum of the elements 
+- sup or infinity norm 
+
+$l^p$ is a subset of $\mathbb{R}^{N}$ where its elements have finite p-norm 
+
+## Module 3 - Convergence 
+
+Definition: sequence in NVS
+
+Definition: convergence in NVS
+
+Definition: sequence in NVS
+
+Proposition: if V is NVS
+- an->v bn->w sequences in V
+1. an + bn -> v + w
+2. a \* an -> a \* v
+
+## Module 4 - More convergence examples 
+
+## Module 5 - Cauchy Sequences 
+
+Definition: Cauchy in NVS
+
+## Module 6
+
+Definition: bounded in NVS
+
+Proposition: If in an in NVS, an is couchy then an is bounded
+
+**Definition - complete:** A **subset** of vector space is **complete** if every cauchy sequence in it converges in it. 
+- If the whole vector space is complete then it said to be a **Banach space**
+
+
