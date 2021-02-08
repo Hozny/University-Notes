@@ -192,4 +192,11 @@ Proposition: If in an in NVS, an is couchy then an is bounded
 **Definition - complete:** A **subset** of vector space is **complete** if every cauchy sequence in it converges in it. 
 - If the whole vector space is complete then it said to be a **Banach space**
 
+# Week 4 
 
+## Module 1 - Topology 1
+
+Topology is the study of subsets of a set X which afford X meaningful analytic / geometric properties
+
+Definition: Let V be NVS. We say $C \subseteq V$ is closed if whenever $(x_n)\subseteq C$ such that $x_n \rightarrow x \in V$ then $x \in C$
+- Idea: C is closed iff C is "closed" under taking limits 
