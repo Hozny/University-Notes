@@ -291,13 +291,524 @@ for (k = l; k &lt;= r; k++) do
 </ul>
 </li>
 </ul>
-<h2 id="15---take-home-messages">1.5 - Take-home messages</h2>
+<h1 id="15---take-home-messages">1.5 - Take-home messages</h1>
 <ul>
 <li>To describe an algorithm we state the main idea, give detailed description (pseudo-code), argue correctness, analyze run-time and ausxiliary space.</li>
 <li>To compare to algorithm we compare worst-case run-times. Break ties by other considerations such as space and/or best-case run-time.</li>
 <li>Asymptotic notation is a way to express bounds without dealing with constants.</li>
-<li>Bounds on run-time and space should always be states as <strong>tight</strong> bounds
-Algorithm merge-sort solves the sorting problem in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta(n log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> run-time and uses <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> auxiliary space.</li>
+<li>Bounds on run-time and space should always be states as <strong>tight</strong> bounds</li>
+</ul>
+<p>Algorithm merge-sort solves the sorting problem in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta(n log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> run-time and uses <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> auxiliary space.</p>
+<h1 id="module-2">Module 2</h1>
+<h2 id="stack-adt">Stack ADT</h2>
+<ul>
+<li>push: inserting an item</li>
+<li>pop: removing an item</li>
+</ul>
+<p>LIFO (last-in first-out)</p>
+<p>Extra operations:</p>
+<ul>
+<li>size, isEmpty, top</li>
+</ul>
+<p>We can implement this with an array or a linked-list</p>
+<h2 id="queue-adt">Queue ADT</h2>
+<ul>
+<li>enqueue: inseting an item</li>
+<li>dequeue: removing the least recently inserted item</li>
+</ul>
+<p>FIFO (first-in first-out)</p>
+<ul>
+<li>size, isEmpty, front</li>
+</ul>
+<p>circular array</p>
+<ul>
+<li>keep track of front and end</li>
+</ul>
+<h2 id="priority-queue">Priority Queue</h2>
+<p>An ADT consisting of items each with a priority</p>
+<p>main operations</p>
+<ul>
+<li>insert: inserting an item tagged with a priority</li>
+<li>deleteMax: removing the item of highest priority</li>
+</ul>
+<p>deleteMax is also called</p>
+<ul>
+<li>the priority is also called a <strong>key</strong></li>
+</ul>
+<p>Above we describe maximum-oriented priority queue, but it could be replaced with a minimum-oriented priority queue</p>
+<p>Using a priority queue to sort</p>
+<pre><code><code><div>PQ-Sort(A[0..n-1])
+    initialize PQ to an empty priority queue 
+    for k = 0 to n - 1 do 
+        PQ.insert(A[k], A[k])
+    for k = n - 1 down to 0 do 
+        A[k] = PQ.deleteMax() 
+</div></code></code></pre>
+<ul>
+<li>run-time is the sum of insertion and deletion
+<ul>
+<li>will depend on how we implement PQ</li>
+</ul>
+</li>
+</ul>
+<p><strong>note:</strong> we usually assyme <strong>dynamic arrays</strong> i.e, expanding by doubling and so ammortized over all insertions this takes <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> extra time</p>
+<p>Suppose we start from an array A of length 1, we can do n insertions <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">n = 2^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li>the cost of these insertions is</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi><munder><mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>+</mo><mo>⋯</mo></mo><mtext>n times</mtext></munder></mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mo>⋯</mo><msup><mn>2</mn><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup><mo>−</mo><mn>1</mn><mo>=</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\underset{\textrm{n times}}{1 + 1 + 1 + \cdots} + (1 + 2 + \cdots 2^{k-1} = 2^k -1 = n - 1)) = O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.566832em;vertical-align:-0.816832em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.64444em;"><span style="top:-2.283168em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textrm mtight">n times</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="minner">⋯</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.816832em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>
+<ul>
+<li>so we see that the additional cost of resizing does not change the insertion run-time from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<p><strong>Realization 1:</strong> unsorted arrays</p>
+<p>Using unsorted arrays</p>
+<ul>
+<li>PQ-sort is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> is <strong>selection sort</strong></li>
+</ul>
+<p><strong>Realization 2:</strong> sorted arrays</p>
+<ul>
+<li>insert <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+<li>deleteMax: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p>PQ-sort with sorted arrays is <strong>insertion sort</strong>, the runtime is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h2 id="binary-heaps">Binary Heaps</h2>
+<p>A <strong>(binary) heap</strong> is a certain type of binary tree</p>
+<p>A binary tree is either</p>
+<ul>
+<li>empty or</li>
+<li>consists of three parts
+<ul>
+<li>a node and two binary trees (left subtree and right subtree)</li>
+</ul>
+</li>
+</ul>
+<p>Terminology: root, leaf, parent, child, level, sibling, ancestor, descendant</p>
+<p>Any binary tree with n nodes has a height at least</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mn>1</mn><mo>∈</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n+1) - 1 \in \Omega (log n)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></span></p>
+<ul>
+<li>the height of a non-empty tree is the length of the longest path from the root to a ndoe</li>
+<li>the height of the <strong>empty</strong> tree is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span></li>
+</ul>
+<p>A <strong>heap</strong> is a binary tree with the following two properties:</p>
+<ul>
+<li><strong>Structural property:</strong> All levels of a heap are completely filled, except (possibly) for the last level. The filled items in the last level are <strong>left-justified</strong></li>
+<li><strong>Heap-order property:</strong> For any node i, the key of the parent of i is larger than or equal to the key of i</li>
+</ul>
+<p>The full name for this is a <em>max-oriented binary heap</em>.</p>
+<p>Lemma: The height of a heap is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta (log (n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<p><strong>Heap implementation:</strong></p>
+<p>Heaps should <strong>not</strong> be stored as binary trees.</p>
+<p>We can store a heap in an array because of its structure property.</p>
+<ul>
+<li>
+<p>The root at A[0] then level 2 is A[1],A[2] and level 3 is A[3]...A[6]</p>
+</li>
+<li>
+<p>the <strong>root</strong> is at index 0</p>
+</li>
+<li>
+<p>the <strong>left child</strong> of node i (if it exists) is node <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
+</li>
+<li>
+<p>the <strong>right child</strong> of node i (if it exists is node <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
+</li>
+<li>
+<p>the <strong>parent</strong> of node i is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⌊</mo><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo stretchy="false">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor{\frac{i-1}{2}}\rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.200664em;vertical-align:-0.345em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.855664em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">⌋</span></span></span></span></p>
+</li>
+<li>
+<p>the <strong>last</strong> node is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
+</li>
+</ul>
+<p>we wrap these operations in root(), parent(i), last(n)</p>
+<h3 id="insert-in-heaps">Insert in Heaps</h3>
+<ul>
+<li>place the new key at the first free leaf (this must be done to maintain structure)</li>
+<li>the heap-order property might be violated: perform a fix-up</li>
+</ul>
+<pre><code><code><div>fix-up(A,k)
+k: an index corresponding to a node of the heap 
+    while parent(k) exists and A[parent(k)] &lt; A[k] do 
+        swap A[k] and A[parent(k)]
+        k = parent(k)
+</div></code></code></pre>
+<ul>
+<li>the new item &quot;bubbles up&quot; until it reaches its correct place in the heap</li>
+<li>runtime: $$O(\textrm{height of heap) = O(log(n))$$</li>
+</ul>
+<h3 id="deletemax-in-heaps">deleteMax in Heaps</h3>
+<pre><code><code><div>fix-down(A, n, k): 
+A: an array that stores a heap of size n 
+k: an index corresponding to a node of the heap 
+    while k is not a leaf do 
+        // find the child with the larger key 
+        j = left child of k 
+        if (j is not last(n) and A[j+1] &gt; A[j]) 
+            j = j + 1
+        if A[k] &gt;= A[j] break 
+            swap A[j] and A[k] 
+            k = j 
+</div></code></code></pre>
+<h3 id="priority-queue-using-heaps">Priority queue using heaps</h3>
+<pre><code><code><div>insert(x) 
+    increase size 
+    l = last(size) 
+    A[l] = x 
+    fix-up(A, l) 
+
+deleteMax()
+    l = last(size) 
+    swap A[root()] and A[l]
+    decrease size 
+    fix-down(A, size, root()) 
+    return A[l] 
+</div></code></code></pre>
+<ul>
+<li>insert and deleteMax: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p>Time: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mtext> height of tree</mtext><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\textrm{ height of tree}) = O(log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord text"><span class="mord textrm"> height of tree</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="sorting-using-heaps">Sorting using heaps</h2>
+<pre><code><code><div>PQsortWithHeaps(A) 
+    initialize H to an empty heap 
+    for k = 0 to n - 1 do 
+        H.insert(A[k]) (we just insert keys, no items) 
+    for k = n - 1 down to 0 do 
+        A[k] = H.deleteMax()
+</div></code></code></pre>
+<p>Can improve this with two simple tricks -&gt; Heapsort</p>
+<ol>
+<li>Heaps can be built faster if we know all input in advance</li>
+<li>Can use the same array for input and heap -&gt; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>$ auxiliary space</li>
+</ol>
+<h3 id="building-heaps-with-fix-up">Building heaps with fix-up</h3>
+<p>Problem: given n items all at once build a heap containing them</p>
+<p>Solution 1: start with empty heap and insert items one at a time</p>
+<pre><code><code><div>simpleHeapBuilding(A)
+A: an array 
+    initialize H as an empty heap 
+    for i = 0 to size(A) - 1 do 
+        H.insert(A[i])
+</div></code></code></pre>
+<p>This corresponds to doing fix-ups<br>
+Worst-case running time: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false">(</mo><mi>n</mi><mo>⋅</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Theta (n \cdot log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<p>Solution 2: using fix-doesn instead:</p>
+<pre><code><code><div>heapify(A)
+A: an array 
+    n = A.size()
+    for i = 0 parent(last(n)) downto 0 do 
+        fix-down(A, n, i)
+</div></code></code></pre>
+<h3 id="heapsort">HeapSort</h3>
+<pre><code><code><div>HeapSort(A, n) 
+    //heapify 
+    n = A.size() 
+    for i = parent(last(n)) downto 0 do 
+        fix-down(A, n, i) 
+
+    // repeatedly find minimum 
+    while n &gt; 1 
+        // delete maximum 
+        swap items at A[root()] and A[last(n)]
+        decrease n 
+        fix-down(A, n, root())
+</div></code></code></pre>
+<h2 id="module-2-summary">Module 2 Summary</h2>
+<ul>
+<li>Binary Heap: A binary tree that satisfies structural and heap-order property</li>
+<li>Heaps are on possible realization of ADT PriorityQueue:
+<ul>
+<li>insert takes O(log n)</li>
+<li>deleteMax takes O(log n)</li>
+<li>Also supports findMax in time O(1)</li>
+</ul>
+</li>
+<li>A binary heap can be built in linear time</li>
+<li>PQ-sort with binary heaps leads to a sorting algorithm with O(n log n) worst-case run-time (HeapSort)</li>
+<li>We have seen here the <em>max-oriented version</em> of heaps (the maximum priority is at the root)
+<ul>
+<li>there exists a summetric min-oriented version that supports insert and deleteMin with the same runtimes</li>
+</ul>
+</li>
+</ul>
+<h3 id="find-the-smallest-item">Find the smallest item</h3>
+<p>Problem: Find the kth smallest item in array A of n distinct numbers</p>
+<p>Solution 1: Make k passes through the array, deleting the minimum number each time</p>
+<ul>
+<li>O(kn)</li>
+</ul>
+<p>Solution 2: Sort A, then return A[k-1]</p>
+<ul>
+<li>O(n log n)</li>
+</ul>
+<p>Solution 3: Scan the array and maintain the k smallest numbers seen so far in a max-heap</p>
+<ul>
+<li>O(n log k)</li>
+</ul>
+<p>Solution 4: Create a min-heap with heapify(A). Call deleteMin(A) k times</p>
+<ul>
+<li>O(n + k log n)</li>
+</ul>
+<h1 id="module-4---avl-trees">Module 4 - AVL Trees</h1>
+<p><strong>Dictionary:</strong> ADT consisting of a collection of items each of which contains a</p>
+<ul>
+<li>key</li>
+<li>some data (the value)</li>
+</ul>
+<p>operations:</p>
+<ul>
+<li>search(k) (also called findElement(k))</li>
+<li>insert(k, v) (also called insertItem(k,v))</li>
+<li>delete(k) (also called removeElement(k))</li>
+<li>optional: closestKeyBefore, join, isEmpty, size, etc.</li>
+</ul>
+<p>Examples: symbol table, license plate databse</p>
+<p>Elementary Implementations</p>
+<ul>
+<li>assumptions
+<ul>
+<li>dictionary has n KVPs (key value pairs)</li>
+<li>Each KVP uses constant space</li>
+<li>Keys can be compared in constant time</li>
+</ul>
+</li>
+</ul>
+<p>Unordered array or linked list</p>
+<ul>
+<li>search O(n)</li>
+<li>insert O(1) (except array occasionally needs to resize)</li>
+<li>delete O(n) (need to search)</li>
+</ul>
+<p>Ordered array</p>
+<ul>
+<li>search (log n) (via binary serach)</li>
+<li>insert O(n)</li>
+<li>delete O(n)</li>
+</ul>
+<h3 id="binary-search-trees-review">Binary Search Trees (review)</h3>
+<p>Structure:</p>
+<ul>
+<li>binary tree: all nodes have two (possibly empty) subtrees</li>
+<li>Every node stores a KVP</li>
+<li>Empty subtrees usually not shown</li>
+</ul>
+<p>Ordering:</p>
+<ul>
+<li>Every key k in T.left is less than the root key</li>
+<li>Every key k in T.right is greater than the root key</li>
+</ul>
+<h3 id="bst-as-a-realization-of-adt-dictionary">BST as a realization of ADT Dictionary</h3>
+<p>BST::search(k)</p>
+<ul>
+<li>searches (simple search)</li>
+</ul>
+<p>BST::delete(x)</p>
+<ul>
+<li>if x is a leaf just delete it</li>
+<li>if x has one non-empty subtree just move the children up</li>
+<li>else, swap x with successor (one step right in tree, then left as much as possible)
+<ul>
+<li>this successor node will not have a left child because of the way we reached it (as far left)</li>
+<li>then we can just swap with x and delete</li>
+</ul>
+</li>
+<li>All of these have complexity O(h) where h is height
+<ul>
+<li>in a normal BST h has no reason to be less than n</li>
+</ul>
+</li>
+</ul>
+<h3 id="avl-trees">AVL Trees</h3>
+<p>AVL Tree : a BST with extra property</p>
+<ul>
+<li>height of left and right subtree differ by at most 1</li>
+</ul>
+<p>Rephrase: If node v has subtree L and R</p>
+<ul>
+<li>balance(b) := height(R) - height(L) must be in [-1, 0, 1]
+<ul>
+<li>balance(v) = -1 is left-heavy</li>
+<li>balance(v) = 1 is right-heavy</li>
+</ul>
+</li>
+</ul>
+<p>Need to store the height of each subtree at every node</p>
+<ul>
+<li>we could save space using only balance(v) at each node but it complicates the code</li>
+</ul>
+<h4 id="height-of-an-avl-tree">Height of an AVL Tree</h4>
+<p><strong>Theorem:</strong> An AVL tree on n nodes has O(log n) height</p>
+<ul>
+<li>search, insert, delete all cost O(log n) in the worst case</li>
+</ul>
+<p>AVL::insert(k, v)</p>
+<ul>
+<li>first insert(k, v) with usual BST insertion
+<ul>
+<li>assume that this returns the new leaf z where the key was stored</li>
+</ul>
+</li>
+<li>move up from tree from z, updating hieght
+<ul>
+<li>assume that we have parent-links. we could avoid this if BST::insert returns full path to z</li>
+</ul>
+</li>
+<li>if the height difference becomes +2,-2 at node z, then z is <strong>unbalanced</strong> must re-structure the tree to rebalance</li>
+</ul>
+<pre><code><code><div>AVL::insert(k, v)
+    z = BST::insert(k, v) // leaf where k is now stored
+    while (z is not NULL)
+        if (|z.left.height - z.right.height| &gt; 1) then 
+            let y be taller child of z 
+            let x be taller child of y 
+            z = restructure(x, y, z)  // see later
+            break                     // can argue that we are done (at max we fix one node in insert)
+        setHeightFromSubtrees(z)
+        z = z.parent
+
+setHeightFromSubtrees(u)
+    u.height = 1 + max(u.left.height, u.right.height)
+</div></code></code></pre>
+<p>Rotations:</p>
+<pre><code><code><div>rotate-right(z)
+    y = z.left, z.left = y.right, y.right = z
+    setHeightFromSubtrees(z), setHeightFromSubtrees(y)
+    return y // returns new root of subtree
+</div></code></code></pre>
+<pre><code><code><div>restructure(x, y, z)
+node x has parent y and grandparent z 
+    case 
+        //right rotation z left- y left- x
+        return rotate-right(z)
+
+        // double-right rotation z left- y right-x
+        z.left = rotate-left(y)
+        return rotate-right(z)
+
+        // double-left rotation z right- y left x
+        z.right = rotate-right(y)
+        return rotate-left(z)
+
+        // left rotation z right- y right- x
+        return rotate-left
+</div></code></code></pre>
+<pre><code><code><div>AVL::delete(k)
+    z = BST::delete(k)
+    // assume z is parent of the BST node that was removed
+    while (z is not null) 
+        if (|z.left.height - z.right.height| &gt; 1) then 
+            let y be taller child of z
+            let x be taller child of y
+            z = restructure(x, y, z)
+        // always continue up the path and fix if needed 
+        setHeightFromSubtrees(z)
+        z = z.parent
+</div></code></code></pre>
+<h1 id="module-5---dictionary-implementations-not-based-on-bst">Module 5 - Dictionary Implementations Not Based on BST</h1>
+<p>Realizations</p>
+<ul>
+<li>Balanced search trees (AVL trees)
+<ul>
+<li>O(log n) worst case search, insert and delete</li>
+<li>complex code and not necessarily the fastest run time in practice</li>
+</ul>
+</li>
+<li>BST
+<ul>
+<li>O(height) search, insert, and delete</li>
+<li>simpler than AVL tree</li>
+<li>randomization helps efficiency</li>
+</ul>
+</li>
+<li>Ordered array
+<ul>
+<li>simple implementation</li>
+<li>O(log n) search</li>
+<li>O(n) search and delete</li>
+</ul>
+</li>
+<li>Ordered linked list
+<ul>
+<li>simple implementation</li>
+<li>O(n) search, insert and delete</li>
+<li>search is the bottleneck, insert and delete would be O(1) if do search first and account for its running time separately</li>
+<li>efficient search (like binary search) in ordered linked list?</li>
+</ul>
+</li>
+</ul>
+<h2 id="skip-lists">Skip Lists</h2>
+<p>Motivation:</p>
+<ul>
+<li>Ordered array has efficient binary search</li>
+</ul>
+<p>We have a hierarchy of linked lists where each level is half intervals</p>
+<ul>
+<li>we visit at most two items at each level</li>
+<li>log n height for the hierarchy</li>
+</ul>
+<p>Easy to implement if structure is static</p>
+<ul>
+<li>it is hard to insert and delete in this thing</li>
+</ul>
+<p>Skip Lists [Pugh' 1989]</p>
+<ul>
+<li>A hierarchy of S ordered linked lists (levels)
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">S_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> contains the KVPS of S in non-decreasing order</li>
+<li>other lists store only keys or linkes to nodes in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">S_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>each <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> contains special keys (sentinels) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">∞</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">+ \infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mord">∞</span></span></span></span></li>
+<li>each <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is randomly generated subsequence of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">S_{i-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>h</mi></msub></mrow><annotation encoding="application/x-tex">S_h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> contains only sentinels, the left sentinel is the root
+<ul>
+<li>each node p has references to after(p) and below(p)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code><code><div>skipList::insert(k, v)
+    p = gePredecessors(k)
+    for(i = 0; random(2) = 1; i = i+1) {} // random tower height
+    while (i &gt;= P.size()) 
+        root = new netinel-only list linked in appropriately 
+        P.append(left sentinel of root)
+    p = P.pop()
+
+    zBelow = new node with (k, v) inserted after p
+    while i &gt; 0
+        p = P.pop()
+        z = new node with k added after p
+        z.below = zBelow
+        zBelow = z
+        i = i - 1
+</div></code></code></pre>
+<pre><code><code><div>skipList::delete(k)
+    P = getPRedecessors(k)
+    while P is non-empty
+        p = P.pop()
+        if p.after.key = k
+            p.after = p.after.after
+        else break
+    p = left sentinel of the root-list
+    while p.below.after is the infinity sentinel
+        // the two top lists are both only sentinels, remove one
+        p.below = p.below.below
+        p.after.below = p.after.below.below
+</div></code></code></pre>
+<p>Can save number of links stored by storing towers in array</p>
+<p>Dynamic ordering</p>
+<ul>
+<li>best static ordering is by frequency</li>
+<li>dynamic idea:
+<ul>
+<li>move-to-front-heuristic
+<ul>
+<li>can show this is &quot;2-competitive&quot; no worse than twice as bad as the best static ordering</li>
+</ul>
+</li>
+<li>transpose-heuristic: swap with previous</li>
+</ul>
+</li>
 </ul>
 
     </body>

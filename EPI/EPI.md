@@ -106,6 +106,123 @@ TODO
 ## General conversation 
 TODO 
 
+# Problem Solving
+Work hard...
 
+## Data Structure Review 
 
+|Data Structure | Key Points | 
+|---|---|
+|Promitive types | know how `int,char,double,etc.` are represented in memory|
+|Arrays| Fast index access, slow lookup. Be comfortable with iteration, resizing, partitioning, merging, etc.|
+|Strings| Know memory representation. Understanding comparison, copying, matching, joining, splitting, etc.|
+|Lists|Understand trade-offs with respect to arrays. Iteration, insertion, deletion in singly and doubly linked lists. Know implementation with dynamic memory and arrays |
+|Stacks and queues| LIFO FIFO know implementations|
+|Binary trees| know depth, heigh, leaves, search path, traversal sequences, successor/predecessor operations|
+|Heaps| O(1) lookup of Max, O(log n) insertion and O(log n) deletion of max. Node and array implemenation. Min-heap variant|
+|Hash tables| O(1) insertions, deletions and lookups. Not suitable for order-related queries; need for resizing; poor worst-case performacnce. Understand implementation using array of buckets and collision chains. Know has functions for integers, strings, objects.|
+|Binary search trees| O(log n) insertions, deletions, lookups, find-min, find-max, successor predecessor when tree is height balanced. Familiar with balance and operations maintaining balance.|
 
+Counting how many set bits in an `int`
+- `y = x & ~(x-1)`  ~ is complement operator
+    - y is set to 1 at the lowest set bit of x
+    - this bit is removed from x using y XOR x
+    - O(s) where s is set bits in x
+`(x-1)` will set the rightmost 1 bit to 0 and all bits to its right to 1. So `x & ~(x-`)` isolates the right most bit
+
+if we will repeatedly need to look it up we can create an array size 65536 and then break up a 64 bit integer into 16 bits and get the sum of the precomputed values in our array by adding the 16 bit chunk values
+
+problems involving bit manipulation are often asked in interviews. 
+
+**Analaysis patterns:**
+|Analysis principle| Key Points | 
+|---|---|
+|Concrete examples| manually solve concrete example and generalize solution|
+|Case analysis | split input/exeuction into cases and solve each separately|
+|Iterative refinement| Find brute-force solution and improve on it|
+|Reduction| use a well-known solution to another problem as a subroutine|
+|Graph modeling| describe the problem using a graph and solve it using an existing algorithm| 
+
+**Algorithm design patterns:**
+|Technique| Key Points| 
+|---|---|
+|Sorting| uncover some structure by sorting input|
+|Recursion| if input structure is recursive design recursive algorithm that follows input definition|
+|Divide-and-conquer| divide the problem into two or more smaller independent subproblems and solve original using solutions to subproblems|
+|Dynamic programming| compute solution for smaller instances of a given input and use these solutions to construct a solution to the pobrlem. Cache results for performance|
+|Greedy algorithms| computing solution in stages, making choices that are locally optimum at step; these choices are never undone. (locally optimum solution is globally optimum)|
+|Invariants| identify and invariant and use it to rule out potential solutions that are suboptimal/dominated by other solutions|
+
+### Concrete examples
+What is the smallest value that cannot be constructed from a set of coins
+- at each point if we can construct up to V  but not V+1 and add a coin u. if u <= V+1 then we can construct up to V + u + 1 but if u > V + 1 we cannot construct V + 1. So we keep track of what could be constructed at each point in sorted fashion
+```C++
+int smallestImpossible(vector<int> A) { 
+    sorts(A.begin(), A.end());
+    int max_possible = 0; 
+    for (int a : A) {
+        if (a > max_possible + 1) { 
+            break;
+        }
+        max_possible += a;
+    }
+    return max_possible;
+}
+```
+- O(nlog n) to sort O(n) to iterate
+
+### Case analysis
+example
+
+### Iterative refine-ment of brute-force
+Given array A of **n-numbers** rearrange A to get B such that B[0] <= B[1] >= B[2] <= B[3] ...
+```C++
+void Rearrange(vector<int>* A_ptr) { 
+    vector<int>& A = *A_ptr;
+    for (size_t i = 1; i < A.size(); ++i) { 
+        if ((! I % 2) && A[i - 1] < A[i] || ((i % 2) && A[i - 1] > A[i])) { 
+            swap(A[i], A[i-1]);
+        }
+    }
+}
+```
+- notice this requires unique values 
+
+### Reduction
+Problem: determine if string is a rotation of another "car" and "arc" are rotations
+
+This problem is very similar to string search
+- we add the string to itself and see if we can find the original string using famous String Search algorithms gives O(n + m)
+- bca + bca = bc abc a 
+
+### Graph modelling
+see if arbitrage can be formed in currency exchange
+- we can set graph to currency with edges being logarithm of exchange rate 
+- then using Bellman-Ford we can see if positive cycle exists which is arbitrage
+
+### Sorting
+sorting problems...
+
+### Recursion
+recursion problems
+
+### Divide and conquer
+number of pairs of elements in an array that are out of sorted order
+
+how many ways to place trimineos
+
+### Dynamic programming
+how many ways to form a score as the sum of 2, 3, 7
+- notice C(s) = C(s-7) + C(s - 3) + C(s-2)
+
+### Greedy algorithm 
+map 2n white and black cities in 1 to 1 fashion
+- sort white and black and pair left to right each one
+
+### Invariants 
+given sorted A find A[i] + A[j] = k 
+- use two pointers on each end 
+- works because invariant is maintained that when we increment left or right pointer all values we rule out are not possible
+
+# Part 3 - Problems
+# Primitive Types

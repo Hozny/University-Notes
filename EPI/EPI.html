@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Elements of Programming Interviews &lpar;C&plus;&plus;&rpar;</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="elements-of-programming-interviews-c">Elements of Programming Interviews (C++)</h1>
+<p>Notes for EPI (Version 2.0.0)</p>
+<h2 id="the-epi-editorial-style">The EPI editorial style</h2>
+<p>Problems:</p>
+<ol>
+<li>Establish context (e.g, real-world scenario)</li>
+<li>State the problem to be solved (does not specify detailed constraints, input format, etc...)</li>
+<li>Give a short hint (only read this if stuck)</li>
+</ol>
+<p>Solutions:</p>
+<ol>
+<li>Develop simple brute-force</li>
+<li>Aanalyze brute-force to get intution for inefficiencies and where to improve</li>
+<li>Develop more efficient algorithm</li>
+<li>Apply program to concrete input</li>
+<li>Give code for key steps</li>
+<li>Analyze space and time complexity</li>
+<li>Outline variants - problems whose solution is similar to the solved problem</li>
+</ol>
+<h2 id="recommended-algorithm-books-for-those-who-require-prerequisite-knowledge">Recommended algorithm books (for those who require prerequisite knowledge)</h2>
+<p>Algorithms by Dasgupta, et al.  (&quot;succinct and beautifully written&quot;)
+Introduction to Algirhtms by Cormen, et al. (&quot;amazing reference&quot;)</p>
+<h2 id="study-guide">Study guide</h2>
+<p>Hackacthon (weekend entirely devoted to preparation)<br>
+Finals cram (one week, 3-4 hours a day)<br>
+Term project (four weeks, 1.5-2.5 hours per day)<br>
+Algorithms class (3-4 months, 1 hour per day)</p>
+<h2 id="the-interview-lifecycle">The interview lifecycle</h2>
+<ol>
+<li>Identify companies you are interested in. Ideally find people you know at these companies.</li>
+<li>Prepare resume. Submit through personal contact (preferred)</li>
+<li>Perform phone screening (question-answer with engineer). Might require submitting code via shared document. Don't take this casually - can be very challenging.</li>
+<li>Go for an on-site interview. One-on-one interviews with engineers and managers, and a convo with your HR contact.</li>
+<li>Receive offers. Usually starting point for negotiations.</li>
+</ol>
+<h2 id="the-resume-this-advice-makes-more-sense-for-full-time-positions-than-internships-or-really-sought-after-internships">The resume (this advice makes more sense for full-time positions than internships, or really sought-after internships)</h2>
+<ol>
+<li>Have a clear statement of your objective (tailor resume for a given employer)</li>
+<li>The most important points (the differentiating points) should come first. Logical order comes second to this principle.
+<ul>
+<li>list significant class projects, standardized test scores (if exceptionsal), etc...</li>
+</ul>
+</li>
+<li>The resume should be high-quality: no spelling mistakes, good formatting, capitilzations, numberings, correct grammar/punction. Use few fonts. PDF is preferred.</li>
+<li>Concact information, LinkedIn profile, URL to personal homepage with examples of work.</li>
+<li>If you can work at company without special processing (e.g., green card) make note of it.</li>
+<li>Have friends review your resume. It is better to write something quickly and then refine based on feedback.</li>
+<li>Resume does not have to be one page, two pages is appropriate (more than two is likely not). This advice does not apply to juniors/first internship.</li>
+<li>Prefer not to see a list of hobbies/ECs unless they are different &quot;olympic&quot; or high level achievements</li>
+</ol>
+<h2 id="mock-interviews">Mock interviews</h2>
+<p>Get a friend. Code on paper. Give hints when stuck. Record and review session. Give feedback both positive and negative.</p>
+<h2 id="language-review">Language review</h2>
+<p>C++ best practices:</p>
+<ul>
+<li>follow Google's C++ style guide:
+<ul>
+<li>input arguments are either values or const references.</li>
+<li>use pointers to pass output arguments to functions</li>
+<li>use <code>deque&lt;bool&gt;</code> for Boolean arrays, <code>vector&lt;bool&gt;</code> is not an STL container.</li>
+</ul>
+</li>
+</ul>
+<p>Review the <a href="https://google.github.io/styleguide/cppguide.html">Google C++ style guide</a></p>
+<h1 id="strategies-for-a-great-interview">Strategies For A Great Interview</h1>
+<p>A typical one hour interview will be 5 minutes of introduction/questions about resume, 5-15 minutes of questions on basic programming concepts. The core of the interview is one or two detailed design questions where candidate will present a solution.</p>
+<h2 id="aproaching-the-problem">Aproaching the problem</h2>
+<p>Clarify the question</p>
+<ul>
+<li>good way to clarify is state a concrete exmaple of the problem (example case)</li>
+<li>ask interviewer about complexity they would like, they might refuse but no harm in asking and you may get some clues.</li>
+</ul>
+<p>Work on concrete examples</p>
+<p>Spell out the brute-force solution:</p>
+<ul>
+<li>good idea and shows ur problem solving process</li>
+<li>can be detrimental if it takes long time to describe the brute-force approach</li>
+</ul>
+<p>Think out loud:</p>
+<ul>
+<li>helps u stay on track</li>
+<li>gives interviewers ability to guide you in right direction</li>
+</ul>
+<p>Apply patterns:</p>
+<ul>
+<li>good data structure, general algorithm technique, etc..</li>
+</ul>
+<p>##Presenting solution:</p>
+<ul>
+<li>once you have algorithm it is important to present it in clear manner.</li>
+</ul>
+<p>Libraries:</p>
+<ul>
+<li>don't reinvent the wheel (unless asked to)</li>
+</ul>
+<p>Focus on the top-level algirhtm:</p>
+<ul>
+<li>for example use BST and implement it later</li>
+<li>add TODO comment to portions u want to come back to</li>
+</ul>
+<p>Manage the white board:</p>
+<ul>
+<li>you will likely use more space than you expect</li>
+</ul>
+<p>Assum valid inputs</p>
+<p>Test corner cases</p>
+<p>Syntax</p>
+<ul>
+<li>don't have lots of syntax erroes (a few small ones is ok)</li>
+</ul>
+<p>Memory management</p>
+<ul>
+<li>avoid memory management operations altogether</li>
+</ul>
+<h2 id="know-your-interviewers--the-company">Know your interviewers &amp; the company</h2>
+<p>TODO</p>
+<h2 id="general-conversation">General conversation</h2>
+<p>TODO</p>
+<h1 id="problem-solving">Problem Solving</h1>
+<p>Work hard...</p>
+<h2 id="data-structure-review">Data Structure Review</h2>
+<table>
+<thead>
+<tr>
+<th>Data Structure</th>
+<th>Key Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Promitive types</td>
+<td>know how <code>int,char,double,etc.</code> are represented in memory</td>
+</tr>
+<tr>
+<td>Arrays</td>
+<td>Fast index access, slow lookup. Be comfortable with iteration, resizing, partitioning, merging, etc.</td>
+</tr>
+<tr>
+<td>Strings</td>
+<td>Know memory representation. Understanding comparison, copying, matching, joining, splitting, etc.</td>
+</tr>
+<tr>
+<td>Lists</td>
+<td>Understand trade-offs with respect to arrays. Iteration, insertion, deletion in singly and doubly linked lists. Know implementation with dynamic memory and arrays</td>
+</tr>
+<tr>
+<td>Stacks and queues</td>
+<td>LIFO FIFO know implementations</td>
+</tr>
+<tr>
+<td>Binary trees</td>
+<td>know depth, heigh, leaves, search path, traversal sequences, successor/predecessor operations</td>
+</tr>
+<tr>
+<td>Heaps</td>
+<td>O(1) lookup of Max, O(log n) insertion and O(log n) deletion of max. Node and array implemenation. Min-heap variant</td>
+</tr>
+<tr>
+<td>Hash tables</td>
+<td>O(1) insertions, deletions and lookups. Not suitable for order-related queries; need for resizing; poor worst-case performacnce. Understand implementation using array of buckets and collision chains. Know has functions for integers, strings, objects.</td>
+</tr>
+<tr>
+<td>Binary search trees</td>
+<td>O(log n) insertions, deletions, lookups, find-min, find-max, successor predecessor when tree is height balanced. Familiar with balance and operations maintaining balance.</td>
+</tr>
+</tbody>
+</table>
+<p>Counting how many set bits in an <code>int</code></p>
+<ul>
+<li><code>y = x &amp; ~(x-1)</code>  ~ is complement operator
+<ul>
+<li>y is set to 1 at the lowest set bit of x</li>
+<li>this bit is removed from x using y XOR x</li>
+<li>O(s) where s is set bits in x
+<code>(x-1)</code> will set the rightmost 1 bit to 0 and all bits to its right to 1. So <code>x &amp; ~(x-</code>)` isolates the right most bit</li>
+</ul>
+</li>
+</ul>
+<p>if we will repeatedly need to look it up we can create an array size 65536 and then break up a 64 bit integer into 16 bits and get the sum of the precomputed values in our array by adding the 16 bit chunk values</p>
+<p>problems involving bit manipulation are often asked in interviews.</p>
+<p><strong>Analaysis patterns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Analysis principle</th>
+<th>Key Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concrete examples</td>
+<td>manually solve concrete example and generalize solution</td>
+</tr>
+<tr>
+<td>Case analysis</td>
+<td>split input/exeuction into cases and solve each separately</td>
+</tr>
+<tr>
+<td>Iterative refinement</td>
+<td>Find brute-force solution and improve on it</td>
+</tr>
+<tr>
+<td>Reduction</td>
+<td>use a well-known solution to another problem as a subroutine</td>
+</tr>
+<tr>
+<td>Graph modeling</td>
+<td>describe the problem using a graph and solve it using an existing algorithm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Algorithm design patterns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Key Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sorting</td>
+<td>uncover some structure by sorting input</td>
+</tr>
+<tr>
+<td>Recursion</td>
+<td>if input structure is recursive design recursive algorithm that follows input definition</td>
+</tr>
+<tr>
+<td>Divide-and-conquer</td>
+<td>divide the problem into two or more smaller independent subproblems and solve original using solutions to subproblems</td>
+</tr>
+<tr>
+<td>Dynamic programming</td>
+<td>compute solution for smaller instances of a given input and use these solutions to construct a solution to the pobrlem. Cache results for performance</td>
+</tr>
+<tr>
+<td>Greedy algorithms</td>
+<td>computing solution in stages, making choices that are locally optimum at step; these choices are never undone. (locally optimum solution is globally optimum)</td>
+</tr>
+<tr>
+<td>Invariants</td>
+<td>identify and invariant and use it to rule out potential solutions that are suboptimal/dominated by other solutions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="concrete-examples">Concrete examples</h3>
+<p>What is the smallest value that cannot be constructed from a set of coins</p>
+<ul>
+<li>at each point if we can construct up to V  but not V+1 and add a coin u. if u &lt;= V+1 then we can construct up to V + u + 1 but if u &gt; V + 1 we cannot construct V + 1. So we keep track of what could be constructed at each point in sorted fashion</li>
+</ul>
+<pre><code class="language-C++"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">smallestImpossible</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; A)</span> </span>{ 
+    sorts(A.begin(), A.end());
+    <span class="hljs-keyword">int</span> max_possible = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a : A) {
+        <span class="hljs-keyword">if</span> (a &gt; max_possible + <span class="hljs-number">1</span>) { 
+            <span class="hljs-keyword">break</span>;
+        }
+        max_possible += a;
+    }
+    <span class="hljs-keyword">return</span> max_possible;
+}
+</div></code></pre>
+<ul>
+<li>O(nlog n) to sort O(n) to iterate</li>
+</ul>
+<h3 id="case-analysis">Case analysis</h3>
+<p>example</p>
+<h3 id="iterative-refine-ment-of-brute-force">Iterative refine-ment of brute-force</h3>
+<p>Given array A of <strong>n-numbers</strong> rearrange A to get B such that B[0] &lt;= B[1] &gt;= B[2] &lt;= B[3] ...</p>
+<pre><code class="language-C++"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Rearrange</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;* A_ptr)</span> </span>{ 
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; A = *A_ptr;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">1</span>; i &lt; A.size(); ++i) { 
+        <span class="hljs-keyword">if</span> ((! I % <span class="hljs-number">2</span>) &amp;&amp; A[i - <span class="hljs-number">1</span>] &lt; A[i] || ((i % <span class="hljs-number">2</span>) &amp;&amp; A[i - <span class="hljs-number">1</span>] &gt; A[i])) { 
+            swap(A[i], A[i<span class="hljs-number">-1</span>]);
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>notice this requires unique values</li>
+</ul>
+<h3 id="reduction">Reduction</h3>
+<p>Problem: determine if string is a rotation of another &quot;car&quot; and &quot;arc&quot; are rotations</p>
+<p>This problem is very similar to string search</p>
+<ul>
+<li>we add the string to itself and see if we can find the original string using famous String Search algorithms gives O(n + m)</li>
+<li>bca + bca = bc abc a</li>
+</ul>
+<h3 id="graph-modelling">Graph modelling</h3>
+<p>see if arbitrage can be formed in currency exchange</p>
+<ul>
+<li>we can set graph to currency with edges being logarithm of exchange rate</li>
+<li>then using Bellman-Ford we can see if positive cycle exists which is arbitrage</li>
+</ul>
+<h3 id="sorting">Sorting</h3>
+<p>sorting problems...</p>
+<h3 id="recursion">Recursion</h3>
+<p>recursion problems</p>
+<h3 id="divide-and-conquer">Divide and conquer</h3>
+<p>number of pairs of elements in an array that are out of sorted order</p>
+<p>how many ways to place trimineos</p>
+<h3 id="dynamic-programming">Dynamic programming</h3>
+<p>how many ways to form a score as the sum of 2, 3, 7</p>
+<ul>
+<li>notice C(s) = C(s-7) + C(s - 3) + C(s-2)</li>
+</ul>
+<h3 id="greedy-algorithm">Greedy algorithm</h3>
+<p>map 2n white and black cities in 1 to 1 fashion</p>
+<ul>
+<li>sort white and black and pair left to right each one</li>
+</ul>
+<h3 id="invariants">Invariants</h3>
+<p>given sorted A find A[i] + A[j] = k</p>
+<ul>
+<li>use two pointers on each end</li>
+<li>works because invariant is maintained that when we increment left or right pointer all values we rule out are not possible</li>
+</ul>
+<h1 id="part-3---problems">Part 3 - Problems</h1>
+<h1 id="primitive-types">Primitive Types</h1>
+
+    </body>
+    </html>
